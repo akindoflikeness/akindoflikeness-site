@@ -452,6 +452,3 @@ button {
   min-width: 0
 }
 
-.nav a[aria-current="page"]::before {
-  content: "> ";
-}
