@@ -1,13 +1,3 @@
-.DS_Store
-phyllotaxis/renders/
-
-# wrangler pages dev writes here when the site is served locally
-.wrangler/
 node_modules/
-
-# In-progress wiki build — not ready to be public; kept out so an accidental
-# `git add -A` cannot deploy it.
-/wiki/
-
 # Local editor settings
 .vscode/

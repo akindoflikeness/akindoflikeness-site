@@ -6,7 +6,12 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://akindoflikeness.net/bypo</loc>
+    <loc>https://akindoflikeness.net/albums</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://akindoflikeness.net/blow-your-phase-off</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
