@@ -1,0 +1,45 @@
+.bypo { max-width:780px; min-width:0; }
+.bypo-header { display:flex; align-items:baseline; justify-content:space-between; gap:24px; margin-bottom:32px; }
+.bypo-header h1 { margin:0; }
+.bypo-header a,.readme a { text-decoration:underline; text-underline-offset:4px; }
+.bypo-header a { color:#aaa; }
+.readme { overflow-wrap:break-word; line-height:1.65; }
+.readme p { margin:0 0 20px; }
+.readme h1,.readme h2,.readme h3,.readme h4 { margin:32px 0 16px; font:inherit; }
+.readme h2 { padding-top:20px; border-top:1px solid #303030; }
+.readme h3,.readme h4 { color:#aaa; }
+.readme ul,.readme ol { padding-left:24px; margin:0 0 24px; }
+.readme li { margin:8px 0; }
+.readme li>p { margin-bottom:8px; }
+.readme img { display:inline-block; max-width:100%; height:auto; vertical-align:middle; }
+.readme pre { max-width:100%; overflow:auto; padding:16px; background:#111; border:1px solid #303030; margin:20px 0; font:12px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace; white-space:pre; overflow-wrap:normal; tab-size:4; }
+.readme pre code { font:inherit; }
+.readme code,.readme kbd { font:13px/1.7 ui-monospace,monospace; }
+.readme blockquote { border-left:1px solid #666; padding-left:20px; margin:24px 0; color:#aaa; }
+.readme table { display:block; max-width:100%; overflow:auto; border-collapse:collapse; margin:24px 0; }
+.readme th,.readme td { padding:10px 16px; border-bottom:1px solid #303030; text-align:left; font-weight:normal; vertical-align:top; min-width:90px; }
+.readme td p:last-child { margin-bottom:0; }
+.readme th { color:#aaa; }
+.readme hr { border:0; border-top:1px solid #303030; margin:28px 0; }
+.readme summary { cursor:pointer; margin:16px 0; }
+.readme [id] { scroll-margin-top:24px; }
+.readme .align-center { text-align:center; }
+.readme .align-right { text-align:right; }
+.readme .readme-badge { display:inline-block; white-space:nowrap; font-size:14px; }
+.readme .image-unavailable { display:block; color:#aaa; font-size:14px; }
+.readme .layout-table { display:table; width:100%; table-layout:fixed; }
+.readme .layout-table td { border:0; padding:0 16px 0 0; }
+.readme .layout-table td:last-child { padding-right:0; }
+.readme .diagram-grid { display:block; overflow:visible; }
+.readme .diagram-grid tbody { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.readme .diagram-grid tr { display:contents; }
+.readme .diagram-grid td { display:block; padding:0; min-width:0; border:0; }
+.readme .diagram-grid pre { margin:0; height:100%; }
+.readme .download-table { width:100%; }
+.readme .download-table td { white-space:nowrap; min-width:115px; }
+@media(max-width:600px) {
+  .readme .layout-table,.readme .layout-table tbody,.readme .layout-table tr,.readme .layout-table td { display:block; width:100%; }
+  .readme .layout-table td { padding:0; margin-bottom:20px; }
+  .readme .diagram-grid tbody { grid-template-columns:1fr; }
+  .readme .download-table td { padding:10px; }
+}
