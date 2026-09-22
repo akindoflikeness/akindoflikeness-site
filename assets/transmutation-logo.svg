@@ -8,7 +8,7 @@
   </defs>
   <rect width="400" height="520" fill="#090909"/>
   <g fill="none" stroke="#c9953d" stroke-linejoin="round" stroke-linecap="round" transform="translate(40 24) scale(.8)">
-    <circle cx="200" cy="200" r="190" stroke-width="1.25" stroke-opacity=".45" stroke-dasharray="1 5.94"/>
+    <circle cx="200" cy="200" r="190" stroke-width="1.25" stroke-opacity=".45"/>
     <circle cx="200" cy="200" r="140" stroke-width="1.9"/>
     <path d="M200 60 L321.24 270 L78.76 270 Z" stroke-width="1.9"/>
     <rect x="143.75" y="157.5" width="112.5" height="112.5" stroke-width="1.9"/>
