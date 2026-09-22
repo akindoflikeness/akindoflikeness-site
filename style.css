@@ -452,3 +452,141 @@ button {
   min-width: 0
 }
 
+
+/* transmutation sample pack */
+.pack {
+  --gold: #c9953d;
+}
+
+.pack-hero {
+  display: grid;
+  grid-template-columns: 220px minmax(0,1fr);
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.pack-mark {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+}
+
+.pack-word {
+  min-width: 0;
+}
+
+.pack-title {
+  font-size: 28px;
+  letter-spacing: .3em;
+  line-height: 1.2;
+}
+
+.pack-sub {
+  color: #aaa;
+  letter-spacing: .14em;
+  margin-top: 6px;
+}
+
+.pack-lede {
+  margin-top: 22px;
+  max-width: 34em;
+  line-height: 1.6;
+}
+
+.pack-facts {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 8px 24px;
+  margin: 22px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.pack-facts div {
+  display: flex;
+  gap: 12px;
+  border-top: 1px solid #303030;
+  padding-top: 6px;
+}
+
+.pack-facts dt {
+  color: #aaa;
+  min-width: 4.5em;
+}
+
+.pack-facts dd {
+  margin: 0;
+}
+
+.pack .readme table.pack-contents,
+.pack .readme table.pack-modes {
+  display: table;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+.pack .readme .pack-contents td,
+.pack .readme .pack-contents th {
+  min-width: 0;
+  padding: 10px 12px;
+}
+
+.pack .readme .pack-contents .sig {
+  color: var(--gold);
+  font-size: 18px;
+  line-height: 1;
+  width: 1.4em;
+  padding-right: 0;
+}
+
+.pack .readme .num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.pack .readme tfoot td {
+  color: #aaa;
+  border-bottom: 0;
+}
+
+.pack .readme .pack-modes td {
+  min-width: 0;
+  padding: 8px 12px;
+}
+
+.pack .readme .pack-modes td:first-child {
+  width: 4em;
+}
+
+.pack .readme .deg {
+  color: #aaa;
+  white-space: nowrap;
+}
+
+.pack-sign {
+  color: var(--gold);
+  margin-top: 40px;
+  letter-spacing: .04em;
+}
+
+.pack .readme h3 {
+  margin-top: 28px;
+}
+
+@media(max-width:700px) {
+  .pack-hero {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .pack-mark {
+    max-width: 180px;
+  }
+  .pack-facts {
+    grid-template-columns: 1fr;
+  }
+  .pack .readme .pack-contents {
+    display: block;
+    overflow-x: auto;
+  }
+}
