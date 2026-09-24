@@ -126,7 +126,7 @@
         </div>
         <div class="player-ctl">
           <button type="button" id="p-prev" aria-label="Previous track">⏮</button>
-          <button type="button" id="p-play" aria-label="Play or pause">▸</button>
+          <button type="button" id="p-play" aria-label="Play or pause"><svg class="ico-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5v11L13 8z"/></svg><svg class="ico-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5h3.5v11H3.5zM9 2.5h3.5v11H9z"/></svg></button>
           <button type="button" id="p-next" aria-label="Next track">⏭</button>
         </div>
         <div class="player-time"><span id="p-cur">0:00</span> / <span id="p-dur">0:00</span></div>
@@ -278,8 +278,8 @@
           if (audio.paused) { var p = audio.play(); if (p && p.catch) p.catch(function () {}); } else audio.pause();
         }
         function step(d) { if (!state.album) return; var n = state.track + d; if (n >= 0 && n < state.album.tracks.length) playTrack(state.album, n); }
-        audio.addEventListener("play", function () { state.paused = false; $("p-play").textContent = "▮▮"; markGrid(); markTracks(); });
-        audio.addEventListener("pause", function () { state.paused = true; $("p-play").textContent = "▸"; markGrid(); markTracks(); });
+        audio.addEventListener("play", function () { state.paused = false; $("p-play").classList.add("is-playing"); markGrid(); markTracks(); });
+        audio.addEventListener("pause", function () { state.paused = true; $("p-play").classList.remove("is-playing"); markGrid(); markTracks(); });
         audio.addEventListener("timeupdate", function () {
           var d = audio.duration || (state.album && state.album.tracks[state.track].seconds) || 0;
           $("p-cur").textContent = mmss(audio.currentTime);
@@ -290,7 +290,7 @@
         audio.addEventListener("error", function () {
           if (audio.dataset.fallback) { audio.src = audio.dataset.fallback; audio.dataset.fallback = ""; var p = audio.play(); if (p && p.catch) p.catch(function () {}); return; }
           $("p-note").textContent = "— can't reach archive.org from here; open the album there to listen.";
-          state.paused = true; $("p-play").textContent = "▸"; markGrid(); markTracks();
+          state.paused = true; $("p-play").classList.remove("is-playing"); markGrid(); markTracks();
         });
         $("p-play").addEventListener("click", toggle);
         $("p-prev").addEventListener("click", function () { if (audio.currentTime > 4) audio.currentTime = 0; else step(-1); });

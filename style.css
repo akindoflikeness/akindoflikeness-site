@@ -653,6 +653,9 @@ button {
 .player-ctl { display: flex; gap: 6px; }
 .player-ctl button { all: unset; cursor: pointer; padding: 6px 10px; line-height: 1; }
 .player-ctl button:hover { color: var(--accent); }
+.player-ctl button svg { display: block; width: 16px; height: 16px; fill: currentColor; }
+#p-play .ico-pause, #p-play.is-playing .ico-play { display: none; }
+#p-play.is-playing .ico-pause { display: block; }
 .player-ctl button:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
 .player-time { font: 14px/1 var(--mono); color: var(--dim); white-space: nowrap; }
 .player-seek { position: absolute; top: -8px; left: 0; right: 0; height: 16px; cursor: pointer; }
