@@ -116,7 +116,7 @@ def slim_catalogue(albums, root):
     for a in albums:
         out.append({
             "slug": a["slug"], "title": a["title"], "year": a["year"], "accent": a.get("accent") or DEFAULT_ACCENT,
-            "cover": a["archive"]["cover_web"], "page": page_url(root, a),
+            "covers": [a["archive"]["cover_web"], a["archive"]["cover"]], "page": page_url(root, a),
             "identifier": a["archive"]["identifier"], "download": a["archive"]["download"],
             "tracks": [{"title": t["title"], "flac": t["flac"], "seconds": t["seconds"]} for t in a["tracks"]],
         })

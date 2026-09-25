@@ -4,6 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>document.documentElement.className += " js"</script>
     <title>blow your phase off</title>
     <meta name="theme-color" content="#000000">
     <link rel="canonical" href="https://akindoflikeness.net/blow-your-phase-off">
@@ -17,6 +18,7 @@
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
   </head>
   <body class="onebit">
+    <div class="veil" id="veil" aria-hidden="true"></div>
     <a class="skip" href="#main">Skip to content</a>
     <div class="layout">
       <header class="sidebar">
@@ -523,5 +525,32 @@
       </main>
     </div>
 
+    <script>
+    /* The veil: the page sits under a sheet of its own background colour until the face and the
+       pictures in view have arrived, then the sheet fades and is removed. Never held past MAX. */
+    (function () {
+      var veil = document.getElementById("veil"); if (!veil || !window.Promise) return;
+      var MAX = 3000, FADE = 700, waits = [], imgs = document.images, fold = innerHeight;
+      if (document.fonts && document.fonts.load) waits.push(document.fonts.load('1em "Likeness"').catch(function () {}));
+      for (var i = 0; i < imgs.length; i++) (function (img) {
+        if (img.loading === "lazy" && img.getBoundingClientRect().top > fold) return;
+        waits.push(new Promise(function (done) {
+          if (img.complete) return done();
+          var src = img.getAttribute("src");
+          img.addEventListener("load", done);
+          img.addEventListener("error", function () { var s = img.getAttribute("src"); if (s === src) done(); else src = s; });
+        }));
+      })(imgs[i]);
+      function lift() {
+        if (!veil.parentNode || veil.className.indexOf("is-off") >= 0) return;
+        veil.className += " is-off";
+        function gone() { if (veil.parentNode) veil.parentNode.removeChild(veil); }
+        veil.addEventListener("transitionend", gone);
+        setTimeout(gone, FADE + 100);
+      }
+      Promise.all(waits).then(lift, lift);
+      setTimeout(lift, MAX);
+    })();
+    </script>
   </body>
 </html>

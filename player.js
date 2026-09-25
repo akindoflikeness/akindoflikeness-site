@@ -37,14 +37,31 @@
     audio.dataset.fallback = have[mp3] ? flacUrl(a, t) : "";
   }
 
+  /* The cover in the player: the picture the page already shows for this album when it has loaded
+     (so it comes from the cache), else each of the album's covers in turn: the 800 px web copy on
+     archive.org, then the original. Without the fallback a missing web copy left the player blank. */
+  function showCover(a) {
+    var el = $("p-cover"), list = a.covers.slice(), img = document.querySelector('[data-slug="' + a.slug + '"] img');
+    if (img && img.complete && img.naturalWidth) list.unshift(img.currentSrc || img.src);
+    el.onerror = function () { if (list.length) el.src = list.shift(); else el.onerror = null; };
+    el.onload = function () { try { if (navigator.mediaSession && navigator.mediaSession.metadata) navigator.mediaSession.metadata.artwork = artwork(); } catch (e) {} };
+    el.src = list.shift();
+  }
+  function artwork() {
+    var c = $("p-cover"), src = c.currentSrc || c.src;
+    if (!src || !c.naturalWidth || /^data:/.test(src)) return [];
+    return [{ src: src, sizes: c.naturalWidth + "x" + c.naturalHeight, type: /\.png(\?|$)/i.test(src) ? "image/png" : "image/jpeg" }];
+  }
+
   function playTrack(a, i) {
     if (i < 0 || i >= a.tracks.length) return;
     if (state.album === a && state.track === i) { toggle(); return; }
     var t = a.tracks[i];
+    if (state.album !== a) showCover(a);
     state.album = a; state.track = i; state.paused = false;
     player.hidden = false; document.body.classList.add("has-player");
     player.style.setProperty("--accent", a.accent);
-    $("p-cover").src = a.cover; $("p-link").href = a.page;
+    $("p-link").href = a.page;
     $("p-track").textContent = pad(i + 1) + "  " + t.title;
     $("p-album").textContent = a.title + " · " + a.year;
     $("p-note").textContent = "";
@@ -75,7 +92,7 @@
   function announce(a, t) {
     if (!("mediaSession" in navigator)) return;
     try {
-      navigator.mediaSession.metadata = new MediaMetadata({ title: t.title, artist: CAT.artist, album: a.title, artwork: [{ src: a.cover, sizes: "800x800", type: "image/jpeg" }] });
+      navigator.mediaSession.metadata = new MediaMetadata({ title: t.title, artist: CAT.artist, album: a.title, artwork: artwork() });
       navigator.mediaSession.setActionHandler("play", tryPlay);
       navigator.mediaSession.setActionHandler("pause", function () { audio.pause(); });
       navigator.mediaSession.setActionHandler("previoustrack", function () { step(-1); });

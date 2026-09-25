@@ -38,6 +38,11 @@ body.onebit {
 
 /* 3 · base */
 * { box-sizing: border-box }
+/* the veil: a sheet in the page's own colour over everything, lifted by the script at the foot of
+   every page once the face and the pictures in view have arrived. Only shown when scripts run. */
+.veil { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 9; background: var(--ground); transition: opacity .7s ease }
+.js .veil { display: block }
+.veil.is-off { opacity: 0; pointer-events: none }
 :root { color-scheme: dark }
 body { margin: 0; background: var(--ground); color: var(--ink); font: 16px/1.5 var(--site-font) }
 body.has-player { padding-bottom: 100px }
