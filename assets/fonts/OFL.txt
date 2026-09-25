@@ -1,3 +1,7 @@
+Likeness is a Modified Version of Redaction 35 (MCKL), made by tools/likeness.py:
+width 0.96, weight +12 units, x-height 1.06. Modifications copyright 2026 a kind of likeness.
+The original licence follows and applies to the modified font as well.
+
 ## License
 
 Copyright 2019 MCKL Inc.

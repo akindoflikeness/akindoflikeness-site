@@ -1,0 +1,27 @@
+        <article class="release" data-slug="{{slug}}">
+          <header class="release-head">
+            <figure class="release-cover">{{cover}}</figure>
+            <div class="release-word">
+              <h1 class="release-title">{{title}}</h1>
+              <p class="release-sub">{{sub}}</p>
+{{about}}
+              <p class="act">
+                {{play}}
+                <a class="act-link" href="{{bandcamp}}">Bandcamp</a>
+              </p>
+            </div>
+          </header>
+          <ol class="tracks" aria-label="Tracks">
+{{tracks}}
+          </ol>
+          <footer class="get">
+            <h2>get it</h2>
+            <p><a href="{{zip}}">Download FLAC</a> <span class="fine">zip with cover, {{size}}</span></p>
+            <p><a href="{{bandcamp}}">Bandcamp</a> <span class="fine">buy, or name your price</span></p>
+            <p><a href="{{archive}}">archive.org</a> <span class="fine">every track, torrent, checksums</span></p>
+            <p class="fine">{{formats}} FLAC</p>
+          </footer>
+          <nav class="release-nav" aria-label="More music">
+{{neighbours}}
+          </nav>
+        </article>

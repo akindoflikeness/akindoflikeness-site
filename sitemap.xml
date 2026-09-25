@@ -6,9 +6,39 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://akindoflikeness.net/albums</loc>
+    <loc>https://akindoflikeness.net/music/hope-as-haunting</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akindoflikeness.net/music/rotting</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akindoflikeness.net/music/mutation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akindoflikeness.net/music/the-past-in-progress</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akindoflikeness.net/music/sounds-of-solaris</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akindoflikeness.net/music/a-tram-to-sadovaya</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akindoflikeness.net/music/i-miss-the-rain</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://akindoflikeness.net/blow-your-phase-off</loc>

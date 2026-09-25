@@ -1,0 +1,24 @@
+    <div class="player" id="player" aria-label="Now playing" hidden>
+      <div class="player-bar" id="p-bar"></div>
+      <div class="player-seek" id="p-seek" title="seek"></div>
+      <div class="player-inner">
+        <a class="player-cover" id="p-link" href="{{home}}"><img id="p-cover" alt="" width="52" height="52" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></a>
+        <div class="player-what">
+          <div class="track" id="p-track"></div>
+          <div class="album"><span id="p-album"></span> <span class="player-note" id="p-note"></span></div>
+        </div>
+        <div class="player-ctl">
+          <button type="button" id="p-prev" aria-label="Previous track"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5h2v11H3zM13 2.5v11L5.5 8z"/></svg></button>
+          <button type="button" id="p-play" aria-label="Play or pause"><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5v11L13 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5h3.5v11H3.5zM9 2.5h3.5v11H9z"/></svg></button>
+          <button type="button" id="p-next" aria-label="Next track"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11 2.5h2v11h-2zM3 2.5v11L10.5 8z"/></svg></button>
+        </div>
+        <div class="player-vol">
+          <button type="button" id="p-mute" aria-label="Mute or unmute"><svg class="i-vol" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 5.5h3L9 2v12L4.5 10.5h-3z"/><path d="M11.2 5.2a4 4 0 0 1 0 5.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><svg class="i-mute" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 5.5h3L9 2v12L4.5 10.5h-3z"/><path d="M10.5 6l4 4M14.5 6l-4 4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+          <input type="range" id="p-vol" min="0" max="1" step="0.01" value="1" aria-label="Volume">
+        </div>
+        <div class="player-time"><span id="p-cur">0:00</span> / <span id="p-dur">0:00</span></div>
+      </div>
+      <audio id="audio" preload="none"></audio>
+    </div>
+    <script type="application/json" id="catalogue">{{catalogue}}</script>
+    <script src="{{root}}player.js"></script>

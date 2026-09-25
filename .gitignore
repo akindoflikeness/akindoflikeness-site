@@ -1,5 +1,7 @@
 node_modules/
 # Local editor settings
 .vscode/
-# Claude Code worktrees and session files
+# Claude Code session files
 .claude/
+# tools/preview.py output
+preview/
