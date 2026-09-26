@@ -144,6 +144,39 @@ Existing writeup (`writeups/the-past-in-progress.txt`) stays as it is.
 
 ---
 
+## Links noticed (for later)
+
+Connections found while talking. Anchors are real ids on the built pages.
+
+- **Pingala / Fibonacci ↔ "nothing was ever finished"** (hauntology note):
+  Pingala enumerated long and short syllables into the Fibonacci sequence more than a
+  thousand years before Fibonacci. A fragment found later and treated as new.
+  → `blow-your-phase-off.html#readme-progenitor` (Chandas)
+- **The *past in progress* cover shell ↔ hauntology note ↔ The Room**: growth recursing
+  on itself; The Room is built with Fibonacci recursion.
+  → `music/the-past-in-progress.html`, `blow-your-phase-off.html#readme-chambers`
+  (Careful: shells are logarithmic spirals, not golden/Fibonacci ones. "Recursing on
+  itself" is safe.)
+- **Phase Violence ↔ the past feeding the present**: the voice modulated "with its own
+  altered past". Chandas "listens to the signal before and after we do".
+  → `blow-your-phase-off.html#readme-phase-violence`, `#readme-progenitor`
+- **Fragments left behind**: *i miss the rain* (old releases disowned) → *rotting.* (old
+  phone recordings remade) → *hope as haunting* (fragments found and treated as new) →
+  transmutation (CC0, fragments left for strangers).
+- ***wired connection* ↔ *rotting.***: made the *rotting.* way.
+  → `music/rotting.html`
+- **AI piece ↔ bypo's own "On AI" section**: `blow-your-phase-off.html#readme-on-ai`
+- **How I work ↔ the albums**: "decide to build and find out what it is" ↔ *i miss the
+  rain* "explored, found, refined, released" ↔ *rotting.* performed live scene to scene.
+- **"A digital synthesiser is mathematics simulating physics" ↔ hauntology note**
+  ("reality, physics, the earth… bound what's possible").
+- **Bypo presets named after records**: *net terminal gene* (Mutation track),
+  *symmetriad* (Solaris; symmetriads are formations on Lem's ocean).
+- **Simulacra across records**: "hyperreal simulacra" (*hope as haunting*) ↔
+  "Chrono-Simulacra" (*Sounds of Solaris*).
+
+---
+
 ## Still to talk about
 
 - Mutation
