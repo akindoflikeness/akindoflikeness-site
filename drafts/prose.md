@@ -213,6 +213,56 @@ physical world." Replaced in `writeups/`.)
 
 (Plugin: AudioThing's Noises, "pretty sure".)
 
+
+---
+
+## FOR REVIEW: assembled from everything above, nothing new
+
+These three came out of the rest of the conversation. Every line is something already
+said somewhere in this file. Read them whenever; nothing is decided.
+
+### Index page (front door)
+
+a kind of likeness. Records, an instrument, a sample pack.
+
+I learn by doing. I don't set out with a picture of the thing and go after it. I decide
+to build, and find out what I'm making, and why, along the way. Nothing here tries to
+reach a standard. I explored, found, refined and released.
+
+Tools matter to me as much as what they make: not what they can do, but how they do it,
+what they teach you, how they feel to use. They carry the character of whoever made them.
+It's human all the way down. So I made one.
+
+And I leave fragments for other people to find and treat as new. Nothing was ever
+finished enough to be called repeatable.
+
+→ music · blow your phase off · transmutation
+
+### hope as haunting (review version)
+
+*hope as haunting* follows on from *the past in progress*. I found a palette I liked and
+wanted to communicate a widening of the sense of haunting in myself: the feelings and
+patterns Mark Fisher and many others have described. The answer was already in that
+record: a shell recursing on itself, a fossil, a title that says the past is still in
+progress. Hauntology assumes something was once truly new. But reality, physics, the
+earth, the limits of perception have always bounded what's possible, and climbing a rung
+doesn't put you somewhere that can ignore the ladder or the rungs below it. Nothing was
+ever finished enough to be called repeatable. The fragments we leave behind get found and
+treated as new, and maybe that isn't a bug but a feature.
+
+It's built from RF recordings I made with a SOMA Ether, mixed with solo guitar passages
+that float unbound. The guitar always sits behind the noise, and it's never lost. The
+last track, *wired connection*, is made the *rotting.* way instead. Its texture is
+different, but it still fits with the rest.
+
+(Same as the current version above, with "I found a palette… in myself" put back from
+your first answer, so the record says something about you and not only about Fisher.)
+
+### AI piece and how I work
+
+Nothing new needed: both are drafted above. "How I work" became most of the index page.
+The AI piece can sit with bypo's own "On AI" section (`#readme-on-ai`) when it goes up.
+
 ---
 
 ## Links noticed (for later)
@@ -260,7 +310,7 @@ Connections found while talking. Anchors are real ids on the built pages.
 
 ---
 
-## Still to talk about
+## Still to do
 
-- hope as haunting: what the record itself is saying
-- what the index page says
+- Review: Mutation, i miss the rain, the three FOR REVIEW pieces
+- Then: finished drafts into `writeups/`, the index page built, links added, build run
