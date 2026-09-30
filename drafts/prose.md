@@ -144,10 +144,12 @@ Existing writeup (`writeups/the-past-in-progress.txt`) stays as it is.
 
 ---
 
-## Mutation (draft, needs a check)
+## Mutation (draft)
+
+("Symbiosis" was a track title that got dropped; the idea stays.)
 
 *Mutation* is about the relationship between humans and tools. The idea was that machines,
-or tools, can be like a mutation that forces some adoption in the gene pool. Being able to
+or tools, can be like a mutation that forces some adaptation in the gene pool. Being able to
 make tools was a massive thing in our evolutionary history, along with sharing them,
 building on them and using them together. Tools are fundamental to almost everything in
 life.
@@ -174,18 +176,18 @@ without control from humans.
 
 ---
 
-## Sounds of Solaris (draft)
+## Sounds of Solaris (done, in `writeups/`)
 
 *Sounds of Solaris* was the first album I made after my second psychosis. I just wanted
 an album to listen to that could accompany *Solaris*, Stanisław Lem's book. The book
 doesn't need music. I wanted music at that time, and I wanted it to fit the book, so
 that's what I made.
 
-(Existing writeup: "Sounds inspired by Stanisław Lem's Solaris." Kept in `writeups/`.)
+(Existing writeup: "Sounds inspired by Stanisław Lem's Solaris." Replaced in `writeups/`.)
 
 ---
 
-## A Tram to Sadovaya (draft)
+## A Tram to Sadovaya (done, in `writeups/`)
 
 *A Tram to Sadovaya* was a first experiment in restraint. The usual path of getting good
 at this, then good at that, building skills over time, never fit how I wanted to do
@@ -199,18 +201,17 @@ constantly changing but always somehow the same; they wouldn't bore me, but they
 me to sleep.
 
 I was reading a lot at the time, so the titles are all books. Sadovaya is from *The Master
-and Margarita*. *Missing Lynx* is Lynx from Marlen Haushofer's *The Wall*, which is told
-from the woman's perspective. *Mr K* is Kafka's *The Trial*. *Little Green Shawl* is
+and Margarita*. *Missing Lynx* is Lynx, the dog in Marlen Haushofer's *The Wall*. The woman
+writes her notes from later on, so she talks about missing him, but in the things she's
+reporting he's still there. *Mr K* is Kafka's *The Trial*. *Little Green Shawl* is
 what Sonya is described wearing in *Crime and Punishment*.
 
 (Existing writeup: "Ethereal dreams built from raw noise. By preserving the full-spectrum
 essence of the raw source and coaxing out fleeting, shifting harmonies, these pieces move
 with a heavy, organic weight. They aim to soothe while firmly rooted in the grit of the
-physical world." Kept in `writeups/`.)
+physical world." Replaced in `writeups/`.)
 
-### To check
-- Plugin: AudioThing's Noises (made with Hainbach)? Name not confirmed.
-- Lynx in *The Wall* is the dog, not a cat.
+(Plugin: AudioThing's Noises, "pretty sure".)
 
 ---
 
