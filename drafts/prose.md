@@ -144,6 +144,76 @@ Existing writeup (`writeups/the-past-in-progress.txt`) stays as it is.
 
 ---
 
+## Mutation (draft, needs a check)
+
+*Mutation* is about the relationship between humans and tools. The idea was that machines,
+or tools, can be like a mutation that forces some adoption in the gene pool. Being able to
+make tools was a massive thing in our evolutionary history, along with sharing them,
+building on them and using them together. Tools are fundamental to almost everything in
+life.
+
+My own progression, in the arts and anywhere else, has come through learning and using
+different tools and finding the bits that work for me. The most important thing about a
+tool isn't only what it can do but what it can teach you, how it teaches you, how it
+inspires you, how you feel when you use it. Those questions came up as I explored
+hardware and synthesis and put more thought and intention into the tools I made music
+with, rather than picking up a new plugin here and there or using stock ones. There's
+nothing wrong with either path, but for me the tools contributed to my advancement, not
+because of what they could do but because of how they did it. They contribute to the
+final product too, offering a character shaped by whoever made them. It's human all the
+way down.
+
+It was meant to be a story. I never wrote it because I don't think it needed writing, but
+it follows in the track titles: a human negotiating that boundary, becoming aware that
+the machine has some kind of being. It isn't alive, but it's something independent of
+them. In the end, through symbiosis, they find they're one and the same. The machine is
+only alive because another human made it that way.
+
+"Net Terminal Gene" is from *BLAME!*: the gene that stops the builders building endlessly
+without control from humans.
+
+---
+
+## Sounds of Solaris (draft)
+
+*Sounds of Solaris* was the first album I made after my second psychosis. I just wanted
+an album to listen to that could accompany *Solaris*, Stanisław Lem's book. The book
+doesn't need music. I wanted music at that time, and I wanted it to fit the book, so
+that's what I made.
+
+(Existing writeup: "Sounds inspired by Stanisław Lem's Solaris." Kept in `writeups/`.)
+
+---
+
+## A Tram to Sadovaya (draft)
+
+*A Tram to Sadovaya* was a first experiment in restraint. The usual path of getting good
+at this, then good at that, building skills over time, never fit how I wanted to do
+things. Instead I find a spark, set myself constraints, and work completely differently
+from how I ever have before.
+
+There's only one sound source: AudioThing's Noises, several instances per track. The rest
+of the music-making happens in automation lanes and mixer channels, which make each
+track's movements and parts. I wanted long pieces to fall asleep to and chill out with,
+constantly changing but always somehow the same; they wouldn't bore me, but they'd send
+me to sleep.
+
+I was reading a lot at the time, so the titles are all books. Sadovaya is from *The Master
+and Margarita*. *Missing Lynx* is Lynx from Marlen Haushofer's *The Wall*, which is told
+from the woman's perspective. *Mr K* is Kafka's *The Trial*. *Little Green Shawl* is
+what Sonya is described wearing in *Crime and Punishment*.
+
+(Existing writeup: "Ethereal dreams built from raw noise. By preserving the full-spectrum
+essence of the raw source and coaxing out fleeting, shifting harmonies, these pieces move
+with a heavy, organic weight. They aim to soothe while firmly rooted in the grit of the
+physical world." Kept in `writeups/`.)
+
+### To check
+- Plugin: AudioThing's Noises (made with Hainbach)? Name not confirmed.
+- Lynx in *The Wall* is the dog, not a cat.
+
+---
+
 ## Links noticed (for later)
 
 Connections found while talking. Anchors are real ids on the built pages.
@@ -175,11 +245,21 @@ Connections found while talking. Anchors are real ids on the built pages.
 - **Simulacra across records**: "hyperreal simulacra" (*hope as haunting*) ↔
   "Chrono-Simulacra" (*Sounds of Solaris*).
 
+- **Mutation ↔ bypo ↔ AI piece**: tools teach you and carry their maker's character,
+  "human all the way down". bypo is that kind of tool. The AI piece says the harm came
+  from people's choices about a tool, not from the tool.
+  → `blow-your-phase-off.html`, `#readme-on-ai`
+- **Mutation ↔ how I work**: learning through tools, "how they did it" ↔ learning by doing.
+- **Constraint as method**: *A Tram to Sadovaya* (one plugin) ↔ *rotting.* (one Octatrack
+  pattern per track) ↔ bypo ("opinionated instrument").
+- **Sadovaya is in two of the books**: Bulgakov's Sadovaya (Moscow), and the Haymarket on
+  Sadovaya in *Crime and Punishment* (St Petersburg), where *Little Green Shawl* comes from.
+- **Books as sources**: Lem (*Sounds of Solaris*), Bulgakov, Haushofer, Kafka, Dostoevsky
+  (*A Tram to Sadovaya*), *BLAME!* (*Mutation*).
+
 ---
 
 ## Still to talk about
 
-- Mutation
-- Sounds of Solaris
-- A Tram to Sadovaya
+- hope as haunting: what the record itself is saying
 - what the index page says
