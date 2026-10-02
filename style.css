@@ -95,6 +95,26 @@ img { max-width: 100% }
 .play-text svg, .play-text .i-eq { width: 12px; height: 12px }
 
 /* 6 · music, home — the latest release large, everything else in a grid */
+.prose { max-width: 34em; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.65; overflow-wrap: break-word }
+.prose p + p { margin-top: 1.15em }
+.home-intro { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 72px; align-items: start; max-width: 1040px; margin-bottom: clamp(56px, 7vw, 96px) }
+.home-intro .prose { grid-column: 1; grid-row: 1 }
+.intro-title { font-size: clamp(23px, 2.4vw, 32px); line-height: 1.2; letter-spacing: .04em; margin-bottom: 36px }
+/* Shared image treatment; placement belongs to the containing page. Preserve each image's ratio. */
+.content-image { min-width: 0 }
+.content-image picture, .content-image img { display: block }
+.content-image img { width: 100%; height: auto }
+.content-image figcaption { margin-top: 12px; color: var(--dim); font-size: 14px; line-height: 1.5 }
+.home-portrait { grid-column: 2; grid-row: 1 }
+/* A quiet collection beneath the introduction, rendered only when images are supplied. */
+.home-gallery { display: flex; flex-wrap: nowrap; gap: clamp(8px, 1.5vw, 24px); align-items: start; max-width: 1040px; padding: 32px 0 16px; border-top: 1px solid var(--rule) }
+.home-gallery .content-image { flex: 1 1 0; max-width: 120px }
+.home-gallery figcaption { margin-top: 10px; font-size: 11px; overflow-wrap: anywhere }
+@media (max-width: 1100px) {
+  .home-intro { grid-template-columns: minmax(0, 1fr); gap: 56px }
+  .home-portrait { grid-column: 1; grid-row: 1; width: 280px; max-width: 100% }
+  .home-intro .prose { grid-row: 2 }
+}
 .music { max-width: 1120px; min-width: 0 }
 .latest { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: center; padding-bottom: 48px; margin-bottom: 48px; border-bottom: 1px solid var(--rule) }
 .latest-cover, .record-cover { display: block }

@@ -13,7 +13,8 @@ What goes in:
     tools/templates/      the chrome every page shares, the home page, a release page, the player.
 
 What comes out:
-    index.html            music: the latest release, then every other release
+    index.html            introduction
+    music.html            the latest release, then every other release
     music/<slug>.html     one page per release
     <name>.html           one per file in pages/
     sitemap.xml
@@ -146,6 +147,7 @@ def page(root, home, *, title, content, tail="", current=None, accent=None, them
     return tpl("base.html", title=esc(title), theme_color="#000000" if theme == "onebit" else "#090909",
                head_extra=head_extra(title, **head), root=root, home=home,
                body_attrs=(" " + " ".join(body)) if body else "",
+               cur_home=' aria-current="page"' if current == "home" else "",
                cur_music=' aria-current="page"' if current == "music" else "",
                cur_bypo=' aria-current="page"' if current == "bypo" else "",
                cur_pack=' aria-current="page"' if current == "pack" else "",
@@ -159,7 +161,41 @@ def writeup(a):
 
 # ---------- pages ----------
 
+def home_gallery(root):
+    """Ordered local images, with optional native animation and captions."""
+    def asset(path):
+        if not path.startswith("assets/") or ".." in path.split("/") or "\\" in path:
+            raise ValueError(f"Gallery images must use paths within assets/: {path}")
+        if not os.path.isfile(os.path.join(ROOT, path)):
+            raise ValueError(f"Missing gallery image: {path}")
+        return esc(root + path)
+
+    figures = []
+    for item in json.loads(read(os.path.join(ROOT, "index-images.json"))):
+        width, height = int(item["width"]), int(item["height"])
+        if width <= 0 or height <= 0:
+            raise ValueError("Gallery image dimensions must be positive")
+        image = (f'<img src="{asset(item["src"])}" alt="{esc(item["alt"])}" '
+                 f'width="{width}" height="{height}" loading="lazy" decoding="async">')
+        if item.get("animated"):
+            image = (f'<picture><source media="(prefers-reduced-motion: no-preference)" '
+                     f'srcset="{asset(item["animated"])}">{image}</picture>')
+        caption = f'<figcaption>{esc(item["caption"])}</figcaption>' if item.get("caption") else ""
+        figures.append(f'          <figure class="content-image">{image}{caption}</figure>')
+    if not figures:
+        return ""
+    return '        <section class="home-gallery" aria-label="Images and characters">\n' + "\n".join(figures) + '\n        </section>'
+
+
 def build_home(albums, root, home):
+    content = tpl("home.html", root=root, gallery=home_gallery(root),
+                  introduction=indent(paragraphs(read(os.path.join(ROOT, "writeups", "index.txt"))), 12))
+    return page(root, home, title="AKOL", content=content, current="home",
+                canonical=SITE_URL + "/",
+                description="Music and art by a kind of likeness. I learn by making them.")
+
+
+def build_music(albums, root, home):
     latest, rest = albums[0], albums[1:]
     about = paragraphs(writeup(latest))
     first = about.split("</p>")[0] + "</p>" if about else ""
@@ -173,15 +209,15 @@ def build_home(albums, root, home):
                 <span class="year">{a['year']}</span>
               </div>
             </div>''')
-    content = tpl("home.html",
+    content = tpl("music.html",
                   latest_slug=latest["slug"], latest_accent=latest.get("accent") or DEFAULT_ACCENT,
                   latest_page=page_url(root, latest), latest_cover=cover_img(latest), latest_title=esc(latest["title"]),
                   latest_sub=f"{nice_date(latest['date'])} · {len(latest['tracks'])} tracks · {running_time(latest['total_seconds'])}",
                   latest_about=indent(f'<div class="latest-about">{first}</div>', 14) if first else "",
                   latest_play=play_button(latest, text=True), records="\n".join(records))
     tail = tpl("player.html", root=root, home=home, catalogue=slim_catalogue(albums, root))
-    return page(root, home, title="AKOL", content=content, tail=tail, current="music",
-                canonical=SITE_URL + "/", image=latest["archive"]["cover_web"],
+    return page(root, home, title="music — AKOL", content=content, tail=tail, current="music",
+                canonical=SITE_URL + "/music", image=latest["archive"]["cover_web"],
                 description=f"Music by {ARTIST}. Listen here, buy on Bandcamp, or download lossless from archive.org.")
 
 
@@ -209,7 +245,7 @@ def build_release(a, albums, root, home):
     if i > 0:
         b = albums[i - 1]
         neighbours.append(f'            <a href="{page_url(root, b)}"><span class="fine">after this</span>{esc(b["title"])}</a>')
-    neighbours.append(f'            <a href="{home}"><span class="fine">everything</span>music</a>')
+    neighbours.append(f'            <a href="{root}music.html"><span class="fine">everything</span>music</a>')
     about = paragraphs(writeup(a))
     content = tpl("release.html", slug=a["slug"], cover=cover_img(a), title=esc(a["title"]),
                   sub=f"{ARTIST} · {nice_date(a['date'])}",
@@ -242,7 +278,7 @@ def build_hand_page(name, root, home):
 
 
 def build_sitemap(albums):
-    urls = [(SITE_URL + "/", "1.0")] + [(f"{SITE_URL}/music/{a['slug']}", "0.8") for a in albums]
+    urls = [(SITE_URL + "/", "1.0"), (SITE_URL + "/music", "0.9")] + [(f"{SITE_URL}/music/{a['slug']}", "0.8") for a in albums]
     urls += [(f"{SITE_URL}/blow-your-phase-off", "0.9"), (f"{SITE_URL}/transmutation", "0.9")]
     items = "\n".join(f"  <url>\n    <loc>{u}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>{p}</priority>\n  </url>" for u, p in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{items}\n</urlset>\n'
@@ -267,6 +303,7 @@ def main():
 
     root, home = links(0)
     write(os.path.join(out, "index.html"), build_home(albums, root, home))
+    write(os.path.join(out, "music.html"), build_music(albums, root, home))
     root, home = links(1)
     for a in albums:
         write(os.path.join(out, "music", a["slug"] + ".html"), build_release(a, albums, root, home))
