@@ -5,17 +5,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>document.documentElement.className += " js"</script>
+    <style>
+      /* Self-contained: visible without the site stylesheet, font or images. */
+      .veil { display:none; position:fixed; inset:0; z-index:9; background:var(--ground,#090909); color:var(--ink,#e5e5e5); transition:opacity .7s ease }
+      .js .veil { display:grid; place-items:center }
+      .veil.is-off { opacity:0; pointer-events:none }
+      .veil-status { display:grid; justify-items:center; gap:18px; font:12px/1.5 monospace; letter-spacing:.12em }
+      .veil-pulse { width:6px; height:6px; margin:0 24px; background:currentColor; box-shadow:-18px 0 currentColor,18px 0 currentColor; animation:veil-pulse 1.2s steps(3,end) infinite }
+      @keyframes veil-pulse { 0%,100% { opacity:.3 } 50% { opacity:1 } }
+      @media (prefers-reduced-motion:reduce) { .veil-pulse { animation:none } .veil { transition:none } }
+    </style>
     <title>TERMS</title>
     <meta name="theme-color" content="#090909">
     <meta name="robots" content="noindex">
     <meta property="og:title" content="TERMS">
     <meta property="og:type" content="website">
     <link rel="preload" href="/assets/fonts/Likeness-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/style.css">
+    <link id="site-style" rel="stylesheet" href="/style.css" media="print" onload="this.media='all';this.dataset.ready='1'" onerror="this.dataset.ready='1'">
+    <noscript><link rel="stylesheet" href="/style.css"></noscript>
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
   </head>
   <body>
-    <div class="veil" id="veil" aria-hidden="true"></div>
+    <div class="veil" id="veil">
+      <div class="veil-status" role="status"><span class="veil-pulse" aria-hidden="true"></span><span>loading</span></div>
+    </div>
     <a class="skip" href="#main">Skip to content</a>
     <div class="layout">
       <header class="sidebar">
@@ -47,9 +60,18 @@
     /* The veil: the page sits under a sheet of its own background colour until the face and the
        pictures in view have arrived, then the sheet fades and is removed. Never held past MAX. */
     (function () {
-      var veil = document.getElementById("veil"); if (!veil || !window.Promise) return;
+      var veil = document.getElementById("veil"); if (!veil) return;
+      if (!window.Promise) { veil.parentNode.removeChild(veil); return; }
       var MAX = 3000, FADE = 700, waits = [], imgs = document.images, fold = innerHeight;
-      if (document.fonts && document.fonts.load) waits.push(document.fonts.load('1em "Likeness"').catch(function () {}));
+      var sheet = document.getElementById("site-style");
+      var styled = new Promise(function (done) {
+        if (sheet.dataset.ready) return done();
+        sheet.addEventListener("load", done, { once:true });
+        sheet.addEventListener("error", done, { once:true });
+      });
+      waits.push(styled.then(function () {
+        if (document.fonts && document.fonts.load) return document.fonts.load('1em "Likeness"').catch(function () {});
+      }));
       for (var i = 0; i < imgs.length; i++) (function (img) {
         if (img.loading === "lazy" && img.getBoundingClientRect().top > fold) return;
         waits.push(new Promise(function (done) {
@@ -62,6 +84,7 @@
       function lift() {
         if (!veil.parentNode || veil.className.indexOf("is-off") >= 0) return;
         veil.className += " is-off";
+        veil.setAttribute("aria-hidden", "true");
         function gone() { if (veil.parentNode) veil.parentNode.removeChild(veil); }
         veil.addEventListener("transitionend", gone);
         setTimeout(gone, FADE + 100);
