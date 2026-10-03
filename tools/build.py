@@ -197,8 +197,6 @@ def build_home(albums, root, home):
 
 def build_music(albums, root, home):
     latest, rest = albums[0], albums[1:]
-    about = paragraphs(writeup(latest))
-    first = about.split("</p>")[0] + "</p>" if about else ""
     records = []
     for a in rest:
         records.append(f'''            <div class="record" data-slug="{a['slug']}" style="--accent: {a.get('accent') or DEFAULT_ACCENT}">
@@ -213,7 +211,6 @@ def build_music(albums, root, home):
                   latest_slug=latest["slug"], latest_accent=latest.get("accent") or DEFAULT_ACCENT,
                   latest_page=page_url(root, latest), latest_cover=cover_img(latest), latest_title=esc(latest["title"]),
                   latest_sub=f"{nice_date(latest['date'])} · {len(latest['tracks'])} tracks · {running_time(latest['total_seconds'])}",
-                  latest_about=indent(f'<div class="latest-about">{first}</div>', 14) if first else "",
                   latest_play=play_button(latest, text=True), records="\n".join(records))
     tail = tpl("player.html", root=root, home=home, catalogue=slim_catalogue(albums, root))
     return page(root, home, title="music — AKOL", content=content, tail=tail, current="music",
