@@ -1,6 +1,20 @@
         <article class="home-intro">
           <figure class="content-image home-portrait">
-            <img src="{{root}}assets/pathologic-portrait-transparent.png" alt="Portrait of AKOL in a dark cap and brown hoodie" width="1254" height="1254" decoding="async">
+            <img src="{{root}}assets/pathologic-portrait-dithered.png" alt="Portrait of AKOL looking slightly away, in a dark cap and brown hoodie" width="512" height="512" decoding="async">
+      <svg viewBox="0 0 320 320" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+        <defs>
+          <g id="portrait-corner">
+            <path d="M7 45V7H45 M12 37C12 23 19 21 23 21C21 19 23 12 37 12 M7 28L12 23L17 18L23 12L28 7"/>
+            <path d="M13 13L17 9L21 13L17 17Z" fill="#000"/>
+          </g>
+        </defs>
+        <rect x=".5" y=".5" width="319" height="319"/>
+        <use href="#portrait-corner"/>
+        <use href="#portrait-corner" transform="translate(320 0) rotate(90)"/>
+        <use href="#portrait-corner" transform="translate(320 320) rotate(180)"/>
+        <use href="#portrait-corner" transform="translate(0 320) rotate(270)"/>
+        <path d="M154 .5L160 6L166 .5 M154 319.5L160 314L166 319.5"/>
+      </svg>
           </figure>
           <div class="home-word">
             <h1 class="intro-title">A KIND OF LIKENESS</h1>
