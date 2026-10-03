@@ -249,7 +249,9 @@ def build_release(a, albums, root, home):
     about = paragraphs(writeup(a))
     content = tpl("release.html", slug=a["slug"], cover=cover_img(a), title=esc(a["title"]),
                   sub=f"{ARTIST} · {nice_date(a['date'])}",
-                  about=indent(f'<div class="release-about">\n{about}\n</div>', 14) if about else "",
+                  about=indent(f'<section class="release-about" aria-labelledby="about-title">\n'
+                               f'  <h2 class="about-title" id="about-title">About</h2>\n'
+                               f'  <blockquote class="prose prose-quote">\n{about}\n  </blockquote>\n</section>', 10) if about else "",
                   play=play_button(a, text=True), bandcamp=a["bandcamp"], tracks="\n".join(rows),
                   zip=zip_url, size=size, archive=a["archive"]["details"], formats=", ".join(formats),
                   neighbours="\n".join(neighbours))
