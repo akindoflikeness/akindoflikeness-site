@@ -207,6 +207,17 @@ img { max-width: 100% }
 .bypo-header a { color: var(--dim); text-decoration: underline; text-underline-offset: 4px }
 
 /* blow your phase off: artist notes and demonstration */
+.writing-list { list-style: none; padding: 0; margin: 0 }
+.writing-entry { border-top: 1px solid var(--rule); padding: 28px 0 32px; max-width: 680px }
+.writing-entry h2 { font-size: 28px; line-height: 1.3; margin-bottom: 8px }
+.writing-excerpt { font-family: Georgia, "Times New Roman", serif; font-size: 18px; line-height: 1.7; margin-top: 18px; max-width: 34em }
+.essay-header { margin-bottom: 36px }
+.essay-header .intro-title { margin-bottom: 12px }
+.essay-prose { font-family: Georgia, "Times New Roman", serif; font-size: clamp(18px, 1.5vw, 20px); line-height: 1.75 }
+.essay-back { display: inline-block; margin-top: 48px }
+.essay-nav { display: flex; flex-wrap: wrap; gap: 24px 36px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule); font-size: 16px }
+.essay-nav .fine { display: block; margin-bottom: 4px }
+.essay-prose a, .release-about .prose a { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--accent) }
 .instrument-image { margin-bottom: 48px }
 .tool-browser-frame { display: grid; grid-template-columns: 40px minmax(0, 1fr) 40px; gap: 16px; align-items: center }
 .tool-card { border: 1px solid var(--rule); padding: clamp(16px, 3vw, 28px) }

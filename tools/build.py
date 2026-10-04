@@ -244,7 +244,9 @@ def build_release(a, albums, root, home):
         b = albums[i - 1]
         neighbours.append(f'            <a href="{page_url(root, b)}"><span class="fine">after this</span>{esc(b["title"])}</a>')
     neighbours.append(f'            <a href="{root}music.html"><span class="fine">everything</span>music</a>')
-    about = paragraphs(writeup(a))
+    if writeup(a).strip():
+        neighbours.append(f'<a href="{root}writing/{a["slug"]}.html"><span class="fine">album notes</span>Writing →</a>')
+    about = paragraphs(linked_album_prose(a, root))
     content = tpl("release.html", slug=a["slug"], cover=cover_img(a), title=esc(a["title"]),
                   sub=f"{ARTIST} · {nice_date(a['date'])}",
                   about=indent(f'<section class="release-about" aria-labelledby="about-title">\n'
@@ -258,6 +260,78 @@ def build_release(a, albums, root, home):
     return page(root, home, title=f"{a['title']} — AKOL", content=content, tail=tail, current="music",
                 accent=a.get("accent"), canonical=f"{SITE_URL}/music/{a['slug']}", og_type="music.album",
                 image=a["archive"]["cover_web"], description=desc)
+
+
+def linked_album_prose(album, root):
+    text = writeup(album)
+    # Link explicit album references without changing the author's wording.
+    references = {"the past in progress": "the-past-in-progress", "rotting.": "rotting", "i miss the rain": "i-miss-the-rain"}
+    for title, slug in references.items():
+        if slug != album["slug"]:
+            text = text.replace(f"<em>{title}</em>", f'<a href="{root}writing/{slug}.html"><em>{title}</em></a>')
+    return text
+
+
+def essay_navigation(root, entry):
+    links = [f'<a href="{root}writing.html">← Writing</a>']
+    if entry.get("album"):
+        links.append(f'<a href="{root}music/{entry["album"]}.html">Listen to {esc(entry["title"])} →</a>')
+    if entry["slug"] == "on-ai":
+        links.append(f'<a href="{root}blow-your-phase-off.html">Blow Your Phase Off →</a>')
+    related = json.loads(read(os.path.join(ROOT, "writing-links.json")))
+    titles = {item["slug"]: item["title"] for item in writing_entries()}
+    for slug in related.get(entry["slug"], []):
+        if slug in titles:
+            links.append(f'<a href="{root}writing/{slug}.html"><span class="fine">related writing</span>{esc(titles[slug])} →</a>')
+    return '<nav class="essay-nav" aria-label="More to explore">' + ''.join(links) + '</nav>'
+
+
+def writing_entries():
+    entries = json.loads(read(os.path.join(ROOT, "writing.json")))
+    cat = json.loads(read(os.path.join(ROOT, "catalogue.json")))
+    for album in cat["albums"]:
+        text = writeup(album).strip()
+        if not album.get("available") or not text:
+            continue
+        first = re.split(r"\n\s*\n", text)[0]
+        excerpt = html.unescape(re.sub(r"<[^>]+>", "", first))
+        if len(excerpt) > 220:
+            excerpt = excerpt[:220].rsplit(" ", 1)[0] + "…"
+        entries.append(dict(slug=album["slug"], title=album["title"], date=album["date"],
+                            excerpt=excerpt, album=album["slug"]))
+    return sorted(entries, key=lambda entry: entry["date"], reverse=True)
+
+
+def build_writing(root, home, entries):
+    items = []
+    for entry in entries:
+        items.append(f'''<li class="writing-entry">
+          <h2><a href="{root}writing/{esc(entry['slug'])}.html">{esc(entry['title'])}</a></h2>
+          <time class="fine" datetime="{esc(entry['date'])}">{('Released ' if entry.get('album') else '')}{nice_date(entry['date'])}</time>
+          <p class="writing-excerpt">{esc(entry['excerpt'])}</p>
+        </li>''')
+    content = '<section class="detail writing-index"><h1 class="intro-title">Writing</h1><ul class="writing-list">' + ''.join(items) + '</ul></section>'
+    return page(root, home, title="Writing", content=content, current="writing",
+                canonical=SITE_URL + "/writing", description="Writing by a kind of likeness.")
+
+
+def build_essay(root, home, entry):
+    if entry.get("album"):
+        cat = json.loads(read(os.path.join(ROOT, "catalogue.json")))
+        album = next(album for album in cat["albums"] if album["slug"] == entry["album"])
+        prose = paragraphs(linked_album_prose(album, root))
+    else:
+        prose = read(os.path.join(ROOT, "writeups", "writing", entry["slug"] + ".html"))
+    content = f'''<article class="detail essay">
+      <header class="essay-header">
+        <h1 class="intro-title">{esc(entry['title'])}</h1>
+        <time class="fine" datetime="{esc(entry['date'])}">{('Released ' if entry.get('album') else '')}{nice_date(entry['date'])}</time>
+      </header>
+      <div class="prose essay-prose">{prose}</div>
+      {essay_navigation(root, entry)}
+    </article>'''
+    return page(root, home, title=entry["title"], content=content, current="writing",
+                canonical=SITE_URL + "/writing/" + entry["slug"], description=entry["excerpt"], og_type="article")
 
 
 def build_collection(root, home, name):
@@ -318,6 +392,7 @@ def build_hand_page(name, root, home):
 def build_sitemap(albums):
     urls = [(SITE_URL + "/", "1.0"), (SITE_URL + "/music", "0.9")] + [(f"{SITE_URL}/music/{a['slug']}", "0.8") for a in albums]
     urls += [(f"{SITE_URL}/samples", "0.9"), (f"{SITE_URL}/tools", "0.9"), (f"{SITE_URL}/writing", "0.8"), (f"{SITE_URL}/blow-your-phase-off", "0.9"), (f"{SITE_URL}/transmutation", "0.9")]
+    urls += [(SITE_URL + "/writing/" + entry["slug"], "0.8") for entry in writing_entries()]
     items = "\n".join(f"  <url>\n    <loc>{u}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>{p}</priority>\n  </url>" for u, p in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{items}\n</urlset>\n'
 
@@ -349,6 +424,11 @@ def main():
     pages = [f for f in sorted(os.listdir(os.path.join(ROOT, "pages"))) if f.endswith(".html")]
     for f in pages:
         write(os.path.join(out, f), build_hand_page(f[:-5], root, home))
+    entries = writing_entries()
+    write(os.path.join(out, "writing.html"), build_writing(root, home, entries))
+    essay_root, essay_home = links(1)
+    for entry in entries:
+        write(os.path.join(out, "writing", entry["slug"] + ".html"), build_essay(essay_root, essay_home, entry))
     write(os.path.join(out, "samples.html"), build_collection(root, home, "samples"))
     write(os.path.join(out, "tools.html"), build_collection(root, home, "tools"))
     write(os.path.join(out, "sitemap.xml"), build_sitemap(albums))

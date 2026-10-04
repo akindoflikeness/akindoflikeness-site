@@ -26,7 +26,14 @@ The tools browser is built from `tools.json`. Add an entry with a name, GIF, sti
 image, dimensions, alt text, GitHub URL and detail-page URL, then rebuild. Left and
 right navigation enables automatically when there is more than one tool. Instrument
 images currently live in `assets/instruments/`; the still image is used for reduced
-motion. Edit `pages/writing.html` for the writing section.
+motion. Writing entries live in `writing.json` (slug, title, date and excerpt), with
+each piece's HTML prose in `writeups/writing/<slug>.html`. Rebuild to generate the
+Writing index and individual pages; the index lists newest pieces first.
+Album notes also appear automatically in Writing from their existing `writeups/*.txt`
+sources, labelled with the release date. Albums without prose are omitted. Related
+reading links are listed by slug in `writing-links.json`; essay pages link back to
+listening, and release pages link to their writing. The original connection notes
+are in `drafts/prose.md` under “Links noticed (for later)”.
 
 1. Organise, encode and upload it with the scripts in `Downloads/akol-albums/tools`
    (`README.md` there walks through it). Give it an `accent` in `catalogue.py`: one
