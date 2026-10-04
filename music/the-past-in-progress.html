@@ -39,16 +39,18 @@
           <a href="/">AKOL</a>
         </div>
         <nav class="nav" aria-label="Pages">
-          <a href="/music.html" aria-current="page">music</a>
-          <a href="/blow-your-phase-off.html">blow your phase off</a>
-          <a href="/transmutation.html">transmutation</a>
+          <a href="/music.html" aria-current="page">Music</a>
+          <a href="/tools.html">Tools</a>
+          <a href="/samples.html">Samples</a>
+          <a href="/writing.html">Writing</a>
         </nav>
         <div class="elsewhere">
           <a href="https://akindoflikeness.bandcamp.com">bandcamp</a>
           <a href="https://www.youtube.com/@akindoflikeness">youtube</a>
           <a href="https://github.com/wraithsys">github</a>
           <a href="https://discord.gg/xBtGXU7Etf">discord</a>
-          <a class="contact" href="mailto:akindoflikeness@gmail.com">akindoflikeness@gmail.com</a>
+          <button class="contact" id="copy-email" type="button">email</button>
+          <span class="contact-status fine" id="copy-email-status" role="status"></span>
         </div>
       </header>
       <main class="content" id="main">
@@ -156,6 +158,21 @@
     <script src="/player.js" defer></script>
 
     <script>
+    (function () {
+      var button = document.getElementById("copy-email");
+      var status = document.getElementById("copy-email-status");
+      var timer;
+      button.addEventListener("click", async function () {
+        try {
+          await navigator.clipboard.writeText("akindoflikeness@gmail.com");
+          status.textContent = "copied";
+          clearTimeout(timer);
+          timer = setTimeout(function () { status.textContent = ""; }, 2500);
+        } catch (error) {
+          status.textContent = "Copy manually: akindoflikeness@gmail.com";
+        }
+      });
+    })();
     /* The veil: the page sits under a sheet of its own background colour until the face and the
        pictures in view have arrived, then the sheet fades and is removed. Never held past MAX. */
     (function () {

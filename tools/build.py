@@ -27,7 +27,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES = os.path.join(ROOT, "tools", "templates")
 SITE_URL = "https://akindoflikeness.net"
 ARTIST = "a kind of likeness"
-DEFAULT_ACCENT = "#a9c7d2"
+DEFAULT_ACCENT = "#a82b43"
 
 ICON_PLAY = '<svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5v11L13 8z"/></svg>'
 ICON_PAUSE = '<svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5h3.5v11H3.5zM9 2.5h3.5v11H9z"/></svg>'
@@ -150,6 +150,7 @@ def page(root, home, *, title, content, tail="", current=None, accent=None, them
                cur_home=' aria-current="page"' if current == "home" else "",
                cur_music=' aria-current="page"' if current == "music" else "",
                cur_bypo=' aria-current="page"' if current == "bypo" else "",
+               cur_writing=' aria-current="page"' if current == "writing" else '',
                cur_pack=' aria-current="page"' if current == "pack" else "",
                content=content, tail=tail)
 
@@ -259,6 +260,45 @@ def build_release(a, albums, root, home):
                 image=a["archive"]["cover_web"], description=desc)
 
 
+def build_collection(root, home, name):
+    is_tools = name == "tools"
+    noun = "tool" if is_tools else "sample pack"
+    entries = json.loads(read(os.path.join(ROOT, name + ".json")))
+    cards = []
+    for i, item in enumerate(entries):
+        def url(value):
+            return root + value.lstrip("/") if value.startswith("/") else value
+        github = f'<a href="{esc(item["github"])}">GitHub</a>' if item.get("github") else ''
+        subtitle = f'<p class="fine card-subtitle">{esc(item["subtitle"])}</p>' if item.get("subtitle") else ''
+        description = f'<p class="card-description">{esc(item["description"])}</p>' if item.get("description") else ''
+        label = "About" if is_tools else "Select"
+        cards.append(f'''<article class="tool-card"{(' hidden' if i else '')}>
+          <figure class="tool-media"><picture>
+            <source srcset="{esc(url(item['image']))}" media="(prefers-reduced-motion: no-preference)">
+            <img src="{esc(url(item['still']))}" alt="{esc(item['alt'])}" width="{item['width']}" height="{item['height']}">
+          </picture></figure>
+          <h2>{esc(item['name'])}</h2>
+          {subtitle}{description}
+          <div class="tool-actions">{github}<a href="{esc(url(item['page']))}">{label}</a></div>
+        </article>''')
+    disabled = ' disabled' if len(cards) < 2 else ''
+    content = f'''<section class="detail tools-browser" aria-labelledby="tools-title">
+      <h1 class="intro-title" id="tools-title">{name.title()}</h1>
+      <div class="tool-browser-frame">
+        <button class="tool-arrow" data-direction="-1" aria-label="Previous {noun}"{disabled}>←</button>
+        <div class="tool-cards">{''.join(cards)}</div>
+        <button class="tool-arrow" data-direction="1" aria-label="Next {noun}"{disabled}>→</button>
+      </div>
+      <p class="tool-position fine" aria-live="polite" aria-atomic="true">{('1 / ' + str(len(cards))) if cards else 'No entries yet'}</p>
+    </section>'''
+    content = "
+".join(line.rstrip() for line in content.splitlines())
+    return page(root, home, title=name, content=content, current="bypo" if is_tools else "pack",
+                theme="onebit" if is_tools else None, accent=None if is_tools else "#c9953d",
+                canonical=SITE_URL + "/" + name, description="Instruments and tools by AKOL." if is_tools else "Sample packs by AKOL.",
+                tail=f'<script src="{root}tools-browser.js" defer></script>')
+
+
 def build_hand_page(name, root, home):
     src = read(os.path.join(ROOT, "pages", name + ".html"))
     head, _, body = src.partition("\n---\n")
@@ -278,7 +318,7 @@ def build_hand_page(name, root, home):
 
 def build_sitemap(albums):
     urls = [(SITE_URL + "/", "1.0"), (SITE_URL + "/music", "0.9")] + [(f"{SITE_URL}/music/{a['slug']}", "0.8") for a in albums]
-    urls += [(f"{SITE_URL}/blow-your-phase-off", "0.9"), (f"{SITE_URL}/transmutation", "0.9")]
+    urls += [(f"{SITE_URL}/samples", "0.9"), (f"{SITE_URL}/tools", "0.9"), (f"{SITE_URL}/writing", "0.8"), (f"{SITE_URL}/blow-your-phase-off", "0.9"), (f"{SITE_URL}/transmutation", "0.9")]
     items = "\n".join(f"  <url>\n    <loc>{u}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>{p}</priority>\n  </url>" for u, p in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{items}\n</urlset>\n'
 
@@ -310,6 +350,8 @@ def main():
     pages = [f for f in sorted(os.listdir(os.path.join(ROOT, "pages"))) if f.endswith(".html")]
     for f in pages:
         write(os.path.join(out, f), build_hand_page(f[:-5], root, home))
+    write(os.path.join(out, "samples.html"), build_collection(root, home, "samples"))
+    write(os.path.join(out, "tools.html"), build_collection(root, home, "tools"))
     write(os.path.join(out, "sitemap.xml"), build_sitemap(albums))
     print(f"built {len(albums)} releases, {len(pages)} pages, sitemap -> {out}")
 

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "BLOW YOUR PHASE OFF",
+    "image": "/assets/instruments/bypomono-hero.gif",
+    "still": "/assets/instruments/bypomono-hero-still.png",
+    "width": 880,
+    "height": 580,
+    "alt": "Blow Your Phase Off: operator controls, phase scope and sequencer",
+    "github": "https://github.com/wraithsys/bypomono",
+    "page": "/blow-your-phase-off.html"
+  }
+]

@@ -15,19 +15,19 @@
       @keyframes veil-pulse { 0%,100% { opacity:.3 } 50% { opacity:1 } }
       @media (prefers-reduced-motion:reduce) { .veil-pulse { animation:none } .veil { transition:none } }
     </style>
-    <title>AKOL</title>
+    <title>samples</title>
     <meta name="theme-color" content="#090909">
-    <link rel="canonical" href="https://akindoflikeness.net/">
-    <meta property="og:title" content="AKOL">
+    <link rel="canonical" href="https://akindoflikeness.net/samples">
+    <meta property="og:title" content="samples">
     <meta property="og:type" content="website">
-    <meta name="description" content="Music and art by a kind of likeness. I learn by making them.">
-    <meta property="og:description" content="Music and art by a kind of likeness. I learn by making them.">
+    <meta name="description" content="Sample packs by AKOL.">
+    <meta property="og:description" content="Sample packs by AKOL.">
     <link rel="preload" href="/assets/fonts/Likeness-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link id="site-style" rel="stylesheet" href="/style.css" media="print" onload="this.media='all';this.dataset.ready='1'" onerror="this.dataset.ready='1'">
     <noscript><link rel="stylesheet" href="/style.css"></noscript>
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
   </head>
-  <body>
+  <body style="--accent: #c9953d">
     <div class="veil" id="veil">
       <div class="veil-status" role="status"><span class="veil-pulse" aria-hidden="true"></span><span>loading</span></div>
     </div>
@@ -35,12 +35,12 @@
     <div class="layout">
       <header class="sidebar">
         <div class="identity">
-          <a href="/" aria-current="page">AKOL</a>
+          <a href="/">AKOL</a>
         </div>
         <nav class="nav" aria-label="Pages">
           <a href="/music.html">Music</a>
           <a href="/tools.html">Tools</a>
-          <a href="/samples.html">Samples</a>
+          <a href="/samples.html" aria-current="page">Samples</a>
           <a href="/writing.html">Writing</a>
         </nav>
         <div class="elsewhere">
@@ -53,23 +53,26 @@
         </div>
       </header>
       <main class="content" id="main">
-        <article class="home-intro">
-          <figure class="content-image home-portrait">
-            <img src="/assets/portrait-bitmap-v2.png" alt="Bitmap portrait of AKOL in a cap and hoodie, surrounded by a distressed printed frame" width="1254" height="1254" decoding="async">
-          </figure>
-          <div class="home-word">
-            <h1 class="intro-title">A KIND OF LIKENESS</h1>
-            <blockquote class="prose prose-quote">
-            <p>I make music and art as a kind of likeness. I learn by making them. I don’t usually start with a picture of the thing and work towards it. I decide to build, and find out what I’m making, and why, along the way.</p>
-            <p>A lot of what I make begins with something already there: noise, recordings I kept without knowing why, fragments of older work. Making something from them changes how I hear what was there in the first place.</p>
-            </blockquote>
-          </div>
-        </article>
-
-
+<section class="detail tools-browser" aria-labelledby="tools-title">
+      <h1 class="intro-title" id="tools-title">Samples</h1>
+      <div class="tool-browser-frame">
+        <button class="tool-arrow" data-direction="-1" aria-label="Previous sample pack" disabled>←</button>
+        <div class="tool-cards"><article class="tool-card">
+          <figure class="tool-media"><picture>
+            <source srcset="https://archive.org/download/transmutation-akol/sigil.png" media="(prefers-reduced-motion: no-preference)">
+            <img src="https://archive.org/download/transmutation-akol/sigil.png" alt="The transmutation sigil" width="200" height="200">
+          </picture></figure>
+          <h2>TRANSMUTATION</h2>
+          <p class="fine card-subtitle">a kind of likeness · 2025</p><p class="card-description">Seven folders of loops, one-shots, drones and noise etc.</p>
+          <div class="tool-actions"><a href="/transmutation.html">Select</a></div>
+        </article></div>
+        <button class="tool-arrow" data-direction="1" aria-label="Next sample pack" disabled>→</button>
+      </div>
+      <p class="tool-position fine" aria-live="polite" aria-atomic="true">1 / 1</p>
+    </section>
       </main>
     </div>
-
+<script src="/tools-browser.js" defer></script>
     <script>
     (function () {
       var button = document.getElementById("copy-email");

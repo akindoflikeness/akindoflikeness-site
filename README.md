@@ -1,9 +1,9 @@
 # akindoflikeness.net
 
 Static site on Cloudflare Pages: music, blow your phase off, transmutation.
-Nothing is hosted twice. Covers and audio come from archive.org, the instrument's
-pictures from the bypomono repo on GitHub; this repo holds words, the stylesheet,
-one script for the player and the typeface.
+Covers and audio come from archive.org; this repo holds words, artwork, the stylesheet,
+one script for the player and the typeface. The blow your phase off page keeps the
+artist's prose rather than importing the instrument's GitHub README and images.
 
 ## Where things are
 
@@ -21,6 +21,12 @@ one script for the player and the typeface.
 built files; the build overwrites them.
 
 ## Adding a release
+
+The tools browser is built from `tools.json`. Add an entry with a name, GIF, still
+image, dimensions, alt text, GitHub URL and detail-page URL, then rebuild. Left and
+right navigation enables automatically when there is more than one tool. Instrument
+images currently live in `assets/instruments/`; the still image is used for reduced
+motion. Edit `pages/writing.html` for the writing section.
 
 1. Organise, encode and upload it with the scripts in `Downloads/akol-albums/tools`
    (`README.md` there walks through it). Give it an `accent` in `catalogue.py`: one
