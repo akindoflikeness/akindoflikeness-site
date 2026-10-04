@@ -144,6 +144,10 @@ def page(root, home, *, title, content, tail="", current=None, accent=None, them
         body.append(f'class="{theme}"')
     if accent:
         body.append(f'style="--accent: {accent}"')
+    cat = json.loads(read(os.path.join(ROOT, "catalogue.json")))
+    available = [a for a in cat["albums"] if a.get("available") and a.get("tracks")]
+    available.sort(key=lambda a: a["date"], reverse=True)
+    tail += tpl("player.html", root=root, home=home, catalogue=slim_catalogue(available, "/"))
     return tpl("base.html", title=esc(title), theme_color="#000000" if theme == "onebit" else "#090909",
                head_extra=head_extra(title, **head), root=root, home=home,
                body_attrs=(" " + " ".join(body)) if body else "",
@@ -197,25 +201,25 @@ def build_home(albums, root, home):
 
 
 def build_music(albums, root, home):
-    latest, rest = albums[0], albums[1:]
-    records = []
-    for a in rest:
-        records.append(f'''            <div class="record" data-slug="{a['slug']}" style="--accent: {a.get('accent') or DEFAULT_ACCENT}">
+    records, features = [], []
+    for a in albums:
+        records.append(f'''<div class="record" data-slug="{a['slug']}" style="--accent: {a.get('accent') or DEFAULT_ACCENT}">
               <a class="record-cover" href="{page_url(root, a)}">{cover_img(a, lazy=True)}</a>
-              <div class="caption">
-                {play_button(a)}
-                <a class="record-title" href="{page_url(root, a)}">{esc(a['title'])}</a>
-                <span class="year">{a['year']}</span>
-              </div>
+              <div class="caption">{play_button(a)}<a class="record-title" href="{page_url(root, a)}">{esc(a['title'])}</a><span class="year">{a['year']}</span></div>
             </div>''')
-    content = tpl("music.html",
-                  latest_slug=latest["slug"], latest_accent=latest.get("accent") or DEFAULT_ACCENT,
-                  latest_page=page_url(root, latest), latest_cover=cover_img(latest), latest_title=esc(latest["title"]),
-                  latest_sub=f"{nice_date(latest['date'])} · {len(latest['tracks'])} tracks · {running_time(latest['total_seconds'])}",
-                  latest_play=play_button(latest, text=True), records="\n".join(records))
-    tail = tpl("player.html", root=root, home=home, catalogue=slim_catalogue(albums, root))
-    return page(root, home, title="music — AKOL", content=content, tail=tail, current="music",
-                canonical=SITE_URL + "/music", image=latest["archive"]["cover_web"],
+        text = html.unescape(re.sub(r"<[^>]+>", "", writeup(a))).strip()
+        text = " ".join(text.split())
+        excerpt = text[:128].rsplit(" ", 1)[0] + "…" if len(text) > 129 else text
+        features.append(tpl("music.html", latest_slug=a["slug"], latest_accent=a.get("accent") or DEFAULT_ACCENT,
+                            latest_page=page_url(root, a), latest_cover=cover_img(a), latest_title=esc(a["title"]),
+                            latest_sub=f"{nice_date(a['date'])} · {len(a['tracks'])} tracks · {running_time(a['total_seconds'])}",
+                            latest_about=esc(excerpt), latest_play=play_button(a, text=True)))
+    content = '<article class="music"><div id="featured-album">' + features[0] + '</div>'
+    content += '<div class="records" aria-label="Albums">' + "".join(records) + '</div></article>'
+    content += "".join(f'<template class="featured-option">{feature}</template>' for feature in features)
+    tail = ""
+    return page(root, home, title="Music — AKOL", content=content, tail=tail, current="music",
+                canonical=SITE_URL + "/music",
                 description=f"Music by {ARTIST}. Listen here, buy on Bandcamp, or download lossless from archive.org.")
 
 
@@ -255,7 +259,7 @@ def build_release(a, albums, root, home):
                   play=play_button(a, text=True), bandcamp=a["bandcamp"], tracks="\n".join(rows),
                   zip=zip_url, size=size, archive=a["archive"]["details"], formats=", ".join(formats),
                   neighbours="\n".join(neighbours))
-    tail = tpl("player.html", root=root, home=home, catalogue=slim_catalogue(albums, root))
+    tail = ""
     desc = f"{a['title']} ({a['year']}) by {ARTIST}: {len(a['tracks'])} tracks, {running_time(a['total_seconds'])}."
     return page(root, home, title=f"{a['title']} — AKOL", content=content, tail=tail, current="music",
                 accent=a.get("accent"), canonical=f"{SITE_URL}/music/{a['slug']}", og_type="music.album",
@@ -369,7 +373,7 @@ def build_collection(root, home, name):
     return page(root, home, title=name, content=content, current="bypo" if is_tools else "pack",
                 theme="onebit" if is_tools else None, accent=None if is_tools else "#c9953d",
                 canonical=SITE_URL + "/" + name, description="Instruments and tools by AKOL." if is_tools else "Sample packs by AKOL.",
-                tail=f'<script src="{root}tools-browser.js" defer></script>')
+                tail="")
 
 
 def build_hand_page(name, root, home):

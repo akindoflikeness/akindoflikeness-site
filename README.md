@@ -1,9 +1,18 @@
 # akindoflikeness.net
 
 Static site on Cloudflare Pages: music, blow your phase off, transmutation.
-Covers and audio come from archive.org; this repo holds words, artwork, the stylesheet,
-one script for the player and the typeface. The blow your phase off page keeps the
-artist's prose rather than importing the instrument's GitHub README and images.
+The Music page randomly features one album on each load, with a prose excerpt
+of up to 129 characters; the remaining albums appear in the gallery. The selection
+runs in `music-feature.js` each time the Music page is opened.
+The footer player is shared by every page. Swup 4.10.0 (vendored under
+`assets/vendor/`, MIT licence included) replaces the main content and navigation
+while retaining the audio element. `site-navigation.js` refreshes page components,
+theme, metadata and playing indicators. Normal links still work without JavaScript.
+Playback continues during internal navigation, including browser back/forward;
+full reloads and links opened in a new tab start separate documents.
+
+The player follows album track order automatically, with previous/next controls.
+Volume remains saved between visits.
 
 ## Where things are
 

@@ -1,4 +1,4 @@
-(() => {
+window.initToolsBrowser = function () {
   const browser = document.querySelector('.tools-browser');
   if (!browser) return;
   const cards = [...browser.querySelectorAll('.tool-card')];
@@ -20,4 +20,5 @@
       move(event.key === 'ArrowLeft' ? -1 : 1);
     }
   });
-})();
+};
+window.initToolsBrowser();

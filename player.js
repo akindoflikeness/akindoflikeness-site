@@ -8,7 +8,7 @@
   if (!catEl || !player || !audio) return;
   var CAT = JSON.parse(catEl.textContent), albums = CAT.albums;
   var $ = function (id) { return document.getElementById(id); };
-  var state = { album: null, track: -1, paused: true, formats: {} };
+  var state = { album: null, track: -1, paused: true, formats: {}, request: 0 };
 
   function pad(n) { return (n < 10 ? "0" : "") + n; }
   function mmss(s) { s = Math.round(s || 0); return Math.floor(s / 60) + ":" + pad(s % 60); }
@@ -53,12 +53,14 @@
     return [{ src: src, sizes: c.naturalWidth + "x" + c.naturalHeight, type: /\.png(\?|$)/i.test(src) ? "image/png" : "image/jpeg" }];
   }
 
-  function playTrack(a, i) {
+  function playTrack(a, i, force) {
     if (i < 0 || i >= a.tracks.length) return;
-    if (state.album === a && state.track === i) { toggle(); return; }
+    if (!force && state.album === a && state.track === i) { toggle(); return; }
     var t = a.tracks[i];
     if (state.album !== a) showCover(a);
     state.album = a; state.track = i; state.paused = false;
+    var request = ++state.request;
+    audio.pause();
     player.hidden = false; document.body.classList.add("has-player");
     player.style.setProperty("--accent", a.accent);
     $("p-link").href = a.page;
@@ -67,13 +69,18 @@
     $("p-note").textContent = "";
     $("p-dur").textContent = mmss(t.seconds); $("p-cur").textContent = "0:00"; $("p-bar").style.width = "0";
     mark();
+    $("p-next").disabled = i === a.tracks.length - 1;
     learnFormats(a).then(function () {
-      if (state.album !== a || state.track !== i) return;
+      if (state.request !== request) return;
       setSource(a, t); tryPlay(); announce(a, t);
     });
   }
   function toggle() { if (!state.album) return; if (audio.paused) tryPlay(); else audio.pause(); }
-  function step(d) { if (!state.album) return; var n = state.track + d; if (n >= 0 && n < state.album.tracks.length) playTrack(state.album, n); }
+  function step(d) {
+    if (!state.album) return;
+    var n = state.track + d;
+    if (n >= 0 && n < state.album.tracks.length) playTrack(state.album, n, true);
+  }
 
   /* what is playing, shown on the buttons and their containers */
   function mark() {
@@ -86,6 +93,7 @@
       el.classList.toggle("is-paused", !!on && state.paused);
     }
     $("p-play").classList.toggle("is-playing", !!a && !state.paused);
+    $("p-play").setAttribute("aria-label", state.paused ? "Play" : "Pause");
   }
 
   /* lock screens and media keys */
@@ -120,7 +128,7 @@
     $("p-bar").style.width = d ? (100 * audio.currentTime / d) + "%" : "0";
   });
   audio.addEventListener("durationchange", function () { if (isFinite(audio.duration) && audio.duration) $("p-dur").textContent = mmss(audio.duration); });
-  audio.addEventListener("ended", function () { step(1); });
+  audio.addEventListener("ended", function () { state.paused = true; step(1); mark(); });
   audio.addEventListener("error", function () {
     if (audio.dataset.fallback) { audio.src = audio.dataset.fallback; audio.dataset.fallback = ""; tryPlay(); return; }
     $("p-note").textContent = "can't reach archive.org from here";
@@ -128,6 +136,7 @@
   });
 
   $("p-play").addEventListener("click", toggle);
+  document.addEventListener("akol:page", mark);
   $("p-prev").addEventListener("click", function () { if (audio.currentTime > 4) audio.currentTime = 0; else step(-1); });
   $("p-next").addEventListener("click", function () { step(1); });
   $("p-seek").addEventListener("click", function (e) {

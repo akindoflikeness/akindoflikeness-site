@@ -20,7 +20,7 @@ if os.path.isdir(out):
 os.makedirs(os.path.join(out, "covers"))
 subprocess.check_call([sys.executable, os.path.join(ROOT, "tools", "build.py"), "--out", out, "--relative"])
 
-for f in ("player.js", "tools-browser.js", "favicon.ico"):
+for f in ("player.js", "tools-browser.js", "music-feature.js", "site-navigation.js", "favicon.ico"):
     shutil.copy(os.path.join(ROOT, f), out)
 shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(out, "assets"))
 # the face travels inside the stylesheet: the sandbox only trusts fonts it can see inline

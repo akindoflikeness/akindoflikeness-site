@@ -86,6 +86,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://akindoflikeness.net/writing/mutation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://akindoflikeness.net/writing/the-past-in-progress</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

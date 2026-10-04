@@ -28,6 +28,7 @@
       <div class="veil-status" role="status"><span class="veil-pulse" aria-hidden="true"></span><span>loading</span></div>
     </div>
     <a class="skip" href="#main">Skip to content</a>
+    <span class="sr-only" id="page-status" role="status"></span>
     <div class="layout">
       <header class="sidebar">
         <div class="identity">
@@ -48,11 +49,15 @@
           <span class="contact-status fine" id="copy-email-status" role="status"></span>
         </div>
       </header>
-      <main class="content" id="main">
+      <main class="content" id="main" tabindex="-1">
 {{content}}
       </main>
     </div>
 {{tail}}
+    <script src="{{root}}music-feature.js" defer></script>
+    <script src="{{root}}tools-browser.js" defer></script>
+    <script src="{{root}}assets/vendor/swup.umd.js" defer></script>
+    <script src="{{root}}site-navigation.js" defer></script>
     <script>
     (function () {
       var button = document.getElementById("copy-email");
