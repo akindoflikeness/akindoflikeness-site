@@ -278,12 +278,12 @@
       ],
       "bandcamp": "https://akindoflikeness.bandcamp.com/album/mutation",
       "archive": {
-        "identifier": "mutation-akol",
-        "details": "https://archive.org/details/mutation-akol",
-        "download": "https://archive.org/download/mutation-akol",
-        "zip": "https://archive.org/compress/mutation-akol",
-        "cover": "https://archive.org/download/mutation-akol/cover.png",
-        "cover_web": "https://archive.org/download/mutation-akol/cover-web.jpg"
+        "identifier": "mutation-akol-v2",
+        "details": "https://archive.org/details/mutation-akol-v2",
+        "download": "https://archive.org/download/mutation-akol-v2",
+        "zip": "https://archive.org/compress/mutation-akol-v2",
+        "cover": "https://archive.org/download/mutation-akol-v2/cover.png",
+        "cover_web": "https://archive.org/download/mutation-akol-v2/cover-web.jpg"
       },
       "available": true,
       "tracks": [
@@ -298,8 +298,8 @@
           "flac_bytes": 70684890,
           "sha256": "959ca9faac7707c0be3450c1d579b632d1ba5c5a59341dbf381963cc8693c9dd",
           "urls": {
-            "flac": "https://archive.org/download/mutation-akol/01 Experiment.flac",
-            "mp3": "https://archive.org/download/mutation-akol/01 Experiment.mp3"
+            "flac": "https://archive.org/download/mutation-akol-v2/01 Experiment.flac",
+            "mp3": "https://archive.org/download/mutation-akol-v2/01 Experiment.mp3"
           }
         },
         {
@@ -313,8 +313,8 @@
           "flac_bytes": 99830851,
           "sha256": "f66c6e646f55cae479a77bbb85ff3d3b4bbe3fb955bc1ceba3aa212cafe39ffd",
           "urls": {
-            "flac": "https://archive.org/download/mutation-akol/02 Tormented Oscillations.flac",
-            "mp3": "https://archive.org/download/mutation-akol/02 Tormented Oscillations.mp3"
+            "flac": "https://archive.org/download/mutation-akol-v2/02 Tormented Oscillations.flac",
+            "mp3": "https://archive.org/download/mutation-akol-v2/02 Tormented Oscillations.mp3"
           }
         },
         {
@@ -328,8 +328,8 @@
           "flac_bytes": 73217606,
           "sha256": "6897d166d854577c832a10d5cf6e461ca050fe881180debff5c8775bbe55adcc",
           "urls": {
-            "flac": "https://archive.org/download/mutation-akol/03 Distributed Dreaming.flac",
-            "mp3": "https://archive.org/download/mutation-akol/03 Distributed Dreaming.mp3"
+            "flac": "https://archive.org/download/mutation-akol-v2/03 Distributed Dreaming.flac",
+            "mp3": "https://archive.org/download/mutation-akol-v2/03 Distributed Dreaming.mp3"
           }
         },
         {
@@ -343,8 +343,8 @@
           "flac_bytes": 45655496,
           "sha256": "c2eabf19889ffd3df0eb1c4f71b448a8faf74fbd91fa5d27c6561ab807834bc1",
           "urls": {
-            "flac": "https://archive.org/download/mutation-akol/04 Scanning.flac",
-            "mp3": "https://archive.org/download/mutation-akol/04 Scanning.mp3"
+            "flac": "https://archive.org/download/mutation-akol-v2/04 Scanning.flac",
+            "mp3": "https://archive.org/download/mutation-akol-v2/04 Scanning.mp3"
           }
         },
         {
@@ -358,8 +358,8 @@
           "flac_bytes": 165819850,
           "sha256": "591145185c9a3790c3456d10e7d927a5d52f8f4d5cc4a016dd81c754fc180e1f",
           "urls": {
-            "flac": "https://archive.org/download/mutation-akol/05 The Last Interface.flac",
-            "mp3": "https://archive.org/download/mutation-akol/05 The Last Interface.mp3"
+            "flac": "https://archive.org/download/mutation-akol-v2/05 The Last Interface.flac",
+            "mp3": "https://archive.org/download/mutation-akol-v2/05 The Last Interface.mp3"
           }
         },
         {
@@ -373,8 +373,8 @@
           "flac_bytes": 142988305,
           "sha256": "99c26c90e1460897a6ad74bcb7fabf14a337867db32dfa68768c4d74f1f2c7ea",
           "urls": {
-            "flac": "https://archive.org/download/mutation-akol/06 Hole In Chest.flac",
-            "mp3": "https://archive.org/download/mutation-akol/06 Hole In Chest.mp3"
+            "flac": "https://archive.org/download/mutation-akol-v2/06 Hole In Chest.flac",
+            "mp3": "https://archive.org/download/mutation-akol-v2/06 Hole In Chest.mp3"
           }
         },
         {
@@ -388,8 +388,8 @@
           "flac_bytes": 58644970,
           "sha256": "debb0671ef35bdd9d8699a8e3075c65cd7b2a611b00431d9c4ea8297a70c021c",
           "urls": {
-            "flac": "https://archive.org/download/mutation-akol/07 Net Terminal Gene.flac",
-            "mp3": "https://archive.org/download/mutation-akol/07 Net Terminal Gene.mp3"
+            "flac": "https://archive.org/download/mutation-akol-v2/07 Net Terminal Gene.flac",
+            "mp3": "https://archive.org/download/mutation-akol-v2/07 Net Terminal Gene.mp3"
           }
         }
       ],

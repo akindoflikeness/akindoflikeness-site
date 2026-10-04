@@ -34,7 +34,7 @@ Keep the filename when changing a title so existing links continue to work.
 |---------------------------------|----------------------------------------|-----------------------------|
 | Writing title or prose / release notes | `prose/<slug>.txt`             | commit and push to `main`   |
 | the index introduction         | `writeups/index.txt`                   | `python3 tools/build.py`    |
-| a release's tracks, date, colour| `catalogue.py` in `Downloads/akol-albums/tools`, then `export_catalogue.py` there (it writes `catalogue.json` here too) | `python3 tools/build.py` |
+| a release's tracks, date, colour| `catalogue.py` in `Music/akol-albums/tools`, then `export_catalogue.py` there (it writes `catalogue.json` here too) | `python3 tools/build.py` |
 | blow your phase off, transmutation, terms, 404 | `pages/<name>.html` (a few `key: value` lines, `---`, then HTML) | `python3 tools/build.py` |
 | the sidebar, the page frame     | `tools/templates/base.html`            | `python3 tools/build.py`    |
 | the look                        | `style.css`                            | nothing                     |
@@ -57,13 +57,20 @@ reading links are listed by slug in `writing-links.json`; essay pages link back 
 listening, and release pages link to their writing. The original connection notes
 are in `drafts/prose.md` under “Links noticed (for later)”.
 
-1. Organise, encode and upload it with the scripts in `Downloads/akol-albums/tools`
+1. Organise, encode and upload it with the scripts in `Music/akol-albums/tools`
    (`README.md` there walks through it). Give it an `accent` in `catalogue.py`: one
    colour from the cover, used for the playing track, the progress line and text selection.
 2. `powershell -File tools/cover_web.ps1` and `sh tools/upload_covers.sh` there put the
    800 px `cover-web.jpg` on the archive.org item. The site shows that copy.
 3. `python3 export_catalogue.py` there, then `python3 tools/build.py` here.
 4. Write `prose/<slug>.txt` (title, blank line, prose) whenever you like and push.
+
+Mutation uses the fresh Archive.org item `mutation-akol-v2`: the original item's
+delivery server returned HTTP 500 for covers and audio. All seven FLAC masters
+and seven MP3s were copied with matching checksums, along with the updated cover.
+The site uses the same cover and streaming URL patterns as every other release.
+Its `archive_identifier` in the source catalogue and the cover upload scripts
+retain this item when exporting or uploading again.
 
 ## The typeface
 
