@@ -1,0 +1,46 @@
+name: Publish prose
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'prose/**'
+      - 'writeups/**'
+      - 'writing.json'
+      - 'writing-links.json'
+      - 'catalogue.json'
+      - 'pages/**'
+      - 'tools/build.py'
+      - 'tools/templates/**'
+      - '.github/workflows/publish-prose.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-prose
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build site
+        run: python tools/build.py
+      - name: Publish generated pages
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html' music/ writing/ sitemap.xml
+          if ! git diff --cached --quiet; then
+            git commit -m 'Publish updated prose'
+            git push origin HEAD:main
+          fi

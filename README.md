@@ -16,9 +16,23 @@ Volume remains saved between visits.
 
 ## Where things are
 
+To edit Writing, open a file in `prose/`. The first line is its title, followed by
+a blank line and the prose. Blank lines separate paragraphs. These are plain text
+documents: no HTML, dates, excerpts or other publishing fields. Album notes use
+the same document on their release page. The title controls the Writing heading;
+album names in the music catalogue stay in `catalogue.json`.
+
+Save, commit and push to `main` as usual. The **Publish prose** GitHub Action builds
+the pages and commits them automatically; Cloudflare Pages publishes that commit.
+There is no manual build step for prose edits. To add a piece, add
+`prose/your-piece.txt` with the same title-and-prose format. Its filename sets the
+URL, its first commit supplies its date, and its first paragraph supplies its
+excerpt. Existing publication dates and related links remain outside the documents.
+Keep the filename when changing a title so existing links continue to work.
+
 | you want to change              | edit                                   | then run                    |
 |---------------------------------|----------------------------------------|-----------------------------|
-| the words on a release page     | `writeups/<slug>.txt`                  | `python3 tools/build.py`    |
+| Writing title or prose / release notes | `prose/<slug>.txt`             | commit and push to `main`   |
 | the index introduction         | `writeups/index.txt`                   | `python3 tools/build.py`    |
 | a release's tracks, date, colour| `catalogue.py` in `Downloads/akol-albums/tools`, then `export_catalogue.py` there (it writes `catalogue.json` here too) | `python3 tools/build.py` |
 | blow your phase off, transmutation, terms, 404 | `pages/<name>.html` (a few `key: value` lines, `---`, then HTML) | `python3 tools/build.py` |
@@ -35,11 +49,10 @@ The tools browser is built from `tools.json`. Add an entry with a name, GIF, sti
 image, dimensions, alt text, GitHub URL and detail-page URL, then rebuild. Left and
 right navigation enables automatically when there is more than one tool. Instrument
 images currently live in `assets/instruments/`; the still image is used for reduced
-motion. Writing entries live in `writing.json` (slug, title, date and excerpt), with
-each piece's HTML prose in `writeups/writing/<slug>.html`. Rebuild to generate the
-Writing index and individual pages; the index lists newest pieces first.
-Album notes also appear automatically in Writing from their existing `writeups/*.txt`
-sources, labelled with the release date. Albums without prose are omitted. Related
+motion. Writing documents live in `prose/*.txt`; `writing.json` only preserves
+existing essay dates. The index lists newest pieces first.
+Album notes also appear automatically in Writing, labelled with the release date.
+Albums without prose are omitted. Related
 reading links are listed by slug in `writing-links.json`; essay pages link back to
 listening, and release pages link to their writing. The original connection notes
 are in `drafts/prose.md` under “Links noticed (for later)”.
@@ -50,7 +63,7 @@ are in `drafts/prose.md` under “Links noticed (for later)”.
 2. `powershell -File tools/cover_web.ps1` and `sh tools/upload_covers.sh` there put the
    800 px `cover-web.jpg` on the archive.org item. The site shows that copy.
 3. `python3 export_catalogue.py` there, then `python3 tools/build.py` here.
-4. Write `writeups/<slug>.txt` whenever you like and build again.
+4. Write `prose/<slug>.txt` (title, blank line, prose) whenever you like and push.
 
 ## The typeface
 

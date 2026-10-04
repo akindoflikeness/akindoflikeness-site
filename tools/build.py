@@ -7,7 +7,7 @@
 What goes in:
     catalogue.json        every release: titles, dates, tracks, archive.org links, accent colour.
                           Made by Downloads/akol-albums/tools/export_catalogue.py; change things there.
-    writeups/<slug>.txt   the words on a release page. Blank line between paragraphs, HTML allowed.
+    prose/<slug>.txt      title, blank line, prose. Shared by Writing and release pages.
     pages/<name>.html     hand-written pages (blow your phase off, transmutation, terms, 404):
                           a few "key: value" lines, a line with ---, then the page's own HTML.
     tools/templates/      the chrome every page shares, the home page, a release page, the player.
@@ -21,7 +21,7 @@ What comes out:
 Everything else at the root (style.css, player.js, fonts, favicon, _headers, _redirects, robots.txt)
 is written by hand and left alone.
 """
-import argparse, datetime, html, json, os, re, sys
+import argparse, datetime, html, json, os, re, subprocess, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES = os.path.join(ROOT, "tools", "templates")
@@ -160,8 +160,26 @@ def page(root, home, *, title, content, tail="", current=None, accent=None, them
 
 
 def writeup(a):
-    p = os.path.join(ROOT, "writeups", a["slug"] + ".txt")
-    return read(p) if os.path.exists(p) else (a.get("about") or "")
+    p = os.path.join(ROOT, "prose", a["slug"] + ".txt")
+    return esc(prose_document(p)[1]) if os.path.exists(p) else ""
+
+
+def prose_document(path):
+    """A title, a blank line, then plain prose. No publishing fields in the document."""
+    text = read(path).lstrip("\ufeff").strip()
+    title, separator, body = text.partition("\n")
+    if not title.strip() or not separator or not body.strip():
+        raise ValueError(f"{path}: supply a title, a blank line and prose")
+    if body.splitlines()[0].strip():
+        raise ValueError(f"{path}: leave a blank line after the title")
+    return title.strip(), body.strip()
+
+
+def prose_date(slug):
+    result = subprocess.run(
+        ["git", "log", "--follow", "--diff-filter=A", "--format=%cs", "--", f"prose/{slug}.txt"],
+        cwd=ROOT, capture_output=True, text=True, check=True)
+    return result.stdout.strip().splitlines()[-1] if result.stdout.strip() else datetime.date.today().isoformat()
 
 
 # ---------- pages ----------
@@ -272,7 +290,7 @@ def linked_album_prose(album, root):
     references = {"the past in progress": "the-past-in-progress", "rotting.": "rotting", "i miss the rain": "i-miss-the-rain"}
     for title, slug in references.items():
         if slug != album["slug"]:
-            text = text.replace(f"<em>{title}</em>", f'<a href="{root}writing/{slug}.html"><em>{title}</em></a>')
+            text = re.sub(re.escape(title), lambda match: f'<a href="{root}writing/{slug}.html">{match[0]}</a>', text, flags=re.IGNORECASE)
     return text
 
 
@@ -291,18 +309,25 @@ def essay_navigation(root, entry):
 
 
 def writing_entries():
-    entries = json.loads(read(os.path.join(ROOT, "writing.json")))
+    metadata = {entry["slug"]: entry for entry in json.loads(read(os.path.join(ROOT, "writing.json")))}
     cat = json.loads(read(os.path.join(ROOT, "catalogue.json")))
-    for album in cat["albums"]:
-        text = writeup(album).strip()
-        if not album.get("available") or not text:
+    albums = {a["slug"]: a for a in cat["albums"] if a.get("available")}
+    entries = []
+    for filename in sorted(os.listdir(os.path.join(ROOT, "prose"))):
+        if not filename.endswith(".txt"):
             continue
+        slug = filename[:-4]
+        title, text = prose_document(os.path.join(ROOT, "prose", filename))
         first = re.split(r"\n\s*\n", text)[0]
-        excerpt = html.unescape(re.sub(r"<[^>]+>", "", first))
+        excerpt = " ".join(first.split())
         if len(excerpt) > 220:
             excerpt = excerpt[:220].rsplit(" ", 1)[0] + "…"
-        entries.append(dict(slug=album["slug"], title=album["title"], date=album["date"],
-                            excerpt=excerpt, album=album["slug"]))
+        album = albums.get(slug)
+        date = album["date"] if album else metadata.get(slug, {}).get("date") or prose_date(slug)
+        entry = dict(slug=slug, title=title, date=date, excerpt=excerpt)
+        if album:
+            entry["album"] = slug
+        entries.append(entry)
     return sorted(entries, key=lambda entry: entry["date"], reverse=True)
 
 
@@ -325,7 +350,7 @@ def build_essay(root, home, entry):
         album = next(album for album in cat["albums"] if album["slug"] == entry["album"])
         prose = paragraphs(linked_album_prose(album, root))
     else:
-        prose = read(os.path.join(ROOT, "writeups", "writing", entry["slug"] + ".html"))
+        prose = paragraphs(esc(prose_document(os.path.join(ROOT, "prose", entry["slug"] + ".txt"))[1]))
     content = f'''<article class="detail essay">
       <header class="essay-header">
         <h1 class="intro-title">{esc(entry['title'])}</h1>
