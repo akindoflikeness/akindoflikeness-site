@@ -195,12 +195,11 @@
         }
       });
     })();
-    /* The veil: the page sits under a sheet of its own background colour until the face and the
-       pictures in view have arrived, then the sheet fades and is removed. Never held past MAX. */
+    /* Reveal when styles and type are ready. Remote images must not block the page. */
     (function () {
       var veil = document.getElementById("veil"); if (!veil) return;
       if (!window.Promise) { veil.parentNode.removeChild(veil); return; }
-      var MAX = 3000, FADE = 700, waits = [], imgs = document.images, fold = innerHeight;
+      var MAX = 1000, FADE = 700, waits = [];
       var sheet = document.getElementById("site-style");
       var styled = new Promise(function (done) {
         if (sheet.dataset.ready) return done();
@@ -210,15 +209,6 @@
       waits.push(styled.then(function () {
         if (document.fonts && document.fonts.load) return document.fonts.load('1em "Likeness"').catch(function () {});
       }));
-      for (var i = 0; i < imgs.length; i++) (function (img) {
-        if (img.loading === "lazy" && img.getBoundingClientRect().top > fold) return;
-        waits.push(new Promise(function (done) {
-          if (img.complete) return done();
-          var src = img.getAttribute("src");
-          img.addEventListener("load", done);
-          img.addEventListener("error", function () { var s = img.getAttribute("src"); if (s === src) done(); else src = s; });
-        }));
-      })(imgs[i]);
       function lift() {
         if (!veil.parentNode || veil.className.indexOf("is-off") >= 0) return;
         veil.className += " is-off";
