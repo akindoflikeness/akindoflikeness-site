@@ -291,8 +291,7 @@ def build_collection(root, home, name):
       </div>
       <p class="tool-position fine" aria-live="polite" aria-atomic="true">{('1 / ' + str(len(cards))) if cards else 'No entries yet'}</p>
     </section>'''
-    content = "
-".join(line.rstrip() for line in content.splitlines())
+    content = chr(10).join(line.rstrip() for line in content.splitlines())
     return page(root, home, title=name, content=content, current="bypo" if is_tools else "pack",
                 theme="onebit" if is_tools else None, accent=None if is_tools else "#c9953d",
                 canonical=SITE_URL + "/" + name, description="Instruments and tools by AKOL." if is_tools else "Sample packs by AKOL.",
