@@ -17,7 +17,7 @@
     "height": 580,
     "alt": "Three audio paths blending around a transition",
     "subtitle": "non-zero boundary transitions",
-    "description": "An unfinished audio experiment. Signal, copy and sample, with a bit of time borrowed to get through a change.",
+    "description": "A proposal for audio runtimes to handle changes over time. Read the research and try a small signal, copy and sample demonstration.",
     "page": "/nzbt.html"
   }
 ]

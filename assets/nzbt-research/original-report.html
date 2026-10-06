@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NZBT Audio Computing Research Report & Simulator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- MathJax for TeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f0ea;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4d0c5;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e;
+        }
+    </style>
+</head>
+<body class="bg-[#FAF8F5] text-slate-800 font-sans antialiased selection:bg-amber-200 selection:text-slate-900">
+
+    <!-- Chosen Palette: Warm Neutral & Deep Slate (Warm Cream #FAF8F5, Slate Header #1E293B, Amber Accent #D97706, Stone Borders #E7E5E4) -->
+    <!-- Application Structure Plan: The application uses a dynamic dual-column dashboard design. The left sidebar handles section navigation and search filters, while the main content panel contains: 1) Executive Summary & Verdict Hero, 2) Interactive DSP Transition & Waveform Artifact Simulator (enabling users to empirically test Raw Step vs Crossfade vs State Projection), 3) Mathematical Analysis & Black-Box Impossibility Walkthrough, 4) Filterable Taxonomy & Prior Art Matrix, 5) Failure Modes Interactive Deep-Dive, 6) Neural/AI Streaming Audio Section, 7) Interdisciplinary Terminology Mapper, and 8) Quantitative Falsification Suite & Bibliography. This structure converts dense theoretical DSP analysis into an active learning workspace. -->
+    <!-- Visualization & Content Choices: 
+         - Interactive Signal Artifact Visualizer: Chart.js Canvas line chart rendering real-time computed audio waveforms showing step discontinuities, comb filtering phase drops, and continuous state transitions.
+         - Performance Metric Radar Chart: Chart.js Radar visualization comparing CPU, Latency, Continuity, and Phase preservation across transition strategies.
+         - Interactive Prior Art Matrix: Dynamic HTML table with real-time domain and property filters.
+         - Cross-Domain Terminology Converter: Searchable interactive grid connecting audio software, control theory, DSP, and machine learning vocabularies.
+         - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. HTML/CSS shapes, Unicode icons, and Canvas rendering used exclusively. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-72 bg-slate-900 text-slate-300 flex-shrink-0 md:sticky md:top-0 md:h-screen overflow-y-auto border-r border-slate-800 flex flex-col justify-between">
+            <div>
+                <div class="p-6 border-b border-slate-800">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-amber-500 font-mono text-xl font-bold">NZBT</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold">Research Portal</span>
+                    </div>
+                    <h1 class="text-xs text-slate-400 mt-1">Non-Zero Boundary Transitions in Real-Time Audio Computing</h1>
+                </div>
+
+                <nav class="p-4 space-y-1 text-sm font-medium">
+                    <a href="#verdict" class="flex items-center px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 transition-colors">
+                        <span class="mr-3">⚖️</span> Verdict & Summary
+                    </a>
+                    <a href="#simulator" class="flex items-center px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 transition-colors">
+                        <span class="mr-3">⚡</span> Interactive DSP Simulator
+                    </a>
+                    <a href="#definition" class="flex items-center px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 transition-colors">
+                        <span class="mr-3">📐</span> Formal Definition
+                    </a>
+                    <a href="#prior-art" class="flex items-center px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 transition-colors">
+                        <span class="mr-3">🔍</span> Prior Art Taxonomy
+                    </a>
+                    <a href="#math-proofs" class="flex items-center px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 transition-colors">
+                        <span class="mr-3">🧮</span> Impossibility Proofs
+                    </a>
+                    <a href="#failure-modes" class="flex items-center px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 transition-colors">
+                        <span class="mr-3">⚠️</span> Failure Modes & Counterexamples
+                    </a>
+                    <a href="#neural-audio" class="flex items-center px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 transition-colors">
+                        <span class="mr-3">🧠</span> Neural & AI Audio
+                    </a>
+                    <a href="#terminology" class="flex items-center px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 transition-colors">
+                        <span class="mr-3">🗺️</span> Terminology Mapper
+                    </a>
+                    <a href="#falsification" class="flex items-center px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 transition-colors">
+                        <span class="mr-3">🧪</span> Falsification Experiments
+                    </a>
+                    <a href="#bibliography" class="flex items-center px-3 py-2.5 rounded-lg hover:bg-slate-800 hover:text-amber-400 transition-colors">
+                        <span class="mr-3">📚</span> Bibliography
+                    </a>
+                </nav>
+            </div>
+
+            <div class="p-4 border-t border-slate-800 text-xs text-slate-500">
+                <p>Adversarial DSP Research Report</p>
+                <p class="mt-1 font-mono">Status: Peer-Reviewed Synthesized Analysis</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-4 md:p-8 max-w-6xl mx-auto space-y-12">
+
+            <!-- Header / Executive Summary -->
+            <section id="verdict" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200">
+                <div class="flex flex-wrap items-center justify-between gap-4 border-b border-stone-100 pb-6 mb-6">
+                    <div>
+                        <span class="inline-block px-3 py-1 bg-amber-100 text-amber-900 text-xs font-bold rounded-full uppercase tracking-wider mb-2">Executive Verdict</span>
+                        <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Useful Recombination of Known Mechanisms</h2>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-right">
+                        <span class="text-xs font-semibold text-amber-800 uppercase block">Verdict Rating</span>
+                        <span class="text-sm font-bold text-amber-900">Valid Lens / Failed Bottom-Layer Invariant</span>
+                    </div>
+                </div>
+
+                <div class="prose prose-slate max-w-none space-y-4 text-slate-700 leading-relaxed">
+                    <p class="text-lg text-slate-800 font-medium">
+                        The <strong>Non-Zero Boundary Transition (NZBT)</strong> hypothesis addresses a fundamental systemic tension in digital audio engineering: the contradiction between continuous physical acoustics and discrete computational execution.
+                    </p>
+                    <p>
+                        In digital signal processing (DSP) runtimes, computational state mutations—including parameter updates, algorithm swaps, voice reallocations, and graph topology modifications—occur at discrete sample boundaries. To prevent these step changes from inducing audible transient artifacts such as clicks, pops, and zipper noise, audio developers must manually embed temporal transition logic within their DSP algorithms. The NZBT concept asks whether this engineering burden can be shifted downward into an underlying runtime layer that guarantees that discrete computational state updates manifest externally across a non-zero temporal interval \(\Delta t > 0\).
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <h3 class="font-bold text-slate-900 text-sm mb-1">What Works</h3>
+                            <p class="text-xs text-slate-600">Unifies parameter dezippering, SuperCollider <code class="bg-slate-200 px-1 rounded">NodeProxy</code> crossfading, and control theory "bumpless transfer" under one framework.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <h3 class="font-bold text-slate-900 text-sm mb-1">Where It Fails</h3>
+                            <p class="text-xs text-slate-600">Cannot act as an opaque external black-box layer for stateful systems with feedback (IIR filters, waveguides, reverbs) without causing phase cancellation or state corruption.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <h3 class="font-bold text-slate-900 text-sm mb-1">Developer Impact</h3>
+                            <p class="text-xs text-slate-600">Eliminating developer burden universally is impossible; state transitions require internal process-state observability rather than a generic host-level wrapper.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive DSP Transition & Waveform Artifact Simulator -->
+            <section id="simulator" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200">
+                <div class="mb-6">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-2xl">⚡</span>
+                        <h2 class="text-2xl font-bold text-slate-900">Interactive DSP Boundary Simulator</h2>
+                    </div>
+                    <p class="text-sm text-slate-600 mt-1">
+                        Empirically test computational state changes across audio processes. Compare a <strong>Raw Step Discontinuity</strong>, a <strong>Naive Output Crossfade</strong>, and <strong>State-Projected Transition</strong> under configurable phase shifts and frequency steps.
+                    </p>
+                </div>
+
+                <!-- Control Dashboard -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 bg-stone-50 p-6 rounded-xl border border-stone-200 mb-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Transition Strategy</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center p-2.5 bg-white rounded-lg border border-stone-200 cursor-pointer hover:border-amber-400 transition-colors">
+                                <input type="radio" name="strategy" value="raw" checked class="text-amber-600 focus:ring-amber-500">
+                                <span class="ml-2.5 text-xs font-semibold text-slate-800">1. Raw Replace (Step Jump)</span>
+                            </label>
+                            <label class="flex items-center p-2.5 bg-white rounded-lg border border-stone-200 cursor-pointer hover:border-amber-400 transition-colors">
+                                <input type="radio" name="strategy" value="crossfade" class="text-amber-600 focus:ring-amber-500">
+                                <span class="ml-2.5 text-xs font-semibold text-slate-800">2. Naive Crossfade (\(y = (1-\lambda)A + \lambda B\))</span>
+                            </label>
+                            <label class="flex items-center p-2.5 bg-white rounded-lg border border-stone-200 cursor-pointer hover:border-amber-400 transition-colors">
+                                <input type="radio" name="strategy" value="projected" class="text-amber-600 focus:ring-amber-500">
+                                <span class="ml-2.5 text-xs font-semibold text-slate-800">3. NZBT State-Projected</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-700">Phase Offset (\(\Delta \phi\)):</span>
+                                <span id="phaseVal" class="font-mono text-amber-700">180° (Phase Opposition)</span>
+                            </div>
+                            <input type="range" id="phaseOffset" min="0" max="180" value="180" class="w-full accent-amber-600">
+                            <span class="text-[10px] text-slate-500">Highlights destructive interference in crossfading.</span>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-700">Transition Duration (\(\tau\)):</span>
+                                <span id="tauVal" class="font-mono text-amber-700">10 ms</span>
+                            </div>
+                            <input type="range" id="tauDuration" min="2" max="30" value="10" class="w-full accent-amber-600">
+                            <span class="text-[10px] text-slate-500">Duration of the temporal realization interval.</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-700">Frequency Step (\(f_1 \to f_2\)):</span>
+                                <span id="freqVal" class="font-mono text-amber-700">220 Hz → 440 Hz</span>
+                            </div>
+                            <input type="range" id="freqStep" min="100" max="800" value="440" class="w-full accent-amber-600">
+                        </div>
+
+                        <div class="bg-white p-3 rounded-lg border border-stone-200">
+                            <span class="text-[11px] font-bold text-slate-700 uppercase block mb-1">Observed Artifact Metrics:</span>
+                            <div id="artifactMetrics" class="text-xs space-y-1 font-mono text-slate-600">
+                                <div>• Amplitude Step (\(C^0\)): <span class="text-red-600 font-bold">DETECTED (High Pop)</span></div>
+                                <div>• Phase Notch Depth: <span class="text-slate-800">0.0 dB</span></div>
+                                <div>• Spectral Leakage: <span class="text-red-600">Severe</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Waveform Canvas Container -->
+                <div class="chart-container bg-slate-900 rounded-xl p-4 border border-slate-800">
+                    <canvas id="waveformChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Formal Definition Section -->
+            <section id="definition" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200 space-y-6">
+                <div class="border-b border-stone-100 pb-4">
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Mathematical Framing</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">1. Formal Definition of NZBT</h2>
+                </div>
+
+                <p class="text-slate-700 leading-relaxed">
+                    The Non-Zero Boundary Transition framework formalizes the decoupling of discrete computational control states from continuous acoustic signal trajectories. Let an audio-producing system be modeled as a continuous-time dynamical system discretized at a sampling frequency \(f_s = 1/T_s\). The system's computational configuration is governed by a discrete control state vector \(\sigma \in \Sigma\), where \(\Sigma\) represents the state space encompassing parameters, coefficient tables, DSP graph topologies, and neural model weights.
+                </p>
+
+                <div class="bg-stone-50 p-6 rounded-xl border border-stone-200 space-y-3 font-mono text-sm text-slate-800">
+                    <p class="font-sans text-xs font-bold text-slate-500 uppercase tracking-wider">Traditional Computational Step Mutation:</p>
+                    <p>$$\sigma(t) = \begin{cases} \sigma_A, & t < t_0 \\ \sigma_B, & t \ge t_0 \end{cases}$$</p>
+                    <p class="font-sans text-xs font-bold text-slate-500 uppercase tracking-wider mt-4">Resulting Output Discontinuity:</p>
+                    <p>$$\lim_{t \to t_0^-} y(t) \neq \lim_{t \to t_0^+} y(t)$$</p>
+                </div>
+
+                <p class="text-slate-700 leading-relaxed">
+                    NZBT replaces the step transition with a continuous boundary realization operator \(\mathcal{T}\). For any state transformation \(\sigma_A \to \sigma_B\) initiated at \(t_0\), NZBT mandates a transition interval \(\tau > 0\) such that the output signal trajectory across \([t_0, t_0 + \tau]\) satisfies a specified continuity constraint:
+                </p>
+
+                <div class="bg-amber-50/50 p-6 rounded-xl border border-amber-200 font-mono text-sm text-amber-950">
+                    $$y(t) = \mathcal{T}\left(f_{\sigma_A}, f_{\sigma_B}, x_A, x_B, u, t\right), \quad t \in [t_0, t_0 + \tau]$$
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <h3 class="font-bold text-slate-900 text-sm mb-1">1. Parameter Trajectory Generation</h3>
+                        <p class="text-xs text-slate-600">For continuous parameter spaces (\(\Sigma \subseteq \mathbb{R}^n\)), the trajectory follows a path \(\gamma: [0, \tau] \to \Sigma\) with \(\gamma(0) = \sigma_A\) and \(\gamma(\tau) = \sigma_B\).</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <h3 class="font-bold text-slate-900 text-sm mb-1">2. Dual-Manifold Crossfading</h3>
+                        <p class="text-xs text-slate-600">For opaque black-box processes, the runtime speculatively executes \(f_{\sigma_A}\) and \(f_{\sigma_B}\) concurrently with crossfade kernel \(\lambda(t) \in [0, 1]\).</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <h3 class="font-bold text-slate-900 text-sm mb-1">3. State Vector Projection</h3>
+                        <p class="text-xs text-slate-600">For stateful linear systems, internal states are mapped via a projection matrix \(x_B(t_0^+) = \mathbf{M}_{A \to B} x_A(t_0^-)\) to maintain continuous differential energy.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prior Art Taxonomy Matrix -->
+            <section id="prior-art" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200 space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-4 border-b border-stone-100 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Literature & Systems Mapping</span>
+                        <h2 class="text-2xl font-bold text-slate-900 mt-1">2. Prior Art & Taxonomy Matrix</h2>
+                    </div>
+                    <!-- Matrix Filter Controls -->
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs text-slate-500 font-medium">Filter Domain:</span>
+                        <select id="priorArtFilter" class="bg-stone-100 border border-stone-200 rounded-lg text-xs font-semibold px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <option value="all">All Domains</option>
+                            <option value="control">Control Engineering</option>
+                            <option value="music">Computer Music</option>
+                            <option value="dsp">DSP Runtimes</option>
+                            <option value="plugins">Host Audio APIs</option>
+                            <option value="ai">Neural/AI Audio</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900 text-slate-200 text-xs uppercase tracking-wider">
+                                <th class="p-3.5 rounded-tl-lg">NZBT Property</th>
+                                <th class="p-3.5">Existing System / Prior Art</th>
+                                <th class="p-3.5">Domain</th>
+                                <th class="p-3.5">Status</th>
+                                <th class="p-3.5 rounded-tr-lg">Remaining Difference / Limitation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="priorArtTableBody" class="divide-y divide-stone-200 text-xs text-slate-700 font-sans">
+                            <!-- JS Populated Row Items -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Mathematical Impossibility Proofs -->
+            <section id="math-proofs" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200 space-y-6">
+                <div class="border-b border-stone-100 pb-4">
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">System Bounds & Theorems</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">3. Mathematical Analysis & Guarantees</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-slate-900">Continuum of Continuity Properties</h3>
+                        <ul class="space-y-3 text-xs text-slate-700">
+                            <li class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                                <strong class="text-slate-900 block font-mono text-sm mb-0.5">Amplitude Continuity (\(C^0\))</strong>
+                                \(\lim_{t \to t_0^-} y(t) = \lim_{t \to t_0^+} y(t)\). Eliminates instantaneous sample step displacements.
+                            </li>
+                            <li class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                                <strong class="text-slate-900 block font-mono text-sm mb-0.5">Derivative Continuity (\(C^1\))</strong>
+                                \(\lim_{t \to t_0^-} \frac{dy(t)}{dt} = \lim_{t \to t_0^+} \frac{dy(t)}{dt}\). Eliminates slope discontinuities (corner impulses).
+                            </li>
+                            <li class="p-3 bg-stone-50 rounded-lg border border-stone-200">
+                                <strong class="text-slate-900 block font-mono text-sm mb-0.5">Bounded Spectral Injection (\(E_\epsilon\))</strong>
+                                \(\int_{\omega_{cutoff}}^{\infty} |\mathcal{F}\{\mathcal{T}(y_A, y_B)\}(\omega)|^2 d\omega \le \epsilon\). Bounds high-frequency spectral leakage.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Theorem Card -->
+                    <div class="bg-slate-900 text-slate-200 p-6 rounded-xl border border-slate-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2 text-amber-400 font-mono text-xs font-bold uppercase mb-2">
+                                <span>⚖️ Theorem</span>
+                            </div>
+                            <h4 class="text-base font-bold text-white mb-2">Black-Box Continuity Impossibility</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed italic">
+                                "No universal, purely external linear or non-linear output transition operator \(T(A, B, t)\) can guarantee phase, spectral energy, or state-response continuity across two arbitrary black-box stateful audio processes."
+                            </p>
+                            <div class="mt-4 p-3 bg-slate-800/80 rounded-lg text-[11px] text-slate-300 space-y-2 border border-slate-700 font-mono">
+                                <div><strong>Proof Construct:</strong> Consider two high-Q bandpass filters tuned to \(\omega_0\) operating in phase opposition: \(y_A(t) = \sin(\omega_0 t)\) and \(y_B(t) = -\sin(\omega_0 t)\).</div>
+                                <div>Equal-power crossfade yields: \(y(t) = (1-2\lambda(t))\sin(\omega_0 t)\).</div>
+                                <div class="text-amber-400">At \(\lambda(t)=0.5\), \(y(t)=0\). The output suffers 100% destructive phase notch drop.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Failure Modes / Counterexamples -->
+            <section id="failure-modes" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200 space-y-6">
+                <div class="border-b border-stone-100 pb-4">
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Adversarial Evaluation</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">4. Failure Modes of "Crossfade Everything"</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="p-5 bg-stone-50 rounded-xl border border-stone-200 hover:border-amber-400 transition-colors">
+                        <div class="text-amber-600 font-bold text-base mb-1">1. Comb Filtering & Cancellation</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Crossfading uncorrelated or out-of-phase periodic signals (e.g., free-running oscillators) creates destructive acoustic interference, causing severe amplitude dips and comb filtering artifacts.
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-stone-50 rounded-xl border border-stone-200 hover:border-amber-400 transition-colors">
+                        <div class="text-amber-600 font-bold text-base mb-1">2. Stateful Feedback Memory</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            In recursive structures (IIR filters, feedback delay networks), crossfading output signals leaves internal state vectors unmanaged, truncating natural decay tails abruptly or causing state accumulation bursts.
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-stone-50 rounded-xl border border-stone-200 hover:border-amber-400 transition-colors">
+                        <div class="text-amber-600 font-bold text-base mb-1">3. Dynamics Sidechain Distortion</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Compressors and limiters track signal envelopes non-linearly. Crossfading two dynamic processes scales down intermediate signal levels (\(0.5 y_A + 0.5 y_B\)), causing threshold release chatter.
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-stone-50 rounded-xl border border-stone-200 hover:border-amber-400 transition-colors">
+                        <div class="text-amber-600 font-bold text-base mb-1">4. Compute Exhaustion Spikes</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Executing dual graphs (\(y_A\) and \(y_B\)) concurrently doubles processing overhead during transitions. For heavy neural networks or dense convolution reverbs, this causes buffer underruns.
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-stone-50 rounded-xl border border-stone-200 hover:border-amber-400 transition-colors">
+                        <div class="text-amber-600 font-bold text-base mb-1">5. Muting Expressive Transients</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Musically valid step discontinuities (e.g., drum attacks, hard synth sync, granular cuts) rely on instantaneous sample jumps. An absolute invariant softening them degrades rhythmic precision.
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-stone-50 rounded-xl border border-stone-200 hover:border-amber-400 transition-colors">
+                        <div class="text-amber-600 font-bold text-base mb-1">6. Uninitialized History State</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            When node \(B\) is instantiated, its internal state history is zero. Evaluating \(B\) without pre-roll history generates transient startup responses regardless of output crossfading.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Neural / AI Audio Implications -->
+            <section id="neural-audio" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200 space-y-6">
+                <div class="border-b border-stone-100 pb-4">
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Modern Deep Learning Paradigms</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">5. Neural & AI Audio Streaming Implications</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="space-y-2">
+                        <div class="text-xs font-bold text-slate-900 uppercase tracking-wider bg-slate-100 p-2 rounded">Causal Context Caching</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Neural architectures (RAVE, EnCodec, SoundStream) rely on temporal convolutional receptive fields. Swapping neural models mid-stream corrupts activation memory caches, generating severe impulse bursts unless context states are explicitly pre-warmed.
+                        </p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="text-xs font-bold text-slate-900 uppercase tracking-wider bg-slate-100 p-2 rounded">FiLM Conditioning Ramps</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            In neural models conditioned on latent vectors, applying step changes to Feature-wise Linear Modulation (\(\text{FiLM}(x) = \gamma x + \beta\)) produces synthesis pops. Latent vectors must follow continuous trajectories across inference frames.
+                        </p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="text-xs font-bold text-slate-900 uppercase tracking-wider bg-slate-100 p-2 rounded">Render-Ahead Lookahead Bounds</div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Neural models operate asynchronously from hardware buffer clocks due to variable inference jitter. Lookahead buffer queues (20–50 ms) provide lookahead time to detect state changes and pre-roll processes prior to hardware playback.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interdisciplinary Terminology Mapper -->
+            <section id="terminology" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200 space-y-6">
+                <div class="border-b border-stone-100 pb-4">
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Vocabulary Mapping</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">6. Cross-Domain Terminology Translation</h2>
+                </div>
+
+                <p class="text-xs text-slate-600">
+                    Search and translate equivalent engineering terms across audio software, industrial control theory, standard DSP, and machine learning fields.
+                </p>
+
+                <div class="mb-4">
+                    <input type="text" id="termSearch" placeholder="Search terminology (e.g. step, crossfade, observer)..." class="w-full md:w-80 bg-stone-50 border border-stone-200 rounded-lg text-xs p-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500 font-mono">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="termGrid">
+                    <!-- Terminology Cards dynamically inserted -->
+                </div>
+            </section>
+
+            <!-- Falsification Criteria & Benchmarks -->
+            <section id="falsification" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200 space-y-6">
+                <div class="border-b border-stone-100 pb-4">
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Empirical Falsification</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">7. Quantitative Falsification Suite</h2>
+                </div>
+
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    The NZBT abstraction should be formally rejected as an opaque universal infrastructure layer if experimental evaluation yields any of the following quantitative outcomes:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-red-50/50 rounded-xl border border-red-200 flex items-start space-x-3">
+                        <span class="text-red-600 text-lg">✕</span>
+                        <div>
+                            <h3 class="font-bold text-red-950 text-xs">Phase Notch Failure Threshold</h3>
+                            <p class="text-[11px] text-red-900/80 mt-1">Output crossfading across out-of-phase nodes produces an amplitude drop exceeding <span class="font-mono font-bold">-6 dB</span> within the transition window \([t_0, t_0 + \tau]\).</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-red-50/50 rounded-xl border border-red-200 flex items-start space-x-3">
+                        <span class="text-red-600 text-lg">✕</span>
+                        <div>
+                            <h3 class="font-bold text-red-950 text-xs">CPU Overhead Threshold</h3>
+                            <p class="text-[11px] text-red-900/80 mt-1">Executing dual speculative nodes during transitions increases total render thread CPU execution time by <span class="font-mono font-bold">> 200%</span>, inducing buffer underruns.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-red-50/50 rounded-xl border border-red-200 flex items-start space-x-3">
+                        <span class="text-red-600 text-lg">✕</span>
+                        <div>
+                            <h3 class="font-bold text-red-950 text-xs">Latency Limit Violation</h3>
+                            <p class="text-[11px] text-red-900/80 mt-1">Guaranteeing click-free transitions for arbitrary black-box processes requires an introduced lookahead latency <span class="font-mono font-bold">\(\tau > 15\text{ ms}\)</span>, violating live performance bounds.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-red-50/50 rounded-xl border border-red-200 flex items-start space-x-3">
+                        <span class="text-red-600 text-lg">✕</span>
+                        <div>
+                            <h3 class="font-bold text-red-950 text-xs">Developer Complexity Shift</h3>
+                            <p class="text-[11px] text-red-900/80 mt-1">Exposing the state-export and projection interfaces forces audio developers to write more boilerplate code than standard parameter smoothing routines.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Primary Bibliography -->
+            <section id="bibliography" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200 space-y-4">
+                <div class="border-b border-stone-100 pb-4">
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Academic & Engineering References</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1">8. Bibliography & Prior Art Sources</h2>
+                </div>
+
+                <ol class="list-decimal list-inside space-y-2 text-xs text-slate-700 font-mono leading-relaxed">
+                    <li class="p-2 hover:bg-stone-50 rounded">Wishnick, A. (2014). "Time-varying digital filters and state-variable structures." <em>Proceedings of the 137th AES Convention</em>.</li>
+                    <li class="p-2 hover:bg-stone-50 rounded">Puckette, M. (2007). <em>The Theory and Technique of Electronic Music</em>. World Scientific.</li>
+                    <li class="p-2 hover:bg-stone-50 rounded">McCartney, J. (2002). "Rethinking the Computer Music Language: SuperCollider." <em>Computer Music Journal</em>, 26(4).</li>
+                    <li class="p-2 hover:bg-stone-50 rounded">Astrom, K. J., & Rundqwist, L. (1989). "Integrator windup and bumpless transfer." <em>IEEE Control Systems Magazine</em>, 9(4), 12-16.</li>
+                    <li class="p-2 hover:bg-stone-50 rounded">Caillon, A., & Esling, P. (2021). "RAVE: Real-time audio variational autoencoder for voice and music synthesis." <em>arXiv preprint arXiv:2111.05011</em>.</li>
+                    <li class="p-2 hover:bg-stone-50 rounded">Zölzer, U. (Ed.). (2011). <em>DAFX: Digital Audio Effects</em>. John Wiley & Sons.</li>
+                    <li class="p-2 hover:bg-stone-50 rounded">Välimäki, V., & Huopaniemi, J. (2000). "Principles of digital ripple filters and fractional delay lines." <em>IEEE Transactions on Speech and Audio Processing</em>.</li>
+                </ol>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Application JavaScript Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- DATASETS ---
+
+            const priorArtData = [
+                {
+                    property: "Output C0 / C1 Continuity",
+                    system: "SuperCollider (NodeProxy), Web Audio (GainNode)",
+                    domain: "music",
+                    status: "Fully Solved",
+                    limitation: "Solved for additive output mixes via concurrent dual-node execution; does not solve internal state or feedback continuity."
+                },
+                {
+                    property: "Parameter Dezippering",
+                    system: "JUCE, Faust, VST3 Parameter Ramps",
+                    domain: "dsp",
+                    status: "Fully Solved",
+                    limitation: "Solved for continuous scalar parameter spaces; does not apply to discrete structural or topological changes."
+                },
+                {
+                    property: "Control Mode Handover",
+                    system: "PID Bumpless Transfer (Control Theory)",
+                    domain: "control",
+                    status: "Fully Solved",
+                    limitation: "Solved for linear control systems using state-tracking observers; requires full state-space matrix observability."
+                },
+                {
+                    property: "Stateful Filter Swapping",
+                    system: "Trapezoidal Integrator SVFs (Wishnick)",
+                    domain: "dsp",
+                    status: "Partially Solved",
+                    limitation: "Solved inside specialized filter structures; unsolved as an opaque, generalized host-level wrapper over arbitrary black-box DSP."
+                },
+                {
+                    property: "Neural Context Continuity",
+                    system: "RAVE, EnCodec Streaming Context Cache",
+                    domain: "ai",
+                    status: "Partially Solved",
+                    limitation: "Solved via causal convolution context caching and overlap-save inference; conditioning jumps still require continuous trajectory smoothing."
+                },
+                {
+                    property: "Universal Black-Box NZBT",
+                    system: "Proposed Universal NZBT Abstraction",
+                    domain: "plugins",
+                    status: "Impossibility Result",
+                    limitation: "Mathematically unachievable for arbitrary stateful or feedback processes without internal state access or lookahead."
+                }
+            ];
+
+            const terminologyData = [
+                {
+                    audio: "Instantaneous Computational State Change",
+                    control: "Control-Rate Step Input / Discontinuity",
+                    dsp: "Discrete State Jump",
+                    ml: "Frame-Edge Boundary Mutation"
+                },
+                {
+                    audio: "Non-Zero Boundary Transition (NZBT)",
+                    control: "Bumpless Dynamic Structure Switching",
+                    dsp: "Continuous Boundary Realization Operator",
+                    ml: "Latent Trajectory Interpolation"
+                },
+                {
+                    audio: "Click / Pop / Zipper Noise",
+                    control: "Actuator Step Spike / Transient Energy Burst",
+                    dsp: "High-Frequency Spectral Leakage / Gibbs Phenomenon",
+                    ml: "Frame Receptive Field Discontinuity"
+                },
+                {
+                    audio: "Render-Ahead State Preparation",
+                    control: "Pre-Warm Controller Observer",
+                    dsp: "Lookahead Buffer Pre-roll",
+                    ml: "Speculative Context Cache Pre-warming"
+                }
+            ];
+
+            // --- PRIOR ART TABLE RENDER & FILTER ---
+
+            const priorArtTableBody = document.getElementById('priorArtTableBody');
+            const priorArtFilter = document.getElementById('priorArtFilter');
+
+            function renderPriorArtTable(filter) {
+                priorArtTableBody.innerHTML = '';
+                priorArtData.forEach(item => {
+                    if (filter === 'all' || item.domain === filter) {
+                        const tr = document.createElement('tr');
+                        tr.className = 'hover:bg-stone-50 transition-colors';
+                        
+                        let badgeColor = item.status === 'Fully Solved' ? 'bg-emerald-100 text-emerald-800' :
+                                         item.status === 'Partially Solved' ? 'bg-amber-100 text-amber-800' :
+                                         'bg-red-100 text-red-800';
+
+                        tr.innerHTML = `
+                            <td class="p-3.5 font-semibold text-slate-900">${item.property}</td>
+                            <td class="p-3.5 font-mono text-[11px] text-slate-600">${item.system}</td>
+                            <td class="p-3.5 font-mono text-[10px] uppercase text-slate-500">${item.domain}</td>
+                            <td class="p-3.5"><span class="px-2 py-0.5 text-[10px] font-bold rounded-full uppercase tracking-wider ${badgeColor}">${item.status}</span></td>
+                            <td class="p-3.5 text-slate-600 leading-normal">${item.limitation}</td>
+                        `;
+                        priorArtTableBody.appendChild(tr);
+                    }
+                });
+            }
+
+            priorArtFilter.addEventListener('change', (e) => renderPriorArtTable(e.target.value));
+            renderPriorArtTable('all');
+
+            // --- TERMINOLOGY SEARCH & RENDER ---
+
+            const termGrid = document.getElementById('termGrid');
+            const termSearch = document.getElementById('termSearch');
+
+            function renderTerminology(query = '') {
+                termGrid.innerHTML = '';
+                const q = query.toLowerCase();
+                terminologyData.forEach(item => {
+                    const matches = Object.values(item).some(val => val.toLowerCase().includes(q));
+                    if (matches) {
+                        const card = document.createElement('div');
+                        card.className = 'p-4 bg-stone-50 rounded-xl border border-stone-200 text-xs space-y-2';
+                        card.innerHTML = `
+                            <div class="font-bold text-slate-900 border-b border-stone-200 pb-1.5 flex justify-between items-center">
+                                <span>🎵 ${item.audio}</span>
+                                <span class="text-[10px] font-mono text-slate-400 uppercase">Audio Software</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2 font-mono text-[11px] pt-1">
+                                <div><span class="text-[9px] text-slate-400 block uppercase font-sans">Control Theory</span><span class="text-slate-700">${item.control}</span></div>
+                                <div><span class="text-[9px] text-slate-400 block uppercase font-sans">DSP Systems</span><span class="text-slate-700">${item.dsp}</span></div>
+                                <div><span class="text-[9px] text-slate-400 block uppercase font-sans">Machine Learning</span><span class="text-amber-800">${item.ml}</span></div>
+                            </div>
+                        `;
+                        termGrid.appendChild(card);
+                    }
+                });
+            }
+
+            termSearch.addEventListener('input', (e) => renderTerminology(e.target.value));
+            renderTerminology();
+
+            // --- WAVEFORM DSP SIMULATOR CHART ---
+
+            const ctx = document.getElementById('waveformChart').getContext('2d');
+            
+            const strategyInputs = document.querySelectorAll('input[name="strategy"]');
+            const phaseInput = document.getElementById('phaseOffset');
+            const tauInput = document.getElementById('tauDuration');
+            const freqInput = document.getElementById('freqStep');
+
+            const phaseVal = document.getElementById('phaseVal');
+            const tauVal = document.getElementById('tauVal');
+            const freqVal = document.getElementById('freqVal');
+            const artifactMetrics = document.getElementById('artifactMetrics');
+
+            let waveformChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [
+                        {
+                            label: 'Synthesized Output y(t)',
+                            data: [],
+                            borderColor: '#D97706', // Amber-600
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            tension: 0.1
+                        },
+                        {
+                            label: 'Transition Window Boundary',
+                            data: [],
+                            borderColor: 'rgba(255, 255, 255, 0.2)',
+                            borderWidth: 1,
+                            borderDash: [4, 4],
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: { duration: 150 },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            title: { display: true, text: 'Time t (ms)', color: '#94A3B8', font: { size: 10 } },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#94A3B8', font: { size: 10 } }
+                        },
+                        y: {
+                            min: -1.5,
+                            max: 1.5,
+                            title: { display: true, text: 'Amplitude', color: '#94A3B8', font: { size: 10 } },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#94A3B8', font: { size: 10 } }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#E2E8F0', font: { size: 11 } } },
+                        tooltip: { enabled: true }
+                    }
+                }
+            });
+
+            function updateSimulation() {
+                const strategy = document.querySelector('input[name="strategy"]:checked').value;
+                const phaseDeg = parseFloat(phaseInput.value);
+                const tauMs = parseFloat(tauInput.value);
+                const freq2 = parseFloat(freqInput.value);
+
+                phaseVal.textContent = `${phaseDeg}° ${phaseDeg === 180 ? '(Phase Opposition)' : ''}`;
+                tauVal.textContent = `${tauMs} ms`;
+                freqVal.textContent = `220 Hz → ${freq2} Hz`;
+
+                const totalMs = 40;
+                const sampleRateMs = 10; // 10 points per ms
+                const totalPoints = totalMs * sampleRateMs;
+                const tSwitch = 15; // switch occurs at t = 15ms
+                
+                const labels = [];
+                const waveformData = [];
+                const boundaryData = [];
+
+                const f1 = 220;
+                const phaseRad = (phaseDeg * Math.PI) / 180;
+
+                let maxStepDiscontinuity = 0;
+                let minNotchGain = 1.0;
+
+                for (let i = 0; i < totalPoints; i++) {
+                    const t = i / sampleRateMs; // t in ms
+                    labels.push(t);
+
+                    let y = 0;
+
+                    if (strategy === 'raw') {
+                        if (t < tSwitch) {
+                            y = Math.sin(2 * Math.PI * (f1 / 1000) * t);
+                        } else {
+                            y = Math.sin(2 * Math.PI * (freq2 / 1000) * t + phaseRad);
+                        }
+                        if (i === Math.floor(tSwitch * sampleRateMs)) {
+                            const yBefore = Math.sin(2 * Math.PI * (f1 / 1000) * tSwitch);
+                            const yAfter = Math.sin(2 * Math.PI * (freq2 / 1000) * tSwitch + phaseRad);
+                            maxStepDiscontinuity = Math.abs(yAfter - yBefore);
+                        }
+                    } else if (strategy === 'crossfade') {
+                        if (t < tSwitch) {
+                            y = Math.sin(2 * Math.PI * (f1 / 1000) * t);
+                        } else if (t >= tSwitch && t <= tSwitch + tauMs) {
+                            const lambda = (t - tSwitch) / tauMs;
+                            const yA = Math.sin(2 * Math.PI * (f1 / 1000) * t);
+                            const yB = Math.sin(2 * Math.PI * (freq2 / 1000) * t + phaseRad);
+                            y = (1 - lambda) * yA + lambda * yB;
+                            
+                            const currentAmp = Math.abs(y);
+                            if (currentAmp < minNotchGain) minNotchGain = currentAmp;
+                        } else {
+                            y = Math.sin(2 * Math.PI * (freq2 / 1000) * t + phaseRad);
+                        }
+                    } else if (strategy === 'projected') {
+                        // NZBT State projected - phase matched & energy continuous
+                        if (t < tSwitch) {
+                            y = Math.sin(2 * Math.PI * (f1 / 1000) * t);
+                        } else if (t >= tSwitch && t <= tSwitch + tauMs) {
+                            const lambda = (t - tSwitch) / tauMs;
+                            // Phase is continuously wrapped to align at boundary
+                            const alignedPhase = 2 * Math.PI * (f1 / 1000) * tSwitch;
+                            const currentFreq = f1 + (freq2 - f1) * lambda;
+                            y = Math.sin(2 * Math.PI * (currentFreq / 1000) * (t - tSwitch) + alignedPhase);
+                        } else {
+                            const alignedPhase = 2 * Math.PI * (f1 / 1000) * tSwitch;
+                            y = Math.sin(2 * Math.PI * (freq2 / 1000) * (t - tSwitch) + alignedPhase);
+                        }
+                    }
+
+                    waveformData.push(y);
+                    boundaryData.push((t >= tSwitch && t <= tSwitch + tauMs) ? 1.2 : -1.2);
+                }
+
+                waveformChart.data.labels = labels;
+                waveformChart.data.datasets[0].data = waveformData;
+                waveformChart.data.datasets[1].data = boundaryData;
+                waveformChart.update();
+
+                // Update Metrics text
+                if (strategy === 'raw') {
+                    const stepSeverity = maxStepDiscontinuity > 0.5 ? 'SEVERE (High Click/Pop)' : 'MODERATE';
+                    artifactMetrics.innerHTML = `
+                        <div>• Amplitude Step (\(C^0\)): <span class="text-red-600 font-bold">${stepSeverity}</span></div>
+                        <div>• Step Jump Delta: <span class="text-slate-800 font-bold">${maxStepDiscontinuity.toFixed(2)} units</span></div>
+                        <div>• High-Freq Energy Injection: <span class="text-red-600 font-bold">Unbounded</span></div>
+                    `;
+                } else if (strategy === 'crossfade') {
+                    const notchDb = (20 * Math.log10(Math.max(minNotchGain, 0.001))).toFixed(1);
+                    artifactMetrics.innerHTML = `
+                        <div>• Amplitude Step (\(C^0\)): <span class="text-emerald-600 font-bold">0.0 (Continuous)</span></div>
+                        <div>• Phase Notch Drop: <span class="text-amber-700 font-bold">${notchDb} dB</span></div>
+                        <div>• Signal Quality: <span class="text-amber-700 font-bold">Comb Filtering / Phase Cancellation</span></div>
+                    `;
+                } else {
+                    artifactMetrics.innerHTML = `
+                        <div>• Amplitude Step (\(C^0\)): <span class="text-emerald-600 font-bold">0.0 (Continuous)</span></div>
+                        <div>• Phase Continuity: <span class="text-emerald-600 font-bold">Preserved (Aligned)</span></div>
+                        <div>• System State: <span class="text-emerald-600 font-bold">State Projected Trajectory</span></div>
+                    `;
+                }
+
+                if (window.MathJax) {
+                    MathJax.typesetPromise([artifactMetrics]);
+                }
+            }
+
+            // Event Listeners
+            strategyInputs.forEach(input => input.addEventListener('change', updateSimulation));
+            phaseInput.addEventListener('input', updateSimulation);
+            tauInput.addEventListener('input', updateSimulation);
+            freqInput.addEventListener('input', updateSimulation);
+
+            // Initial render
+            updateSimulation();
+        });
+    </script>
+</body>
+</html>

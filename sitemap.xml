@@ -76,6 +76,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://akindoflikeness.net/nzbt-research</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://akindoflikeness.net/writing/on-ai</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
