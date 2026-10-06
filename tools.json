@@ -21,12 +21,12 @@
     "page": "/nzbt.html"
   },
   {
-    "name": "SLOP",
-    "image": "/assets/slop-wordmark.svg",
-    "still": "/assets/slop-wordmark.svg",
+    "name": "slop",
+    "image": "/assets/slop-wordmark-v2.svg",
+    "still": "/assets/slop-wordmark-v2.svg",
     "width": 880,
     "height": 580,
-    "alt": "Slop — music from the Internet Archive",
+    "alt": "slop",
     "description": "Pick a release, have a listen, and keep what you like. A small music discovery app for the Internet Archive.",
     "app": "/tools/slop/",
     "page": "/slop.html"
