@@ -1,20 +1,17 @@
-Slop
-==========
-A buildless, MIT-licensed music discovery prototype.
+slop
+====
+A buildless, MIT-licensed discovery interface and player for Internet Archive audio.
 
-Serve this directory with any static web server. No install or build step.
-Search: https://archive.org/advancedsearch.php
-Release metadata: https://archive.org/metadata/{identifier}
-Audio: https://archive.org/download/{identifier}/{file}
-Artwork: https://archive.org/services/img/{identifier}
+Serve index.html, app.js, artwork.js and LICENSE.txt together. No install, account or backend is required.
 
-Start with a fixed shelf of 30 releases and 59 checked MP3 sample tracks in catalogue.json. Release information loads from that local file; audio and artwork still come directly from the Archive. Choose Search the Archive for the existing live search, including Netlabels, Clinical Archives and Live Music Archive. Genre trails and More like this use metadata tags, not audio analysis. Recommendations shuffle ties and try to avoid consecutive creators. No backend, account, model, telemetry or build dependencies are required.
+Browsing and search query the Archive audio index directly, 20 releases at a time. Load more retrieves the next page. Genre and collection filters narrow that index; the AKOL shortcut selects the artist's seven published Archive releases. There is no fixed starter catalogue. More like this searches for shared metadata tags, not audio similarity.
 
-Hearts save source references and display metadata in IndexedDB (slop-library, saved store). Changes are committed before the UI reports a save. The Saved view offers JSON export and additive import with a preview. The prototype format is slop-saved-tracks version 1; it is deliberately smaller than the proposed full-library format in the research. Import validates references, merges exact item/file pairs, and leaves existing saves unchanged. Files never contain audio or credentials. Clearing browser data/private browsing can remove this local copy: keep an exported backup. Different site origins have separate local libraries.
+Opening a release fetches its complete playable track list from Archive metadata. Audio streams directly from archive.org. Larger cover artwork loads as cards come into view; Archive thumbnails remain the fallback. Availability depends on the source uploads and Archive service.
 
-The queue and playback history exist only for this tab/session. Play next puts a track at the front; previous-track, seeking, volume and playback errors remain available. A normal internet connection is required for audio. Source availability may change after the recorded link-check date. No offline audio is promised.
+Hearts save references in IndexedDB (slop-library, saved store). Export/import uses slop-saved-tracks version 1 JSON. Imports add new tracks without removing existing saves. Backups contain references and metadata, not audio. Clearing browser data removes local saves. Each site origin has a separate library.
 
-Serve index.html, app.js, catalogue.json, README.txt and LICENSE.txt together. No install or build step. The repository's scripts/prepare-catalogue.mjs is a manual maintenance utility, not a scheduled task; it checks a selected set of releases and MP3 HEAD responses. Do not run it to launch the app.
+Clicking an album starts its first track and fills From this album with the remaining tracks. Up next contains manually added tracks and takes priority. Opening another album replaces only the album queue. Both queues and playback history last for this tab session.
 
-Existing project investigated: https://github.com/essicolo/dustic
-This prototype uses the Archive APIs directly rather than importing a larger application. Dustic may provide a future reusable foundation for a richer player.
+APIs: https://archive.org/advancedsearch.php ; https://archive.org/metadata/{identifier} ; https://archive.org/download/{identifier}/{file}
+
+The interface is MIT licensed. Music and artwork retain their own rights; see each original release.
