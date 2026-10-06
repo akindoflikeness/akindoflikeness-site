@@ -10,7 +10,7 @@ Opening a release fetches its complete playable track list from Archive metadata
 
 Hearts save references in IndexedDB (slop-library, saved store). Export/import uses slop-saved-tracks version 1 JSON. Imports add new tracks without removing existing saves. Backups contain references and metadata, not audio. Clearing browser data removes local saves. Each site origin has a separate library.
 
-Clicking an album starts its first track and fills From this album with the remaining tracks. Up next contains manually added tracks and takes priority. Opening another album replaces only the album queue. Both queues and playback history last for this tab session.
+Clicking an album cover starts its first track and fills From this album with the remaining tracks. Up next contains manually added tracks and takes priority. Playing another album replaces only the album queue. Both queues and playback history last for this tab session.
 
 APIs: https://archive.org/advancedsearch.php ; https://archive.org/metadata/{identifier} ; https://archive.org/download/{identifier}/{file}
 
