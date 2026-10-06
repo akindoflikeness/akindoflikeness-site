@@ -372,6 +372,7 @@ def build_collection(root, home, name):
         def url(value):
             return root + value.lstrip("/") if value.startswith("/") else value
         github = f'<a href="{esc(item["github"])}">GitHub</a>' if item.get("github") else ''
+        app = f'<a href="{esc(url(item["app"]))}" data-no-swup>App</a>' if item.get("app") else ''
         subtitle = f'<p class="fine card-subtitle">{esc(item["subtitle"])}</p>' if item.get("subtitle") else ''
         description = f'<p class="card-description">{esc(item["description"])}</p>' if item.get("description") else ''
         label = "About" if is_tools else "Select"
@@ -382,7 +383,7 @@ def build_collection(root, home, name):
           </picture></figure>
           <h2>{esc(item['name'])}</h2>
           {subtitle}{description}
-          <div class="tool-actions">{github}<a href="{esc(url(item['page']))}">{label}</a></div>
+          <div class="tool-actions">{app}{github}<a href="{esc(url(item['page']))}">{label}</a></div>
         </article>''')
     disabled = ' disabled' if len(cards) < 2 else ''
     content = f'''<section class="detail tools-browser" aria-labelledby="tools-title">
@@ -422,6 +423,7 @@ def build_sitemap(albums):
     urls = [(SITE_URL + "/", "1.0"), (SITE_URL + "/music", "0.9")] + [(f"{SITE_URL}/music/{a['slug']}", "0.8") for a in albums]
     urls += [(f"{SITE_URL}/samples", "0.9"), (f"{SITE_URL}/tools", "0.9"), (f"{SITE_URL}/writing", "0.8"), (f"{SITE_URL}/blow-your-phase-off", "0.9"), (f"{SITE_URL}/transmutation", "0.9")]
     urls += [(SITE_URL + "/nzbt", "0.8"), (SITE_URL + "/nzbt-research", "0.8")]
+    urls += [(SITE_URL + "/slop", "0.8"), (SITE_URL + "/tools/slop/", "0.8")]
     urls += [(SITE_URL + "/writing/" + entry["slug"], "0.8") for entry in writing_entries()]
     items = "\n".join(f"  <url>\n    <loc>{u}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>{p}</priority>\n  </url>" for u, p in urls)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{items}\n</urlset>\n'

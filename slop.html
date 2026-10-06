@@ -15,13 +15,13 @@
       @keyframes veil-pulse { 0%,100% { opacity:.3 } 50% { opacity:1 } }
       @media (prefers-reduced-motion:reduce) { .veil-pulse { animation:none } .veil { transition:none } }
     </style>
-    <title>tools</title>
+    <title>Slop</title>
     <meta name="theme-color" content="#000000">
-    <link rel="canonical" href="https://akindoflikeness.net/tools">
-    <meta property="og:title" content="tools">
+    <link rel="canonical" href="https://akindoflikeness.net/slop">
+    <meta property="og:title" content="Slop">
     <meta property="og:type" content="website">
-    <meta name="description" content="Instruments and tools by AKOL.">
-    <meta property="og:description" content="Instruments and tools by AKOL.">
+    <meta name="description" content="A small music discovery app for the Internet Archive. Listen, save favourites and follow the sound.">
+    <meta property="og:description" content="A small music discovery app for the Internet Archive. Listen, save favourites and follow the sound.">
     <link rel="preload" href="/assets/fonts/Likeness-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link id="site-style" rel="stylesheet" href="/assets/nzbt-offering-v2.css" media="print" onload="this.media='all';this.dataset.ready='1'" onerror="this.dataset.ready='1'">
     <noscript><link rel="stylesheet" href="/assets/nzbt-offering-v2.css"></noscript>
@@ -54,39 +54,24 @@
         </div>
       </header>
       <main class="content" id="main" tabindex="-1">
-<section class="detail tools-browser" aria-labelledby="tools-title">
-      <h1 class="intro-title" id="tools-title">Tools</h1>
-      <div class="tool-browser-frame">
-        <button class="tool-arrow" data-direction="-1" aria-label="Previous tool">←</button>
-        <div class="tool-cards"><article class="tool-card">
-          <figure class="tool-media"><picture>
-            <source srcset="/assets/instruments/bypomono-hero.gif" media="(prefers-reduced-motion: no-preference)">
-            <img src="/assets/instruments/bypomono-hero-still.png" alt="Blow Your Phase Off: operator controls, phase scope and sequencer" width="880" height="580">
-          </picture></figure>
-          <h2>BLOW YOUR PHASE OFF</h2>
-
-          <div class="tool-actions"><a href="https://github.com/wraithsys/bypomono">GitHub</a><a href="/blow-your-phase-off.html">About</a></div>
-        </article><article class="tool-card" hidden>
-          <figure class="tool-media"><picture>
-            <source srcset="/assets/nzbt-waveform.svg" media="(prefers-reduced-motion: no-preference)">
-            <img src="/assets/nzbt-waveform.svg" alt="Three audio paths blending around a transition" width="880" height="580">
-          </picture></figure>
-          <h2>NZBT</h2>
-          <p class="fine card-subtitle">non-zero boundary transitions</p><p class="card-description">A proposal for audio runtimes to handle changes over time. Read the research and try a small signal, copy and sample demonstration.</p>
-          <div class="tool-actions"><a href="/nzbt.html">About</a></div>
-        </article><article class="tool-card" hidden>
-          <figure class="tool-media"><picture>
-            <source srcset="/assets/slop-wordmark.svg" media="(prefers-reduced-motion: no-preference)">
-            <img src="/assets/slop-wordmark.svg" alt="Slop — music from the Internet Archive" width="880" height="580">
-          </picture></figure>
-          <h2>SLOP</h2>
-          <p class="card-description">Pick a release, have a listen, and keep what you like. A small music discovery app for the Internet Archive.</p>
-          <div class="tool-actions"><a href="/tools/slop/" data-no-swup>App</a><a href="/slop.html">About</a></div>
-        </article></div>
-        <button class="tool-arrow" data-direction="1" aria-label="Next tool">→</button>
-      </div>
-      <p class="tool-position fine" aria-live="polite" aria-atomic="true">1 / 3</p>
-    </section>
+        <article class="detail">
+          <h1 class="intro-title">Slop</h1>
+          <p class="fine">Music from the Internet Archive</p>
+          <div class="tool-actions"><a href="/tools/slop/" data-no-swup>App</a><a href="/tools.html">All tools</a></div>
+          <div class="prose">
+            <p>Slop is a small discovery app for music already hosted on the Internet Archive. Pick a release, have a listen, and keep what you like.</p>
+            <p>The starter shelf has 30 releases and 59 sample tracks. You can search the wider Archive, line up your next track, and use “More like this” to find releases with matching tags. The matches come from the upload metadata; they aren’t an analysis of the sound.</p>
+            <h2>Why Slop?</h2>
+            <p>“Slop peddler.” “Noise generator.” “The antithesis of creativity.” Words used to dismiss the person making the music before anyone has to listen.</p>
+            <p>If I’m a slop peddler, why not embrace it? Here’s the stall. You can hear something, dislike it, love it, or move on. You don’t need a certificate to make it or permission to enjoy it.</p>
+            <h2>Your little collection</h2>
+            <p>Heart a track to save it in this browser. No account is needed. Export a backup from Saved to keep a copy or move it to another device; importing adds tracks without removing your existing saves. Backups contain track references, not audio.</p>
+            <p>Clearing browser data removes your local collection. If you used the earlier ChatGPT-hosted prototype, export your saves there and import them here.</p>
+            <h2>A small prototype</h2>
+            <p>Audio and artwork load from the Internet Archive, so availability depends on the original uploads. Each release links back to its source and rights information. The music keeps its own licence.</p>
+            <p>The interface is MIT licensed. Its <a href="/tools/slop/README.txt" data-no-swup>readme</a>, <a href="/tools/slop/app.js" data-no-swup>app code</a> and <a href="/tools/slop/LICENSE.txt" data-no-swup>licence</a> are available to read and reuse.</p>
+          </div>
+        </article>
       </main>
     </div>
     <footer class="player" id="player" aria-label="Now playing" hidden>

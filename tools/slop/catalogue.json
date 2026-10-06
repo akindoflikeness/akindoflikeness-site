@@ -1,0 +1,793 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-06T15:07:51.455Z",
+  "note": "A fixed selection with up to two checked MP3 tracks per release. Tags are broad editorial groupings based on Archive metadata. Availability can change.",
+  "releases": [
+    {
+      "identifier": "wmri-minor-objects",
+      "title": "WMRI - Minor Objects [USC-WR-1206.0058]",
+      "creator": "WMRI",
+      "date": "2012-06-02",
+      "subject": [
+        "electronic",
+        "ambient"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "tracks": [
+        {
+          "file": "01.X-Technology.mp3",
+          "original": "01.X-Technology.mp3",
+          "title": "X-Technology",
+          "artist": "WMRI",
+          "duration": 364.09
+        },
+        {
+          "file": "02.Lost in Time (Harmonic Remix).mp3",
+          "original": "02.Lost in Time (Harmonic Remix).mp3",
+          "title": "Lost in Time (Harmonic Remix)",
+          "artist": "WMRI",
+          "duration": 311.33
+        }
+      ]
+    },
+    {
+      "identifier": "ca015_va_cs",
+      "title": "Various - Clinical Sounds - Vol.1 (ca015)",
+      "creator": "Various",
+      "date": "2007-02-26",
+      "subject": [
+        "ambient",
+        "experimental",
+        "field recordings"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "101.Etat_Des_Stocks_Klassikkos_64kb.mp3",
+          "original": "101.Etat_Des_Stocks_Klassikkos.mp3",
+          "title": "101.Etat_Des_Stocks_Klassikkos",
+          "artist": "Etat Des Stocks",
+          "duration": null
+        },
+        {
+          "file": "101.Etat_Des_Stocks_Klassikkos_vbr.mp3",
+          "original": "101.Etat_Des_Stocks_Klassikkos.mp3",
+          "title": "101.Etat_Des_Stocks_Klassikkos",
+          "artist": "Etat Des Stocks",
+          "duration": null
+        }
+      ]
+    },
+    {
+      "identifier": "ca200_cjazz",
+      "title": "Various - Clinical Jazz (ca200)",
+      "creator": "Various",
+      "date": "2008-12-31",
+      "subject": [
+        "jazz",
+        "experimental"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "101_Strings_Of_Consciousness__Asphodel.mp3",
+          "original": "101_Strings_Of_Consciousness__Asphodel.mp3",
+          "title": "101. Strings Of Consciousness - Asphodel",
+          "artist": "Strings Of Consciousness",
+          "duration": 357.82
+        },
+        {
+          "file": "102_The_Black_Hakawati__There_s_a_Hole_at_the_End_of_the_Tunnel.mp3",
+          "original": "102_The_Black_Hakawati__There_s_a_Hole_at_the_End_of_the_Tunnel.mp3",
+          "title": "102. The Black Hakawati - There’s a Hole at the End of the Tunnel",
+          "artist": "The Black Hakawati",
+          "duration": 324
+        }
+      ]
+    },
+    {
+      "identifier": "pcr089EmilDavydov-Sketches",
+      "title": "[PCR089] Emil Davydov - Sketches",
+      "creator": "E. Davydov",
+      "date": "2011-04-05",
+      "subject": [
+        "ambient",
+        "experimental"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nd/3.0/de/",
+      "tracks": [
+        {
+          "file": "pcr089_01_emil_davydov_sketch_no1.mp3",
+          "original": "pcr089_01_emil_davydov_sketch_no1.mp3",
+          "title": "Sketch No.1",
+          "artist": "Emil Davydov",
+          "duration": 158.37
+        },
+        {
+          "file": "pcr089_02_emil_davydov_sketch_no2.mp3",
+          "original": "pcr089_02_emil_davydov_sketch_no2.mp3",
+          "title": "Sketch No.2",
+          "artist": "Emil Davydov",
+          "duration": 129.03
+        }
+      ]
+    },
+    {
+      "identifier": "PoodleplayArkestra-TheoryOfColour",
+      "title": "Theory Of Colour",
+      "creator": "Poodleplay Arkestra",
+      "date": "2012-08-27",
+      "subject": [
+        "ambient",
+        "experimental"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "1-Winter_Flowers.mp3",
+          "original": "1-Winter_Flowers.mp3",
+          "title": "Winter Flowers",
+          "artist": "Poodleplay Arkestra",
+          "duration": 216.54
+        },
+        {
+          "file": "2-Twenty_Squares_Of_Light.mp3",
+          "original": "2-Twenty_Squares_Of_Light.mp3",
+          "title": "Twenty Squares Of Light",
+          "artist": "Poodleplay Arkestra",
+          "duration": 251.1
+        }
+      ]
+    },
+    {
+      "identifier": "Vkrsnl037CandlegravityAMomentForMyself",
+      "title": "VKRSNL037 Candlegravity A Moment for Myself",
+      "creator": "Candlegravity",
+      "date": "",
+      "subject": [
+        "ambient"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "Candlegravity-AMomentForMyself-01-SomewhereElse.mp3",
+          "original": "Candlegravity-AMomentForMyself-01-SomewhereElse.mp3",
+          "title": "Somewhere Else",
+          "artist": "Candlegravity",
+          "duration": null
+        },
+        {
+          "file": "Candlegravity-AMomentForMyself-02-LoveBreaks.mp3",
+          "original": "Candlegravity-AMomentForMyself-02-LoveBreaks.mp3",
+          "title": "Love Breaks",
+          "artist": "Candlegravity",
+          "duration": null
+        }
+      ]
+    },
+    {
+      "identifier": "siro463SisterSoleil-HauntedEp",
+      "title": "[Siro463] Sister Soleil - Haunted EP",
+      "creator": "Artist not listed",
+      "date": "",
+      "subject": [
+        "ambient"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "01-SisterSoleil-Eyesfeat.Dolphin.mp3",
+          "original": "01-SisterSoleil-Eyesfeat.Dolphin.mp3",
+          "title": "Eyes (Feat. Dolphin)",
+          "artist": "Sister Soleil",
+          "duration": null
+        },
+        {
+          "file": "02-SisterSoleil-IllumTangendoproducedByTrentReznor.mp3",
+          "original": "02-SisterSoleil-IllumTangendoproducedByTrentReznor.mp3",
+          "title": "Illum Tangendo (Produced by Trent Reznor)",
+          "artist": "Sister Soleil",
+          "duration": null
+        }
+      ]
+    },
+    {
+      "identifier": "pan026",
+      "title": "Turner Of Wheels - Hazy Mote Penumbra [pan026]",
+      "creator": "Shane Turner",
+      "date": "2007-06-08",
+      "subject": [
+        "experimental"
+      ],
+      "licenseurl": "",
+      "tracks": [
+        {
+          "file": "pan026-turner_of_wheels-1-katana.mp3",
+          "original": "pan026-turner_of_wheels-1-katana.mp3",
+          "title": "Katana",
+          "artist": "Turner Of Wheels",
+          "duration": 239.15
+        },
+        {
+          "file": "pan026-turner_of_wheels-2-daybreakfastballadvertigo.mp3",
+          "original": "pan026-turner_of_wheels-2-daybreakfastballadvertigo.mp3",
+          "title": "Daybreakfastballadvertigo",
+          "artist": "Turner Of Wheels",
+          "duration": 276.61
+        }
+      ]
+    },
+    {
+      "identifier": "ca446_opa",
+      "title": "Opa! - Nakurlah (ca446)",
+      "creator": "Opa!",
+      "date": "2011-05-30",
+      "subject": [
+        "experimental"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "01-RingTone.mp3",
+          "original": "01-RingTone.mp3",
+          "title": "01 - Ring Tone",
+          "artist": "Opa!",
+          "duration": 285.3
+        },
+        {
+          "file": "02-Nakurilah.mp3",
+          "original": "02-Nakurilah.mp3",
+          "title": "02 - Nakurilah",
+          "artist": "Opa!",
+          "duration": 283.45
+        }
+      ]
+    },
+    {
+      "identifier": "NS050",
+      "title": "Another Day, Another Way",
+      "creator": "No-Source Netlabel",
+      "date": "2012",
+      "subject": [
+        "electronic"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "tracks": [
+        {
+          "file": "01-NS050-Multi-Panel_Christmas-With-Mr-Rice.mp3",
+          "original": "01-NS050-Multi-Panel_Christmas-With-Mr-Rice.mp3",
+          "title": "Christmas with Mr. Rice",
+          "artist": "Multi-Panel",
+          "duration": 240.9
+        },
+        {
+          "file": "02-NS050-Full-Source_Prior-To-alt-ver.mp3",
+          "original": "02-NS050-Full-Source_Prior-To-alt-ver.mp3",
+          "title": "Prior To (alt. ver.)",
+          "artist": "Full-Source",
+          "duration": 167.97
+        }
+      ]
+    },
+    {
+      "identifier": "puls02",
+      "title": "Sasha Ponkratov - Kaleidoscope (ep, Pulsations For You, puls02)",
+      "creator": "Sasha Ponkratov",
+      "date": "",
+      "subject": [
+        "electronic",
+        "jazz"
+      ],
+      "licenseurl": "",
+      "tracks": [
+        {
+          "file": "01-Sasha_Ponkratov_-_Morning.mp3",
+          "original": "01-Sasha_Ponkratov_-_Morning.mp3",
+          "title": "01-Sasha_Ponkratov_-_Morning",
+          "artist": "Sasha Ponkratov",
+          "duration": 255.87
+        },
+        {
+          "file": "02-Sasha_Ponkratov_-_Train.mp3",
+          "original": "02-Sasha_Ponkratov_-_Train.mp3",
+          "title": "02-Sasha_Ponkratov_-_Train",
+          "artist": "Sasha Ponkratov",
+          "duration": 203.26
+        }
+      ]
+    },
+    {
+      "identifier": "mtk140",
+      "title": "ST - I'll Meet You There EP [mtk140]",
+      "creator": "ST",
+      "date": "0000-00-00 00:00:00",
+      "subject": [
+        "electronic"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/2.0/",
+      "tracks": [
+        {
+          "file": "mtk140-ST-01-csanca.mp3",
+          "original": "mtk140-ST-01-csanca.mp3",
+          "title": "Csanca",
+          "artist": "ST",
+          "duration": 272.12
+        },
+        {
+          "file": "mtk140-ST-02-ill-meet-you-there.mp3",
+          "original": "mtk140-ST-02-ill-meet-you-there.mp3",
+          "title": "I'll meet you there",
+          "artist": "ST",
+          "duration": 216.83
+        }
+      ]
+    },
+    {
+      "identifier": "foot149",
+      "title": "Duis [foot149]",
+      "creator": "Edmar Travassos",
+      "date": "2010-07-11",
+      "subject": [
+        "electronic",
+        "jazz"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-sa/3.0/",
+      "tracks": [
+        {
+          "file": "foot149_01-duis-ea1.mp3",
+          "original": "foot149_01-duis-ea1.mp3",
+          "title": "Ea1",
+          "artist": "Duis",
+          "duration": 143.84
+        },
+        {
+          "file": "foot149_02-duis-watch_the.mp3",
+          "original": "foot149_02-duis-watch_the.mp3",
+          "title": "Watch The",
+          "artist": "Duis",
+          "duration": 165.99
+        }
+      ]
+    },
+    {
+      "identifier": "DWK123",
+      "title": "Curses From Past Times (LP)",
+      "creator": "ProleteR",
+      "date": "2012-03-21",
+      "subject": [
+        "jazz",
+        "hip hop"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "ProleteR_-_01_-_April_Showers.mp3",
+          "original": "ProleteR_-_01_-_April_Showers.mp3",
+          "title": "April Showers",
+          "artist": "ProleteR",
+          "duration": null
+        },
+        {
+          "file": "ProleteR_-_02_-_Downtown_Irony.mp3",
+          "original": "ProleteR_-_02_-_Downtown_Irony.mp3",
+          "title": "Downtown Irony",
+          "artist": "ProleteR",
+          "duration": null
+        }
+      ]
+    },
+    {
+      "identifier": "MIXG032",
+      "title": "[MIXG032] Various Artists - Retrovision",
+      "creator": "Artist not listed",
+      "date": "2013-07-26",
+      "subject": [
+        "jazz"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc/3.0/",
+      "tracks": [
+        {
+          "file": "01_Zipp_-_Pour_Quoi_Royale.mp3",
+          "original": "01_Zipp_-_Pour_Quoi_Royale.mp3",
+          "title": "Pour Quoi Royale",
+          "artist": "Zipp",
+          "duration": 201.2
+        },
+        {
+          "file": "02_Dog_On_Springs_-_Footloose_feat_Paul_Whiteman.mp3",
+          "original": "02_Dog_On_Springs_-_Footloose_feat_Paul_Whiteman.mp3",
+          "title": "Footloose (feat. Paul Whiteman)",
+          "artist": "Dog On Springs",
+          "duration": 122.78
+        }
+      ]
+    },
+    {
+      "identifier": "001netlabel-jazz-01-recorcholis",
+      "title": "001netlabel-jazz-01-recorcholis",
+      "creator": "Claudio Perez P. 001 Records Netlabel",
+      "date": "2010-01-25",
+      "subject": [
+        "jazz"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "01-recorcholis.mp3",
+          "original": "01-recorcholis.mp3",
+          "title": "Recorcholis (Perdimos a Uno)",
+          "artist": "Claudio Rubio",
+          "duration": 440.68
+        },
+        {
+          "file": "02-flujo.mp3",
+          "original": "02-flujo.mp3",
+          "title": "Flujo",
+          "artist": "Sebastian Jordan",
+          "duration": 396.92
+        }
+      ]
+    },
+    {
+      "identifier": "DWK149",
+      "title": "Blueberry Hill (LP)",
+      "creator": "Boogie Belgique",
+      "date": "2012-07-02",
+      "subject": [
+        "jazz",
+        "hip hop"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "Boogie_Belgique_-_01_-_Dance_With_The_Democrat.mp3",
+          "original": "Boogie_Belgique_-_01_-_Dance_With_The_Democrat.mp3",
+          "title": "Dance With The Democrat",
+          "artist": "Boogie Belgique",
+          "duration": null
+        },
+        {
+          "file": "Boogie_Belgique_-_02_-_Stairway_To_The_USSR.mp3",
+          "original": "Boogie_Belgique_-_02_-_Stairway_To_The_USSR.mp3",
+          "title": "Stairway To The USSR",
+          "artist": "Boogie Belgique",
+          "duration": null
+        }
+      ]
+    },
+    {
+      "identifier": "DWK031",
+      "title": "Deltitnu EP",
+      "creator": "Aydio",
+      "date": "2009-01-11",
+      "subject": [
+        "hip hop"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "Aydio_-_01_-_Track_64kb.mp3",
+          "original": "Aydio_-_01_-_Track.mp3",
+          "title": "Aydio_-_01_-_Track",
+          "artist": "Aydio",
+          "duration": null
+        },
+        {
+          "file": "Aydio_-_02_-_Deltitnu_64kb.mp3",
+          "original": "Aydio_-_02_-_Deltitnu.mp3",
+          "title": "Aydio_-_02_-_Deltitnu",
+          "artist": "Aydio",
+          "duration": null
+        }
+      ]
+    },
+    {
+      "identifier": "dystopiaq029",
+      "title": "[dystopiaq029] Various Artists - mix-toor presents: This is material music.I do your condition",
+      "creator": "Various Artists",
+      "date": "2012-02-07",
+      "subject": [
+        "hip hop"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "101mixtoorMaterialMusic.mp3",
+          "original": "101mixtoorMaterialMusic.mp3",
+          "title": "Material Music",
+          "artist": "mix-toor",
+          "duration": 173.38
+        },
+        {
+          "file": "102TheBrokeUnknownLisboa.mp3",
+          "original": "102TheBrokeUnknownLisboa.mp3",
+          "title": "Lisboa",
+          "artist": "The Broke Unknown",
+          "duration": 194.96
+        }
+      ]
+    },
+    {
+      "identifier": "OnorezdiLP014",
+      "title": "[onorezdiLP014] See No Evil (Dec. 15 . 2013)",
+      "creator": "I.Z. aka IDzeroNo",
+      "date": "",
+      "subject": [
+        "hip hop"
+      ],
+      "licenseurl": "",
+      "tracks": [
+        {
+          "file": "BLACKALICIOUS (PROD REEDIT BY SAILAWAY & THEDEEPR) - FEEL THAT WAY.mp3",
+          "original": "BLACKALICIOUS (PROD REEDIT BY SAILAWAY & THEDEEPR) - FEEL THAT WAY.mp3",
+          "title": "FEEL THAT WAY",
+          "artist": "BLACKALICIOUS (PROD REEDIT BY SAILAWAY & THEDEEPR)",
+          "duration": 195.58
+        },
+        {
+          "file": "BOCREW OFFICIAL WEB SITE - LISA SHINE.mp3",
+          "original": "BOCREW OFFICIAL WEB SITE - LISA SHINE.mp3",
+          "title": "LISA SHINE",
+          "artist": "BOCREW OFFICIAL WEB SITE",
+          "duration": 152.79
+        }
+      ]
+    },
+    {
+      "identifier": "mia049",
+      "title": "Aphilas - Instrumentally Ill EP [mia049]",
+      "creator": "Artist not listed",
+      "date": "0000-00-00 00:00:00",
+      "subject": [
+        "hip hop"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nd-nc/1.0/",
+      "tracks": [
+        {
+          "file": "mia49a_aphilas_-_lifelong_fiction.mp3",
+          "original": "mia49a_aphilas_-_lifelong_fiction.mp3",
+          "title": "lifelong fiction",
+          "artist": "aphilas",
+          "duration": 350.64
+        },
+        {
+          "file": "mia49b_aphilas_-_thats_just_what_its_for.mp3",
+          "original": "mia49b_aphilas_-_thats_just_what_its_for.mp3",
+          "title": "that's just what it's for",
+          "artist": "aphilas",
+          "duration": 326.9
+        }
+      ]
+    },
+    {
+      "identifier": "DWK217",
+      "title": "Nightwalker (Vol. 1) (LP)",
+      "creator": "Boogie Belgique",
+      "date": "2013-06-27",
+      "subject": [
+        "hip hop"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "Boogie_Belgique_-_01_-_Forever_and_Ever.mp3",
+          "original": "Boogie_Belgique_-_01_-_Forever_and_Ever.mp3",
+          "title": "Forever & Ever",
+          "artist": "Boogie Belgique",
+          "duration": null
+        },
+        {
+          "file": "Boogie_Belgique_-_02_-_All_Over_The_World.mp3",
+          "original": "Boogie_Belgique_-_02_-_All_Over_The_World.mp3",
+          "title": "All Over The World",
+          "artist": "Boogie Belgique",
+          "duration": null
+        }
+      ]
+    },
+    {
+      "identifier": "wh055",
+      "title": "Various Artists - Far Afield: A Webbed Hand Compilation [wh055]",
+      "creator": "Artist not listed",
+      "date": "0000-00-00 00:00:00",
+      "subject": [
+        "field recordings"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/us/",
+      "tracks": [
+        {
+          "file": "wh055_A03_Lyndsey_Cockwell_DWP.mp3",
+          "original": "wh055_A03_Lyndsey_Cockwell_DWP.mp3",
+          "title": "DWP",
+          "artist": "Lyndsey Cockwell",
+          "duration": 240.39
+        }
+      ]
+    },
+    {
+      "identifier": "amp042_Rememverberation",
+      "title": "Rememverberation - (amp042)",
+      "creator": "Vi­ctor Sequi",
+      "date": "2009-16-09",
+      "subject": [
+        "field recordings"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/2.5/mx/",
+      "tracks": [
+        {
+          "file": "01_usera_song.mp3",
+          "original": "01_usera_song.mp3",
+          "title": "01_Usera _Song",
+          "artist": "Víctor Sequí",
+          "duration": 329.77
+        },
+        {
+          "file": "02_399_golpes.mp3",
+          "original": "02_399_golpes.mp3",
+          "title": "02. 399 golpes",
+          "artist": "Víctor Sequí",
+          "duration": 158.32
+        }
+      ]
+    },
+    {
+      "identifier": "mn001",
+      "title": "[mn001] va - first",
+      "creator": "various",
+      "date": "0000-00-00 00:00:00",
+      "subject": [
+        "field recordings"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/2.0/",
+      "tracks": [
+        {
+          "file": "mn001_01-andrey_kiritchenko-speading_comets.mp3",
+          "original": "mn001_01-andrey_kiritchenko-speading_comets.mp3",
+          "title": "speading comets",
+          "artist": "andrey kiritchenko",
+          "duration": 275.08
+        },
+        {
+          "file": "mn001_02-c6-dusty_link.mp3",
+          "original": "mn001_02-c6-dusty_link.mp3",
+          "title": "dusty link",
+          "artist": "c6",
+          "duration": 405.07
+        }
+      ]
+    },
+    {
+      "identifier": "ca024_va_cs2",
+      "title": "Various - Clinical Sounds - Vol.2 (ca024)",
+      "creator": "Various",
+      "date": "2007-05-15",
+      "subject": [
+        "field recordings"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "101_Luwte_Now_it_is_64kb.mp3",
+          "original": "101_Luwte_Now_it_is.mp3",
+          "title": "101_Luwte_Now_it_is",
+          "artist": "Various",
+          "duration": null
+        },
+        {
+          "file": "101_Luwte_Now_it_is_vbr.mp3",
+          "original": "101_Luwte_Now_it_is.mp3",
+          "title": "101_Luwte_Now_it_is",
+          "artist": "Various",
+          "duration": null
+        }
+      ]
+    },
+    {
+      "identifier": "ca300_ca",
+      "title": "Various - Clinical Anthology (2006-2009) (ca300)",
+      "creator": "Various",
+      "date": "2009-08-30",
+      "subject": [
+        "field recordings",
+        "experimental"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "101_ZAUS__Amanita_my_Love.mp3",
+          "original": "101_ZAUS__Amanita_my_Love.mp3",
+          "title": "101 - Zaus - Amanita, My Love!",
+          "artist": "Various",
+          "duration": 271.39
+        },
+        {
+          "file": "102_Pandoras_box__Golden_Spoon.mp3",
+          "original": "102_Pandoras_box__Golden_Spoon.mp3",
+          "title": "102 - pandoras.box - Golden Spoon",
+          "artist": "Various",
+          "duration": 244.98
+        }
+      ]
+    },
+    {
+      "identifier": "nullbomb",
+      "title": "Nullbomb creatures 2005-2006",
+      "creator": "Artist not listed",
+      "date": "2006-06-21",
+      "subject": [
+        "experimental",
+        "electronic"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by/2.5/",
+      "tracks": [
+        {
+          "file": "blueday_64kb.mp3",
+          "original": "blueday.mp3",
+          "title": "blueday",
+          "artist": "Nullbomb",
+          "duration": null
+        },
+        {
+          "file": "blueday_vbr.mp3",
+          "original": "blueday.mp3",
+          "title": "blueday",
+          "artist": "Nullbomb",
+          "duration": null
+        }
+      ]
+    },
+    {
+      "identifier": "TFR100-VA-TornFleshRecordsPresentsVestigialSickness",
+      "title": "TFR100 - VA - Torn Flesh Records Presents Vestigial Sickness",
+      "creator": "Torn Flesh Records",
+      "date": "",
+      "subject": [
+        "experimental",
+        "electronic"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "01-AbsoluteEntity01Elephantknuckle-TornFleshRecordsPresentsVestigialSicknessintro.mp3",
+          "original": "01-AbsoluteEntity01Elephantknuckle-TornFleshRecordsPresentsVestigialSicknessintro.mp3",
+          "title": "01 - Absolute Entity 01 & elephantknuckle - Torn Flesh Records Presents Vestigial Sickness (Intro)",
+          "artist": "Absolute Entity 01(Justine) & elephantknuckle",
+          "duration": 54.25
+        },
+        {
+          "file": "02-Damokis-HellFuck.yeah.mp3",
+          "original": "02-Damokis-HellFuck.yeah.mp3",
+          "title": "02 - DAMOKIS - Hell, Fuck.Yeah!!!",
+          "artist": "Damokis",
+          "duration": 75.33
+        }
+      ]
+    },
+    {
+      "identifier": "TFR55-LechonesSangrientosAndVulgarDisease-VidaYonqui-LiveAtPaultoolMadrigueras",
+      "title": "TFR55 - Lechones Sangrientos & Vulgar Disease - Vida Yonqui (Live at Paultool Madrigueras)",
+      "creator": "Lechones Sangrientos, Vulgar Disease",
+      "date": "",
+      "subject": [
+        "ambient"
+      ],
+      "licenseurl": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+      "tracks": [
+        {
+          "file": "01-LechonesSangrientosVulgarDisease-EtiopaMeatTortaLocaWithChipotle.mp3",
+          "original": "01-LechonesSangrientosVulgarDisease-EtiopaMeatTortaLocaWithChipotle.mp3",
+          "title": "01 - Lechones Sangrientos & Vulgar Disease - Etiopía Meat Torta Loca With Chipotle",
+          "artist": "Lechones Sangrientos & Vulgar Disease",
+          "duration": 602.28
+        },
+        {
+          "file": "02-LechonesSangrientosVulgarDisease-ChanclotDancerMarihuana.mp3",
+          "original": "02-LechonesSangrientosVulgarDisease-ChanclotDancerMarihuana.mp3",
+          "title": "02 - Lechones Sangrientos & Vulgar Disease - Chanclot Dancer Marihuana",
+          "artist": "Lechones Sangrientos & Vulgar Disease",
+          "duration": 555.24
+        }
+      ]
+    }
+  ]
+}

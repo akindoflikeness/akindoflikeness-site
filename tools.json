@@ -19,5 +19,16 @@
     "subtitle": "non-zero boundary transitions",
     "description": "A proposal for audio runtimes to handle changes over time. Read the research and try a small signal, copy and sample demonstration.",
     "page": "/nzbt.html"
+  },
+  {
+    "name": "SLOP",
+    "image": "/assets/slop-wordmark.svg",
+    "still": "/assets/slop-wordmark.svg",
+    "width": 880,
+    "height": 580,
+    "alt": "Slop — music from the Internet Archive",
+    "description": "Pick a release, have a listen, and keep what you like. A small music discovery app for the Internet Archive.",
+    "app": "/tools/slop/",
+    "page": "/slop.html"
   }
 ]
