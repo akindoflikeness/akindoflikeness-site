@@ -8,5 +8,16 @@
     "alt": "Blow Your Phase Off: operator controls, phase scope and sequencer",
     "github": "https://github.com/wraithsys/bypomono",
     "page": "/blow-your-phase-off.html"
+  },
+  {
+    "name": "NZBT",
+    "image": "/assets/nzbt-waveform.svg",
+    "still": "/assets/nzbt-waveform.svg",
+    "width": 880,
+    "height": 580,
+    "alt": "Three audio paths blending around a transition",
+    "subtitle": "non-zero boundary transitions",
+    "description": "An unfinished audio experiment. Signal, copy and sample, with a bit of time borrowed to get through a change.",
+    "page": "/nzbt.html"
   }
 ]

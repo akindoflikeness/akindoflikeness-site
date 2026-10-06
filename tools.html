@@ -57,7 +57,7 @@
 <section class="detail tools-browser" aria-labelledby="tools-title">
       <h1 class="intro-title" id="tools-title">Tools</h1>
       <div class="tool-browser-frame">
-        <button class="tool-arrow" data-direction="-1" aria-label="Previous tool" disabled>←</button>
+        <button class="tool-arrow" data-direction="-1" aria-label="Previous tool">←</button>
         <div class="tool-cards"><article class="tool-card">
           <figure class="tool-media"><picture>
             <source srcset="/assets/instruments/bypomono-hero.gif" media="(prefers-reduced-motion: no-preference)">
@@ -66,10 +66,18 @@
           <h2>BLOW YOUR PHASE OFF</h2>
 
           <div class="tool-actions"><a href="https://github.com/wraithsys/bypomono">GitHub</a><a href="/blow-your-phase-off.html">About</a></div>
+        </article><article class="tool-card" hidden>
+          <figure class="tool-media"><picture>
+            <source srcset="/assets/nzbt-waveform.svg" media="(prefers-reduced-motion: no-preference)">
+            <img src="/assets/nzbt-waveform.svg" alt="Three audio paths blending around a transition" width="880" height="580">
+          </picture></figure>
+          <h2>NZBT</h2>
+          <p class="fine card-subtitle">non-zero boundary transitions</p><p class="card-description">An unfinished audio experiment. Signal, copy and sample, with a bit of time borrowed to get through a change.</p>
+          <div class="tool-actions"><a href="/nzbt.html">About</a></div>
         </article></div>
-        <button class="tool-arrow" data-direction="1" aria-label="Next tool" disabled>→</button>
+        <button class="tool-arrow" data-direction="1" aria-label="Next tool">→</button>
       </div>
-      <p class="tool-position fine" aria-live="polite" aria-atomic="true">1 / 1</p>
+      <p class="tool-position fine" aria-live="polite" aria-atomic="true">1 / 2</p>
     </section>
       </main>
     </div>
@@ -100,6 +108,7 @@
 
     <script src="/music-feature.js" defer></script>
     <script src="/tools-browser.js" defer></script>
+    <script src="/assets/nzbt.js" defer></script>
     <script src="/assets/vendor/swup.umd.js" defer></script>
     <script src="/site-navigation.js" defer></script>
     <script>
