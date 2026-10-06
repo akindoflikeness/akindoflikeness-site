@@ -357,7 +357,7 @@ img { max-width: 100% }
 /* NZBT follows the one-bit tool pages. */
 .nzbt { max-width:900px }
 .nzbt .intro-title { margin-bottom:8px }
-.nzbt-subtitle { margin-bottom:32px }
+.nzbt-subtitle { margin-bottom:32px; font-size:clamp(22px, 2vw, 26px); line-height:1.4; color:var(--ink); max-width:32em }
 .nzbt-intro { max-width:36em; margin-bottom:28px }
 .nzbt-disclaimer { margin:24px 0 40px; max-width:42em }
 .nzbt section { padding:28px 0; border-top:1px solid var(--rule) }
