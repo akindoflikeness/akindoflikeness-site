@@ -23,8 +23,8 @@
     <meta name="description" content="An unfinished audio experiment by AKOL. Signal, copy and sample paths coordinated around a change.">
     <meta property="og:description" content="An unfinished audio experiment by AKOL. Signal, copy and sample paths coordinated around a change.">
     <link rel="preload" href="/assets/fonts/Likeness-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link id="site-style" rel="stylesheet" href="/style.css?v=7304137-ready" media="print" onload="this.media='all';this.dataset.ready='1'" onerror="this.dataset.ready='1'">
-    <noscript><link rel="stylesheet" href="/style.css?v=7304137-ready"></noscript>
+    <link id="site-style" rel="stylesheet" href="/assets/nzbt-listening.css" media="print" onload="this.media='all';this.dataset.ready='1'" onerror="this.dataset.ready='1'">
+    <noscript><link rel="stylesheet" href="/assets/nzbt-listening.css"></noscript>
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64">
   </head>
   <body class="onebit">
@@ -67,8 +67,8 @@
         <p><button id="run">Calculate comparisons</button><span id="status" aria-live="polite"></span></p>
         <canvas id="wave" width="1100" height="260" aria-label="Transition output comparison"></canvas><p class="legend">Solid: three paths · dashed: two paths · dotted: linear crossfade</p>
         <canvas id="weights" width="1100" height="240" aria-label="Optimized path weights"></canvas><p class="legend">Solid: signal · dashed: copy · dotted: sample</p>
-        <details class="nzbt-notes"><summary>Numbers behind this run</summary><div id="metrics"></div></details><p><button class="play" data-mode="three" disabled>Hear three paths</button><button class="play" data-mode="two" disabled>Hear optimized two paths</button><button class="play" data-mode="linear" disabled>Hear linear crossfade</button><button class="play" data-mode="cold" disabled>Hear cold jump</button><button id="stop">Stop audio</button></p>
-        <p class="muted">Playback is a short 8 kHz mono example, repeated three times with silence between clips. Every mode uses the same playback gain of 0.35; no per-mode normalization. Cold jump starts the replacement at the switch without pre-roll. This page calculates offline, not on an audio render thread.</p></section>
+        <details class="nzbt-notes"><summary>Numbers behind this run</summary><div id="metrics"></div></details><p class="nzbt-listening">One change at <strong>1.50 seconds</strong>. Each button restarts the same tone and timing.</p><progress id="listen-progress" max="3.38" value="0" aria-label="Audio comparison progress"></progress><p id="listen-status" role="status" aria-live="off">Ready to listen.</p><p><button class="play" data-mode="three" disabled>Hear three paths</button><button class="play" data-mode="two" disabled>Hear optimized two paths</button><button class="play" data-mode="linear" disabled>Hear linear crossfade</button><button class="play" data-mode="cold" disabled>Hear cold jump</button><button id="stop">Stop audio</button></p>
+        <p class="muted">Playback is one 3.38-second sustained tone at 16 kHz, with a single 80 ms transition at 1.50 seconds. Short fades soften the start and end of each clip. A shared gain is calculated across all four methods to leave headroom; the methods are not individually normalized. Cold jump starts the replacement at the switch without pre-roll. This page calculates offline, not on an audio render thread.</p></section>
         <details class="nzbt-notes"><summary>The maths, if you want it</summary><p>At each sample, choose nonnegative weights summing to one. Fix the first weights to signal alone and the last to copy alone. The reference r is a quintic transition between the available signal and copy outputs. It is an explicit design target, not an inaccessible ideal history or a validated model of hearing.</p>
         <div class="math"><code>y[k] = Σᵢ wᵢ[k] pᵢ[k]<br>r[k] = (1 − s[k]) signal[k] + s[k] copy[k]<br>s = 10u³ − 15u⁴ + 6u⁵, u = k/N<br>J = mean((y − r)²) / P + 8 mean((Δy − Δr)²) / P<br>    + λ Σₖ ||Δw[k]||²<br>P = max(mean(r²), 10⁻⁶)</code></div>
         <p>For fixed path signals this is a convex quadratic objective on simplex constraints. Projected gradient descent with backtracking evaluates the objective and its gradient at every iteration. The code reports its iteration cap and projected-gradient residual; it does not claim convergence merely because it stopped. The sample weight may be zero. The three-path solver starts from the computed two-path solution and uses additional iterations, so this is not an equal-compute benchmark. The two-path optimizer uses the same objective and endpoints with sample disabled.</p>
@@ -77,7 +77,7 @@
         <p>A memory time constant is not an exact finite memory cutoff. Finite pre-roll generally reduces a stable IIR filter’s state mismatch rather than making it exactly zero at H equal to a time constant. For the scalar decay case, ε(H) = ε(0) exp(−H/τ): there is no special impossibility boundary at H = τ. A zero initial mismatch also remains zero.</p>
         <p>Smooth weights alone do not guarantee waveform or slope continuity. Path regularity, endpoint value and slope matching, and the way paths are activated also matter. Crossfade cancellation depends on the actual signals and weights; internal phase access is not universally required to inspect output phase relationships. Compute cost must be measured, not assumed to equal three times the original process.</p>
         <p>Exact reproduction of an unknown alternate history remains distinct from delivering an acceptable transition. This demo supports neither a universal impossibility verdict nor a universal success verdict.</p></details>
-        <details class="nzbt-notes"><summary>Limits and where this came from</summary><p>The diagnostic history reference runs the replacement for one second plus 100 ms before the switch using the same deterministic input. It is a finite longer-history benchmark, not an infinite-past ground truth. Its output discrepancy is measured separately and is never fed to the optimizer.</p>
+        <details class="nzbt-notes"><summary>Limits and where this came from</summary><p>The diagnostic history reference runs the replacement for one second plus 1.50 seconds before the switch using the same deterministic input. It is a finite longer-history benchmark, not an infinite-past ground truth. Its output discrepancy is measured separately and is never fed to the optimizer.</p>
         <p>H here means accessible recorded history replayed into a new instance. The page does not implement a live output queue, emulate unknown future player actions, or measure end-to-end latency. Real replay requires sufficient compute before its deadline. Output buffering, recorded history length, transition duration and interaction delay are separate budgets.</p>
         <p>The research and this implementation were made with AI agents. The first reports confused leftover state error with unavoidable audible failure, and described fixed blends as optimization. Those claims were challenged and the demo was rewritten. This version gives the controller an explicit objective; it is still a small numerical example, not a listening study or a finished audio framework.</p></details><noscript><p>The notes are readable without JavaScript. The controls and audio comparisons need JavaScript.</p></noscript><nav class="essay-nav" aria-label="More to explore"><a href="/tools.html">Tools</a><a href="/writing/on-ai.html">On AI</a></nav></article>
       </main>
@@ -109,7 +109,7 @@
 
     <script src="/music-feature.js" defer></script>
     <script src="/tools-browser.js" defer></script>
-    <script src="/assets/nzbt.js" defer></script>
+    <script src="/assets/nzbt-listening.js" defer></script>
     <script src="/assets/vendor/swup.umd.js" defer></script>
     <script src="/site-navigation.js" defer></script>
     <script>
