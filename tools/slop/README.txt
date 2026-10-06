@@ -4,7 +4,7 @@ A buildless, MIT-licensed discovery interface and player for Internet Archive au
 
 Serve index.html, app.js, artwork.js and LICENSE.txt together. No install, account or backend is required.
 
-Browsing and search query the Archive audio index directly, 20 releases at a time. Load more retrieves the next page. Genre and collection filters narrow that index; the AKOL shortcut selects the artist's seven published Archive releases. There is no fixed starter catalogue. More like this searches for shared metadata tags, not audio similarity.
+Browsing and search query the Archive audio index directly, 20 releases at a time. Load more retrieves the next page. Genre and collection filters narrow that index. There is no fixed starter catalogue. More like this searches for shared metadata tags, not audio similarity.
 
 Opening a release fetches its complete playable track list from Archive metadata. Audio streams directly from archive.org. Larger cover artwork loads as cards come into view; Archive thumbnails remain the fallback. Availability depends on the source uploads and Archive service.
 
