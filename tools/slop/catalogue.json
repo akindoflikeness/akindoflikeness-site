@@ -28,6 +28,11 @@
           "artist": "WMRI",
           "duration": 311.33
         }
+      ],
+      "coverFiles": [
+        "0058.jpg",
+        "MinorObjects1.png",
+        "MinorObjects2.png"
       ]
     },
     {
@@ -56,6 +61,12 @@
           "artist": "Etat Des Stocks",
           "duration": null
         }
+      ],
+      "coverFiles": [
+        "ca015_02_cover_front.jpg",
+        "ca015_01_cover_front72.jpg",
+        "ca015_cd1_inside.jpg",
+        "ca015_cd2_inside.jpg"
       ]
     },
     {
@@ -83,6 +94,12 @@
           "artist": "The Black Hakawati",
           "duration": 324
         }
+      ],
+      "coverFiles": [
+        "ca200CD2_02_front.jpg",
+        "ca200CD8_02_front.jpg",
+        "ca200CD3_02_front.jpg",
+        "ca200CD6_02_front.jpg"
       ]
     },
     {
@@ -110,6 +127,12 @@
           "artist": "Emil Davydov",
           "duration": 129.03
         }
+      ],
+      "coverFiles": [
+        "pcr089.jpg",
+        "pcr089_02_emil_davydov_sketch_no2_spectrogram.png",
+        "pcr089_03_emil_davydov_sketch_no3_spectrogram.png",
+        "pcr089_01_emil_davydov_sketch_no1_spectrogram.png"
       ]
     },
     {
@@ -137,6 +160,12 @@
           "artist": "Poodleplay Arkestra",
           "duration": 251.1
         }
+      ],
+      "coverFiles": [
+        "front.jpg",
+        "2-Twenty_Squares_Of_Light_spectrogram.png",
+        "4-Interlude_spectrogram.png",
+        "1-Winter_Flowers_spectrogram.png"
       ]
     },
     {
@@ -163,6 +192,12 @@
           "artist": "Candlegravity",
           "duration": null
         }
+      ],
+      "coverFiles": [
+        "Cover.jpg",
+        "Cover-Tracklisting-and-Information.jpg",
+        "Candlegravity-AMomentForMyself-06-YouWereInMyDream_spectrogram.png",
+        "Candlegravity-AMomentForMyself-01-SomewhereElse_spectrogram.png"
       ]
     },
     {
@@ -189,6 +224,12 @@
           "artist": "Sister Soleil",
           "duration": null
         }
+      ],
+      "coverFiles": [
+        "Cover.jpg",
+        "03-SisterSoleil-EyesmewarkRemix_spectrogram.png",
+        "01-SisterSoleil-Eyesfeat.Dolphin_spectrogram.png",
+        "04-SisterSoleil-SilentNightmare_spectrogram.png"
       ]
     },
     {
@@ -215,6 +256,12 @@
           "artist": "Turner Of Wheels",
           "duration": 276.61
         }
+      ],
+      "coverFiles": [
+        "pan026.jpg",
+        "pan026sm.jpg",
+        "pan026-turner_of_wheels-5-up_convex_down_concave_pass_spectrogram.png",
+        "pan026-turner_of_wheels-6-net_dance_spectrogram.png"
       ]
     },
     {
@@ -241,6 +288,12 @@
           "artist": "Opa!",
           "duration": 283.45
         }
+      ],
+      "coverFiles": [
+        "ca446_02_front.jpg",
+        "ca446_01_front72.jpg",
+        "ca446_04_disk.jpg",
+        "05-NakurilahHip-hopMix_spectrogram.png"
       ]
     },
     {
@@ -267,6 +320,12 @@
           "artist": "Full-Source",
           "duration": 167.97
         }
+      ],
+      "coverFiles": [
+        "NS050_Cover.jpg",
+        "10-NS050-Artie-Appleseed_Chipembere-trad_spectrogram.png",
+        "03-NS050-Cocolixe_Swing-Low_spectrogram.png",
+        "08-NS050-Medos-Little-Trap_Lake_spectrogram.png"
       ]
     },
     {
@@ -294,6 +353,9 @@
           "artist": "Sasha Ponkratov",
           "duration": 203.26
         }
+      ],
+      "coverFiles": [
+        "kaleidoscope_150.jpg"
       ]
     },
     {
@@ -320,6 +382,12 @@
           "artist": "ST",
           "duration": 216.83
         }
+      ],
+      "coverFiles": [
+        "mtk140large.jpg",
+        "mtk140.jpg",
+        "mtk140-ST-03-i-met-a-girl-with-butterfly-wings_spectrogram.png",
+        "mtk140-ST-01-csanca_spectrogram.png"
       ]
     },
     {
@@ -347,6 +415,11 @@
           "artist": "Duis",
           "duration": 165.99
         }
+      ],
+      "coverFiles": [
+        "foot149_front.jpg",
+        "foot149_full.jpg",
+        "foot149.jpg"
       ]
     },
     {
@@ -374,6 +447,12 @@
           "artist": "ProleteR",
           "duration": null
         }
+      ],
+      "coverFiles": [
+        "ProleteR_-_Curses_From_Past_Times.jpg",
+        "ProleteR_-_10_-_Faidherbe_Square_feat._Mister_Colfer_and_DJ_Crabees_spectrogram.png",
+        "ProleteR_-_09_-_May_Flowers_feat._Taskrok_spectrogram.png",
+        "ProleteR_-_11_-_Do_A_Stupid_Little_Dance_feat._Taskrok_spectrogram.png"
       ]
     },
     {
@@ -400,6 +479,12 @@
           "artist": "Dog On Springs",
           "duration": 122.78
         }
+      ],
+      "coverFiles": [
+        "cover.jpg",
+        "02_Dog_On_Springs_-_Footloose_feat_Paul_Whiteman_spectrogram.png",
+        "01_Zipp_-_Pour_Quoi_Royale_spectrogram.png",
+        "03_Astat_-_Daily_Dozen_spectrogram.png"
       ]
     },
     {
@@ -426,6 +511,12 @@
           "artist": "Sebastian Jordan",
           "duration": 396.92
         }
+      ],
+      "coverFiles": [
+        "cover_high_res.jpg",
+        "cover_425px.jpg",
+        "Recrcholis.jpg",
+        "04-telonio.png"
       ]
     },
     {
@@ -453,6 +544,12 @@
           "artist": "Boogie Belgique",
           "duration": null
         }
+      ],
+      "coverFiles": [
+        "Boogie_Belgique_-_Blueberry_Hill.jpg",
+        "Boogie_Belgique_-_03_-_Once_Have_I_spectrogram.png",
+        "Boogie_Belgique_-_09_-_Moriarty_spectrogram.png",
+        "Boogie_Belgique_-_08_-_The_Getaway_spectrogram.png"
       ]
     },
     {
@@ -479,6 +576,12 @@
           "artist": "Aydio",
           "duration": null
         }
+      ],
+      "coverFiles": [
+        "Aydio_-_Deltitnu.jpg",
+        "Aydio_-_04_-_Step_One_spectrogram.png",
+        "Aydio_-_02_-_Deltitnu_spectrogram.png",
+        "Aydio_-_01_-_Track_spectrogram.png"
       ]
     },
     {
@@ -505,6 +608,12 @@
           "artist": "The Broke Unknown",
           "duration": 194.96
         }
+      ],
+      "coverFiles": [
+        "Cover1_front.jpg",
+        "Cover2_tracks.jpg",
+        "Poster.jpg",
+        "106GlyphickLateniteCruise2_spectrogram.png"
       ]
     },
     {
@@ -531,6 +640,12 @@
           "artist": "BOCREW OFFICIAL WEB SITE",
           "duration": 152.79
         }
+      ],
+      "coverFiles": [
+        "HUNDRED SCHOOLS OF THOUGHT.jpg",
+        "TRINAD JAMES FT TRAVI$ SCOTT (prod & reedit BY DJ RUFFSHRAKER & 95) - SHUT UP_spectrogram.png",
+        "DE LA SOUL ( prod & reedit BY D-RAM & 95) - Itzsoweezee_spectrogram.png",
+        "BY MELVIN CLARK & THEINFORMERS - HUNDRED SCHOOLS OF THOUGHT - INSTRUMENTAL_spectrogram.png"
       ]
     },
     {
@@ -557,6 +672,9 @@
           "artist": "aphilas",
           "duration": 326.9
         }
+      ],
+      "coverFiles": [
+        "mia049.jpg"
       ]
     },
     {
@@ -583,6 +701,12 @@
           "artist": "Boogie Belgique",
           "duration": null
         }
+      ],
+      "coverFiles": [
+        "Boogie_Belgique_-_Nightwalker_Vol._1.jpg",
+        "Boogie_Belgique_-_04_-_Lucifer_spectrogram.png",
+        "Boogie_Belgique_-_10_-_Nightwalker_spectrogram.png",
+        "Boogie_Belgique_-_12_-_Faithful_Andy_spectrogram.png"
       ]
     },
     {
@@ -602,6 +726,11 @@
           "artist": "Lyndsey Cockwell",
           "duration": 240.39
         }
+      ],
+      "coverFiles": [
+        "wh055_cover.jpg",
+        "wh055_disk.jpg",
+        "wh055.jpg"
       ]
     },
     {
@@ -628,6 +757,9 @@
           "artist": "Víctor Sequí",
           "duration": 158.32
         }
+      ],
+      "coverFiles": [
+        "frontamp042.jpg"
       ]
     },
     {
@@ -654,6 +786,11 @@
           "artist": "c6",
           "duration": 405.07
         }
+      ],
+      "coverFiles": [
+        "mn001orginal.jpg",
+        "mn001large.jpg",
+        "mn001.jpg"
       ]
     },
     {
@@ -680,6 +817,12 @@
           "artist": "Various",
           "duration": null
         }
+      ],
+      "coverFiles": [
+        "ca024_02_front_cd1.jpg",
+        "ca024_03_front_cd2.jpg",
+        "207_Front_Sonore_Front_Sonore_spectrogram.png",
+        "207_Front_Sonore_Front_Sonore_vbr.png"
       ]
     },
     {
@@ -707,6 +850,12 @@
           "artist": "Various",
           "duration": 244.98
         }
+      ],
+      "coverFiles": [
+        "ca300_03_front_cd5.jpg",
+        "ca300_03_front_cd3.jpg",
+        "ca300_03_front_cd2.jpg",
+        "ca300_03_front_cd4.jpg"
       ]
     },
     {
@@ -734,6 +883,12 @@
           "artist": "Nullbomb",
           "duration": null
         }
+      ],
+      "coverFiles": [
+        "nullbomb-big.jpg",
+        "nullbomb_itemimage.jpg",
+        "A-class-music1_spectrogram.png",
+        "i-device_spectrogram.png"
       ]
     },
     {
@@ -761,6 +916,12 @@
           "artist": "Damokis",
           "duration": 75.33
         }
+      ],
+      "coverFiles": [
+        "TornFleshRecordsPresentsVestigialSickness-InsideRightCover.jpg",
+        "TornFleshRecordsPresentsVestigialSickness-InsideLeftCover.jpg",
+        "TornFleshRecordsPresentsVestigialSickness-Covervestigial.jpg",
+        "TornFleshRecordsPresentsVestigialSickness-Coversatyr.jpg"
       ]
     },
     {
@@ -787,6 +948,12 @@
           "artist": "Lechones Sangrientos & Vulgar Disease",
           "duration": 555.24
         }
+      ],
+      "coverFiles": [
+        "VidaYonqui-Cover.jpg",
+        "05-LechonesSangrientosVulgarDisease-DrinkingChangoAlbino_spectrogram.png",
+        "04-LechonesSangrientosVulgarDisease-AvonMara_spectrogram.png",
+        "06-LechonesSangrientosVulgarDisease-FrijolesFartSmokingCaliente_spectrogram.png"
       ]
     }
   ]
