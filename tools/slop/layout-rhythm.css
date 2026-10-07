@@ -1,0 +1,370 @@
+/*
+ * Compact layout rhythm
+ *
+ * Slop keeps the cover grid and the track rows, but these values make their
+ * spacing deliberate: the same small set controls card copy, grid gaps, and
+ * track controls at every breakpoint.
+ */
+:root {
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 14px;
+  --space-4: 20px;
+  --content-inset: clamp(20px, 4vw, 56px);
+  --track-control: 44px;
+  --track-gap: 8px;
+}
+
+aside {
+  padding: 28px 20px;
+}
+
+main {
+  padding: 28px var(--content-inset) 155px;
+}
+
+.intro {
+  margin-bottom: var(--space-4);
+}
+
+.trails {
+  gap: var(--space-2);
+  margin: var(--space-3) 0 var(--space-4);
+}
+
+.heading {
+  margin-bottom: var(--space-3);
+}
+
+.grid {
+  gap: 20px 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cover::after {
+  right: var(--space-2);
+  bottom: var(--space-2);
+  width: 34px;
+  height: 34px;
+}
+
+.card h3 {
+  margin: var(--space-3) 0 0;
+  line-height: 1.25;
+}
+
+.card p {
+  margin: var(--space-1) 0 0;
+  line-height: 1.35;
+}
+
+.card .meta {
+  margin-top: var(--space-2);
+  line-height: 1.25;
+}
+
+.cardTags {
+  min-height: 2.6em;
+  margin: var(--space-2) 0 var(--space-3);
+  line-height: 1.3;
+}
+
+.relatedButton {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 7px 10px;
+}
+
+.tracks {
+  border-bottom: 1px solid var(--line);
+}
+
+.track {
+  display: grid;
+  grid-template-columns: var(--track-control) minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: var(--track-gap);
+  row-gap: var(--space-1);
+  padding: var(--space-2) 0;
+}
+
+.trackCopy {
+  min-width: 0;
+  line-height: 1.32;
+}
+
+.trackCopy small {
+  display: inline-block;
+  margin-top: 2px;
+  line-height: 1.2;
+}
+
+.trackPlay,
+.trackActions > button:not([data-remove]) {
+  width: var(--track-control);
+  min-width: var(--track-control);
+  min-height: var(--track-control);
+  padding: 4px;
+}
+
+.trackPlay {
+  align-self: center;
+  margin: 0 !important;
+}
+
+.trackActions {
+  display: flex;
+  align-items: center;
+  gap: var(--track-gap);
+  min-width: 0;
+}
+
+.trackActions > button {
+  align-self: center;
+  margin: 0 !important;
+}
+
+.trackActions .saveTrack {
+  font-size: 22px;
+}
+
+.trackActions [data-remove] {
+  min-width: auto;
+  padding: 6px 10px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.savedLinks {
+  gap: var(--space-3);
+  padding: 0 0 var(--space-3) calc(var(--track-control) + var(--track-gap));
+}
+
+@media (max-width: 720px) {
+  aside {
+    padding: var(--space-2) var(--content-inset);
+  }
+
+  main {
+    padding: 24px var(--content-inset) 210px;
+  }
+
+  .grid {
+    gap: 18px 12px;
+  }
+
+  .track {
+    grid-template-columns: var(--track-control) minmax(0, 1fr);
+  }
+
+  .trackActions {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .trackActions [data-remove] {
+    margin-left: 0 !important;
+  }
+
+  .savedLinks {
+    padding-left: calc(var(--track-control) + var(--track-gap));
+  }
+}
+
+@media (max-width: 520px) {
+  main {
+    padding-bottom: 215px;
+  }
+}
+
+/* The navigation is the site identity now; the utility header is gone. */
+.shell {
+  grid-template-columns: 158px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+aside {
+  padding: 20px 14px;
+}
+
+.sidebarBrand {
+  margin: 0 10px var(--space-3);
+  font-size: 25px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+nav {
+  gap: 4px;
+}
+
+nav button {
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+nav .sidebarIcon {
+  display: grid;
+  place-items: center;
+  inline-size: 18px;
+  block-size: 18px;
+  flex: 0 0 18px;
+  margin-left: 0;
+  font-size: 18px;
+  line-height: 1;
+}
+
+nav .navLabel {
+  margin-left: 0;
+  font-size: inherit;
+  line-height: 1.2;
+}
+
+@media (max-width: 1000px) {
+  .shell {
+    grid-template-columns: 150px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  aside {
+    padding: var(--space-2) var(--content-inset);
+  }
+
+  .sidebarBrand {
+    margin: 0 0 var(--space-2);
+    font-size: 20px;
+  }
+
+  nav {
+    gap: 6px;
+  }
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin: 28px 0 0;
+}
+
+.pager button {
+  min-width: 42px;
+  min-height: 42px;
+  padding: 6px 10px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.pager output {
+  min-width: 2.5ch;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+@media (min-width: 1281px) {
+  .grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+/* A listening rail keeps the active release present while the shelf scrolls. */
+@media (min-width: 721px) {
+  :root {
+    --sidebar-width: 188px;
+  }
+
+  .shell {
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  }
+
+  aside {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    block-size: 100vh;
+    block-size: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebarNow {
+    display: grid;
+    gap: var(--space-1);
+    margin-top: auto;
+    padding-top: var(--space-4);
+  }
+
+  .sidebarNow img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    object-fit: cover;
+  }
+
+  .sidebarNowLabel {
+    margin-top: var(--space-1);
+    color: var(--lime);
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .sidebarNow b {
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .sidebarNow small {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  .player {
+    left: var(--sidebar-width);
+    grid-template-columns: auto auto minmax(100px, 1fr) auto auto;
+    gap: 8px 14px;
+    padding: 16px 3vw 13px;
+  }
+
+  .player .playingInfo {
+    display: none;
+  }
+
+  .player .saveTrack,
+  .player .transport,
+  .player .volume,
+  .player .timing,
+  .player #queueToggle {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1000px) {
+  :root {
+    --sidebar-width: 160px;
+  }
+}
+
+@media (max-width: 720px) {
+  .sidebarNow {
+    display: none !important;
+  }
+}
