@@ -3,14 +3,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
-  min-height: 38px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0;
-  border-radius: 50%;
-  font-family: Arial, sans-serif;
-  font-size: 20px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
   line-height: 1;
 }
 
@@ -19,11 +18,7 @@
   cursor: default;
 }
 
-.transport .shareTrack {
-  border: 1px solid var(--line);
-}
-
-.transport .shareTrack:hover {
+.shareTrack:hover:not(:disabled) {
   border-color: var(--lime);
 }
 
@@ -81,10 +76,10 @@
 
 @media (max-width: 520px) {
   .shareTrack {
-    width: 34px;
-    height: 34px;
-    min-width: 34px;
-    min-height: 34px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   #shareDialog .shareActions > button {
