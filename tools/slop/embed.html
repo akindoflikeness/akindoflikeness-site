@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Slop Slip</title>
+  <style>
+    :root{color-scheme:dark;--bg:#000;--panel:#141311;--line:#827e75;--ink:#f1eadc;--muted:#c0b8aa;--lime:#e4d6ba}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.35 Georgia,"Times New Roman",serif}
+    .card{min-height:152px;padding:14px;display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:center;border:1px solid var(--line);background:var(--bg)}
+    img{width:96px;height:96px;object-fit:cover;background:var(--panel)}
+    .eyebrow{color:var(--lime);font-size:11px;letter-spacing:1.7px;text-transform:uppercase}
+    h1{margin:4px 0 2px;font-size:18px;line-height:1.2;overflow-wrap:anywhere}
+    p{margin:0;color:var(--muted);overflow-wrap:anywhere}
+    .actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+    button,a{color:var(--ink);border:1px solid var(--line);border-radius:4px;background:none;padding:7px 10px;font:inherit;text-decoration:none;cursor:pointer}
+    button:hover,a:hover{border-color:var(--lime);color:var(--lime)}
+    .primary{background:var(--lime);color:#000;border-color:var(--lime)}
+    #state{min-height:152px;display:grid;place-items:center;padding:20px;text-align:center;color:var(--muted)}
+    #state.error{color:#ffc2b8}
+    [hidden]{display:none!important}
+  </style>
+</head>
+<body>
+  <main id="card" class="card" hidden>
+    <img id="cover" alt="">
+    <div>
+      <div class="eyebrow">A spoonful from Slop</div>
+      <h1 id="title"></h1>
+      <p id="artist"></p>
+      <div class="actions">
+        <button id="playEmbed" class="primary">Play</button>
+        <a id="openSlop" target="_blank" rel="noopener">Open in Slop</a>
+        <a id="openArchive" target="_blank" rel="noopener">Archive rights</a>
+      </div>
+    </div>
+  </main>
+  <p id="state" role="status" aria-live="polite">Opening a spoonful…</p>
+  <audio id="embedAudio" preload="none"></audio>
+  <script src="slop-slip.js?v=slip-1"></script>
+  <script src="embed.js?v=slip-1"></script>
+</body>
+</html>

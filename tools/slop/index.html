@@ -8,4 +8,238 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 @media(max-width:1100px){.player{grid-template-columns:1fr auto auto auto;gap:8px 14px}.playingInfo{grid-column:1;grid-row:1}.player .saveTrack{grid-column:2;grid-row:1}.transport{grid-column:3;grid-row:1}.player #queueToggle{grid-column:4;grid-row:1}.volume{grid-column:1;grid-row:2}.timing{grid-column:3/5;grid-row:2;justify-self:end}#message{bottom:135px}}
 @media(max-width:720px){nav{flex-wrap:wrap}nav button{padding:8px 10px}#message{bottom:155px}.track>span{flex-basis:calc(100% - 110px)}.savedLinks{padding-left:0}.track [data-rnext],.track [data-snext],.track [data-qnext]{margin-left:50px}.savedLinks{flex-wrap:wrap}main{padding-bottom:210px}}
 @media(max-width:520px){.player{grid-template-columns:1fr auto auto}.playingInfo{grid-column:1/3;grid-row:1}.player .saveTrack{grid-column:3;grid-row:1}.transport{grid-column:1/3;grid-row:2}.player #queueToggle{grid-column:3;grid-row:2}.volume{grid-column:1;grid-row:3}.timing{grid-column:2/4;grid-row:3}#message{bottom:190px}.detailtop{gap:12px}.detailtop h2{font-size:20px}.shelfChoice{align-items:center}dialog{padding:20px}}
-.backupDownload{display:inline-block;background:var(--lime);color:#000;padding:10px 15px;border-radius:6px;text-decoration:none;margin-bottom:12px}#backupText{width:100%;min-height:230px;background:var(--panel);color:var(--ink);padding:12px;border:1px solid var(--line);font:14px/1.5 monospace}summary{cursor:pointer}#exportDialog>h2{padding-right:80px}#saveState:empty{display:none}.controlIcon{width:22px;height:22px;vertical-align:middle;flex-shrink:0}.transport button,#mute,#queueToggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px}header{gap:10px}header a{font-size:13px}header .brand{line-height:1}nav .controlIcon{width:18px;height:18px}#playerQcount{font-size:14px}#queueList>h2{margin:28px 0 14px}.track .controlIcon{width:20px;height:20px}.releaseTitle{font:inherit;font-weight:inherit;text-align:left;border:0;border-radius:0;padding:0;line-height:inherit}.releaseTitle:hover{text-decoration:underline;text-underline-offset:3px}</style></head><body><div class="shell"><aside><div class="sidebarBrand">slop</div><nav><button class="active" data-view="discover"><span class="sidebarIcon" aria-hidden="true">◎</span><span class="navLabel">Discover</span></button><button data-view="saved"><span class="sidebarIcon" aria-hidden="true">♡</span><span class="navLabel">Liked</span></button><button data-view="queue"><span class="sidebarIcon" aria-hidden="true"><svg viewBox="0 0 24 24" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h12M3 18h12m4-6 4 3-4 3Z"/></svg></span><span class="navLabel">Queue</span></button><button data-view="about"><span class="sidebarIcon" aria-hidden="true"><svg viewBox="0 0 24 24" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></svg></span><span class="navLabel">About</span></button></nav><section class="sidebarNow" id="sidebarNow" aria-label="Now playing" hidden><img id="sidebarNowCover" alt=""><div class="sidebarNowLabel">Now playing</div><b id="sidebarNowTitle"></b><small id="sidebarNowArtist"></small></section></aside><main><section id="discover"><form class="search" id="search"><input id="query" aria-label="Search music" placeholder="Search an artist, release, or sound…"><button class="primary">Search</button></form><div class="trails" aria-label="Explore sounds"><button data-collection="netlabels">Netlabels</button><button data-collection="etree">Live music</button><button class="active" data-genre="">All sounds</button><button data-genre="ambient">Ambient</button><button data-genre="experimental">Experimental</button><button data-genre="electronic">Electronic</button><button data-genre="jazz">Jazz</button><button data-genre="noise">Noise</button><button data-genre="hip hop">Hip-hop</button><button data-genre="field recordings">Field recordings</button></div><div class="heading"><h2 id="shelfTitle">A pile of slop</h2><span id="resultCount">LIVE ARCHIVE INDEX</span></div><div id="status" role="status" aria-live="polite"></div><p id="relatedNote" class="dim" hidden></p><button id="resetShelf" hidden>All music</button><div id="results" class="grid"></div><div class="pager" id="pager" aria-label="Result page" hidden><button id="pagePrevious" aria-label="Previous page">‹</button><output id="pageNumber" aria-live="polite">0</output><button id="pageNext" aria-label="Next page">›</button></div></section><section id="saved" hidden><h1>Liked tracks</h1><p id="saveState" class="dim">Opening your liked tracks…</p><div class="libraryTools"><button id="exportLibrary" disabled>Save</button><button id="importLibrary">Load</button><input type="file" id="importFile" accept=".json,application/json" hidden></div><div id="savedList"></div></section><section id="queue" hidden><h1>The next helping.</h1><div id="queueList"></div></section><section id="about" class="about" hidden><h1>About the app</h1><p>Slop is a lightweight discovery prototype for music already hosted on the Internet Archive. Browse and search the Internet Archive’s audio collection. Open a release for its full playable track list. Audio streams directly from the Archive.</p><h2>Listening queue</h2><p>Click an album cover to play its first track and queue the rest. Click its title to open the release details without changing playback. Up next holds the tracks you add; they play before the remaining album tracks. Playing another album replaces only the album queue. Both queues last for this visit.</p><h2>Follow the sound</h2><p>“More like this” searches the Archive for releases with shared tags. These are metadata matches. Artist, track, and rights information come from the original upload. Follow Full release & rights to hear the rest.</p><h2>Keep what you find</h2><p>Hearts like tracks in this browser, with no account. Save a JSON file from Liked and load it on another device. Loading adds new tracks and keeps existing likes. The file contains references, not audio. Private browsing and clearing site data can remove your local copy.</p><h2>Source and licence</h2><p>The interface is MIT licensed, has no build dependencies, and can be hosted as static files. The music retains its own rights: check each release before reusing it.</p><p><a href="index.html" download="index.html">Interface source</a> · <a href="app.js" download="app.js">App code</a> · <a href="artwork.js" download>Artwork code</a> · <a href="LICENSE.txt">MIT license</a> · <a href="README.txt">How it works</a></p><h2>Nearby open projects</h2><p><a href="https://github.com/essicolo/dustic" target="_blank" rel="noopener">Dustic</a> is an existing open-source Archive player worth exploring alongside this prototype.</p></section></main></div><section class="player" aria-label="Now playing"><div class="seekline"><input id="seek" type="range" min="0" max="100" step="0.1" value="0" disabled aria-label="Seek through track"><output id="seekPreview" hidden>0:00</output></div><div class="playingInfo"><img id="nowCover" hidden alt="Current release artwork"><div><b id="nowTitle">The spoon is yours.</b><small id="nowArtist">Open a release to choose a track.</small></div></div><button id="saveCurrent" class="saveTrack" aria-label="Like current track" aria-pressed="false" disabled>♡</button><div class="transport"><button id="previous" aria-label="Previous track" disabled><svg viewBox="0 0 24 24" aria-hidden="true" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5v14m14-14L8 12l11 7Z"/></svg></button><button id="togglePlay" aria-label="Play" disabled><svg viewBox="0 0 24 24" aria-hidden="true" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 5 11 7-11 7Z"/></svg></button><button id="next" aria-label="Play next queued track"><svg viewBox="0 0 24 24" aria-hidden="true" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5v14M5 5l11 7-11 7Z"/></svg></button></div><div class="volume"><button id="mute" aria-label="Mute"><svg viewBox="0 0 24 24" aria-hidden="true" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h4l5-4v14l-5-4H3Z"/><path d="M16 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg></button><input id="volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume"></div><div class="timing"><span id="elapsed">0:00</span> / <span id="duration">0:00</span></div><button id="queueToggle" aria-label="Open queue" title="Queue"><svg viewBox="0 0 24 24" aria-hidden="true" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h12M3 18h12m4-6 4 3-4 3Z"/></svg></button><audio id="audio" preload="none"></audio></section><div id="message" role="status" aria-live="polite"></div><dialog id="exportDialog"><button class="close" id="closeExport">Close</button><h2>Save liked tracks</h2><p id="exportCount"></p><p><a class="backupDownload" id="downloadBackup" download>Download JSON</a></p><details><summary>JSON text</summary><p>If your browser cannot download the file, copy this text into a file ending in .json.</p><textarea id="backupText" readonly aria-label="JSON file" spellcheck="false"></textarea></details></dialog><dialog id="importDialog"><h2>Load liked tracks?</h2><p id="importSummary"></p><div class="libraryTools"><button class="primary" id="confirmImport">Add liked tracks</button><button id="cancelImport">Cancel</button></div></dialog><dialog id="release"><button class="close" id="close">Close</button><div id="releaseBody"></div></dialog><script src="artwork.js?v=1"></script><script src="app.js?v=sidebar-nav-1"></script></body></html>
+.backupDownload{display:inline-block;background:var(--lime);color:#000;padding:10px 15px;border-radius:6px;text-decoration:none;margin-bottom:12px}#backupText{width:100%;min-height:230px;background:var(--panel);color:var(--ink);padding:12px;border:1px solid var(--line);font:14px/1.5 monospace}summary{cursor:pointer}#exportDialog>h2{padding-right:80px}#saveState:empty{display:none}.controlIcon{width:22px;height:22px;vertical-align:middle;flex-shrink:0}.transport button,#mute,#queueToggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px}header{gap:10px}header a{font-size:13px}header .brand{line-height:1}nav .controlIcon{width:18px;height:18px}#playerQcount{font-size:14px}#queueList>h2{margin:28px 0 14px}.track .controlIcon{width:20px;height:20px}.releaseTitle{font:inherit;font-weight:inherit;text-align:left;border:0;border-radius:0;padding:0;line-height:inherit}.releaseTitle:hover{text-decoration:underline;text-underline-offset:3px}</style>
+<link rel="stylesheet" href="slop-slip.css?v=slip-1">
+<link rel="stylesheet" href="slop-handbook.css?v=handbook-1">
+</head>
+<body><div class="shell"><aside><div class="sidebarBrand">slop</div><nav>
+<button class="active" data-view="discover"><span class="sidebarIcon" aria-hidden="true">◎</span><span class="navLabel">Discover</span></button>
+<button data-view="saved"><span class="sidebarIcon" aria-hidden="true">♡</span><span class="navLabel">Liked</span></button>
+<button data-view="queue"><span class="sidebarIcon" aria-hidden="true"><svg viewBox="0 0 24 24" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h12M3 18h12m4-6 4 3-4 3Z"/></svg></span><span class="navLabel">Queue</span></button>
+<button data-view="log"><span class="sidebarIcon" aria-hidden="true">▤</span><span class="navLabel">Log</span></button>
+<button data-view="docs"><span class="sidebarIcon" aria-hidden="true">?</span><span class="navLabel">Docs</span></button>
+<button data-view="about"><span class="sidebarIcon" aria-hidden="true"><svg viewBox="0 0 24 24" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></svg></span><span class="navLabel">About</span></button>
+</nav><section class="sidebarNow" id="sidebarNow" aria-label="Now playing" hidden><img id="sidebarNowCover" alt=""><div class="sidebarNowLabel">Now playing</div><b id="sidebarNowTitle"></b><small id="sidebarNowArtist"></small></section></aside>
+<main>
+<section id="discover"><form class="search" id="search"><input id="query" aria-label="Search music" placeholder="Search an artist, release, or sound…"><button class="primary">Search</button></form><div class="trails" aria-label="Explore sounds"><button data-collection="netlabels">Netlabels</button><button data-collection="etree">Live music</button><button class="active" data-genre="">All sounds</button><button data-genre="ambient">Ambient</button><button data-genre="experimental">Experimental</button><button data-genre="electronic">Electronic</button><button data-genre="jazz">Jazz</button><button data-genre="noise">Noise</button><button data-genre="hip hop">Hip-hop</button><button data-genre="field recordings">Field recordings</button></div><div class="heading"><h2 id="shelfTitle">A pile of slop</h2><span id="resultCount">LIVE ARCHIVE INDEX</span></div><div id="status" role="status" aria-live="polite"></div><p id="relatedNote" class="dim" hidden></p><button id="resetShelf" hidden>All music</button><div id="results" class="grid"></div><div class="pager" id="pager" aria-label="Result page" hidden><button id="pagePrevious" aria-label="Previous page">‹</button><output id="pageNumber" aria-live="polite">0</output><button id="pageNext" aria-label="Next page">›</button></div></section>
+<section id="saved" hidden><h1>Liked tracks</h1><p id="saveState" class="dim">Opening your liked tracks…</p><div class="libraryTools"><button id="exportLibrary" disabled>Save</button><button id="importLibrary">Load</button><input type="file" id="importFile" accept=".json,application/json" hidden></div><div id="savedList"></div></section>
+<section id="queue" hidden><h1>The next helping.</h1><div id="queueList"></div></section>
+<section id="log" class="handbook handbook--log" hidden aria-labelledby="log-title">
+  <div class="handbookHero">
+    <p class="handbookEyebrow">DEV DIARY / NOT A FEED</p>
+    <h1 id="log-title">log</h1>
+    <p class="handbookLead">What changed, when it changed, and whether anything caught fire. No roadmap theatre. Just the little machine telling on itself.</p>
+    <dl class="handbookMeta">
+      <div><dt>Last fed</dt><dd>07 Oct 2026</dd></div>
+      <div><dt>Status rule</dt><dd>Local is not public</dd></div>
+      <div><dt>House rule</dt><dd>Append, do not rewrite history</dd></div>
+    </dl>
+  </div>
+
+  <div class="logLegend" role="note" aria-label="Log labels">
+    <span class="logStatus logStatus--pot">In the pot</span><span>built and checked locally; not public yet</span>
+    <span class="logStatus logStatus--shipped">Shipped</span><span>live and checked on the public site</span>
+    <span class="logStatus logStatus--weird">Known weirdness</span><span>real edge, documented instead of disguised</span>
+  </div>
+
+  <ol class="logList">
+    <li class="logEntry">
+      <div class="logDate"><time datetime="2026-10-07">07 Oct<br>2026</time><span class="logStatus logStatus--pot">In the pot</span></div>
+      <article>
+        <p class="entryKicker">Added / sharing</p>
+        <h2>Pass the spoon.</h2>
+        <p>Slop Slip gives a specific Archive release, file, and optional listening moment its own compact link. A recommendation should arrive as the thing, not as a scavenger hunt.</p>
+        <p class="entryNote"><strong>Checked:</strong> protocol tests pass locally. <strong>Still true:</strong> public verification is pending.</p>
+      </article>
+    </li>
+    <li class="logEntry">
+      <div class="logDate"><time datetime="2026-10-07">07 Oct<br>2026</time><span class="logStatus logStatus--pot">In the pot</span></div>
+      <article>
+        <p class="entryKicker">Added / embed</p>
+        <h2>Quiet by construction.</h2>
+        <p>A small embed points at the same public Archive item. It presents a plain Play button; it does not make a room suddenly make sound merely because a page loaded.</p>
+        <p class="entryNote"><strong>Checked:</strong> the embed prepares its Archive source only after an explicit Play action.</p>
+      </article>
+    </li>
+    <li class="logEntry">
+      <div class="logDate"><time datetime="2026-10-07">07 Oct<br>2026</time><span class="logStatus logStatus--pot">In the pot</span></div>
+      <article>
+        <p class="entryKicker">Added / keeper tools</p>
+        <h2>A log and a manual, because future-you is also a person.</h2>
+        <p>This Log records behaviour and deployment facts. Docs is the non-user manual: where data comes from, where state lives, how sharing works, and how to change things without turning a small player into a haunted house.</p>
+        <p class="entryNote"><strong>Rule:</strong> this entry stays <em>In the pot</em> until this exact public page has been checked.</p>
+      </article>
+    </li>
+    <li class="logEntry">
+      <div class="logDate"><time datetime="2026-10-07">07 Oct<br>2026</time><span class="logStatus logStatus--weird">Known weirdness</span></div>
+      <article>
+        <p class="entryKicker">Boundary / previews</p>
+        <h2>Fragments are invisible to the server.</h2>
+        <p>Slop Slips use the URL fragment so sharing stays static and private to the browser. That means a server cannot make per-track social preview cards from a Slip alone. Proper Open Graph or oEmbed previews need a separate server-backed project.</p>
+      </article>
+    </li>
+  </ol>
+
+  <details class="logRecipe">
+    <summary>How to feed this log without making it weird</summary>
+    <p>Append one entry after a meaningful behaviour, reliability, or deployment change. Give it a date, a status, a short title, what changed, and what was actually checked. Mark a local change <strong>In the pot</strong>. After the feature is checked publicly, change the entry to <strong>Shipped</strong>, publish that status update, and check the public Log itself.</p>
+    <pre class="docsCode">YYYY-MM-DD · [IN THE POT | SHIPPED | KNOWN WEIRDNESS] · [ADDED | CHANGED | FIXED]
+Small memorable title.
+What changed and why it matters.
+Checked: command, browser path, or public URL.
+Caveat: the honest edge, if there is one.</pre>
+  </details>
+</section>
+
+<section id="docs" class="handbook handbook--docs" hidden aria-labelledby="docs-title">
+  <div class="handbookHero">
+    <p class="handbookEyebrow">FOR PEOPLE WITH THE KEYS</p>
+    <h1 id="docs-title">keepers&rsquo; manual</h1>
+    <p class="handbookLead">This is the tech-end map of Slop. If you are here to listen, you are dramatically overqualified. If you are here because you inherited the cupboard keys: hello, and sorry about the notes.</p>
+    <dl class="handbookMeta">
+      <div><dt>Shape</dt><dd>Static client-side app</dd></div>
+      <div><dt>Source of music</dt><dd>Internet Archive metadata + files</dd></div>
+      <div><dt>First rule</dt><dd>Keep it small, legible, and honest</dd></div>
+    </dl>
+  </div>
+
+  <details class="docsSection" open>
+    <summary>Start here: the ten-minute restart</summary>
+    <div class="docsBody">
+      <ol class="docsSteps">
+        <li>Read the source and this manual before editing. Slop is buildless on purpose.</li>
+        <li>Serve the folder locally with a plain static server. Do not invent a build chain to change a sentence or button.</li>
+        <li>Make the smallest layer-specific change: markup and CSS for a static view, app code for behaviour, protocol code for sharing.</li>
+        <li>Run focused checks, then use a real Archive item in a browser. A green syntax check cannot tell you whether live metadata is strange today.</li>
+        <li>Update Docs when a contract changes, append the Log for meaningful behaviour or deployment facts, then deploy coupled assets together.</li>
+      </ol>
+      <p><strong>Do not put credentials here.</strong> The handover ledger records where deployment knowledge lives, not secrets themselves.</p>
+    </div>
+  </details>
+
+  <details class="docsSection">
+    <summary>System map: a small, static listening machine</summary>
+    <div class="docsBody">
+      <pre class="docsCode">browser
+  ├─ index.html       structure, styles, dialogs, navigation
+  ├─ app.js           search, release UI, player, queue, liked state
+  ├─ artwork.js       artwork helpers
+  ├─ Internet Archive advancedsearch
+  │    └─ discovery result identifiers
+  ├─ Internet Archive metadata/{identifier}
+  │    └─ authoritative labels + playable files
+  └─ IndexedDB: slop-library / saved
+       └─ this browser's liked tracks only</pre>
+      <p>There is no account, server-side library, queue sync, or hidden recommendation profile. The app asks Archive for public information and keeps only local convenience state in the browser.</p>
+    </div>
+  </details>
+
+  <details class="docsSection">
+    <summary>Data and playback: let Archive metadata win</summary>
+    <div class="docsBody">
+      <p>Discovery can begin with an Archive advanced-search result, but a release and playback resolve Archive metadata. That response is the authority for the title, creator, date, rights, and actual file list.</p>
+      <p>Construct playable URLs from the Archive identifier and the exact metadata file name. A human-facing release title is a label, never a stable audio path. Show a plain failure rather than guessing a nearby URL.</p>
+      <p>Playback state is one thing at a time: selected track, source URL, audio element, and visible player. Reading Log or Docs must not reset playback or queue state.</p>
+    </div>
+  </details>
+
+  <details class="docsSection">
+    <summary>Local state: liked, queue, history</summary>
+    <div class="docsBody">
+      <p>Individual liked tracks live in IndexedDB under <code>slop-library</code>, store <code>saved</code>. This is per-browser convenience state. Never imply that a link, export, or feature shares it with another person.</p>
+      <p>Queue and listening history are session behaviour. The easy regression is making a detail dialog or received link unexpectedly write history, clear a queue, or start audio.</p>
+      <p>When changing local data shape, keep backwards reads tolerant where possible and test an existing browser profile as well as a blank one.</p>
+    </div>
+  </details>
+
+  <details class="docsSection">
+    <summary>Slop Slip: exact sharing without a new service</summary>
+    <div class="docsBody">
+      <p>A Slip is a versioned location fragment:</p>
+      <pre class="docsCode">#v=1&amp;r=archive-identifier&amp;f=relative%2Ftrack.ogg&amp;at=83</pre>
+      <ul class="docsList">
+        <li><code>v=1</code> is a promise that the format remains readable; do not reinterpret it silently.</li>
+        <li><code>r</code> is the validated Archive identifier.</li>
+        <li><code>f</code> is optional for a release-only Slip. When present it must be a relative playable mp3, ogg, or m4a file: no scheme, backslash, control character, absolute path, or dot segment.</li>
+        <li><code>at</code> is an optional whole-second timestamp, capped at seven days, and only makes sense with <code>f</code>.</li>
+        <li>Labels displayed to the listener come from Archive metadata, never text in a URL.</li>
+      </ul>
+      <p>A release-only Slip opens the release. A track Slip prepares the exact track and seeks once its source is ready, but never autoplays. Keep timestamp listeners bound to the expected source so a later track choice cannot receive an old seek.</p>
+      <p>Location fragments are not sent to a static server. That is good for this no-account protocol, but per-track social cards and oEmbed discovery are a separate server-backed project if they are ever wanted.</p>
+    </div>
+  </details>
+
+  <details class="docsSection">
+    <summary>Release procedure: change, check, say what happened</summary>
+    <div class="docsBody">
+      <ol class="docsSteps">
+        <li>Name the user-visible outcome and the invariant that must survive it.</li>
+        <li>Trace the live path before editing: source, state, player, and public URL contract.</li>
+        <li>Change the smallest appropriate layer. Avoid unrelated clean-up on a live fix.</li>
+        <li>Run focused syntax checks, then test a real Archive result and fresh sharing link in a browser.</li>
+        <li>Update Docs when the stable handover knowledge changed. Append a Log entry for behaviour, reliability, or deployment facts.</li>
+        <li>Deploy coupled static files together and bump cache suffixes when browsers could otherwise keep mismatched code.</li>
+        <li>Verify the public functional release in a fresh tab.</li>
+        <li>Then publish the Log status change from <em>In the pot</em> to <em>Shipped</em> in a separate small update and verify the public Log itself.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details class="docsSection">
+    <summary>Handover ledger: leave a trail, not a treasure map</summary>
+    <div class="docsBody">
+      <p class="handoverAlert"><strong>Handover status: source and deployment facts are recorded here; add a human contact route before a formal handover.</strong> This manual gives the shape of the work; it must not bluff access it does not have.</p>
+      <table class="handoverTable">
+        <thead><tr><th scope="col">Thing</th><th scope="col">Record here</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Live URL</th><td><a href="https://akindoflikeness.net/tools/slop/">akindoflikeness.net/tools/slop/</a>. Record the date it was last verified.</td></tr>
+          <tr><th scope="row">Source location</th><td>GitHub repository <code>wraithsys/akindoflikeness-site</code>, path <code>tools/slop/</code>, branch <code>main</code>.</td></tr>
+          <tr><th scope="row">Deploy path</th><td>Push the reviewed commit to <code>main</code>. Cloudflare Pages publishes the static site. Roll back with a reviewed revert on <code>main</code>; never paste access tokens here.</td></tr>
+          <tr><th scope="row">Known edges</th><td>Archive availability and metadata quality are external dependencies. Slop Slip fragments cannot produce server-side social previews alone.</td></tr>
+          <tr><th scope="row">Last keeper</th><td><strong>Required before formal handover:</strong> add a human contact route, not an assumption that the previous laptop remains immortal.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details class="docsSection">
+    <summary>Troubleshooting: boring answers first</summary>
+    <div class="docsBody">
+      <dl class="troubleList">
+        <div><dt>A Slip opens the wrong track.</dt><dd>Confirm metadata file name matches <code>f</code> exactly, including nested directories and Unicode. Confirm audio URLs use the Archive identifier, not a displayed release title.</dd></div>
+        <div><dt>A received Slip suddenly plays.</dt><dd>Check the prepare path passes an explicit no-autoplay flag and a browser user gesture is still required for playback.</dd></div>
+        <div><dt>The app has old behaviour after deploy.</dt><dd>Look for mismatched cached static assets. Update cache suffixes on files that must ship together and check a fresh tab.</dd></div>
+        <div><dt>Docs broke a shared track.</dt><dd>Remove hash routing or anchor links. Tabs use the in-app view system, leaving <code>location.hash</code> entirely to Slop Slip.</dd></div>
+      </dl>
+    </div>
+  </details>
+</section>
+<section id="about" class="about" hidden><h1>About the app</h1><p>Slop is a lightweight discovery prototype for music already hosted on the Internet Archive. Browse and search the Internet Archive’s audio collection. Open a release for its full playable track list. Audio streams directly from the Archive.</p><h2>Listening queue</h2><p>Click an album cover to play its first track and queue the rest. Click its title to open the release details without changing playback. Up next holds the tracks you add; they play before the remaining album tracks. Playing another album replaces only the album queue. Both queues last for this visit.</p><h2>Follow the sound</h2><p>“More like this” searches the Archive for releases with shared tags. These are metadata matches. Artist, track, and rights information come from the original upload. Follow Full release & rights to hear the rest.</p><h2>Keep what you find</h2><p>Hearts like tracks in this browser, with no account. Save a JSON file from Liked and load it on another device. Loading adds new tracks and keeps existing likes. The file contains references, not audio. Private browsing and clearing site data can remove your local copy.</p><h2>Source and licence</h2><p>The interface is MIT licensed, has no build dependencies, and can be hosted as static files. The music retains its own rights: check each release before reusing it.</p><p><a href="index.html" download="index.html">Interface source</a> · <a href="app.js" download="app.js">App code</a> · <a href="artwork.js" download>Artwork code</a> · <a href="LICENSE.txt">MIT license</a> · <a href="README.txt">How it works</a></p><h2>Nearby open projects</h2><p><a href="https://github.com/essicolo/dustic" target="_blank" rel="noopener">Dustic</a> is an existing open-source Archive player worth exploring alongside this prototype.</p></section></main>
+</div><section class="player" aria-label="Now playing"><div class="seekline"><input id="seek" type="range" min="0" max="100" step="0.1" value="0" disabled aria-label="Seek through track"><output id="seekPreview" hidden>0:00</output></div><div class="playingInfo"><img id="nowCover" hidden alt="Current release artwork"><div><b id="nowTitle">The spoon is yours.</b><small id="nowArtist">Open a release to choose a track.</small></div></div><button id="saveCurrent" class="saveTrack" aria-label="Like current track" aria-pressed="false" disabled>♡</button><div class="transport">
+<button id="previous" aria-label="Previous track" disabled><svg viewBox="0 0 24 24" aria-hidden="true" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5v14m14-14L8 12l11 7Z"/></svg></button>
+<button id="togglePlay" aria-label="Play" disabled><svg viewBox="0 0 24 24" aria-hidden="true" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 5 11 7-11 7Z"/></svg></button>
+<button id="shareCurrent" class="shareTrack" type="button" aria-label="Share current track" title="Choose a track to share" disabled>↗<span class="srOnly"> Share</span></button>
+<button id="next" aria-label="Play next queued track"><svg viewBox="0 0 24 24" aria-hidden="true" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5v14M5 5l11 7-11 7Z"/></svg></button>
+</div>
+<div class="volume"><button id="mute" aria-label="Mute"><svg viewBox="0 0 24 24" aria-hidden="true" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h4l5-4v14l-5-4H3Z"/><path d="M16 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg></button><input id="volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume"></div><div class="timing"><span id="elapsed">0:00</span> / <span id="duration">0:00</span></div><button id="queueToggle" aria-label="Open queue" title="Queue"><svg viewBox="0 0 24 24" aria-hidden="true" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h12M3 18h12m4-6 4 3-4 3Z"/></svg></button><audio id="audio" preload="none"></audio></section>
+<div id="message" role="status" aria-live="polite"></div><dialog id="exportDialog"><button class="close" id="closeExport">Close</button><h2>Save liked tracks</h2><p id="exportCount"></p><p><a class="backupDownload" id="downloadBackup" download>Download JSON</a></p><details><summary>JSON text</summary><p>If your browser cannot download the file, copy this text into a file ending in .json.</p><textarea id="backupText" readonly aria-label="JSON file" spellcheck="false"></textarea></details></dialog>
+<dialog id="importDialog"><h2>Load liked tracks?</h2><p id="importSummary"></p><div class="libraryTools"><button class="primary" id="confirmImport">Add liked tracks</button><button id="cancelImport">Cancel</button></div></dialog>
+<dialog id="release"><button class="close" id="close">Close</button><div id="releaseBody"></div></dialog>
+<dialog id="shareDialog">
+  <button class="close" id="closeShare">Close</button>
+  <div class="eyebrow">Pass the spoon</div>
+  <h2 id="shareHeading">Share this exact track</h2>
+  <p id="shareContext" class="dim"></p>
+  <label class="shareCheck"><input id="shareStartAt" type="checkbox"><span id="shareStartAtLabel">Start at this moment</span></label>
+  <div class="shareActions">
+    <button id="nativeShare" class="primary" type="button">Share</button>
+    <button id="copySlip" type="button">Copy listening link</button>
+    <button id="copyEmbed" type="button">Copy quiet embed</button>
+  </div>
+  <p class="sharePrinciple">A Slip shares only this public Archive reference. It never shares your Liked tracks, queue, or listening history, and the embed never starts sound by itself.</p>
+</dialog>
+<script src="artwork.js?v=1"></script>
+<script src="slop-slip.js?v=slip-1"></script>
+<script src="slop-slip-ui.js?v=slip-1"></script>
+<script src="app.js?v=slip-log-docs-1"></script>
+</body></html>

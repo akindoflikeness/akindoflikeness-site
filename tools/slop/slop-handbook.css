@@ -1,0 +1,429 @@
+/*
+ * Log and Docs are deliberately scoped so they do not disturb discovery,
+ * playback, or the older broad element selectors in index.html.
+ */
+.handbook {
+  --handbook-rule: var(--line, #827e75);
+  --handbook-ink: var(--ink, #f1eadc);
+  --handbook-muted: var(--muted, #c0b8aa);
+  --handbook-paper: var(--panel, #141311);
+  --handbook-accent: var(--lime, #e4d6ba);
+  width: min(760px, 100%);
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: clamp(24px, 4vw, 52px) clamp(16px, 3vw, 32px) 96px;
+  color: var(--handbook-ink);
+}
+
+.handbook[hidden] {
+  display: none;
+}
+
+.handbook *,
+.handbook *::before,
+.handbook *::after {
+  box-sizing: border-box;
+}
+
+.handbookHero {
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--handbook-rule);
+}
+
+.handbookEyebrow,
+.entryKicker {
+  margin: 0 0 10px;
+  color: var(--handbook-accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.handbook h1,
+.handbook h2 {
+  color: var(--handbook-ink);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -.025em;
+}
+
+.handbook h1 {
+  margin: 0;
+  font-size: clamp(42px, 8vw, 74px);
+  line-height: .94;
+}
+
+.handbook h2 {
+  margin: 0 0 11px;
+  font-size: clamp(24px, 4vw, 34px);
+  line-height: 1;
+}
+
+.handbookLead {
+  max-width: 640px;
+  margin: 18px 0 0;
+  color: var(--handbook-muted);
+  font-size: clamp(17px, 2.2vw, 21px);
+  line-height: 1.42;
+}
+
+.handbookMeta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 25px 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.handbookMeta div {
+  min-width: 0;
+}
+
+.handbookMeta dt {
+  color: var(--handbook-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.handbookMeta dd {
+  margin: 5px 0 0;
+  color: var(--handbook-ink);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.logLegend {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 12px;
+  align-items: center;
+  margin: 23px 0 3px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--handbook-rule);
+  color: var(--handbook-muted);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.logStatus {
+  display: inline-block;
+  width: fit-content;
+  padding: 3px 6px 2px;
+  border: 1px solid currentColor;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.logStatus--pot {
+  color: var(--handbook-accent);
+}
+
+.logStatus--shipped {
+  color: #d4e8b1;
+}
+
+.logStatus--weird {
+  color: #e4aaa3;
+}
+
+.logList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.logEntry {
+  display: grid;
+  grid-template-columns: 106px minmax(0, 1fr);
+  gap: 24px;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--handbook-rule);
+}
+
+.logDate {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--handbook-muted);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.logDate time {
+  white-space: nowrap;
+}
+
+.logEntry article > p:not(.entryKicker) {
+  margin: 0 0 11px;
+  color: var(--handbook-muted);
+  font-size: 16px;
+  line-height: 1.52;
+}
+
+.logEntry .entryNote {
+  padding-left: 12px;
+  border-left: 2px solid var(--handbook-rule);
+  color: var(--handbook-ink) !important;
+  font-size: 14px !important;
+}
+
+.handbook strong {
+  color: var(--handbook-ink);
+  font-weight: 700;
+}
+
+.logRecipe,
+.docsSection {
+  border-bottom: 1px solid var(--handbook-rule);
+}
+
+.logRecipe {
+  margin-top: 18px;
+  border-top: 1px solid var(--handbook-rule);
+}
+
+.handbook summary {
+  position: relative;
+  display: block;
+  padding: 17px 28px 17px 0;
+  color: var(--handbook-ink);
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  line-height: 1.35;
+  list-style: none;
+}
+
+.handbook summary::-webkit-details-marker {
+  display: none;
+}
+
+.handbook summary::after {
+  position: absolute;
+  top: 15px;
+  right: 2px;
+  color: var(--handbook-accent);
+  content: "+";
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.handbook details[open] > summary::after {
+  content: "−";
+}
+
+.logRecipe > p,
+.docsBody > p,
+.docsBody li,
+.docsBody dd {
+  color: var(--handbook-muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.logRecipe > p {
+  margin: 0 0 15px;
+}
+
+.docsSection:first-of-type {
+  margin-top: 22px;
+  border-top: 1px solid var(--handbook-rule);
+}
+
+.docsSection summary {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(19px, 3vw, 24px);
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+
+.docsBody {
+  padding: 0 0 24px;
+}
+
+.docsBody > :first-child {
+  margin-top: 0;
+}
+
+.docsBody > :last-child {
+  margin-bottom: 0;
+}
+
+.docsSteps,
+.docsList {
+  margin: 0 0 15px;
+  padding-left: 21px;
+}
+
+.docsSteps li + li,
+.docsList li + li {
+  margin-top: 7px;
+}
+
+.handbook code,
+.docsCode {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.handbook code {
+  padding: 1px 3px;
+  color: var(--handbook-accent);
+  background: rgba(255, 255, 255, .06);
+  font-size: .88em;
+}
+
+.docsCode {
+  overflow-x: auto;
+  margin: 16px 0;
+  padding: 14px;
+  border: 1px solid var(--handbook-rule);
+  background: var(--handbook-paper);
+  color: var(--handbook-ink);
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre;
+}
+
+.handoverAlert {
+  margin: 0 0 16px;
+  padding: 11px 12px;
+  border-left: 2px solid var(--handbook-accent);
+  background: var(--handbook-paper);
+}
+
+.handoverTable {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--handbook-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.handoverTable th,
+.handoverTable td {
+  padding: 10px 8px;
+  border-top: 1px solid var(--handbook-rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.handoverTable thead th {
+  color: var(--handbook-accent);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.handoverTable tbody th {
+  width: 31%;
+  color: var(--handbook-ink);
+  font-weight: 700;
+}
+
+.handbook a {
+  color: var(--handbook-accent);
+  text-decoration-color: var(--handbook-rule);
+  text-underline-offset: 3px;
+}
+
+.handbook a:hover {
+  color: var(--handbook-ink);
+}
+
+.troubleList {
+  margin: 0;
+}
+
+.troubleList div {
+  padding: 14px 0;
+  border-top: 1px solid var(--handbook-rule);
+}
+
+.troubleList dt {
+  color: var(--handbook-ink);
+  font-weight: 700;
+}
+
+.troubleList dd {
+  margin: 5px 0 0;
+}
+
+@media (max-width: 560px) {
+  .handbook {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .handbookMeta {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .logLegend {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .logLegend .logStatus:not(:first-child) {
+    margin-top: 8px;
+  }
+
+  .logEntry {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .logDate {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .handoverTable,
+  .handoverTable tbody,
+  .handoverTable tr,
+  .handoverTable th,
+  .handoverTable td {
+    display: block;
+    width: 100%;
+  }
+
+  .handoverTable thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .handoverTable tbody th {
+    padding-bottom: 2px;
+    border-top: 1px solid var(--handbook-rule);
+  }
+
+  .handoverTable tbody td {
+    padding-top: 2px;
+    border-top: 0;
+  }
+}

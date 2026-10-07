@@ -14,4 +14,10 @@ Clicking an album cover starts its first track and fills From this album with th
 
 APIs: https://archive.org/advancedsearch.php ; https://archive.org/metadata/{identifier} ; https://archive.org/download/{identifier}/{file}
 
+Slop Slip shares an exact public Archive release or track in a versioned URL
+fragment. Received track links prepare the selected track and optional timestamp
+but never autoplay. The Log and Docs tabs keep an append-only engineering diary
+and the keeper-facing manual in the app; see MAINTENANCE.md for the full source
+map and deployment procedure.
+
 The interface is MIT licensed. Music and artwork retain their own rights; see each original release.

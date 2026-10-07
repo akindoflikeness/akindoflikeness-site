@@ -16,7 +16,7 @@ const keyOf = t => JSON.stringify([t.id,t.file]);
 const audioUrl = t => 'https://archive.org/download/'+encodeURIComponent(t.id)+'/'+t.file.split('/').map(encodeURIComponent).join('/');
 const tagsOf = d => (Array.isArray(d.subject) ? d.subject : text(d.subject).split(/[;,]/)).map(s=>String(s).trim().toLowerCase().slice(0,200)).filter(Boolean).slice(0,50);
 function toast(message){$('#message').textContent=message;clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('#message').textContent='',6500)}
-function view(name){currentView=name;for(const n of ['discover','saved','queue','about'])$('#'+n).hidden=n!==name;document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));if(name==='queue')renderQueue();if(name==='saved')renderSaved()}
+function view(name){currentView=name;for(const n of ['discover','saved','queue','log','docs','about'])$('#'+n).hidden=n!==name;document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));if(name==='queue')renderQueue();if(name==='saved')renderSaved()}
 document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>view(b.dataset.view));
 async function json(url){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),18000);try{const r=await fetch(url,{signal:controller.signal});if(!r.ok){const error=Error('Archive returned '+r.status);error.archiveStatus=r.status;throw error}return await r.json()}finally{clearTimeout(timer)}}
 function archiveFailure(error){const status=Number(error?.archiveStatus);if(status>=500&&status<600)return 'Internet Archive is temporarily unavailable. Slop is working normally — try again in a few minutes.';if(error?.name==='AbortError')return 'Internet Archive is taking too long to respond. Slop is working normally — try again shortly.';return 'Slop can’t get a response from Internet Archive right now. The app is working normally — try again in a few minutes.'}
@@ -74,7 +74,35 @@ async function openRelease(d,autoplay=false){const seq=++releaseRequest;if(!auto
  if(seq!==releaseRequest)return;if(autoplay){if(tracks.length){albumQueue=tracks.slice(1);renderQueue();play(tracks[0])}else toast('No playable tracks were found for this release.');return}$('#releaseBody').innerHTML=`<div class="detailtop"><img src="https://archive.org/services/img/${encodeURIComponent(d.identifier)}" alt="Release artwork"><div><div class="eyebrow">${esc(text(md.date).slice(0,4))} · ${tracks.length} TRACKS</div><h2>${esc(text(md.title)||d.identifier)}</h2><p class="dim">${esc(text(md.creator)||'Artist not listed')}</p><a target="_blank" rel="noopener" href="https://archive.org/details/${encodeURIComponent(d.identifier)}">Full release & rights</a></div></div><p class="dim">${esc(tagsOf(md).join(' · '))}</p><button id="releaseRelated">More like this</button><div class="tracks">${tracks.length?tracks.map((t,i)=>trackRow(t,i,'r')).join(''):'<p>No browser-playable tracks were found. Try the original release.</p>'}</div>`;bindTracks(tracks,'r',$('#releaseBody'));$('#releaseRelated').onclick=()=>related(d);SlopArtwork.attach($('#releaseBody img'),d.identifier,d.coverFiles);
  }catch(error){const message=archiveFailure(error);if(seq===releaseRequest&&autoplay){toast(message);return}if(seq===releaseRequest)$('#releaseBody').innerHTML='<h2>This release couldn’t be loaded.</h2><p>'+esc(message)+' You can also <a target="_blank" rel="noopener" href="https://archive.org/details/'+encodeURIComponent(d.identifier)+'">open the original release</a>.</p>'}}
 let playRequest=0;
-async function play(t,remember=true){if(!t)return;const seq=++playRequest,coverUrl='https://archive.org/services/img/'+encodeURIComponent(t.id),nowArtist=t.artist+(t.release?' · '+t.release:'');if(remember&&currentTrack)history.push(currentTrack);currentTrack=t;$('#previous').disabled=!history.length;$('#togglePlay').disabled=false;$('#seek').disabled=true;$('#seek').value=0;$('#seek').style.setProperty('--progress','0%');$('#elapsed').textContent='0:00';$('#duration').textContent='0:00';$('#nowCover').hidden=false;$('#nowCover').src=coverUrl;SlopArtwork.attach($('#nowCover'),t.id,undefined);$('#nowTitle').textContent=t.title;$('#nowArtist').textContent=nowArtist;$('#sidebarNow').hidden=false;$('#sidebarNowCover').src=coverUrl;SlopArtwork.attach($('#sidebarNowCover'),t.id,undefined);$('#sidebarNowTitle').textContent=t.title;$('#sidebarNowArtist').textContent=nowArtist;audio.src=audioUrl(t);syncSaves();try{await audio.play()}catch(e){if(seq===playRequest&&e.name!=='AbortError')$('#nowArtist').textContent='Press play to listen, or try another track.'}return {title:t.title,artist:t.artist}}
+async function play(t,remember=true,autoplay=true){
+ if(!t)return;
+ const seq=++playRequest,coverUrl='https://archive.org/services/img/'+encodeURIComponent(t.id),nowArtist=t.artist+(t.release?' · '+t.release:'');
+ if(remember&&currentTrack)history.push(currentTrack);
+ currentTrack=t;
+ $('#previous').disabled=!history.length;
+ $('#togglePlay').disabled=false;
+ $('#seek').disabled=true;
+ $('#seek').value=0;
+ $('#seek').style.setProperty('--progress','0%');
+ $('#elapsed').textContent='0:00';
+ $('#duration').textContent='0:00';
+ $('#nowCover').hidden=false;
+ $('#nowCover').src=coverUrl;
+ SlopArtwork.attach($('#nowCover'),t.id,undefined);
+ $('#nowTitle').textContent=t.title;
+ $('#nowArtist').textContent=nowArtist;
+ $('#sidebarNow').hidden=false;
+ $('#sidebarNowCover').src=coverUrl;
+ SlopArtwork.attach($('#sidebarNowCover'),t.id,undefined);
+ $('#sidebarNowTitle').textContent=t.title;
+ $('#sidebarNowArtist').textContent=nowArtist;
+ audio.src=audioUrl(t);
+ syncSaves();
+ document.dispatchEvent(new Event('slop:trackchange'));
+ if(!autoplay)return {title:t.title,artist:t.artist};
+ try{await audio.play()}catch(e){if(seq===playRequest&&e.name!=='AbortError')$('#nowArtist').textContent='Press play to listen, or try another track.'}
+ return {title:t.title,artist:t.artist}
+}
 audio.onerror=()=>$('#nowArtist').textContent='This audio couldn’t be reached. Try another track.';
 function renderQueue(){const total=queue.length+albumQueue.length;$('#queueToggle').setAttribute('aria-label','Queue, '+total+' '+(total===1?'track':'tracks'));$('#queueList').innerHTML='<h2>Up next</h2>'+(queue.length?queue.map((t,i)=>trackRow(t,i,'q')).join(''):'<p class="dim">No added tracks.</p>')+'<h2>From this album</h2>'+(albumQueue.length?albumQueue.map((t,i)=>trackRow(t,i,'a')).join(''):'<p class="dim">No album queued.</p>');bindTracks(queue,'q',$('#queueList'));bindTracks(albumQueue,'a',$('#queueList'));$('#queueList').querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{(b.dataset.queueKind==='q'?queue:albumQueue).splice(Number(b.dataset.remove),1);renderQueue()});$('#next').disabled=!total}
 function next(){const t=queue.length?queue.shift():albumQueue.shift();if(t){renderQueue();play(t)}}$('#next').onclick=next;audio.onended=next;renderQueue();search();
@@ -93,3 +121,13 @@ $('#queueToggle').onclick=()=>{view('queue');window.scrollTo({top:0,behavior:'sm
 
 
 if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'search_archive_music',description:'Search the Archive and update the visible discovery shelf.',inputSchema:{type:'object',properties:{query:{type:'string',maxLength:200}},required:['query'],additionalProperties:false},execute:async input=>{if(!input||typeof input.query!=='string'||input.query.length>200)throw Error('Invalid search');relatedSeed=null;collection='';genre='';$('#query').value=input.query;view('discover');await search();return {releases:docs.map(d=>({identifier:d.identifier,title:text(d.title)})),status:$('#status').textContent}}})).catch(()=>{})}catch{}}
+
+window.SlopSlipUI?.install({
+ getCurrentTrack:()=>currentTrack,
+ getPosition:()=>audio.currentTime,
+ audio,
+ toast,
+ prepareTrack:t=>play(t,false,false),
+ openRelease,
+ onTrackChange:callback=>document.addEventListener('slop:trackchange',callback)
+});
