@@ -41,7 +41,6 @@ body.onebit {
 /* The loading veil's tiny critical styles live inline in base.html. */
 :root { color-scheme: dark }
 body { margin: 0; background: var(--ground); color: var(--ink); font: 16px/1.5 var(--site-font) }
-body:not(.onebit) { background: #051f00 url("/assets/broken-noise.png") repeat }
 body.has-player { padding-bottom: 100px }
 a { color: inherit; text-decoration: none }
 a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--accent) }
