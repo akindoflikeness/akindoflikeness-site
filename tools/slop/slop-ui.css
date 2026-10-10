@@ -1325,3 +1325,18 @@ nav button.active .sidebarIcon img {filter: brightness(0);}
   aside.navigationOpen nav {display: grid;}
   aside nav button, aside #navGenres {height: 44px; min-height: 44px; font-size: 15px; padding: 8px 10px;}
 }
+
+.developmentBanner {padding: 8px 16px; background: #e4d6ba; color: #000; font: 13px/1.4 Arial,sans-serif;}
+.personalPanel {display: block; margin: 24px 0; padding: 18px; border: 1px solid var(--line); border-radius: 6px;}
+.personalPanel summary {cursor: pointer; font-size: 18px;}
+.personalPanel form {margin: 18px 0;}
+.personalPanel label {display: block; margin: 10px 0;}
+.personalPanel textarea {display: block; width: 100%; padding: 10px; background: var(--panel); color: var(--ink);}
+.personalPanel input[type=checkbox] {width: auto; min-height: 0; margin-right: 8px;}
+.personalPanel select {padding: 10px; max-width: 100%;}
+.personalRow {display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 10px 0;}
+.personalRow input {flex: 1; min-width: 120px; max-width: 100%;}
+.personalTrack {display: flex; align-items: center; gap: 6px; padding: 8px 0; border-bottom: 1px solid var(--line);}
+.personalTrack>button:first-child {flex: 1; min-width: 0; text-align: left; overflow-wrap: anywhere;}
+.personalTrack small {display: block; color: var(--muted);}
+@media(max-width:480px){.personalPanel{padding:12px}.personalTrack{flex-wrap:wrap}.personalTrack>button:first-child{flex-basis:100%}}
