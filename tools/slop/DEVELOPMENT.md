@@ -92,7 +92,7 @@ recovery. Desktop and phone layouts were visually inspected. Both GitHub CI runs
 for d06ef17 passed. The first remote sample returned six netlabel items and 273
 tracks with zero audio bytes; it exposed an overly narrow mediatype restriction
 for etree, corrected to accept both audio and etree and fail if either collection
-returns no items. Check the subsequent run for the wider sample before using it.
+returns no items. The corrected 2384f91 run passed both CI checks and collected twelve items with 427 track references, zero failures and zero audio bytes. The latest preview serves that implementation.
 
 Preview: https://slop-discovery-foundations.akindoflikeness-site.pages.dev/tools/slop/
 Draft PR: https://github.com/akindoflikeness/akindoflikeness-site/pull/41
