@@ -1306,13 +1306,22 @@ nav button.active {background: var(--lime); color: #000; border-radius: 6px; bor
 nav button.active .sidebarIcon img {filter: brightness(0);}
 @media (min-width: 721px) and (max-height: 800px) {
   aside {gap: 12px; padding-bottom: 12px;}
-  nav {grid-template-columns: repeat(2,minmax(0,1fr));}
-  nav button, #navGenres {height: 40px; min-height: 40px; padding: 6px 4px; font-size: 13px;}
-  nav .sidebarIcon {margin-right: 5px; width: 18px;}
+  nav {grid-template-columns: minmax(0,1fr);}
+  nav button, #navGenres {height: 36px; min-height: 36px; padding: 6px 10px; font-size: 15px;}
 }
 @media (min-width: 721px) and (max-height: 420px) {
   aside {gap: 4px; padding-top: 4px; padding-bottom: 4px;}
   .sidebarBrand {flex-basis: 26px; line-height: 26px; font-size: 24px;}
-  nav button, #navGenres {height: 32px; min-height: 32px;}
+  nav button, #navGenres {height: 28px; min-height: 28px; padding-block: 3px;}
 }
-.searchScope {max-width: 150px; cursor: pointer;}
+.searchScope {max-width: none; min-width: 174px; cursor: pointer;}
+
+#navigationToggle {display: none;}
+@media (max-width: 720px) {
+  aside {display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center;}
+  .sidebarBrand {margin: 0;}
+  #navigationToggle {display: block; padding: 8px 14px;}
+  aside nav {display: none; grid-column: 1 / -1; grid-template-columns: minmax(0,1fr); gap: 0;}
+  aside.navigationOpen nav {display: grid;}
+  aside nav button, aside #navGenres {height: 44px; min-height: 44px; font-size: 15px; padding: 8px 10px;}
+}

@@ -12,9 +12,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <link rel="stylesheet" href="layout-rhythm.css?v=figma-1">
 <link rel="stylesheet" href="slop-slip.css?v=slip-2">
 <link rel="stylesheet" href="slop-handbook.css?v=handbook-1">
-<link rel="stylesheet" href="slop-ui.css?v=discovery-2">
+<link rel="stylesheet" href="slop-ui.css?v=sidebar-3">
 </head>
-<body><div class="shell"><aside><div class="sidebarBrand">slop</div><nav aria-label="Slop sections">
+<body><div class="shell"><aside><div class="sidebarBrand">slop</div><button id="navigationToggle" type="button" aria-expanded="false" aria-controls="slopNavigation">Menu</button><nav id="slopNavigation" aria-label="Slop sections">
 <button class="active" data-view="discover" aria-current="page"><span class="sidebarIcon" aria-hidden="true"><img src="icons/discover.svg" alt=""></span><span class="navLabel">Discover</span></button>
 <button id="navGenres"><span class="sidebarIcon" aria-hidden="true"></span><span class="navLabel">Genres</span></button>
 <button id="navSearch"><span class="sidebarIcon" aria-hidden="true"><img src="icons/search.svg" alt=""></span><span class="navLabel">Search</span></button>
@@ -57,6 +57,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   </div>
 
   <ol class="logList">
+<li class="logEntry" id="sidebar-correction-log"><div class="logDate"><time datetime="2026-10-10">10 Oct<br>2026</time><span class="logStatus logStatus--pot">In the pot</span></div><article><p class="entryKicker">Fixed / navigation</p><h2>One column, including short screens.</h2><p>The desktop sidebar keeps its vertical navigation at every height, with tighter spacing and flexible artwork. On phones, a Menu button opens the same single list instead of occupying the screen with a two-column grid.</p><p class="entryNote">Checked locally at six screen sizes: single-column alignment, artwork fitting without sidebar scrolling, mobile Menu opening and closing, navigation and keyboard focus.</p></article></li>
     <li class="logEntry" id="discovery-fixes-log">
       <div class="logDate"><time datetime="2026-10-10">10 Oct<br>2026</time><span class="logStatus logStatus--shipped">Shipped</span></div>
       <article><p class="entryKicker">Fixed / discovery and playback</p><h2>Names stay together. Artwork gets room.</h2>
@@ -273,5 +274,5 @@ Caveat: the honest edge, if there is one.</pre>
 <script src="slop-slip.js?v=slip-2"></script>
 <script src="slop-slip-ui.js?v=slip-1"></script>
 <script src="slop-archive.js?v=discovery-2"></script>
-<script src="app.js?v=discovery-2"></script>
+<script src="app.js?v=sidebar-3"></script>
 </body></html>

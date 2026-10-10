@@ -134,3 +134,9 @@ window.SlopSlipUI?.install({
  openRelease,
  onTrackChange:callback=>document.addEventListener('slop:trackchange',callback)
 });
+
+const navigationToggle=$('#navigationToggle'),navigationRail=navigationToggle.closest('aside');
+function closeNavigation(){navigationRail.classList.remove('navigationOpen');navigationToggle.setAttribute('aria-expanded','false');navigationToggle.textContent='Menu'}
+navigationToggle.onclick=()=>{const open=navigationRail.classList.toggle('navigationOpen');navigationToggle.setAttribute('aria-expanded',String(open));navigationToggle.textContent=open?'Close menu':'Menu'};
+$('#slopNavigation').addEventListener('click',e=>{if(e.target.closest('button')){closeNavigation();if(matchMedia('(max-width:720px)').matches&&e.target.closest('button').id!=='navSearch')navigationToggle.focus()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&navigationRail.classList.contains('navigationOpen')){closeNavigation();navigationToggle.focus()}});
