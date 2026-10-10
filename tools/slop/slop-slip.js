@@ -14,7 +14,7 @@
 
   const VERSION = "1";
   const RELEASE_ID = /^[A-Za-z0-9][A-Za-z0-9_.-]{0,199}$/;
-  const PLAYABLE_FILE = /\.(mp3|ogg|m4a)$/i;
+  const PLAYABLE_FILE = /\.(mp3|ogg|m4a|flac|wav|opus)$/i;
   const MAX_START_SECONDS = 7 * 24 * 60 * 60;
 
   function firstText(value) {
@@ -117,6 +117,34 @@
     return !!file && !isPrivate(file) && safeFile(file.name || "");
   }
 
+  function selectArchiveFiles(files, supports) {
+    const all = Array.isArray(files) ? files : [];
+    const byName = new Map(all.filter(Boolean).map(file => [file.name, file]));
+    const choices = new Map();
+    const formats = ['mp3', 'ogg', 'm4a', 'opus', 'flac', 'wav'];
+    for (const file of all) {
+      if (!isPlayableArchiveFile(file)) continue;
+      const extension = file.name.split('.').pop().toLowerCase();
+      if (supports && !supports(extension)) continue;
+      // Archive derivatives point to the original recording. Group by that
+      // lineage, not title: two different performances can share a title.
+      let original = file;
+      const visited = new Set([file.name]);
+      while (original.original && !visited.has(original.original)) {
+        visited.add(original.original);
+        const parent = byName.get(original.original);
+        if (!parent) break;
+        original = parent;
+      }
+      const key = original.name;
+      const previous = choices.get(key);
+      if (!previous || formats.indexOf(extension) < formats.indexOf(previous.name.split('.').pop().toLowerCase())) {
+        choices.set(key, {...original, ...file, title: file.title || original.title, track: file.track || original.track});
+      }
+    }
+    return [...choices.values()].sort((a, b) => (parseInt(a.disc) || 0) - (parseInt(b.disc) || 0) || (parseInt(a.track) || 0) - (parseInt(b.track) || 0) || a.name.localeCompare(b.name, undefined, {numeric: true}));
+  }
+
   function displayFileName(file) {
     return String(file || "").split("/").pop().replace(/\.[^.]+$/, "") || "Untitled track";
   }
@@ -192,6 +220,7 @@
     VERSION: VERSION,
     RELEASE_ID: RELEASE_ID,
     PLAYABLE_FILE: PLAYABLE_FILE,
+    selectArchiveFiles: selectArchiveFiles,
     normaliseReference: normaliseReference,
     parseSlipHash: parseSlipHash,
     looksLikeSlip: looksLikeSlip,

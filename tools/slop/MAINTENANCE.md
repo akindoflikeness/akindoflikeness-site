@@ -9,6 +9,8 @@ Cloudflare Pages.
 
 - index.html contains the static shell, dialogs, navigation, Log, and Docs.
 - app.js owns discovery, metadata, playback, queue, and device-local likes.
+- slop-archive.js defines phrase-based, field-specific Archive search.
+- slop-ui.css and icons/ implement the shared Figma layout.
 - artwork.js owns artwork helpers.
 - layout-rhythm.css owns the established compact layout.
 - slop-slip.js defines the versioned exact-share protocol.
@@ -29,7 +31,7 @@ A version one Slip looks like this:
     #v=1&r=archive-identifier&f=relative%2Ftrack.ogg&at=83
 
 r is an Archive identifier. f is optional for a release-only Slip; when
-present it must be a relative browser-playable mp3, ogg, or m4a file. at is
+present it must be a relative browser-playable mp3, ogg, m4a, flac, wav, or opus file. at is
 an optional whole-second timestamp and only works with an exact file.
 
 Do not use the location fragment for navigation. It belongs to Slop Slip.

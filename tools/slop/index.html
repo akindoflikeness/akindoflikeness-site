@@ -12,19 +12,21 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <link rel="stylesheet" href="layout-rhythm.css?v=figma-1">
 <link rel="stylesheet" href="slop-slip.css?v=slip-2">
 <link rel="stylesheet" href="slop-handbook.css?v=handbook-1">
-<link rel="stylesheet" href="slop-ui.css?v=figma-1">
+<link rel="stylesheet" href="slop-ui.css?v=discovery-2">
 </head>
 <body><div class="shell"><aside><div class="sidebarBrand">slop</div><nav aria-label="Slop sections">
-<button class="active" data-view="discover" aria-current="page"><span class="sidebarIcon" aria-hidden="true"><svg viewBox="0 0 24 24" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2Z"/></svg></span><span class="navLabel">Discover</span></button>
-<button data-view="saved"><span class="sidebarIcon" aria-hidden="true"><svg viewBox="0 0 24 24" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.9-8.6a5.5 5.5 0 0 0-.1-7.8Z"/></svg></span><span class="navLabel">Liked</span></button>
-<button data-view="queue"><span class="sidebarIcon" aria-hidden="true"><svg viewBox="0 0 24 24" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h12M3 18h12m4-6 4 3-4 3Z"/></svg></span><span class="navLabel">Queue</span></button>
-<button data-view="log"><span class="sidebarIcon" aria-hidden="true"><svg viewBox="0 0 24 24" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18H6zM9 8h6M9 12h6M9 16h4"/></svg></span><span class="navLabel">Log</span></button>
-<button data-view="docs"><span class="sidebarIcon" aria-hidden="true"><svg viewBox="0 0 24 24" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5Zm0 0V5.5M8 7h8M8 11h8"/></svg></span><span class="navLabel">Docs</span></button>
-<button data-view="about"><span class="sidebarIcon" aria-hidden="true"><svg viewBox="0 0 24 24" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></svg></span><span class="navLabel">About</span></button>
-</nav><section class="sidebarNow" id="sidebarNow" aria-label="Now playing" hidden><img id="sidebarNowCover" alt=""><div class="sidebarNowLabel">Now playing</div><b id="sidebarNowTitle"></b><small id="sidebarNowArtist"></small></section></aside>
+<button class="active" data-view="discover" aria-current="page"><span class="sidebarIcon" aria-hidden="true"><img src="icons/discover.svg" alt=""></span><span class="navLabel">Discover</span></button>
+<button id="navGenres"><span class="sidebarIcon" aria-hidden="true"></span><span class="navLabel">Genres</span></button>
+<button id="navSearch"><span class="sidebarIcon" aria-hidden="true"><img src="icons/search.svg" alt=""></span><span class="navLabel">Search</span></button>
+<button data-view="saved"><span class="sidebarIcon" aria-hidden="true"><img src="icons/saved.svg" alt=""></span><span class="navLabel">Liked</span></button>
+<button data-view="queue"><span class="sidebarIcon" aria-hidden="true"><img src="icons/queue.svg" alt=""></span><span class="navLabel">Queue</span></button>
+<button data-view="log"><span class="sidebarIcon" aria-hidden="true"><img src="icons/log.svg" alt=""></span><span class="navLabel">Log</span></button>
+<button data-view="docs"><span class="sidebarIcon" aria-hidden="true">?</span><span class="navLabel">Docs</span></button>
+<button data-view="about"><span class="sidebarIcon" aria-hidden="true"><img src="icons/about.svg" alt=""></span><span class="navLabel">About</span></button>
+</nav><section class="sidebarNow" id="sidebarNow" aria-label="Now playing" hidden><img id="sidebarNowCover" alt=""></section></aside>
 <main>
 <section id="discover">
-  <form class="search" id="search"><span class="searchScope" aria-hidden="true">Discover <svg viewBox="0 0 24 24" class="controlIcon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m7 10 5 5 5-5"/></svg></span><input id="query" aria-label="Search music" placeholder="Try slow textures, distant voices, tape hiss…"><button class="primary">Search</button></form>
+  <form class="search" id="search"><select class="searchScope" id="searchScope" aria-label="Search by"><option value="all">Artists &amp; releases</option><option value="artist">Artist</option><option value="release">Release title</option><option value="tags">Tags</option></select><input id="query" aria-label="Search the Archive" maxlength="200" placeholder="Artist or release name…"><button class="primary">Search</button></form>
   <div id="discoverHome">
     <div class="discoverIntro"><p class="eyebrow">Listen sideways</p><h1>Discover</h1><p>Start with a texture, follow a faint signal, and keep the things that survive a second listen.</p></div>
     <section class="discoverSection" aria-labelledby="genre-title"><div class="sectionHeading"><div><p class="eyebrow">A useful first shove</p><h2 id="genre-title">Browse genres</h2></div><button id="browseGenres" type="button">Browse all</button></div><div class="trails" aria-label="Explore sounds"><button data-genre="ambient">Ambient</button><button data-genre="experimental">Experimental</button><button data-genre="electronic">Electronic</button><button data-genre="jazz">Jazz</button><button data-genre="noise">Noise</button><button data-genre="field recordings">Field recordings</button></div></section>
@@ -55,6 +57,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   </div>
 
   <ol class="logList">
+    <li class="logEntry" id="discovery-fixes-log">
+      <div class="logDate"><time datetime="2026-10-10">10 Oct<br>2026</time><span class="logStatus logStatus--pot">In the pot</span></div>
+      <article><p class="entryKicker">Fixed / discovery and playback</p><h2>Names stay together. Artwork gets room.</h2>
+      <p>Search now offers Artist, Release title, Tags and Artists &amp; releases. Names stay together, with credited artists weighted above release titles and relevance before recency. Nothing gives a particular artist special treatment.</p>
+      <p>The shared sidebar fits the screen without its own scroll, with larger artwork and no repeated track details. Short screens compact the navigation. Main content remains scrollable.</p>
+      <p>FLAC, WAV and Opus join the supported audio files. Each recording gets one playable rendition, so an MP3 elsewhere on an album no longer hides its other tracks. Items with no public playable audio explain the limitation and link to the source.</p>
+      <p class="entryNote"><strong>Checked locally:</strong> artist, title and tag search; MP3 and FLAC playback; exact shared links without autoplay; unavailable-item explanation; navigation; six desktop and mobile sizes; format and reference regression checks.</p></article>
+    </li>
     <li class="logEntry" id="figma-ui-log">
       <div class="logDate"><time datetime="2026-10-08">08 Oct<br>2026</time><span class="logStatus logStatus--shipped">Shipped</span></div>
       <article>
@@ -177,11 +187,12 @@ Caveat: the honest edge, if there is one.</pre>
     <summary>Slop Slip: exact sharing without a new service</summary>
     <div class="docsBody">
       <p>A Slip is a versioned location fragment:</p>
+      <p>Search matches phrases in credited artists and release titles. The Tags option searches Archive subject tags. Use the search type to narrow the field. Search results use relevance; browsing without a query uses newest uploads. Archive credits can be incomplete. Audio renditions are selected per original recording according to browser support; private files are excluded. Some Archive records contain only bundles or restricted audio.</p>
       <pre class="docsCode">#v=1&amp;r=archive-identifier&amp;f=relative%2Ftrack.ogg&amp;at=83</pre>
       <ul class="docsList">
         <li><code>v=1</code> is a promise that the format remains readable; do not reinterpret it silently.</li>
         <li><code>r</code> is the validated Archive identifier.</li>
-        <li><code>f</code> is optional for a release-only Slip. When present it must be a relative playable mp3, ogg, or m4a file: no scheme, backslash, control character, absolute path, or dot segment.</li>
+        <li><code>f</code> is optional for a release-only Slip. When present it must be a relative playable mp3, ogg, m4a, flac, wav, or opus file: no scheme, backslash, control character, absolute path, or dot segment.</li>
         <li><code>at</code> is an optional whole-second timestamp, capped at seven days, and only makes sense with <code>f</code>.</li>
         <li>Labels displayed to the listener come from Archive metadata, never text in a URL.</li>
       </ul>
@@ -259,7 +270,8 @@ Caveat: the honest edge, if there is one.</pre>
   <p class="sharePrinciple">A Slip shares only this public Archive reference. It never shares your Liked tracks, queue, or listening history, and the embed never starts sound by itself.</p>
 </dialog>
 <script src="artwork.js?v=1"></script>
-<script src="slop-slip.js?v=slip-1"></script>
+<script src="slop-slip.js?v=slip-2"></script>
 <script src="slop-slip-ui.js?v=slip-1"></script>
-<script src="app.js?v=figma-1"></script>
+<script src="slop-archive.js?v=discovery-2"></script>
+<script src="app.js?v=discovery-2"></script>
 </body></html>

@@ -2,9 +2,9 @@ slop
 ====
 A buildless, MIT-licensed discovery interface and player for Internet Archive audio.
 
-Serve index.html, layout-rhythm.css, app.js, artwork.js and LICENSE.txt together. No install, account or backend is required.
+Serve the entire tools/slop directory together, including the icons directory, stylesheets, Slop Slip scripts and slop-archive.js. No install, account or backend is required.
 
-Browsing and search query the Archive audio index directly, 30 releases at a time. The ‹ page › control moves through result pages, beginning at 0 in the interface. Genre and collection filters narrow that index. Discovery keeps its newest-indexed Archive order; related shelves use Archive download count. There is no fixed starter catalogue. More like this searches for shared metadata tags, not audio similarity.
+Browsing and search query the Archive audio index directly, 30 releases at a time. The ‹ page › control moves through result pages, beginning at 0 in the interface. Genre and collection filters narrow that index. Browsing keeps its newest-indexed Archive order; text searches match phrases in artist names and release titles, with dedicated Artist, Release title and Tags choices and relevance ordering. Related shelves use Archive download count. There is no fixed starter catalogue. More like this searches for shared metadata tags, not audio similarity.
 
 Opening a release fetches its complete playable track list from Archive metadata. Audio streams directly from archive.org. Larger cover artwork loads as cards come into view; Archive thumbnails remain the fallback. Availability depends on the source uploads and Archive service.
 
