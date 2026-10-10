@@ -85,7 +85,22 @@ The sample is operator evidence, not yet a production catalogue.
 
 ## Continuation queue
 
-Complete and record first-slice migration/recovery/browser/remote-CI evidence.
-Then add library search/sort and queue operations with recovery checks. Keep
+First-slice evidence on 10 October: eight Node tests passed; browser checks passed
+locally and against the isolated Pages preview, including v1 migration, repeat
+entries, local exclusions, full export/fresh-browser restore and paused queue
+recovery. Desktop and phone layouts were visually inspected. Both GitHub CI runs
+for d06ef17 passed. The first remote sample returned six netlabel items and 273
+tracks with zero audio bytes; it exposed an overly narrow mediatype restriction
+for etree, corrected to accept both audio and etree and fail if either collection
+returns no items. Check the subsequent run for the wider sample before using it.
+
+Preview: https://slop-discovery-foundations.akindoflikeness-site.pages.dev/tools/slop/
+Draft PR: https://github.com/akindoflikeness/akindoflikeness-site/pull/41
+
+A daily 09:00 thread continuation is configured for bounded development work.
+It is not a continuously running server; catalogue processing and CI run remotely.
+No paid model or database service has been provisioned.
+
+Next add library search/sort and queue operations with recovery checks. Keep
 development separate until the milestone is coherent. Do not label previews
 Shipped in the public Log or merge simply because automated tests pass.
