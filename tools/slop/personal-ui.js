@@ -1,7 +1,7 @@
 'use strict';
 // The existing likes and these records commit in the same IndexedDB database.
 let personalState=SlopPersonal.empty();
-async function readPersonal(){const db=await dbReady;const state=await new Promise((resolve,reject)=>{const tx=db.transaction('personal','readonly'),r=tx.objectStore('personal').get('state');tx.oncomplete=()=>resolve(r.result||SlopPersonal.empty());tx.onerror=tx.onabort=()=>reject(tx.error)});personalState=SlopPersonal.personal(state);window.slopPersonalState=personalState;renderPersonal();return personalState;}
+async function readPersonal(){const db=await dbReady;const state=await new Promise((resolve,reject)=>{const tx=db.transaction('personal','readonly'),r=tx.objectStore('personal').get('state');tx.oncomplete=()=>resolve(r.result||SlopPersonal.empty());tx.onerror=tx.onabort=()=>reject(tx.error)});personalState=SlopPersonal.personal(state);window.slopPersonalState=personalState;renderPersonal();window.dispatchEvent(new Event('slop:personalchange'));return personalState;}
 async function changePersonal(change){const db=await dbReady;await new Promise((resolve,reject)=>{const tx=db.transaction('personal','readwrite'),store=tx.objectStore('personal'),r=store.get('state');r.onsuccess=()=>{try{const state=SlopPersonal.personal(r.result||SlopPersonal.empty());change(state);store.put(SlopPersonal.personal(state),'state')}catch(e){tx.abort();reject(e)}};tx.oncomplete=resolve;tx.onerror=tx.onabort=()=>reject(tx.error||Error('The library could not be updated.'))});await readPersonal();channel?.postMessage('personal');}
 const personalReady=readPersonal().catch(e=>toast('Personal library unavailable: '+e.message));
 window.slopPersonalReady=personalReady;

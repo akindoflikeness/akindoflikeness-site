@@ -104,3 +104,14 @@ No paid model or database service has been provisioned.
 Next add library search/sort and queue operations with recovery checks. Keep
 development separate until the milestone is coherent. Do not label previews
 Shipped in the public Log or merge simply because automated tests pass.
+
+## Figma integration — 10 October 2026
+
+The development UI now uses locally hosted Lora, enclosed contextual search,
+working genre multiselection, album-grouped liked tracks with local search,
+queue filtering, correct active navigation and a compact phone player.
+New playlist controls live in a disclosure, preserving the album-first library.
+Read FIGMA-COVERAGE.md before further UI work: it records source node IDs,
+intentional live-data adaptations and the missing design states. Do not copy
+illustrative CLAP results or claim that metadata search uses an audio model.
+Keep new screens aligned to those shared components and retain one-column nav.

@@ -12,11 +12,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <link rel="stylesheet" href="layout-rhythm.css?v=figma-1">
 <link rel="stylesheet" href="slop-slip.css?v=slip-2">
 <link rel="stylesheet" href="slop-handbook.css?v=handbook-1">
-<link rel="stylesheet" href="slop-ui.css?v=foundations-1">
+<link rel="stylesheet" href="slop-ui.css?v=figma-mesh-1">
 </head>
-<body><div class="developmentBanner">Development preview · personal data stays in this browser · metadata discovery only</div><div class="shell"><aside><div class="sidebarBrand">slop</div><button id="navigationToggle" type="button" aria-expanded="false" aria-controls="slopNavigation">Menu</button><nav id="slopNavigation" aria-label="Slop sections">
+<body><div class="shell"><aside><div class="sidebarBrand">slop <span class="previewBadge">preview</span></div><button id="navigationToggle" type="button" aria-expanded="false" aria-controls="slopNavigation">Menu</button><nav id="slopNavigation" aria-label="Slop sections">
 <button class="active" data-view="discover" aria-current="page"><span class="sidebarIcon" aria-hidden="true"><img src="icons/discover.svg" alt=""></span><span class="navLabel">Discover</span></button>
-<button id="navGenres"><span class="sidebarIcon" aria-hidden="true"></span><span class="navLabel">Genres</span></button>
+<button id="navGenres"><span class="sidebarIcon" aria-hidden="true"><img src="assets/genres.svg" alt=""></span><span class="navLabel">Genres</span></button>
 <button id="navSearch"><span class="sidebarIcon" aria-hidden="true"><img src="icons/search.svg" alt=""></span><span class="navLabel">Search</span></button>
 <button data-view="saved"><span class="sidebarIcon" aria-hidden="true"><img src="icons/saved.svg" alt=""></span><span class="navLabel">Library</span></button>
 <button data-view="queue"><span class="sidebarIcon" aria-hidden="true"><img src="icons/queue.svg" alt=""></span><span class="navLabel">Queue</span></button>
@@ -26,7 +26,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 </nav><section class="sidebarNow" id="sidebarNow" aria-label="Now playing" hidden><img id="sidebarNowCover" alt=""></section></aside>
 <main>
 <section id="discover">
-  <form class="search" id="search"><select class="searchScope" id="searchScope" aria-label="Search by"><option value="all">Artists &amp; releases</option><option value="artist">Artist</option><option value="release">Release title</option><option value="tags">Tags</option></select><input id="query" aria-label="Search the Archive" maxlength="200" placeholder="Artist or release name…"><button class="primary">Search</button></form>
+  <form class="search" id="search"><img src="assets/search.svg" alt=""><select class="searchScope" id="searchScope" aria-label="Search by"><option value="all">Artists &amp; releases</option><option value="artist">Artist</option><option value="release">Release title</option><option value="tags">Tags</option></select><input id="query" aria-label="Search the Archive" maxlength="200" placeholder="Artist or release name…"><button aria-label="Search" type="submit"><img src="assets/submit.svg" alt=""></button></form>
+
 
 <details class="personalPanel"><summary>Shape discovery</summary>
 <p>These controls use Archive metadata. No audio model is connected. Exclusions apply locally to each result page; they are never sent with your search. Archive credits may be incomplete.</p>
@@ -34,20 +35,20 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <form id="saveModeForm"><label for="modeTitle">Save this search and variety setting</label><div class="personalRow"><input id="modeTitle" maxlength="200" placeholder="Mode name" required><button>Save mode</button></div></form><div id="savedModes"></div>
 </details>
 <div id="discoverHome">
-    <div class="discoverIntro"><p class="eyebrow">Listen sideways</p><h1>Discover</h1><p>Start with a texture, follow a faint signal, and keep the things that survive a second listen.</p></div>
-    <section class="discoverSection" aria-labelledby="genre-title"><div class="sectionHeading"><div><p class="eyebrow">A useful first shove</p><h2 id="genre-title">Browse genres</h2></div><button id="browseGenres" type="button">Browse all</button></div><div class="trails" aria-label="Explore sounds"><button data-genre="ambient">Ambient</button><button data-genre="experimental">Experimental</button><button data-genre="electronic">Electronic</button><button data-genre="jazz">Jazz</button><button data-genre="noise">Noise</button><button data-genre="field recordings">Field recordings</button></div></section>
-    <section class="discoverSection" aria-labelledby="paths-title"><div class="sectionHeading"><div><p class="eyebrow">Archive routes, not an algorithm</p><h2 id="paths-title">Listening paths</h2></div></div><div class="pathGrid"><article class="pathCard"><p class="pathMeta">Netlabels / patient signals</p><h3>Slow textures</h3><p>Ambient releases, worn surfaces, and music that makes room for the room.</p><button type="button" data-collection="netlabels">Explore path</button></article><article class="pathCard"><p class="pathMeta">Live Archive / room energy</p><h3>Open circuits</h3><p>Improvised sets, document-of-a-night recordings, and beautifully unstable sound.</p><button type="button" data-collection="etree">Explore path</button></article></div></section>
-    <section class="discoverSection clapSection" aria-labelledby="clap-title"><div class="sectionHeading"><div><p class="eyebrow">Clap · discover by sound</p><h2 id="clap-title">Recent things worth opening</h2></div><p class="sectionHint">These are live Archive results, not a profile pretending to know you.</p></div><div id="clapResults" class="clapGrid" aria-live="polite"><p class="dim">Looking through the Archive…</p></div></section>
+    <div class="discoverIntro"><h1>Discover</h1><p>Start with a texture, follow a faint signal, and keep the things that survive a second listen.</p></div>
+    <section class="discoverSection" aria-labelledby="genre-title"><div class="sectionHeading"><div><h2 id="genre-title">A few places to begin</h2></div><button id="browseGenres" type="button">Browse Genres →</button></div><div class="trails" aria-label="Explore sounds"><button data-genre="ambient">Ambient</button><button data-genre="experimental">Experimental</button><button data-genre="electronic">Electronic</button><button data-genre="jazz">Jazz</button><button data-genre="noise">Noise</button><button data-genre="field recordings">Field recordings</button></div></section>
+    <section class="discoverSection" aria-labelledby="paths-title"><div class="sectionHeading"><div><h2 id="paths-title">Playlists &amp; listening paths</h2></div></div><div class="pathGrid"><article class="pathCard"><img class="collectionArt" src="https://archive.org/services/img/netlabels" alt="Netlabels collection artwork" loading="lazy"><p class="pathMeta">Archive collection</p><h3>Netlabels</h3><p>Independent releases and artist-run labels. Start anywhere and follow a thread.</p><button type="button" data-collection="netlabels">Explore path</button></article><article class="pathCard"><img class="collectionArt" src="https://archive.org/services/img/etree" alt="Live Music Archive collection artwork" loading="lazy"><p class="pathMeta">Archive collection</p><h3>Live Music Archive</h3><p>Concert recordings, live sets and the sound of a room.</p><button type="button" data-collection="etree">Explore path</button></article></div></section>
+    <section class="discoverSection clapSection" aria-labelledby="clap-title"><div class="sectionHeading"><div><p class="eyebrow">From the Archive · metadata discovery</p><h2 id="clap-title">Recent things worth opening</h2></div><p class="sectionHint">These are live Archive results, not a profile pretending to know you.</p></div><div id="clapResults" class="clapGrid" aria-live="polite"><p class="dim">Looking through the Archive…</p></div></section>
     <footer class="discoverFooter"><p>Slop reads public Internet Archive metadata. A release always keeps its own context, credits, and rights.</p><a href="https://github.com/akindoflikeness/akindoflikeness-site/issues" target="_blank" rel="noopener">Report a display issue</a></footer>
   </div>
   <section id="searchResults" hidden><div class="heading"><h2 id="shelfTitle">A pile of slop</h2><span id="resultCount">LIVE ARCHIVE INDEX</span></div><div id="status" role="status" aria-live="polite"></div><p id="relatedNote" class="dim" hidden></p><button id="resetShelf" hidden>All music</button><div id="results" class="grid"></div><div class="pager" id="pager" aria-label="Result page" hidden><button id="pagePrevious" aria-label="Previous page">‹</button><output id="pageNumber" aria-live="polite">0</output><button id="pageNext" aria-label="Next page">›</button></div></section>
 </section>
-<section id="saved" hidden><h1>Your library</h1><p id="saveState" class="dim">Opening your liked tracks…</p><div class="libraryTools"><button id="exportLibrary" disabled>Save</button><button id="importLibrary">Load</button><input type="file" id="importFile" accept=".json,application/json" hidden></div>
-<section class="personalPanel" aria-labelledby="playlistsTitle"><h2 id="playlistsTitle">Playlists</h2>
+<section id="saved" hidden><h1>Liked tracks</h1><p id="saveState" class="dim">Opening your liked tracks…</p><div class="libraryTools"><button id="exportLibrary" disabled>Save</button><button id="importLibrary">Load</button><input type="file" id="importFile" accept=".json,application/json" hidden></div>
+<details class="personalPanel playlistEditor"><summary id="playlistsTitle">Playlists</summary>
 <form id="newPlaylistForm" class="personalRow"><label for="playlistTitle" class="srOnly">New playlist name</label><input id="playlistTitle" maxlength="200" placeholder="New playlist name" required><button>Create playlist</button></form>
 <label for="playlistSelect">Your playlists</label><select id="playlistSelect"></select>
-<div id="playlistActions" hidden><div class="personalRow"><label for="renamePlaylist" class="srOnly">Playlist name</label><input id="renamePlaylist" maxlength="200"><button id="renamePlaylistButton">Rename</button></div><div class="personalRow"><label for="playlistSource">Add tracks from</label><select id="playlistSource"><option value="current">Current track</option><option value="queue">Queue</option><option value="liked">Liked tracks</option></select><button id="addPlaylistTracks">Add tracks</button><button id="queuePlaylist">Queue playlist</button><button id="deletePlaylist">Delete playlist</button></div></div><button id="undoPlaylist" hidden>Undo playlist deletion</button><div id="playlistTracks"></div></section>
-<h2>Liked tracks</h2><div id="savedList"></div></section>
+<div id="playlistActions" hidden><div class="personalRow"><label for="renamePlaylist" class="srOnly">Playlist name</label><input id="renamePlaylist" maxlength="200"><button id="renamePlaylistButton">Rename</button></div><div class="personalRow"><label for="playlistSource">Add tracks from</label><select id="playlistSource"><option value="current">Current track</option><option value="queue">Queue</option><option value="liked">Liked tracks</option></select><button id="addPlaylistTracks">Add tracks</button><button id="queuePlaylist">Queue playlist</button><button id="deletePlaylist">Delete playlist</button></div></div><button id="undoPlaylist" hidden>Undo playlist deletion</button><div id="playlistTracks"></div></details>
+<p class="libraryHint">Save a portable copy of your library, or Load one. Likes and playlists stay in this browser.</p><div id="savedList"></div></section>
 <section id="queue" hidden><h1>The next helping.</h1><label class="personalPanel"><input type="checkbox" id="recoverQueue"> Remember this queue and position on this device. Restore paused.</label><div id="queueList"></div></section>
 <section id="log" class="handbook handbook--log" hidden aria-labelledby="log-title">
   <div class="handbookHero">
@@ -287,6 +288,7 @@ Caveat: the honest edge, if there is one.</pre>
 <script src="slop-slip-ui.js?v=slip-1"></script>
 <script src="slop-archive.js?v=discovery-2"></script>
 <script src="slop-personal.js?v=2"></script>
-<script src="app.js?v=foundations-1"></script>
+<script src="app.js?v=figma-mesh-1"></script>
 <script src="personal-ui.js?v=2"></script>
+<script src="design-ui.js?v=1"></script>
 </body></html>

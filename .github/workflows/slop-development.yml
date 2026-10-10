@@ -23,6 +23,7 @@ jobs:
       - run: |
           node --check tools/slop/app.js
           node --check tools/slop/personal-ui.js
+          node --check tools/slop/design-ui.js
           node --check tools/slop/slop-slip-ui.js
           node --check tools/slop/embed.js
       - name: Browser recovery check
