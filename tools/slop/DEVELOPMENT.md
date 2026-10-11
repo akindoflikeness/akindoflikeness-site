@@ -170,3 +170,33 @@ slice, not completion of all future milestones or the Neocities move.
   feature commits remain isolated from main. Updated the daily continuation to
   treat #41 as release history and open a new draft PR for later development.
 - Browser checks used isolated temporary contexts and closed their processes.
+
+## Genre directory and rotation — 11 October 2026 (preview only)
+
+The owner requested a dense, overlapping directory and performant balanced
+randomisation in preview. This takes priority over the queued queue-reordering step.
+
+- 165 initial names across 14 editorial browsing families in genres.json; stable
+  IDs, aliases, multiple parent routes, neighbours and explanations. GENRES.md
+  explains editing, validation, sampling, privacy and incomplete coverage.
+- Explore a name separately from adding it to the any-tag Archive search. Multiple
+  branches can stay open. Complete families and A-Z expose all entries. Search
+  shows matching names/aliases within family context; custom and observed source
+  tags remain usable, including when the directory file fails to load.
+- Four seeded starting names per family, family-order rotation, bounded device-local
+  recent history, oldest-first fallback when saturated, stable tab reload and
+  explicit reshuffle. No per-genre Archive or audio requests. Closed branches
+  create children only on expansion. Genre rotation does not randomise recordings.
+- Availability is unknown unless a tag appears in metadata loaded this session;
+  even a seen tag is explicitly not a verification of playable recordings.
+- Local evidence: all 12 Node tests passed; browser genre and existing library
+  recovery suites passed. Checks cover overlapping selection, aliases, session
+  stability, balanced quotas, no browsing-triggered Archive requests, custom tag
+  transfer, denied storage, failed data fetch/retry and 320–1440px layout widths.
+  Desktop and mobile screenshots inspected; reduced introductory bulk on phones.
+- Figma still needs this new directory, expanded/overlapping detail, source-tag and
+  responsive states captured. Shared visual components remain the existing design.
+- Production remains at 605bb9f. Do not merge this feature without release approval.
+- Next: verify remote checks and deployed preview; then resume manual queue reorder
+  with repeated-entry and opted-in paused recovery checks. Broader taxonomy coverage
+  and real listener evaluation remain ongoing work, not claimed complete here.

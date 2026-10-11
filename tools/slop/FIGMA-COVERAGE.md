@@ -68,3 +68,12 @@ main views checked at 1440×1024, 1366×768, 1024×600, 720×800, 390×844 and 3
 no horizontal overflow, no desktop sidebar scrolling, both Lora faces loaded,
 no uncaught page errors. Screenshots inspected for Discover, Genres and Liked.
 Archive availability varies independently; deterministic tests mock that service.
+
+## Genre atlas preview — 11 October 2026
+
+The Genres vocabulary screen is now an overlapping directory with rotating starting
+points, complete families and A-Z views. Existing shared typography/navigation is
+retained. The Figma file has not been modified for this step: add frames for the
+atlas, multiple open branches, focused genre relationships, selected filters,
+source/custom tags and mobile layouts. Data and behaviour are documented in
+GENRES.md. This preview supersedes the twelve-checkbox vocabulary implementation.
