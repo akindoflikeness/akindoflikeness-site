@@ -84,7 +84,7 @@ const base = process.env.SLOP_TEST_URL || "http://127.0.0.1:8766/tools/slop/";
       /availability not checked/,
     );
     await page
-      .locator('#genreOptions [data-add-tag="dub techno"]')
+      .locator('#genreFocus [data-full-label][data-add-tag="dub techno"]')
       .first()
       .click();
     assert.equal(
@@ -95,9 +95,10 @@ const base = process.env.SLOP_TEST_URL || "http://127.0.0.1:8766/tools/slop/";
     );
     assert.equal(
       await page.locator("#genreCount").textContent(),
-      "1 genres selected",
+      "1 genre selected",
     );
     await page.locator("#closeGenreFocus").click();
+    assert.equal(await page.evaluate(() => document.activeElement.dataset.explore), "dub-techno");
     await page.locator("#genreQuery").fill("");
     await page.waitForFunction(
       () =>
@@ -123,7 +124,7 @@ const base = process.env.SLOP_TEST_URL || "http://127.0.0.1:8766/tools/slop/";
         )
       ).length <= 200,
     );
-    await page.locator("#genreOrder").selectOption("families");
+    await page.locator('[data-genre-mode="families"]').click();
     await page.locator("#genreQuery").fill("dnb");
     await page.waitForFunction(() =>
       document
@@ -132,7 +133,7 @@ const base = process.env.SLOP_TEST_URL || "http://127.0.0.1:8766/tools/slop/";
     );
     assert.ok(await page.locator('[data-explore="drum-and-bass"]').count());
     await page.locator("#genreQuery").fill("");
-    await page.locator("#genreOrder").selectOption("alpha");
+    await page.locator('[data-genre-mode="alpha"]').click();
     await page.waitForSelector(".atlasAlphabet");
     assert.equal(
       await page.locator(".atlasAlphabet>div>.atlasNode").count(),
@@ -155,7 +156,7 @@ const base = process.env.SLOP_TEST_URL || "http://127.0.0.1:8766/tools/slop/";
       /subject:"another local scene"/,
     );
     await page.locator("#navGenres").click();
-    await page.locator("#genreOrder").selectOption("rotate");
+    await page.locator('[data-genre-mode="rotate"]').click();
     for (const [width, height] of [
       [1440, 1024],
       [1024, 600],

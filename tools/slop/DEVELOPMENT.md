@@ -235,3 +235,21 @@ randomisation in preview. This takes priority over the queued queue-reordering s
   been applied to the website. Original Figma screens remain available.
 - Next UI step: implement the Figma revision in preview and test focus, scrolling,
   tag selection and playback together. Keep production unchanged.
+
+
+## Genre Figma implementation and release approval — 11 October 2026
+
+The owner explicitly approved publishing the Figma revision live. Implemented
+the desktop and phone states from 79:1179–79:1182 with native controls, scoped
+220px navigation on Genres, an independently scrolling directory/detail region,
+pinned filter selection, and separate exploring and filter toggles. Existing
+sidebar, player, local assets, colours and fonts are reused. Randomised content
+and availability come from actual directory/session data, not mockup examples.
+
+All 12 Node tests and all three browser suites passed locally. The new layout
+suite verifies keyboard exploration and selection, Escape/Back focus restoration,
+exact directory scroll restoration, shared overlapping state, selection removal
+on phones and usable pinned controls at 320–1440px and short landscape sizes.
+Desktop and phone directory/detail screenshots inspected. Preview/deployment
+verification must precede merging PR #42; then verify production and update Log
+to Shipped. Keep the development branch and preview available afterward.

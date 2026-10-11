@@ -4,14 +4,13 @@
   const root = document.createElement("section");
   root.id = "genres";
   root.hidden = true;
-  root.innerHTML = `<h1>Genres</h1><p class="viewDescription">Genres, offshoots and unexpected neighbours.</p>
- <div class="atlasToolbar"><label for="genreOrder">Display</label><select id="genreOrder" disabled><option value="rotate">Rotating starting points</option><option value="families">Complete families</option><option value="alpha">Everything A–Z</option></select><button id="reshuffleGenres" disabled>Reshuffle</button><span id="atlasStatus" role="status">Loading the directory…</span></div>
- <p class="atlasNote">Open a name to explore. + adds it to your search.</p>
- <div class="atlasSelection"><output id="genreCount" aria-live="polite">0 genres selected</output><div id="selectedGenres"></div><button id="searchGenres" class="primary" disabled>Search selected genres</button><button id="clearGenres">Clear selection</button><small>Matches any selected tag exactly. A parent does not automatically include its subgenres.</small></div>
- <section id="genreFocus" class="genreFocus" hidden aria-label="Genre connections" tabindex="-1"></section>
- <div id="genreOptions" class="genreAtlas"></div>
+  root.innerHTML = `<div id="genreBrowseHeader"><h1>Genres</h1>
+ <div class="atlasToolbar"><div class="genreModes" role="group" aria-label="Directory display"><button data-genre-mode="rotate" aria-pressed="true">Starting points</button><button data-genre-mode="families" aria-pressed="false">All families</button><button data-genre-mode="alpha" aria-pressed="false">A–Z</button></div><label class="genreOrderLabel" for="genreOrder">Display</label><select id="genreOrder" disabled><option value="rotate">Starting points</option><option value="families">All families</option><option value="alpha">A–Z</option></select><button id="reshuffleGenres" disabled>Reshuffle</button></div>
+ <p class="atlasNote">Open a name to explore. + adds it to your filters.</p></div>
+ <div id="genreWorkspace"><div id="genreBrowse" tabindex="-1" aria-label="Genre directory"><div id="atlasStatus" role="status">Loading the directory…</div><div id="genreOptions" class="genreAtlas"></div>
  <details id="sourceTagPanel" class="sourceTagPanel"><summary>Source tags & other names</summary><p>Unclassified tags are welcome. These are tags seen in loaded results or your liked tracks, not a complete Archive vocabulary. Tag presence does not confirm playable audio.</p><form id="customGenreForm"><label for="customGenre">Add any Archive tag</label><input id="customGenre" maxlength="200" required placeholder="An exact tag or local scene name"><button>Add tag</button></form><div id="sourceGenres"></div></details>
- <details class="atlasMethod"><summary>How these starting points are chosen</summary><p>These are overlapping browsing routes, not an authoritative history of music. A dot means a tag was seen in loaded metadata, not that playback is verified. No dot means availability is unknown.</p><p>Four entries per family, shuffled locally. Recently shown names are passed over where alternatives exist. Your arrangement stays put during this visit; Reshuffle changes it. Complete families and A–Z always include every directory entry.</p><p id="atlasStorage"></p><p>Seed: <code id="genreSeed"></code>. Selection history stays on this device and stores genre identifiers only.</p><button id="forgetGenreHistory">Forget rotation history</button><p><a href="genres.json">Genre data</a> · <a href="GENRES.md">Maintenance guide</a></p></details>`;
+ <details class="atlasMethod"><summary>How these starting points are chosen</summary><p>These are overlapping browsing routes, not an authoritative history of music. A dot means a tag was seen in loaded metadata, not that playback is verified. No dot means availability is unknown.</p><p>Four entries per family, shuffled locally. Recently shown names are passed over where alternatives exist. Your arrangement stays put during this visit; Reshuffle changes it. Complete families and A–Z always include every directory entry.</p><p id="atlasStorage"></p><p>Seed: <code id="genreSeed"></code>. Selection history stays on this device and stores genre identifiers only.</p><button id="forgetGenreHistory">Forget rotation history</button><p><a href="genres.json">Genre data</a> · <a href="GENRES.md">Maintenance guide</a></p></details></div><section id="genreFocus" class="genreFocus" hidden aria-label="Genre connections" tabindex="-1"></section></div>
+ <div class="atlasSelection"><button id="genreSelectionToggle" aria-expanded="false" aria-controls="genreSelectedPanel"><output id="genreCount" aria-live="polite">0 genres selected</output></button><div id="genreSelectedPanel"><div id="selectedGenres"></div><button id="clearGenres">Clear all</button></div><button id="searchGenres" class="primary" disabled>Find recordings</button><small>Matches any selected tag · subgenres are separate</small></div>`;
   $("#discover").after(root);
   let idx = null,
     seed = "",
@@ -19,7 +18,8 @@
     starting = [],
     mode = "rotate",
     focused = null,
-    queryTimer;
+    queryTimer,
+    returnFocus = null;
   const selected = new Set(),
     observed = new Set(),
     openRoutes = new Set();
@@ -99,13 +99,17 @@
         ),
       );
   }
-  function row(id, path) {
+  function addControl(tag, label, full = false) {
+    return `<button class="${full ? "genreFilterAction" : "genreAdd"}" data-add-tag="${esc(tag)}" ${full ? 'data-full-label="true"' : ""} aria-label="Add ${esc(label)}" aria-pressed="${selected.has(tag)}"><span>${selected.has(tag) ? "✓" : "+"}</span></button>`;
+  }
+  function row(id, path, branches = true) {
     const g = idx.byId.get(id),
       tag = g.tag;
     const kids = idx.children.get(id);
     const route = path + "/" + id;
-    return `<div class="atlasNode"><div class="atlasRow"><button class="genreName" data-explore="${id}" ${focused === id ? 'aria-current="true"' : ""}>${esc(g.label)}</button>${seen(g) ? '<span class="tagSeen" title="Tag seen in loaded metadata; playback unverified" aria-label="Tag seen in loaded metadata">•</span>' : ""}${tag ? `<button class="genreAdd" data-add-tag="${esc(tag)}" aria-label="${selected.has(tag) ? "Remove" : "Add"} ${esc(g.label)}" aria-pressed="${selected.has(tag)}">${selected.has(tag) ? "−" : "+"}</button>` : ""}</div>${kids.length ? `<details class="genreBranch" data-route="${esc(route)}" data-parent="${id}" ${openRoutes.has(route) ? "open" : ""}><summary>${kids.length} narrower ${kids.length === 1 ? "route" : "routes"}</summary><div class="branchChildren">${openRoutes.has(route) ? kids.map((c) => row(c, route)).join("") : ""}</div></details>` : ""}</div>`;
+    return `<div class="atlasNode"><div class="atlasRow"><button class="genreName" data-explore="${id}" ${focused === id ? 'aria-current="true"' : ""}>${esc(g.label)}</button>${seen(g) ? '<span class="tagSeen" title="Tag seen in loaded metadata; playback unverified" aria-label="Tag seen in loaded metadata">•</span>' : ""}${tag ? addControl(tag, g.label) : ""}</div>${branches && kids.length ? `<details class="genreBranch" data-route="${esc(route)}" data-parent="${id}" ${openRoutes.has(route) ? "open" : ""}><summary>${kids.length} narrower ${kids.length === 1 ? "route" : "routes"}</summary><div class="branchChildren">${openRoutes.has(route) ? kids.map((c) => row(c, route)).join("") : ""}</div></details>` : ""}</div>`;
   }
+
   function bindRows(container) {
     container
       .querySelectorAll("[data-explore]")
@@ -132,8 +136,10 @@
     );
   }
   function updateSelection() {
+    const previousFocus = document.activeElement;
     const count = selected.size;
-    $("#genreCount").textContent = count + " genres selected";
+    $("#genreCount").textContent =
+      count + (count === 1 ? " genre selected" : " genres selected");
     $("#selectedGenres").innerHTML = [...selected]
       .map(
         (tag) =>
@@ -144,9 +150,16 @@
       .querySelectorAll("button")
       .forEach((b) => (b.onclick = () => toggleTag(b.dataset.removeTag)));
     $("#searchGenres").disabled = !count;
+    $("#clearGenres").disabled = !count;
+    if (previousFocus?.dataset.removeTag && !previousFocus.isConnected)
+      $("#genreSelectionToggle").focus();
     root.querySelectorAll("[data-add-tag]").forEach((b) => {
       const on = selected.has(b.dataset.addTag);
-      b.textContent = on ? "−" : "+";
+      b.innerHTML = b.dataset.fullLabel
+        ? on
+          ? "✓ Added to filters"
+          : "+ Add to filters"
+        : `<span>${on ? "✓" : "+"}</span>`;
       b.setAttribute("aria-pressed", String(on));
       b.setAttribute(
         "aria-label",
@@ -163,25 +176,48 @@
     updateSelection();
   }
   function relation(title, ids) {
-    return `<div class="genreRelations"><h3>${title}</h3>${ids.length ? ids.map((id) => `<button data-explore="${id}">${esc(idx.byId.get(id).label)}</button>`).join("") : '<span class="dim">No routes recorded yet.</span>'}</div>`;
+    if (!ids.length) return "";
+    return `<div class="genreRelations"><h3>${title}</h3>${ids.map((id) => row(id, "related", false)).join("")}</div>`;
+  }
+  function closeFocus(restore = true) {
+    $("#genreFocus").hidden = true;
+    $("#genreBrowse").hidden = false;
+    root.classList.remove("isExploring");
+    focused = null;
+    if (restore)
+      (returnFocus?.isConnected ? returnFocus : $("#genreQuery")).focus({
+        preventScroll: true,
+      });
   }
   function showFocus(id, move = false) {
+    if (!focused) returnFocus = document.activeElement;
     focused = id;
     const g = idx.byId.get(id),
       panel = $("#genreFocus");
+    const panelScroll =
+      panel.querySelector(".genreDetailScroll")?.scrollTop || 0;
+    root.classList.add("isExploring");
+    $("#genreBrowse").hidden = true;
     panel.hidden = false;
-    panel.innerHTML = `<button id="closeGenreFocus" aria-label="Close genre connections">Close</button><h2>${esc(g.label)}</h2><p>${esc(g.note)}</p>${g.aliases.length ? `<p>Also called: ${g.aliases.map(esc).join(" · ")}</p>` : ""}<p class="dim">${seen(g) ? "Tag seen in loaded metadata. Playable recordings have not been verified." : "Recording availability not checked. Explore this tag in Search."}</p>${g.tag ? `<button data-add-tag="${esc(g.tag)}" aria-pressed="${selected.has(g.tag)}" aria-label="Add ${esc(g.label)}">+</button>` : '<p class="dim">This is a browsing family, not an Archive tag.</p>'}${relation("Broader routes", g.parents)}${relation("Narrower routes", idx.children.get(id))}${relation("Neighbouring styles", g.related)}`;
+    const context = g.parents.length ? g.parents : [id];
+    panel.innerHTML = `<button id="closeGenreFocus">‹ Back to directory</button><h1>Explore a connection</h1><div class="genreDetailScroll" tabindex="0" aria-label="Genre relationships"><div class="genreContext">${context
+      .map(
+        (parent) =>
+          `<h2>${esc(idx.byId.get(parent).label)}</h2>${idx.children
+            .get(parent)
+            .map((child) => row(child, "context", false))
+            .join("")}`,
+      )
+      .join(
+        "",
+      )}</div><div class="genreDetail"><h2 tabindex="-1" id="genreDetailTitle">${esc(g.label)}</h2><p>${esc(g.note)}</p>${g.aliases.length ? `<p>Also called: ${g.aliases.map(esc).join(" · ")}</p>` : ""}${relation("Found under", g.parents)}${relation("Narrower routes", idx.children.get(id))}${relation("Neighbouring styles", g.related)}${g.tag ? addControl(g.tag, g.label, true) : '<p class="dim">This is a browsing family, not an Archive tag.</p>'}<p class="genreAvailability">${seen(g) ? "Tag seen in loaded metadata. Playable recordings have not been verified." : "Recording availability not checked."}</p><p class="dim">These are browsing connections, not a claim that recordings sound alike.</p></div></div>`;
     bindRows(panel);
     updateSelection();
-    $("#closeGenreFocus").onclick = () => {
-      panel.hidden = true;
-      focused = null;
-      root.querySelector(`[data-explore="${id}"]`)?.focus();
-    };
-    if (move) {
-      panel.focus({ preventScroll: true });
-      panel.scrollIntoView({ block: "nearest" });
-    }
+    $("#closeGenreFocus").onclick = () => closeFocus();
+    panel.querySelector(".genreDetailScroll").scrollTop = move
+      ? 0
+      : panelScroll;
+    if (move) $("#genreDetailTitle").focus({ preventScroll: true });
   }
   function sourceTags() {
     const q = SlopGenres.normal($("#genreQuery").value);
@@ -207,6 +243,7 @@
   }
   function render() {
     if (!idx) return;
+    closeFocus(false);
     const q = $("#genreQuery").value.trim(),
       matches = q ? SlopGenres.matches(idx, q) : null,
       box = $("#genreOptions");
@@ -234,7 +271,7 @@
           if (!ids.length && !familyMatches) continue;
         } else if (mode === "families")
           ids = idx.children.get(group.family).slice().sort(idx.compare);
-        html += `<section class="atlasFamily"><h2><button data-explore="${family.id}">${esc(family.label)}</button>${family.tag ? `<button class="genreAdd" data-add-tag="${esc(family.tag)}" aria-label="Add ${esc(family.label)}">+</button>` : ""}</h2><div>${ids.map((id) => row(id, group.family)).join("")}</div>${!q && mode === "rotate" ? `<details class="familyRest" data-family="${group.family}"><summary>All ${idx.descendants.get(group.family).length} names in this family</summary><div></div></details>` : ""}</section>`;
+        html += `<section class="atlasFamily"><h2><button data-explore="${family.id}">${esc(family.label)}</button></h2><div>${ids.map((id) => row(id, group.family, mode !== "rotate" || !!q)).join("")}</div>${!q && mode === "rotate" ? `<details class="familyRest" data-family="${group.family}"><summary>Explore family · ${idx.descendants.get(group.family).length} names</summary><div></div></details>` : ""}</section>`;
       }
     }
     box.innerHTML =
@@ -264,9 +301,13 @@
           : idx.all.length + " names · alphabetical";
     sourceTags();
     storageStatus();
+    root.querySelectorAll("[data-genre-mode]").forEach((b) => {
+      b.disabled = !idx;
+      b.setAttribute("aria-pressed", String(b.dataset.genreMode === mode));
+    });
   }
   localSearch(
-    root,
+    $("#genreBrowseHeader"),
     "genreQuery",
     "Genres",
     "Find a genre or alternative name…",
@@ -275,6 +316,33 @@
       queryTimer = setTimeout(render, 100);
     },
   );
+  $("#genreBrowseHeader h1").after($("#genreBrowseHeader .contextualSearch"));
+  root.querySelectorAll("[data-genre-mode]").forEach((b) => {
+    b.disabled = true;
+    b.onclick = () => {
+      $("#genreOrder").value = b.dataset.genreMode;
+      $("#genreOrder").dispatchEvent(new Event("change"));
+    };
+  });
+  $("#genreSelectionToggle").onclick = () => {
+    const open =
+      $("#genreSelectionToggle").getAttribute("aria-expanded") !== "true";
+    $("#genreSelectionToggle").setAttribute("aria-expanded", String(open));
+    $("#genreSelectedPanel").classList.toggle("isOpen", open);
+  };
+  root.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      if ($("#genreSelectedPanel").classList.contains("isOpen")) {
+        $("#genreSelectionToggle").click();
+        $("#genreSelectionToggle").focus();
+      } else if (focused) closeFocus();
+    }
+  });
+  const previousViewChanged = window.slopViewChanged;
+  window.slopViewChanged = (name) => {
+    previousViewChanged?.(name);
+    document.body.classList.toggle("genreView", name === "genres");
+  };
   $("#genreOrder").onchange = (e) => {
     mode = e.target.value;
     saveSession();
@@ -313,7 +381,12 @@
       }
     if (idx && currentView === "genres") {
       sourceTags();
-      if (focused) showFocus(focused);
+      if (focused)
+        $("#genreFocus .genreAvailability").textContent = seen(
+          idx.byId.get(focused),
+        )
+          ? "Tag seen in loaded metadata. Playable recordings have not been verified."
+          : "Recording availability not checked.";
     }
   };
   $("#navGenres").onclick = $("#browseGenres").onclick = () => {

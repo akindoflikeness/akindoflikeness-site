@@ -35,6 +35,7 @@ jobs:
           python3 -m http.server 8766 --bind 127.0.0.1 >/tmp/slop-server.log 2>&1 &
           SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/slop/tests/library-browser.cjs
           SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/slop/tests/genres-browser.cjs
+          SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/slop/tests/genre-layout-browser.cjs
   catalogue-sample:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest

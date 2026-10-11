@@ -101,3 +101,16 @@ Desktop and phone overview/detail screenshots inspected after sizing and toggle
 refinements. This is a design proposal, not a website implementation. Next UI work
 should translate these states to preview, retain complete/unclassified tag access,
 and test keyboard focus, scroll restoration, empty/error states and playback.
+
+
+### Implemented for approved release
+
+The 79:1179–79:1182 revision is now implemented in genre-ui.js and genres.css.
+The genre view uses the current 220px Figma rail without changing other pages.
+Dynamic directory relationships, filters, source tags, disabled/error states and
+recording availability remain functional. Phone selection opens an accessible
+removal panel, which the representative static Figma state did not simulate.
+Short phone viewports compact player spacing to preserve usable browsing space.
+Local screenshot and keyboard/scroll checks passed; see DEVELOPMENT for deployed
+release evidence. Player and navigation asset files remain the existing local
+assets; music cover imagery remains dynamic, with no Figma fixture artwork.
