@@ -43,7 +43,12 @@ function bindTracks(tracks,kind,root){root.querySelectorAll(`[data-${kind}play]`
 function renderSaved(){
  const term=($('#savedQuery')?.value||'').trim().toLocaleLowerCase();
  const tracks=[...saved.values()].sort((a,b)=>(b.savedAt||'').localeCompare(a.savedAt||'')).filter(t=>!term||[t.title,t.artist,t.release].some(v=>String(v||'').toLocaleLowerCase().includes(term)));
- const groups=new Map();tracks.forEach((t,i)=>{if(!groups.has(t.id))groups.set(t.id,[]);groups.get(t.id).push({t,i})});
+ let groups=new Map();tracks.forEach((t,i)=>{if(!groups.has(t.id))groups.set(t.id,[]);groups.get(t.id).push({t,i})});
+ const sort=$('#savedSort')?.value||'recent';
+ if(sort==='artist'||sort==='release'){
+  const compare=(a,b)=>String(a||'').localeCompare(String(b||''),undefined,{numeric:true,sensitivity:'base'});
+  groups=new Map([...groups].sort(([idA,a],[idB,b])=>compare(a[0].t[sort],b[0].t[sort])||compare(a[0].t.release,b[0].t.release)||compare(idA,idB)));
+ }
  $('#savedList').innerHTML=tracks.length?[...groups.values()].map(entries=>{const {t,i}=entries[0];return `<article class="likedAlbum"><div class="likedAlbumHeader"><img data-album-art="${esc(t.id)}" src="https://archive.org/services/img/${encodeURIComponent(t.id)}" alt="Cover for ${esc(t.release||t.id)}"><div><h2>${esc(t.release||t.id)}</h2><p>${esc(t.artist)}</p><div class="albumActions"><button data-album-queue="${esc(t.id)}">Queue liked tracks</button><button data-similar="${i}">More like this</button><a href="https://archive.org/details/${encodeURIComponent(t.id)}" target="_blank" rel="noopener">Original release</a></div></div></div>${entries.map(({t,i},n)=>`<div class="likedTrack"><span class="trackNumber">${n+1}</span><span class="trackCopy">${esc(t.title)}</span><div class="trackActions"><button data-splay="${i}" aria-label="Play ${esc(t.title)}"><img src="assets/play-small.svg" alt=""></button><button data-snext="${i}" aria-label="Play ${esc(t.title)} next"><img src="assets/add-small.svg" alt=""></button>${saveButton(t)}</div></div>`).join('')}</article>`}).join(''):`<div class="notice"><h2>${term?'No liked tracks match.':'No liked tracks yet.'}</h2><button id="savedBrowse">Browse music</button></div>`;
  $('#savedBrowse')?.addEventListener('click',()=>{view('discover');setDiscoverMode('home')});$('#exportLibrary').disabled=false;bindTracks(tracks,'s',$('#savedList'));
  $('#savedList').querySelectorAll('[data-similar]').forEach(b=>b.onclick=()=>{const t=tracks[Number(b.dataset.similar)];related({identifier:t.id,creator:t.artist,title:t.release||t.title,subject:t.tags})});

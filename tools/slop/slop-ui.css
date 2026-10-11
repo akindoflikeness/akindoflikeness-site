@@ -1412,3 +1412,5 @@ h2,.sectionHeading h2{font-size:23px;font-weight:700;letter-spacing:0;line-heigh
 @media(max-width:720px){:root{--slop-player:128px}.player{grid-template-columns:repeat(6,minmax(0,1fr));min-height:128px;gap:8px 0;padding:12px var(--slop-gutter)}.player .playingInfo{grid-column:1/5;grid-row:1}.player .timing{grid-column:5/7;grid-row:1}.player .transport{grid-column:1/4;grid-row:2;justify-self:start}.player .saveTrack{grid-column:4;grid-row:2;justify-self:center}.player #queueToggle{grid-column:5;grid-row:2;justify-self:center}.player #shareCurrent{grid-column:6;grid-row:2;justify-self:end}}
 nav button.active:hover:not(:disabled){background:var(--lime);color:#000;border-color:transparent}
 @media(prefers-reduced-motion:reduce){button{transition:none}}
+.libraryOrder{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 20px;font-size:14px;color:var(--muted)}
+.libraryOrder select{max-width:100%;min-height:44px;padding:8px 12px;font-size:14px}

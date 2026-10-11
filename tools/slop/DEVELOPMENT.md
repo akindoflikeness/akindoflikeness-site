@@ -101,7 +101,8 @@ A daily 09:00 thread continuation is configured for bounded development work.
 It is not a continuously running server; catalogue processing and CI run remotely.
 No paid model or database service has been provisioned.
 
-Next add library search/sort and queue operations with recovery checks. Keep
+Library search and sorting are implemented. Next add manual queue reordering
+with duplicate-reference and opt-in recovery checks. Keep
 development separate until the milestone is coherent. Do not label previews
 Shipped in the public Log or merge simply because automated tests pass.
 
@@ -115,3 +116,21 @@ Read FIGMA-COVERAGE.md before further UI work: it records source node IDs,
 intentional live-data adaptations and the missing design states. Do not copy
 illustrative CLAP results or claim that metadata search uses an audio model.
 Keep new screens aligned to those shared components and retain one-column nav.
+
+## Library sorting — 11 October 2026
+
+- Inspected draft PR #41 at 6fe783c: Pages, both check jobs and the bounded
+  metadata sampler passed; production main remains unchanged.
+- Liked releases now offer Recently liked, Artist A–Z and Release A–Z ordering.
+  Existing release grouping, within-release order and search remain intact.
+  Sorting is a view choice for this visit, not a rewrite of portable library data.
+- Local evidence: eight Node tests passed; the browser recovery suite passed
+  with additional checks for all three sort orders, search combined with sorting,
+  queueing the correct album/track after sorting, and unchanged saved records.
+  Existing migration, full backup restore and paused queue recovery still pass.
+  Desktop/phone layout checks passed and the phone screenshot was inspected.
+- This is a small native control in the existing design system; a dedicated
+  personal-library Figma state remains on the design coverage list.
+- Next: manual queue move-up/move-down operations, preserving repeated entries,
+  then verify their exact order survives opted-in paused recovery. Keep album
+  queue semantics separate. Do not start shuffle/repeat in that same step.

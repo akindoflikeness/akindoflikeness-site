@@ -9,6 +9,9 @@ function selectNavigation(button){document.querySelectorAll('#slopNavigation but
 window.slopDiscoverMode=mode=>selectNavigation(mode==='home'?$('nav [data-view="discover"]'):$('#navSearch'));
 window.slopViewChanged=name=>{selectNavigation(name==='genres'?$('#navGenres'):name==='discover'&&!$('#searchResults').hidden?$('#navSearch'):$(`nav [data-view="${name}"]`))};
 localSearch($('#saved'),'savedQuery','Liked','Search liked artists, releases or tracks…',renderSaved);
+const libraryOrder=document.createElement('div');libraryOrder.className='libraryOrder';
+libraryOrder.innerHTML='<label for="savedSort">Order releases</label><select id="savedSort"><option value="recent">Recently liked</option><option value="artist">Artist A–Z</option><option value="release">Release A–Z</option></select>';
+$('#savedList').before(libraryOrder);$('#savedSort').onchange=renderSaved;
 function filterQueue(){const term=$('#queueQuery').value.toLocaleLowerCase().trim();$('#queueList').querySelectorAll('.track').forEach(row=>row.hidden=!!term&&!row.textContent.toLocaleLowerCase().includes(term));const count=[...$('#queueList').querySelectorAll('.track')].filter(r=>!r.hidden).length;$('#queueFilterStatus').textContent=term?count+' matching tracks':'';}
 localSearch($('#queue'),'queueQuery','Queue','Search this queue…',filterQueue);
 const queueStatus=document.createElement('p');queueStatus.id='queueFilterStatus';queueStatus.className='dim';queueStatus.setAttribute('role','status');$('#queueList').before(queueStatus);

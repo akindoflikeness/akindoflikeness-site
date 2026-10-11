@@ -19,7 +19,21 @@ async function context(browser){const c=await browser.newContext({viewport:{widt
  // Restore into a completely fresh browser context: no accounts, no source reads.
  const fresh=await context(browser),restored=await fresh.newPage();await restored.goto(base);await restored.locator('nav [data-view="saved"]').click();await restored.locator('#importFile').setInputFiles({name:'library.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(data))});await restored.locator('#confirmImport').click();await restored.locator('.playlistEditor summary').click();await restored.waitForSelector('#playlistTracks [data-personal-play]');assert.equal(await restored.locator('#playlistTracks [data-personal-play]').count(),2);assert.equal(await restored.locator('#savedList [data-splay]').count(),1);assert.equal(await restored.locator('#diversify').isChecked(),false);
  await restored.locator('#queuePlaylist').click();await restored.locator('nav [data-view="queue"]').click();await restored.locator('#queueQuery').fill('missing title');assert.equal(await restored.locator('#queueList .track:visible').count(),0);await restored.locator('#queueQuery').fill('preserved');assert.equal(await restored.locator('#queueList .track:visible').count(),2);await restored.locator('#queueQuery').fill('');await restored.locator('#recoverQueue').check();await restored.reload();await restored.locator('nav [data-view="queue"]').click();assert.equal(await restored.locator('#queueList [data-qplay]').count(),2);assert.equal(await restored.locator('#audio').evaluate(a=>a.paused),true);
- await restored.locator('nav [data-view="saved"]').click();if(process.env.SLOP_SCREENSHOTS)await restored.screenshot({path:process.env.SLOP_SCREENSHOTS+'/library-desktop.png'});
+ await restored.locator('nav [data-view="saved"]').click();
+ // Sorting is a view operation: preserve references, grouping and action indices.
+ await restored.evaluate(async t=>{const db=await dbReady;await new Promise((resolve,reject)=>{const tx=db.transaction('saved','readwrite');for(const row of [{...t,savedAt:'2026-10-09T00:00:00Z'},{...t,id:'another-release',artist:'Zulu artist',release:'Alpha release',title:'Second reference',savedAt:'2026-10-11T00:00:00Z'},{...t,file:'second.flac',title:'Same album, second track',savedAt:'2026-10-10T00:00:00Z'}])tx.objectStore('saved').put({...row,key:keyOf(row)});tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)});await refreshSaved()},track);
+ const beforeSort=await restored.evaluate(()=>JSON.stringify([...saved.values()]));
+ const albumNames=()=>restored.locator('.likedAlbumHeader h2').allTextContents();
+ assert.deepEqual(await albumNames(),['Alpha release','Example release']);
+ await restored.locator('#savedSort').selectOption('artist');assert.deepEqual(await albumNames(),['Example release','Alpha release']);
+ await restored.locator('.likedAlbum').first().getByRole('button',{name:'Queue liked tracks',exact:true}).click();
+ assert.deepEqual(await restored.evaluate(()=>queue.slice(-2).map(t=>t.file)),['second.flac','song.flac']);
+ await restored.locator('#savedSort').selectOption('release');assert.deepEqual(await albumNames(),['Alpha release','Example release']);
+ await restored.locator('#savedQuery').fill('preserved');assert.deepEqual(await albumNames(),['Example release']);
+ await restored.locator('#savedList [data-snext]').click();assert.equal(await restored.evaluate(()=>queue[0].file),'song.flac');
+ await restored.locator('#savedQuery').fill('');await restored.locator('#savedSort').selectOption('recent');assert.deepEqual(await albumNames(),['Alpha release','Example release']);
+ assert.equal(await restored.evaluate(()=>JSON.stringify([...saved.values()])),beforeSort);
+ if(process.env.SLOP_SCREENSHOTS)await restored.screenshot({path:process.env.SLOP_SCREENSHOTS+'/library-desktop.png'});
  for(const size of [[1366,768],[390,844]]){await restored.setViewportSize({width:size[0],height:size[1]});assert.equal(await restored.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);}
  if(process.env.SLOP_SCREENSHOTS)await restored.screenshot({path:process.env.SLOP_SCREENSHOTS+'/library-mobile.png'});assert.deepEqual(errors,[]);console.log('PASS: migration, repeated playlist entries, local exclusions, saved mode, full recovery, paused queue and responsive layout');
 }finally{await browser.close()}})().catch(e=>{console.error(e);process.exitCode=1});
