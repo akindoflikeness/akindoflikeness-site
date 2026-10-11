@@ -1414,3 +1414,28 @@ nav button.active:hover:not(:disabled){background:var(--lime);color:#000;border-
 @media(prefers-reduced-motion:reduce){button{transition:none}}
 .libraryOrder{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 20px;font-size:14px;color:var(--muted)}
 .libraryOrder select{max-width:100%;min-height:44px;padding:8px 12px;font-size:14px}
+/* Dense genre routes share the existing type, palette and fixed listening shell. */
+#genres .atlasToolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:18px 0 12px;font-size:14px}
+#genres .atlasToolbar select{max-width:100%;padding:8px;min-height:40px;font-size:14px}
+#genres .atlasToolbar button{font-size:14px;padding:8px 12px}
+#atlasStatus{color:var(--muted);font-size:12px}
+#genres .atlasNote{font-size:13px;line-height:1.6;color:var(--muted);max-width:85ch}
+.atlasSelection{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-block:1px solid #393630;padding:14px 0;margin:18px 0;font-size:13px}
+.atlasSelection #selectedGenres{margin:0;flex:1;min-width:120px}.atlasSelection button{font-size:13px;padding:7px 10px;min-height:36px}.atlasSelection small{flex-basis:100%;color:var(--muted)}
+#genreOptions.genreAtlas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:22px 24px;align-items:start}
+.atlasFamily{min-width:0;border-top:1px solid var(--line);padding-top:10px}.atlasFamily h2{display:flex;align-items:center;gap:6px;margin:0 0 8px;font-size:20px}.atlasFamily h2>button:first-child{flex:1;text-align:left;font-size:20px}
+#genres .genreName,.atlasFamily h2>button:first-child{border:0;background:none;padding:4px 0;color:var(--ink);font-family:inherit;line-height:1.4;border-radius:0}
+#genres .genreName:hover,.atlasFamily h2>button:first-child:hover{text-decoration:underline;color:var(--lime)}
+#genres .atlasRow{display:flex;gap:6px;align-items:center;min-height:34px;font-size:14px}
+#genres .atlasRow>.genreName,#genres .atlasRow>span:first-child{flex:1;min-width:0;text-align:left;overflow-wrap:anywhere;font-size:14px}
+#genres .genreAdd{flex:0 0 30px;width:30px;min-height:30px;padding:0;border:1px solid #514d43;font-size:18px;line-height:1;border-radius:4px}
+#genres .genreAdd[aria-pressed=true]{background:var(--lime);color:#000}
+.tagSeen{color:var(--lime);font-size:12px}.genreBranch{border-left:1px solid #514d43;padding-left:10px;margin:0 0 4px 4px}.genreBranch summary,.familyRest summary{cursor:pointer;font-size:12px;color:var(--muted);padding:5px 0}.familyRest{margin-top:9px;border-top:1px solid #393630}
+.genreFocus{border:1px solid var(--line);border-radius:6px;padding:18px;margin:18px 0;scroll-margin-top:20px}.genreFocus>button:first-child{float:right;font-size:12px}.genreFocus h2{font-size:24px}.genreFocus p{font-size:14px}.genreRelations{margin-top:12px}.genreRelations h3{font-size:13px;margin:0 0 6px;color:var(--muted)}.genreRelations button{font-size:13px;min-height:34px;padding:5px 9px;margin:0 5px 5px 0}
+.atlasAlphabet{grid-column:1/-1;min-width:0}.atlasAlphabet h2{font-size:20px}.atlasAlphabet>div{columns:220px;column-gap:24px}.atlasAlphabet .atlasNode{break-inside:avoid}
+.sourceTagPanel,.atlasMethod{border-top:1px solid #514d43;margin-top:28px;padding-top:14px;font-size:13px;line-height:1.6}.sourceTagPanel summary,.atlasMethod summary{cursor:pointer;font-size:16px}.sourceTagPanel form{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0;align-items:center}.sourceTagPanel input{min-width:0;max-width:100%;flex:1;font-size:14px}.sourceTagPanel button,.atlasMethod button{font-size:13px}.sourceTagPanel #sourceGenres{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:4px 24px}#genreSeed{overflow-wrap:anywhere}
+@media(pointer:coarse){#genres .genreAdd{min-width:44px;min-height:44px}#genres .atlasRow{min-height:44px}}
+@media(max-width:480px){#genreOptions.genreAtlas{grid-template-columns:1fr}.atlasSelection{gap:8px}.atlasSelection #selectedGenres{flex-basis:100%}.genreFocus{padding:12px}.sourceTagPanel form label{flex-basis:100%}}
+#genres .genreName{min-height:30px}#genres .atlasSelection{margin:12px 0;padding:10px 0}#genres .atlasToolbar{margin-top:12px}
+@media(max-width:720px){#genres h1{font-size:38px;margin-bottom:10px}#genres .viewDescription{font-size:15px;margin-bottom:12px}#genres .contextualSearch{margin-bottom:18px}#genres .atlasNote{margin:8px 0}}
+@media(pointer:coarse){#genres .genreName{min-height:44px}}

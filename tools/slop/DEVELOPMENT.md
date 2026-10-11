@@ -16,6 +16,14 @@ functional and recovery gates pass. Do not move the public site prematurely.
 - Each continuation reads this file and the open branch, performs one bounded unit
   of work, updates evidence and remaining work, and stops temporary processes.
 
+## Completion checklist
+
+- Every meaningful behaviour or deployment change must add or update the visible
+  Log in index.html in the same change, as well as these development notes.
+- Preview entries remain In the pot. Shipped requires production verification.
+- Open the deployed Log and verify its entry and status before reporting completion.
+- Figma-only proposals are design work, not implemented functionality.
+
 ## First implementation (approved for release 11 October 2026)
 
 - Existing likes migrate without deletion from IndexedDB version 1 to 2.
@@ -155,3 +163,93 @@ slice, not completion of all future milestones or the Neocities move.
   draft PR when needed. Do not attempt to continue work through a merged PR.
 - Future feature changes remain preview-only until separately approved for release.
 - Next implementation remains manual queue reordering and paused recovery checks.
+
+### Public verification
+
+- PR #41 merged as 605bb9f after both release check jobs and the metadata sampler
+  passed. Cloudflare production deployment 2d2ad1fa-5b4c-4fe0-a82a-93b2e363d493
+  succeeded on 11 October 2026.
+- The full browser regression passed at https://akindoflikeness.net/tools/slop/:
+  migration, repeated playlist entries, exclusions, saved modes, backup restore,
+  sorting, paused queue recovery and desktop/mobile overflow checks.
+- Confirmed the live wordmark hides the preview badge and the retained branch
+  URL shows it. Both expose the released library sorting control.
+- Retained and advanced slop/discovery-foundations to the release merge. Future
+  feature commits remain isolated from main. Updated the daily continuation to
+  treat #41 as release history and open a new draft PR for later development.
+- Browser checks used isolated temporary contexts and closed their processes.
+
+## Genre directory and rotation â€” 11 October 2026 (preview only)
+
+The owner requested a dense, overlapping directory and performant balanced
+randomisation in preview. This takes priority over the queued queue-reordering step.
+
+- 165 initial names across 14 editorial browsing families in genres.json; stable
+  IDs, aliases, multiple parent routes, neighbours and explanations. GENRES.md
+  explains editing, validation, sampling, privacy and incomplete coverage.
+- Explore a name separately from adding it to the any-tag Archive search. Multiple
+  branches can stay open. Complete families and A-Z expose all entries. Search
+  shows matching names/aliases within family context; custom and observed source
+  tags remain usable, including when the directory file fails to load.
+- Four seeded starting names per family, family-order rotation, bounded device-local
+  recent history, oldest-first fallback when saturated, stable tab reload and
+  explicit reshuffle. No per-genre Archive or audio requests. Closed branches
+  create children only on expansion. Genre rotation does not randomise recordings.
+- Availability is unknown unless a tag appears in metadata loaded this session;
+  even a seen tag is explicitly not a verification of playable recordings.
+- Local evidence: all 12 Node tests passed; browser genre and existing library
+  recovery suites passed. Checks cover overlapping selection, aliases, session
+  stability, balanced quotas, no browsing-triggered Archive requests, custom tag
+  transfer, denied storage, failed data fetch/retry and 320â€“1440px layout widths.
+  Desktop and mobile screenshots inspected; reduced introductory bulk on phones.
+- Figma still needs this new directory, expanded/overlapping detail, source-tag and
+  responsive states captured. Shared visual components remain the existing design.
+- Production remains at 605bb9f. Do not merge this feature without release approval.
+- Next: resume manual queue reorder
+  with repeated-entry and opted-in paused recovery checks. Broader taxonomy coverage
+  and real listener evaluation remain ongoing work, not claimed complete here.
+
+### Hosted preview evidence
+
+- Draft PR #42: https://github.com/akindoflikeness/akindoflikeness-site/pull/42.
+  Implementation commit 8e2857099657f9e4e8efb7cd8550c085f60a43d3.
+- Both GitHub check jobs passed; the bounded push metadata sampler passed (the
+  duplicate PR sampler is intentionally skipped). Cloudflare preview deployment
+  e4f1c531-e24d-41fe-b986-0e54a18b5854 succeeded.
+- Genre and existing library browser suites both passed against the deployed
+  https://slop-discovery-foundations.akindoflikeness-site.pages.dev/tools/slop/.
+- Verified remote main remains 605bb9f76ccb02bf58334e3b9274e4c2d102bd95.
+  No merge or production deployment performed. Temporary browsers and local
+  test server stopped. New Figma states remain documented in FIGMA-COVERAGE.md.
+## Log correction and Figma genre revision â€” 11 October 2026
+
+- Added the missing visible genre-directory Log entry in e42107a, marked In the
+  pot; updated its legend to include deployed previews. The development notes had
+  been updated without the user-facing Log. Added an explicit completion gate.
+- Hosted checks, metadata sampler and Pages deployment passed for e42107a.
+  Opened the deployed Log in a browser: new entry visible with preview status and
+  no horizontal overflow at 390px. Browser closed afterward.
+- Figma now contains editable desktop/phone genre browsing and detail proposals,
+  reusable controls, limited prototype links and behaviour notes. See
+  FIGMA-COVERAGE.md for exact nodes and validation. These layout changes have not
+  been applied to the website. Original Figma screens remain available.
+- Next UI step: implement the Figma revision in preview and test focus, scrolling,
+  tag selection and playback together. Keep production unchanged.
+
+
+## Genre Figma implementation and release approval — 11 October 2026
+
+The owner explicitly approved publishing the Figma revision live. Implemented
+the desktop and phone states from 79:1179–79:1182 with native controls, scoped
+220px navigation on Genres, an independently scrolling directory/detail region,
+pinned filter selection, and separate exploring and filter toggles. Existing
+sidebar, player, local assets, colours and fonts are reused. Randomised content
+and availability come from actual directory/session data, not mockup examples.
+
+All 12 Node tests and all three browser suites passed locally. The new layout
+suite verifies keyboard exploration and selection, Escape/Back focus restoration,
+exact directory scroll restoration, shared overlapping state, selection removal
+on phones and usable pinned controls at 320–1440px and short landscape sizes.
+Desktop and phone directory/detail screenshots inspected. Preview/deployment
+verification must precede merging PR #42; then verify production and update Log
+to Shipped. Keep the development branch and preview available afterward.

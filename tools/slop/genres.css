@@ -1,0 +1,557 @@
+/* Figma genre revision 79:1179–79:1182. Scoped to the genre view. */
+body.genreView {
+  --slop-sidebar: 220px;
+  overflow: hidden;
+}
+.genreView .shell {
+  height: 100dvh;
+  min-height: 0;
+}
+.genreView main {
+  padding: 32px;
+  height: calc(100dvh - var(--slop-player));
+  min-height: 0;
+  overflow: hidden;
+}
+.genreView main > footer {
+  display: none;
+}
+.genreView .sidebarNow {
+  display: none;
+}
+.genreView #genres {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+}
+#genreBrowseHeader {
+  flex: none;
+}
+#genres h1 {
+  margin: 0 0 12px;
+  font-size: 38px;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+#genres .contextualSearch {
+  margin: 0 0 12px;
+  height: 48px;
+}
+#genres .atlasToolbar {
+  margin: 0 0 8px;
+  gap: 8px;
+}
+#genres .atlasToolbar button,
+#genres .atlasToolbar select {
+  min-height: 44px;
+  padding: 8px 24px;
+  background: var(--panel);
+  font-size: 15px;
+  border-radius: 4px;
+}
+#genres .genreModes {
+  display: flex;
+  gap: 8px;
+}
+#genres .genreModes [aria-pressed="true"] {
+  background: var(--lime);
+  color: var(--bg);
+}
+#genres #genreOrder,
+#genres .genreOrderLabel {
+  display: none;
+}
+#genres .atlasNote {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+#genreWorkspace {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+#genreBrowse {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding: 4px;
+}
+#atlasStatus {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+#genres #genreOptions.genreAtlas {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px 24px;
+  align-items: start;
+}
+#genres .atlasFamily {
+  border: 0;
+  padding: 0;
+}
+#genres .atlasFamily h2 {
+  margin: 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 21px;
+}
+#genres .atlasFamily h2 > button:first-child {
+  font-size: 21px;
+  font-weight: 700;
+  padding: 0;
+  min-height: 30px;
+}
+#genres .atlasRow {
+  min-height: 44px;
+  gap: 8px;
+  padding: 0 8px;
+}
+#genres .atlasRow .genreName {
+  min-height: 44px;
+  font-size: 15px;
+  line-height: 1.4;
+}
+#genres .genreAdd {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  border-radius: 4px;
+}
+#genres .genreAdd > span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+}
+#genres .genreAdd[aria-pressed="true"] {
+  background: none;
+  color: var(--bg);
+}
+#genres .genreAdd[aria-pressed="true"] > span {
+  background: var(--lime);
+}
+#genres .genreAdd:hover > span {
+  border-color: var(--ink);
+}
+#genres .familyRest {
+  margin: 0;
+  border: 0;
+}
+#genres .familyRest > summary {
+  min-height: 32px;
+  padding: 4px 0;
+  font-size: 13px;
+}
+#genres .genreBranch summary {
+  min-height: 32px;
+}
+#genres .sourceTagPanel,
+#genres .atlasMethod {
+  margin-top: 24px;
+}
+#genres .atlasSelection {
+  position: relative;
+  flex: none;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  background: var(--panel);
+  padding: 8px;
+  margin: 0;
+  border: 0;
+}
+#genres .atlasSelection button {
+  min-height: 44px;
+  font-size: 14px;
+}
+#genres #genreSelectionToggle {
+  border: 0;
+  padding: 4px;
+  font-size: 12px;
+  text-align: left;
+}
+#genres #genreSelectedPanel {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+  align-items: center;
+}
+#genres #selectedGenres {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: auto;
+  max-height: 60px;
+  min-width: 0;
+  margin: 0;
+}
+#genres #selectedGenres button {
+  white-space: nowrap;
+  border: 0;
+  padding: 4px 8px;
+}
+#genres #clearGenres {
+  font-size: 12px;
+  border: 0;
+  white-space: nowrap;
+}
+#genres #searchGenres {
+  min-width: 180px;
+  border-radius: 4px;
+}
+#genres .atlasSelection small {
+  grid-column: 1/-1;
+  font-size: 12px;
+  color: var(--muted);
+}
+#genres.isExploring #genreBrowseHeader {
+  display: none;
+}
+#genres .genreFocus {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-height: 0;
+}
+#genres #closeGenreFocus {
+  float: none;
+  width: 100%;
+  min-height: 44px;
+  flex: none;
+  margin-bottom: 12px;
+  background: var(--panel);
+  font-size: 15px;
+}
+#genres .genreDetailScroll {
+  flex: 1;
+  overflow: auto;
+  overscroll-behavior: contain;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(180px, 290px) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+  padding: 4px;
+}
+#genres .genreContext {
+  min-width: 0;
+}
+#genres .genreContext h2 {
+  font-size: 23px;
+  margin: 0 0 12px;
+}
+#genres .genreContext h2:not(:first-child) {
+  margin-top: 24px;
+}
+#genres .genreContext [aria-current="true"] {
+  text-decoration: underline;
+}
+#genres .genreDetail {
+  padding: 24px;
+  background: var(--panel);
+  min-width: 0;
+}
+#genres .genreDetail h2 {
+  font-size: 38px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0 0 16px;
+  overflow-wrap: anywhere;
+}
+#genres .genreDetail p {
+  font-size: 15px;
+  color: var(--muted);
+}
+#genres .genreRelations {
+  margin: 20px 0;
+}
+#genres .genreRelations h3 {
+  font-size: 13px;
+  color: var(--muted);
+}
+#genres .genreRelations .atlasRow {
+  background: var(--bg);
+}
+#genres .genreRelations button {
+  margin: 0;
+}
+#genres .genreFilterAction {
+  width: 100%;
+  min-height: 44px;
+  font-size: 15px;
+  border-radius: 4px;
+}
+#genres .genreFilterAction[aria-pressed="true"] {
+  background: var(--lime);
+  color: var(--bg);
+}
+#genres .genreDetail .genreAvailability,
+#genres .genreDetail .dim {
+  font-size: 13px;
+}
+@media (min-width: 721px) {
+  .genreView aside {
+    padding-right: 16px;
+  }
+  .genreView #navGenres {
+    height: 48px;
+    min-height: 48px;
+  }
+}
+@media (min-width: 721px) and (max-height: 800px) {
+  .genreView #navGenres {
+    height: 36px;
+    min-height: 36px;
+  }
+  .genreView main {
+    padding: 20px 24px;
+  }
+  #genres h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+  }
+}
+@media (min-width: 721px) and (max-height: 420px) {
+  .genreView #navGenres {
+    height: 28px;
+    min-height: 28px;
+  }
+  .genreView main {
+    padding: 8px;
+  }
+  #genres h1 {
+    display: none;
+  }
+  #genres .atlasNote {
+    display: none;
+  }
+  #genres .contextualSearch {
+    height: 40px;
+  }
+}
+@media (max-width: 1100px) {
+  #genres #genreOptions.genreAtlas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  #genres .genreDetailScroll {
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 16px;
+  }
+  #genres .genreDetail {
+    padding: 16px;
+  }
+  #genres .atlasToolbar button {
+    padding-inline: 12px;
+  }
+}
+@media (max-width: 720px) {
+  .genreView .shell {
+    display: flex;
+    flex-direction: column;
+  }
+  .genreView aside {
+    position: relative;
+    height: 56px;
+    flex: 0 0 56px;
+    padding: 6px 16px;
+    border-bottom: 0;
+    overflow: visible;
+  }
+  .genreView aside nav {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    padding: 8px 16px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    max-height: calc(100dvh - 56px - var(--slop-player));
+    overflow: auto;
+  }
+  .genreView .sidebarBrand {
+    font-size: 25px;
+  }
+  .genreView .sidebarBrand:after {
+    content: " / Genres";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .genreView main {
+    width: 100%;
+    flex: 1;
+    height: calc(100dvh - 56px - var(--slop-player));
+    margin-bottom: var(--slop-player);
+    padding: 16px;
+  }
+  .genreView #genres {
+    gap: 8px;
+  }
+  #genres #genreBrowseHeader h1 {
+    display: none;
+  }
+  #genres .contextualSearch {
+    height: 44px;
+    margin-bottom: 8px;
+    padding: 0 10px;
+  }
+  #genres .contextualSearch .localScope,
+  #genres .contextualSearch > img {
+    display: none;
+  }
+  #genres .contextualSearch input {
+    font-size: 14px;
+  }
+  #genres .genreModes {
+    display: none;
+  }
+  #genres #genreOrder {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    background: var(--lime);
+    color: var(--bg);
+    padding: 8px;
+  }
+  #genres .atlasToolbar {
+    flex-wrap: nowrap;
+  }
+  #genres .atlasToolbar button {
+    padding: 8px 16px;
+  }
+  #genres .atlasNote {
+    font-size: 12px;
+  }
+  #genres #genreOptions.genreAtlas {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  #genres .atlasSelection {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 4px 0;
+  }
+  #genres #searchGenres {
+    min-width: 0;
+    padding-inline: 16px;
+  }
+  #genres #genreSelectedPanel {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    background: var(--panel);
+    padding: 12px;
+    border: 1px solid var(--line);
+    max-height: 35dvh;
+    overflow: auto;
+  }
+  #genres #genreSelectedPanel.isOpen {
+    display: block;
+  }
+  #genres #selectedGenres {
+    flex-wrap: wrap;
+    overflow: visible;
+    max-height: none;
+  }
+  #genres #genreSelectionToggle {
+    text-decoration: underline;
+  }
+  #genres .atlasSelection small {
+    font-size: 11px;
+  }
+  #genres .genreFocus > h1,
+  #genres .genreContext {
+    display: none;
+  }
+  #genres #closeGenreFocus {
+    width: fit-content;
+    padding-inline: 20px;
+    margin-bottom: 8px;
+  }
+  #genres .genreDetailScroll {
+    display: block;
+  }
+  #genres .genreDetail {
+    padding: 0;
+    background: transparent;
+  }
+  #genres .genreDetail h2 {
+    font-size: 30px;
+  }
+  #genres .genreDetail p {
+    font-size: 14px;
+  }
+  #genres .genreFilterAction {
+    width: auto;
+    padding: 8px 20px;
+  }
+}
+@media (max-height: 540px) and (max-width: 720px) {
+  .genreView aside {
+    height: 44px;
+    flex-basis: 44px;
+  }
+  .genreView main {
+    padding: 8px;
+  }
+  #genres .atlasNote {
+    display: none;
+  }
+  #genres .atlasSelection small {
+    display: none;
+  }
+  #genres .atlasToolbar {
+    margin: 0;
+  }
+  #genres .genreDetail h2 {
+    font-size: 24px;
+  }
+}
+@media (max-height: 540px) and (max-width: 720px) {
+  body.genreView {
+    --slop-player: 96px;
+  }
+  .genreView .player {
+    min-height: 96px;
+    padding-block: 8px;
+  }
+  .genreView .playingInfo small {
+    display: none;
+  }
+}
+
+#genres .atlasRow .genreName {
+  font-weight: 400;
+}
+#genres .genreAdd[aria-pressed="true"] > span {
+  color: #000;
+}
+#genres .genreFilterAction[aria-pressed="true"]:hover {
+  background: var(--ink);
+  color: #000;
+}
