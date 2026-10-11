@@ -77,3 +77,7 @@ Sully was previously called Slop. The old /slop and /tools/slop/ routes redirect
 ## Artwork drawer
 
 artwork-drawer.js and artwork-drawer.css provide an independent overlay outside the sidebar. The player thumbnail toggles it; Close and Escape return focus to the thumbnail. Covered navigation is inert while open. The panel ends above the measured player height and keeps images uncropped. Track selection updates the artwork without forcing the drawer open. Run tests/artwork-drawer-browser.cjs for short-screen geometry, focus recovery and unchanged playback state.
+
+## Archive request budget
+
+List artwork must use `SlopArtwork.attach(img, id, files, true)` and native lazy loading. It must not fetch metadata or probe original cover files. Opened releases and player artwork may resolve originals; duplicate elements share the resolution promise. Failed resolutions are retained for the tab lifetime, not retried automatically. Run `node --test tools/sully/artwork.test.cjs`. See ARCHIVE-REQUEST-AUDIT.md for the 11 October investigation and its limits.
