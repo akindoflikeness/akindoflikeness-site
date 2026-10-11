@@ -1,8 +1,8 @@
-# Maintaining Slop
+# Maintaining Sully
 
-Slop is a buildless static Internet Archive player at tools/slop/ in the
+Sully is a buildless static Internet Archive player at tools/sully/ in the
 wraithsys/akindoflikeness-site repository. The deployed route is
-https://akindoflikeness.net/tools/slop/ and pushes to main publish through
+https://akindoflikeness.net/tools/sully/ and pushes to main publish through
 Cloudflare Pages.
 
 ## Runtime map
@@ -24,7 +24,7 @@ tool. Archive metadata and file names are the authority for public labels and
 audio URLs. Liked tracks are per-browser IndexedDB state in slop-library,
 store saved.
 
-## Slop Slip
+## Sully Slip
 
 A version one Slip looks like this:
 
@@ -34,7 +34,7 @@ r is an Archive identifier. f is optional for a release-only Slip; when
 present it must be a relative browser-playable mp3, ogg, m4a, flac, wav, or opus file. at is
 an optional whole-second timestamp and only works with an exact file.
 
-Do not use the location fragment for navigation. It belongs to Slop Slip.
+Do not use the location fragment for navigation. It belongs to Sully Slip.
 Received track links prepare and seek the exact track but must not autoplay.
 Listener-facing names come from Archive metadata, never URL text.
 
@@ -47,10 +47,10 @@ Listener-facing names come from Archive metadata, never URL text.
 4. Change the smallest appropriate layer. Keep unrelated clean-up separate.
 5. Run focused checks:
 
-       node --check tools/slop/app.js
-       node --check tools/slop/slop-slip.js
-       node --check tools/slop/slop-slip-ui.js
-       node --check tools/slop/embed.js
+       node --check tools/sully/app.js
+       node --check tools/sully/slop-slip.js
+       node --check tools/sully/slop-slip-ui.js
+       node --check tools/sully/embed.js
        git diff --check
 
 6. Serve the repository locally and use a real public Archive item. Check
@@ -63,9 +63,13 @@ Listener-facing names come from Archive metadata, never URL text.
    update its cache suffix in index.html.
 9. Verify the normal public route and a fresh cache-busted request. Only after
    the functional deployment is verified, make a second small source update
-   that changes the Log entry from In the pot to Shipped and records the
+   that changes the Log entry from In progress to Shipped and records the
    verification date. Push and verify the public Log itself.
 
 Keep credentials, access tokens, private host paths, and browser export data
 out of this document and the public Log. Before a formal handover, add a
 human contact route to the ledger in Docs.
+
+## Name and compatibility
+
+Sully was previously called Slop. The old /slop and /tools/slop/ routes redirect to /sully and /tools/sully/. Redirects preserve query strings and listening fragments. Keep the slop-library database, localStorage keys, broadcast channel, export format identifiers and v1 listening-link protocol unchanged: these preserve existing libraries and backups on the same origin. Internal slop-prefixed filenames and JavaScript APIs are retained for compatibility. New backup filenames use sully. Historical development notes and copyright attributions retain their original names.

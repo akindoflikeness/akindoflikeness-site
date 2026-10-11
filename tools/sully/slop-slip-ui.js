@@ -102,14 +102,14 @@
       const track = currentTrack();
       button.disabled = !track;
       button.setAttribute("aria-label", track ? "Share " + prettyTrack(track) : "Share current track");
-      button.title = track ? "Pass the spoon" : "Choose a track to share";
+      button.title = track ? "Share this music" : "Choose a track to share";
     }
 
     async function copyLinkText() {
       const track = currentTrack();
       if (!track) return;
       await copyWithFallback(protocol.shareText(track, normalUrl()));
-      toast("Slip copied. Pass the spoon.");
+      toast("Listening link copied.");
     }
 
     async function shareNatively() {
@@ -119,8 +119,8 @@
       if (!navigator.share) return copyLinkText();
       try {
         await navigator.share({
-          title: prettyTrack(track) + " · slop",
-          text: track.release ? "From " + track.release : "A track from Slop",
+          title: prettyTrack(track) + " · Sully",
+          text: track.release ? "From " + track.release : "A track from Sully",
           url: url
         });
       } catch (error) {
@@ -152,13 +152,13 @@
       copyRelease.id = "copyReleaseSlip";
       copyRelease.className = "shareRelease";
       copyRelease.type = "button";
-      copyRelease.textContent = "Copy release Slip";
+      copyRelease.textContent = "Copy release link";
       copyRelease.title = "Copy an exact link to this Archive release";
       copyRelease.addEventListener("click", function () {
         const title = releaseBody.querySelector(".detailtop h2")?.textContent?.trim() || release;
         const url = protocol.buildSlipUrl(settings.baseUrl || root.location.href, ref);
-        copyWithFallback(title + " · slop\n" + url)
-          .then(function () { toast("Release Slip copied. Pass the spoon."); })
+        copyWithFallback(title + " · Sully\n" + url)
+          .then(function () { toast("Release Listening link copied."); })
           .catch(function () { toast("Could not copy the release Slip."); });
       });
       source.insertAdjacentElement("afterend", copyRelease);
@@ -198,7 +198,7 @@
       if (!protocol.looksLikeSlip(hash)) return;
       const ref = protocol.parseSlipHash(hash);
       if (!ref) {
-        toast("This Slop Slip is malformed or no longer supported.");
+        toast("This Sully Slip is malformed or no longer supported.");
         return;
       }
       try {
@@ -207,7 +207,7 @@
           const prepared = settings.prepareTrack(resolved.track);
           seekWhenReady(resolved.track);
           await prepared;
-          toast("A spoonful is ready: " + prettyTrack(resolved.track) + ". Press play to listen.");
+          toast("Ready to listen: " + prettyTrack(resolved.track) + ". Press play to listen.");
         } else if (typeof settings.openRelease === "function") {
           await settings.openRelease({
             identifier: resolved.release.id,
@@ -218,7 +218,7 @@
           toast("A release is ready: " + resolved.release.title + ".");
         }
       } catch (error) {
-        toast(error && error.message ? error.message : "This Slop Slip could not be opened.");
+        toast(error && error.message ? error.message : "This Sully Slip could not be opened.");
       }
     }
 

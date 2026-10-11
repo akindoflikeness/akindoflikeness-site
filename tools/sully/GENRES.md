@@ -24,7 +24,7 @@ Edit `genres.json` directly; no bundler or database is required. Every entry has
 
 Add top-level entry IDs to `families`. Roots can be genre tags or purely navigational
 groups. The validator catches missing IDs, duplicate IDs/names, repeated edges,
-cycles and unreachable entries. Run `node --test tools/slop/genre-directory.test.cjs`
+cycles and unreachable entries. Run `node --test tools/sully/genre-directory.test.cjs`
 before committing, then inspect desktop and phone previews. `genre-ui.js` owns the
 interface; `genre-directory.js` validates and indexes the graph and samples names.
 
@@ -66,7 +66,7 @@ names does not make that underlying catalogue sample random or comprehensive.
 
 ## Design and handoff
 
-The preview retains Slop's Lora typography, shared sidebar and player. Figma still
+The preview retains Sully's Lora typography, shared sidebar and player. Figma still
 needs the new atlas, overlap detail, expanded branches, source-tag and phone states
 if the design file is to describe this implementation. Do not replace working
 keyboard controls with flattened illustration. Test with blocked storage, failed
