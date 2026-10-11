@@ -1,4 +1,7 @@
 'use strict';
+// Keep the preview label on development hosts only.
+const previewBadge=document.querySelector('.previewBadge');
+if(previewBadge)previewBadge.hidden=!(/\.pages\.dev$/.test(location.hostname)&&location.hostname!=='akindoflikeness-site.pages.dev'||['localhost','127.0.0.1'].includes(location.hostname));
 // Figma's shared search and view geometry, with real data and native controls.
 function localSearch(root,id,label,hint,filter){
  const form=document.createElement('form');form.className='search contextualSearch';

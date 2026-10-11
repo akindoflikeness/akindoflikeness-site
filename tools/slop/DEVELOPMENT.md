@@ -16,7 +16,7 @@ functional and recovery gates pass. Do not move the public site prematurely.
 - Each continuation reads this file and the open branch, performs one bounded unit
   of work, updates evidence and remaining work, and stops temporary processes.
 
-## First implementation (development only)
+## First implementation (approved for release 11 October 2026)
 
 - Existing likes migrate without deletion from IndexedDB version 1 to 2.
 - Playlists support creation, rename, repeated entries, ordering, removal, queueing
@@ -95,7 +95,7 @@ for etree, corrected to accept both audio and etree and fail if either collectio
 returns no items. The corrected 2384f91 run passed both CI checks and collected twelve items with 427 track references, zero failures and zero audio bytes. The latest preview serves that implementation.
 
 Preview: https://slop-discovery-foundations.akindoflikeness-site.pages.dev/tools/slop/
-Draft PR: https://github.com/akindoflikeness/akindoflikeness-site/pull/41
+Initial release PR: https://github.com/akindoflikeness/akindoflikeness-site/pull/41
 
 A daily 09:00 thread continuation is configured for bounded development work.
 It is not a continuously running server; catalogue processing and CI run remotely.
@@ -138,3 +138,20 @@ Keep new screens aligned to those shared components and retain one-column nav.
   Cloudflare Pages and the bounded metadata sampler. The browser suite also
   passed against the deployed branch URL, including the new sorting checks.
   Temporary local server and browser processes were stopped.
+
+## Approved public release — 11 October 2026
+
+The owner tested the preview and explicitly requested publication on the existing
+live site, retaining the preview for later development. This approves the current
+slice, not completion of all future milestones or the Neocities move.
+
+- Tested implementation: 5c45733; ff15b93 changes only this evidence document.
+- Rechecked GitHub evidence: both check jobs, Pages and the push metadata sampler
+  succeeded for 5c45733 (the PR sampler is intentionally skipped).
+- Release preparation makes the preview badge host-aware and updates the public
+  Log and README; application behaviour otherwise remains the tested version.
+- Keep slop/discovery-foundations and its Pages preview. PR #41 is the initial
+  release; future continuation must inspect current branch changes and use a new
+  draft PR when needed. Do not attempt to continue work through a merged PR.
+- Future feature changes remain preview-only until separately approved for release.
+- Next implementation remains manual queue reordering and paused recovery checks.

@@ -1,4 +1,4 @@
-DEVELOPMENT PREVIEW: see DEVELOPMENT.md for current scope and evidence.
+See DEVELOPMENT.md for release evidence and the separate development preview.
 
 slop
 ====
