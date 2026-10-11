@@ -253,3 +253,23 @@ on phones and usable pinned controls at 320–1440px and short landscape sizes.
 Desktop and phone directory/detail screenshots inspected. Preview/deployment
 verification must precede merging PR #42; then verify production and update Log
 to Shipped. Keep the development branch and preview available afterward.
+
+
+### Genre revision: public release verified
+
+- PR #42 merged as aa96e5ff1ce3440ee5405f7a9025fff6352a30d2 after both hosted
+  checks and the sampler passed. Preview deployment 423f7e03 and production
+  deployment 7f193f4e succeeded. The newer favicon commit was preserved.
+- Public checks exposed a stale stylesheet URL during the initial deployment;
+  cache-version correction 22d2065 passed preview tests. Concurrent main commits
+  a5fc58b/d21846d renamed the app to Sully, moved it to tools/sully and already
+  refreshed all coupled asset versions. Merge 9f040f5 preserves that complete
+  update; its tree matches the renamed main before this Log-only follow-up.
+- All three browser suites passed on https://akindoflikeness.net/tools/sully/:
+  genre rotation, overlaps, denied storage, failed fetch recovery, keyboard and
+  scroll restoration, pinned controls, 320–1440px/short landscape layouts, and
+  existing library/queue recovery. Temporary browsers and local server closed.
+- The visible genre entry is now marked Shipped. Preview remains at
+  https://slop-discovery-foundations.akindoflikeness-site.pages.dev/tools/sully/.
+- Resume bounded preview development from tools/sully. Future feature publication
+  needs its own release approval; this approval covered the genre revision.
