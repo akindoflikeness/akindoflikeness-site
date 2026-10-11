@@ -1,5 +1,5 @@
 /*
- * Slop Slip v1
+ * Sully Slip v1
  *
  * A small, backend-free handoff format for an Archive release or one exact
  * browser-playable file. This script deliberately exposes a browser global so
@@ -75,7 +75,7 @@
 
   function serialiseSlip(reference) {
     const ref = normaliseReference(reference);
-    if (!ref) throw new TypeError("A Slop Slip needs a valid Archive release and playable file.");
+    if (!ref) throw new TypeError("A Sully Slip needs a valid Archive release and playable file.");
     const params = new URLSearchParams({ v: VERSION, r: ref.release });
     if (ref.file) params.set("f", ref.file);
     if (ref.at !== undefined) params.set("at", String(ref.at));
@@ -105,7 +105,7 @@
       release: track && (track.id || track.releaseId),
       file: track && track.file
     });
-    if (!ref || !ref.file) throw new TypeError("A playable Slop Slip track needs an Archive release and file.");
+    if (!ref || !ref.file) throw new TypeError("A playable Sully Slip track needs an Archive release and file.");
     return "https://archive.org/download/" + encodeURIComponent(ref.release) + "/" + ref.file.split("/").map(encodeURIComponent).join("/");
   }
 
@@ -152,7 +152,7 @@
 
   function resolveMetadata(reference, payload) {
     const ref = normaliseReference(reference);
-    if (!ref) throw new TypeError("Invalid Slop Slip reference.");
+    if (!ref) throw new TypeError("Invalid Sully Slip reference.");
     const metadata = payload && typeof payload.metadata === "object" ? payload.metadata : {};
     const release = {
       id: ref.release,
@@ -182,9 +182,9 @@
 
   async function resolveSlip(reference, fetchImpl) {
     const ref = normaliseReference(reference);
-    if (!ref) throw new TypeError("Invalid Slop Slip reference.");
+    if (!ref) throw new TypeError("Invalid Sully Slip reference.");
     const request = fetchImpl || globalThis.fetch;
-    if (typeof request !== "function") throw new TypeError("A fetch implementation is required to resolve a Slop Slip.");
+    if (typeof request !== "function") throw new TypeError("A fetch implementation is required to resolve a Sully Slip.");
     const response = await request("https://archive.org/metadata/" + encodeURIComponent(ref.release));
     if (!response || !response.ok) throw new Error("The Internet Archive release could not be reached.");
     return resolveMetadata(ref, await response.json());
@@ -213,8 +213,8 @@
 
   function embedCode(track, url) {
     const parts = [firstText(track && track.artist), firstText(track && track.title)].filter(Boolean);
-    const title = parts.join(" — ") || "Slop player";
-    return '<iframe src="' + escapeHtml(url) + '" title="' + escapeHtml("Slop: " + title) + '" loading="lazy" width="360" height="152" frameborder="0"></iframe>';
+    const title = parts.join(" — ") || "Sully player";
+    return '<iframe src="' + escapeHtml(url) + '" title="' + escapeHtml("Sully: " + title) + '" loading="lazy" width="360" height="152" frameborder="0"></iframe>';
   }
 
   return Object.freeze({

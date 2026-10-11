@@ -33,7 +33,7 @@
       await audio.play();
       select("#playEmbed").textContent = "Playing";
     } catch (error) {
-      show("Playback could not start. Try opening Slop.", true);
+      show("Playback could not start. Try opening Sully.", true);
     } finally {
       select("#playEmbed").disabled = false;
     }
@@ -42,7 +42,7 @@
   async function boot() {
     const reference = protocol.parseSlipHash(root.location.hash);
     if (!reference || !reference.file) {
-      show("This embed needs an exact Slop track link.", true);
+      show("This embed needs an exact Sully track link.", true);
       return;
     }
     try {

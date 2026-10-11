@@ -1,7 +1,7 @@
 const { chromium } = require(process.env.SLOP_PLAYWRIGHT || "playwright");
 const assert = require("node:assert/strict");
 const directory = require("../genres.json");
-const base = process.env.SLOP_TEST_URL || "http://127.0.0.1:8766/tools/slop/";
+const base = process.env.SLOP_TEST_URL || "http://127.0.0.1:8766/tools/sully/";
 (async () => {
   const browser = await chromium.launch({
     headless: true,

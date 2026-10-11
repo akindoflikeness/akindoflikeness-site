@@ -1,10 +1,10 @@
 See DEVELOPMENT.md for release evidence and the separate development preview.
 
-slop
-====
+Sully
+=====
 A buildless, MIT-licensed discovery interface and player for Internet Archive audio.
 
-Serve the entire tools/slop directory together, including the icons directory, stylesheets, Slop Slip scripts and slop-archive.js. No install, account or backend is required.
+Serve the entire tools/sully directory together, including the icons directory, stylesheets, Sully Slip scripts and slop-archive.js. No install, account or backend is required.
 
 Browsing and search query the Archive audio index directly, 30 releases at a time. The ‹ page › control moves through result pages, beginning at 0 in the interface. Genre and collection filters narrow that index. Browsing keeps its newest-indexed Archive order; text searches match phrases in artist names and release titles, with dedicated Artist, Release title and Tags choices and relevance ordering. Related shelves use Archive download count. There is no fixed starter catalogue. More like this searches for shared metadata tags, not audio similarity.
 
@@ -16,7 +16,7 @@ Clicking an album cover starts its first track and fills From this album with th
 
 APIs: https://archive.org/advancedsearch.php ; https://archive.org/metadata/{identifier} ; https://archive.org/download/{identifier}/{file}
 
-Slop Slip shares an exact public Archive release or track in a versioned URL
+Sully Slip shares an exact public Archive release or track in a versioned URL
 fragment. Received track links prepare the selected track and optional timestamp
 but never autoplay. The Log and Docs tabs keep an append-only engineering diary
 and the keeper-facing manual in the app; see MAINTENANCE.md for the full source

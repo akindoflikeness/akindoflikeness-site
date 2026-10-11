@@ -21,14 +21,14 @@
     "page": "/nzbt.html"
   },
   {
-    "name": "slop",
-    "image": "/assets/slop-wordmark-v2.svg",
-    "still": "/assets/slop-wordmark-v2.svg",
+    "name": "Sully",
+    "image": "/assets/sully-wordmark.svg",
+    "still": "/assets/sully-wordmark.svg",
     "width": 880,
     "height": 580,
-    "alt": "slop",
-    "description": "Pick a release, have a listen, and keep what you like. A small music discovery app for the Internet Archive.",
-    "app": "/tools/slop/",
-    "page": "/slop.html"
+    "alt": "Sully",
+    "description": "Explore music from the Internet Archive. Listen to full releases, follow artists and sounds, and save music to return to.",
+    "app": "/tools/sully/",
+    "page": "/sully.html"
   }
 ]

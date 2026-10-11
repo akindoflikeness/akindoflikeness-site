@@ -1,6 +1,6 @@
 const {chromium}=require(process.env.SLOP_PLAYWRIGHT||'playwright');
 const assert=require('node:assert/strict');
-const base=process.env.SLOP_TEST_URL||'http://127.0.0.1:8766/tools/slop/';
+const base=process.env.SLOP_TEST_URL||'http://127.0.0.1:8766/tools/sully/';
 const track={id:'unavailable-example',file:'song.flac',title:'A preserved reference',artist:'Example artist',release:'Example release',tags:['ambient']};
 async function context(browser){const c=await browser.newContext({viewport:{width:1366,height:768}});await c.route('https://archive.org/**',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({response:{numFound:3,docs:[{identifier:'one',title:'One',creator:'Excluded',subject:['ambient']},{identifier:'two',title:'Two',creator:'Other',subject:['ambient']},{identifier:'three',title:'Three',creator:'Other',subject:['ambient']}]}})}));return c;}
 (async()=>{const browser=await chromium.launch({headless:true,...(process.env.SLOP_BROWSER_CHANNEL?{channel:process.env.SLOP_BROWSER_CHANNEL}:{})});try{

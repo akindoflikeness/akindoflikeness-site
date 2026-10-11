@@ -1,3 +1,8 @@
 /albums        /music   301
 /albums.html   /music   301
 /music/        /music   301
+/slop /sully 301
+/slop.html /sully 301
+/tools/slop /tools/sully/ 301
+/tools/slop/ /tools/sully/ 301
+/tools/slop/* /tools/sully/:splat 301
