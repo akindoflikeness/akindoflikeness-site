@@ -98,3 +98,10 @@ headings and labels (Artists & Releases), sentence case for prose, and short,
 actionable empty/error states. Do not rewrite artists' names or release titles.
 Run tests/base-ui-browser.cjs for modal focus, dismissal and repeated opening,
 plus the existing library, artwork, genre and Archive-failure browser suites.
+
+## Interface density
+
+`density.css` is the final shared sizing layer: type scale, control sizes and
+spacing across views. Keep new components on this scale rather than adding
+large view-specific margins. Search status reserves no space when empty;
+filters share a compact row. Coarse pointers retain larger hit targets.
