@@ -154,6 +154,8 @@ nav button.active {
 nav .sidebarIcon {
   display: grid;
   place-items: center;
+  flex: 0 0 20px;
+  min-width: 0;
   width: 20px;
   height: 20px;
   margin: 0 10px 0 0;
