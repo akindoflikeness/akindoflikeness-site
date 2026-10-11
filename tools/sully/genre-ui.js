@@ -5,12 +5,12 @@
   root.id = "genres";
   root.hidden = true;
   root.innerHTML = `<div id="genreBrowseHeader"><h1>Genres</h1>
- <div class="atlasToolbar"><div class="genreModes" role="group" aria-label="Directory display"><button data-genre-mode="rotate" aria-pressed="true">Starting points</button><button data-genre-mode="families" aria-pressed="false">All families</button><button data-genre-mode="alpha" aria-pressed="false">A–Z</button></div><label class="genreOrderLabel" for="genreOrder">Display</label><select id="genreOrder" disabled><option value="rotate">Starting points</option><option value="families">All families</option><option value="alpha">A–Z</option></select><button id="reshuffleGenres" disabled>Reshuffle</button></div>
- <p class="atlasNote">Open a name to explore. + adds it to your filters.</p></div>
+ <div class="atlasToolbar"><div class="genreModes" role="group" aria-label="Directory display"><button data-genre-mode="rotate" aria-pressed="true">Starting Points</button><button data-genre-mode="families" aria-pressed="false">All Families</button><button data-genre-mode="alpha" aria-pressed="false">A–Z</button></div><label class="genreOrderLabel" for="genreOrder">Display</label><select id="genreOrder" disabled><option value="rotate">Starting Points</option><option value="families">All Families</option><option value="alpha">A–Z</option></select><button id="reshuffleGenres" disabled>Reshuffle</button></div>
+ <p class="atlasNote">Explore a genre, or select + to filter.</p></div>
  <div id="genreWorkspace"><div id="genreBrowse" tabindex="-1" aria-label="Genre directory"><div id="atlasStatus" role="status">Loading the directory…</div><div id="genreOptions" class="genreAtlas"></div>
- <details id="sourceTagPanel" class="sourceTagPanel"><summary>Source tags & other names</summary><p>Unclassified tags are welcome. These are tags seen in loaded results or your liked tracks, not a complete Archive vocabulary. Tag presence does not confirm playable audio.</p><form id="customGenreForm"><label for="customGenre">Add any Archive tag</label><input id="customGenre" maxlength="200" required placeholder="An exact tag or local scene name"><button>Add tag</button></form><div id="sourceGenres"></div></details>
- <details class="atlasMethod"><summary>How these starting points are chosen</summary><p>These are overlapping browsing routes, not an authoritative history of music. A dot means a tag was seen in loaded metadata, not that playback is verified. No dot means availability is unknown.</p><p>Four entries per family, shuffled locally. Recently shown names are passed over where alternatives exist. Your arrangement stays put during this visit; Reshuffle changes it. Complete families and A–Z always include every directory entry.</p><p id="atlasStorage"></p><p>Seed: <code id="genreSeed"></code>. Selection history stays on this device and stores genre identifiers only.</p><button id="forgetGenreHistory">Forget rotation history</button><p><a href="genres.json">Genre data</a> · <a href="GENRES.md">Maintenance guide</a></p></details></div><section id="genreFocus" class="genreFocus" hidden aria-label="Genre connections" tabindex="-1"></section></div>
- <div class="atlasSelection"><button id="genreSelectionToggle" aria-expanded="false" aria-controls="genreSelectedPanel"><output id="genreCount" aria-live="polite">0 genres selected</output></button><div id="genreSelectedPanel"><div id="selectedGenres"></div><button id="clearGenres">Clear all</button></div><button id="searchGenres" class="primary" disabled>Find recordings</button><small>Matches any selected tag · subgenres are separate</small></div>`;
+ <details id="sourceTagPanel" class="sourceTagPanel"><summary>Other Tags</summary><p>Tags from your results and library. Availability varies.</p><form id="customGenreForm"><label for="customGenre">Add an Archive Tag</label><input id="customGenre" maxlength="200" required placeholder="An exact tag or local scene name"><button>Add Tag</button></form><div id="sourceGenres"></div></details>
+ <details class="atlasMethod"><summary>About This Directory</summary><p>Genres can belong to several families. A dot marks a tag found in your loaded results; playback availability varies.</p><p>Four entries per family, shuffled locally. Recently shown names are passed over where alternatives exist. Your arrangement stays put during this visit; Reshuffle changes it. Complete families and A–Z always include every directory entry.</p><p id="atlasStorage"></p><p>Seed: <code id="genreSeed"></code>. Selection history stays on this device and stores genre identifiers only.</p><button id="forgetGenreHistory">Reset Suggestions</button><p><a href="genres.json">Genre Data</a> · <a href="GENRES.md">Maintenance Guide</a></p></details></div><section id="genreFocus" class="genreFocus" hidden aria-label="Genre connections" tabindex="-1"></section></div>
+ <div class="atlasSelection"><button id="genreSelectionToggle" aria-expanded="false" aria-controls="genreSelectedPanel"><output id="genreCount" aria-live="polite">0 genres selected</output></button><div id="genreSelectedPanel"><div id="selectedGenres"></div><button id="clearGenres">Clear All</button></div><button id="searchGenres" class="primary" disabled>Find Recordings</button><small>Matches any selected tag · subgenres are separate</small></div>`;
   $("#discover").after(root);
   let idx = null,
     seed = "",
@@ -200,7 +200,7 @@
     $("#genreBrowse").hidden = true;
     panel.hidden = false;
     const context = g.parents.length ? g.parents : [id];
-    panel.innerHTML = `<button id="closeGenreFocus">‹ Back to directory</button><h1>Explore a connection</h1><div class="genreDetailScroll" tabindex="0" aria-label="Genre relationships"><div class="genreContext">${context
+    panel.innerHTML = `<button id="closeGenreFocus">‹ Back to Directory</button><h1>Genre Connections</h1><div class="genreDetailScroll" tabindex="0" aria-label="Genre relationships"><div class="genreContext">${context
       .map(
         (parent) =>
           `<h2>${esc(idx.byId.get(parent).label)}</h2>${idx.children
@@ -210,7 +210,7 @@
       )
       .join(
         "",
-      )}</div><div class="genreDetail"><h2 tabindex="-1" id="genreDetailTitle">${esc(g.label)}</h2><p>${esc(g.note)}</p>${g.aliases.length ? `<p>Also called: ${g.aliases.map(esc).join(" · ")}</p>` : ""}${relation("Found under", g.parents)}${relation("Narrower routes", idx.children.get(id))}${relation("Neighbouring styles", g.related)}${g.tag ? addControl(g.tag, g.label, true) : '<p class="dim">This is a browsing family, not an Archive tag.</p>'}<p class="genreAvailability">${seen(g) ? "Tag seen in loaded metadata. Playable recordings have not been verified." : "Recording availability not checked."}</p><p class="dim">These are browsing connections, not a claim that recordings sound alike.</p></div></div>`;
+      )}</div><div class="genreDetail"><h2 tabindex="-1" id="genreDetailTitle">${esc(g.label)}</h2><p>${esc(g.note)}</p>${g.aliases.length ? `<p>Also called: ${g.aliases.map(esc).join(" · ")}</p>` : ""}${relation("Found Under", g.parents)}${relation("Narrower Styles", idx.children.get(id))}${relation("Related Styles", g.related)}${g.tag ? addControl(g.tag, g.label, true) : '<p class="dim">This is a browsing family, not an Archive tag.</p>'}<p class="genreAvailability">${seen(g) ? "Tag seen in loaded metadata. Playable recordings have not been verified." : "Recording availability not checked."}</p></div></div>`;
     bindRows(panel);
     updateSelection();
     $("#closeGenreFocus").onclick = () => closeFocus();
@@ -251,7 +251,7 @@
     $("#genreSeed").textContent = seed;
     let html = "";
     if (mode === "alpha" && !q)
-      html = `<section class="atlasAlphabet"><h2>All ${idx.all.length} names</h2><div>${idx.all.map((id) => row(id, "alphabet")).join("")}</div></section>`;
+      html = `<section class="atlasAlphabet"><h2>All ${idx.all.length} Names</h2><div>${idx.all.map((id) => row(id, "alphabet")).join("")}</div></section>`;
     else {
       const groups =
         q || mode === "families"
@@ -297,7 +297,7 @@
       : mode === "rotate"
         ? "4 starting points per family"
         : mode === "families"
-          ? "All families · expand narrower routes"
+          ? "All Families · expand narrower routes"
           : idx.all.length + " names · alphabetical";
     sourceTags();
     storageStatus();

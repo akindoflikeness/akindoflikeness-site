@@ -862,7 +862,7 @@ h2 {
   border-radius: var(--slop-radius);
 }
 
-dialog {
+.sullyDialog {
   width: min(880px, calc(100vw - 32px));
   max-height: min(85vh, 850px);
   margin: auto;
@@ -874,11 +874,11 @@ dialog {
   box-shadow: 0 30px 90px #000a;
 }
 
-dialog::backdrop {
+.uiBackdrop {
   background: rgb(0 0 0 / .733);
 }
 
-dialog .close {
+.sullyDialog .close {
   min-height: 38px;
   padding: 5px 11px;
   font-size: 13px;
@@ -1193,7 +1193,7 @@ dialog .close {
     bottom: calc(var(--slop-player) + 12px);
   }
 
-  dialog {
+  .sullyDialog {
     padding: 24px;
   }
 
@@ -1443,10 +1443,5 @@ nav button.active:hover:not(:disabled){background:var(--lime);color:#000;border-
 /* Queue controls belong alongside the title; preferences stay collapsed. */
 .queueHeader {display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
 .queueHeader h1 {margin:0}
-.queueOptions {font-size:14px;margin-left:auto;max-width:100%}
-.queueOptions summary {cursor:pointer;text-align:right;padding:12px 0}
-.queueOptions label {display:flex;align-items:center;gap:8px;min-height:44px}
-.queueOptions input {width:auto;margin:0}
-.queueOptions p {font-size:13px;color:var(--muted);margin:0 0 12px}
 #queue .contextualSearch[hidden], #queueFilterStatus[hidden] {display:none}
 #queue .queueEmpty {margin:0}

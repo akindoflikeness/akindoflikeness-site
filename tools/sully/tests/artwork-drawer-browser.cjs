@@ -20,6 +20,7 @@ const base=process.env.SLOP_TEST_URL||'http://127.0.0.1:8767/tools/sully/';
    const before=await page.locator('main').boundingBox();
    const audioBefore=await page.locator('#audio').evaluate(a=>({src:a.src,paused:a.paused,time:a.currentTime}));
    await page.locator('#artworkToggle').click();
+   await page.waitForFunction(()=>Math.abs(document.querySelector('#sidebarNow').getBoundingClientRect().x)<0.01);
    const panel=await page.locator('#sidebarNow').boundingBox(), cover=await page.locator('#sidebarNowCover').boundingBox(), player=await page.locator('.player').boundingBox();
    assert.ok(panel.x===0&&panel.y===0&&panel.y+panel.height<=player.y+1);
    assert.ok(cover.width>=175&&cover.height>=Math.min(175,viewport.height-210),JSON.stringify({viewport,cover}));
