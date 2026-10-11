@@ -197,6 +197,19 @@ randomisation in preview. This takes priority over the queued queue-reordering s
 - Figma still needs this new directory, expanded/overlapping detail, source-tag and
   responsive states captured. Shared visual components remain the existing design.
 - Production remains at 605bb9f. Do not merge this feature without release approval.
-- Next: verify remote checks and deployed preview; then resume manual queue reorder
+- Next: resume manual queue reorder
   with repeated-entry and opted-in paused recovery checks. Broader taxonomy coverage
   and real listener evaluation remain ongoing work, not claimed complete here.
+
+### Hosted preview evidence
+
+- Draft PR #42: https://github.com/akindoflikeness/akindoflikeness-site/pull/42.
+  Implementation commit 8e2857099657f9e4e8efb7cd8550c085f60a43d3.
+- Both GitHub check jobs passed; the bounded push metadata sampler passed (the
+  duplicate PR sampler is intentionally skipped). Cloudflare preview deployment
+  e4f1c531-e24d-41fe-b986-0e54a18b5854 succeeded.
+- Genre and existing library browser suites both passed against the deployed
+  https://slop-discovery-foundations.akindoflikeness-site.pages.dev/tools/slop/.
+- Verified remote main remains 605bb9f76ccb02bf58334e3b9274e4c2d102bd95.
+  No merge or production deployment performed. Temporary browsers and local
+  test server stopped. New Figma states remain documented in FIGMA-COVERAGE.md.
