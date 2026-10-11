@@ -273,3 +273,18 @@ to Shipped. Keep the development branch and preview available afterward.
   https://slop-discovery-foundations.akindoflikeness-site.pages.dev/tools/sully/.
 - Resume bounded preview development from tools/sully. Future feature publication
   needs its own release approval; this approval covered the genre revision.
+
+### Public cache verification after the Sully rename
+
+- Release 5851308 deployed successfully. The custom domain still served the old
+  Log because the zone's 600-second HTML cache exception named only /tools/slop.
+- Extended that existing exception to /tools/sully, /tools/sully/ and
+  /tools/sully/index.html (ruleset 81aed3017e0d452ca538233281d91c4d version 4).
+  Existing cache behaviour for the rest of the site is preserved. A targeted
+  three-URL purge alone had not resolved the stale response.
+- A fresh browser verified the plain old URL redirects to Sully, the public Log
+  shows Shipped, production hides the preview badge, and the retained preview
+  displays its badge and working genre families. Browser closed afterward.
+- When renaming this app again, carry forward the HTML cache exception as well
+  as redirects and asset versions. Next work remains the preview continuation
+  queue, with UI changes designed in Figma before implementation.
