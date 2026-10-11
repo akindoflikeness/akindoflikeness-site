@@ -77,3 +77,27 @@ retained. The Figma file has not been modified for this step: add frames for the
 atlas, multiple open branches, focused genre relationships, selected filters,
 source/custom tags and mobile layouts. Data and behaviour are documented in
 GENRES.md. This preview supersedes the twelve-checkbox vocabulary implementation.
+
+## Genre UX revision — 11 October 2026 (Figma proposal)
+
+Editable screens in the existing file vkLYFKei7GBAjzke9cvcSt:
+- Desktop directory: 79:1179; relationship detail: 79:1180.
+- Phone directory: 79:1181; relationship detail: 79:1182.
+- Behaviour and implementation notes: 79:1183; reusable controls: 79:1184.
+- Genre row default/selected components: 80:1191 / 80:1196.
+- Quiet/primary actions: 80:1199 / 80:1202.
+
+The proposal reduces introductory bulk, separates exploring from 44px filter
+controls, pins listening filters above the player, and confines scrolling to the
+content region. It reuses the current shared sidebar and player, Lora and Slop's
+existing colours; original screens are retained. All 14 families are included in
+the desktop scrolling directory. The phone is a representative state, not an
+exhaustive catalogue mockup. Dub techno opens its detail frame and Back returns.
+Other actions are specified rather than fully simulated.
+
+Structural checks confirmed editable text, instances and vector layers; only the
+existing player's 48px cover thumbnail uses an image. All rendered text is Lora.
+Desktop and phone overview/detail screenshots inspected after sizing and toggle
+refinements. This is a design proposal, not a website implementation. Next UI work
+should translate these states to preview, retain complete/unclassified tag access,
+and test keyboard focus, scroll restoration, empty/error states and playback.

@@ -221,3 +221,17 @@ randomisation in preview. This takes priority over the queued queue-reordering s
 - Verified remote main remains 605bb9f76ccb02bf58334e3b9274e4c2d102bd95.
   No merge or production deployment performed. Temporary browsers and local
   test server stopped. New Figma states remain documented in FIGMA-COVERAGE.md.
+## Log correction and Figma genre revision — 11 October 2026
+
+- Added the missing visible genre-directory Log entry in e42107a, marked In the
+  pot; updated its legend to include deployed previews. The development notes had
+  been updated without the user-facing Log. Added an explicit completion gate.
+- Hosted checks, metadata sampler and Pages deployment passed for e42107a.
+  Opened the deployed Log in a browser: new entry visible with preview status and
+  no horizontal overflow at 390px. Browser closed afterward.
+- Figma now contains editable desktop/phone genre browsing and detail proposals,
+  reusable controls, limited prototype links and behaviour notes. See
+  FIGMA-COVERAGE.md for exact nodes and validation. These layout changes have not
+  been applied to the website. Original Figma screens remain available.
+- Next UI step: implement the Figma revision in preview and test focus, scrolling,
+  tag selection and playback together. Keep production unchanged.
