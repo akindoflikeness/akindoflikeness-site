@@ -33,7 +33,7 @@ const base=process.env.SLOP_TEST_URL||'http://127.0.0.1:8767/tools/sully/';
    await page.keyboard.press('Escape');
    assert.equal(await page.locator('#sidebarNow').isVisible(),false);
    assert.equal(await page.locator('aside').evaluate(e=>e.inert),false);
-   assert.equal(await page.locator('#artworkToggle').evaluate(e=>e===document.activeElement),true);
+   await page.waitForFunction(()=>document.querySelector('#artworkToggle')===document.activeElement);
    await page.locator('#artworkToggle').click();
    await page.locator('#closeArtwork').click();
    assert.equal(await page.locator('#sidebarNow').isVisible(),false);
