@@ -59,6 +59,18 @@ const base=process.env.SLOP_TEST_URL||'http://127.0.0.1:8766/tools/sully/';
     await page.reload();
     await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');
     assert.equal(await page.locator('#recoverQueue').isChecked(),true);
+    await page.locator('#clapResults [data-discover-open]').first().click();
+    await page.locator('#releaseBody [data-rnext]').waitFor({state:'visible'});
+    await page.locator('#releaseBody [data-rnext]').click();
+    assert.equal(await page.locator('#copyReleaseSlip').count(),1);
+    await page.keyboard.press('Escape');
+    await page.locator('#release').waitFor({state:'hidden'});
+    await page.locator('#clapResults [data-discover-open]').first().click();
+    await page.locator('#releaseBody [data-rnext]').waitFor({state:'visible'});
+    assert.equal(await page.locator('#copyReleaseSlip').count(),1);
+    await page.locator('#close').click();
+    await page.locator('nav [data-view="queue"]').click();
+    assert.equal(await page.locator('#queueList [data-qplay]').count(),1);
     assert.deepEqual(errors,[]);
     console.log('PASS: Base UI startup, modal focus and dismissal, responsive geometry, retained forms, popover persistence and unchanged audio');
   } finally {await browser.close();}
