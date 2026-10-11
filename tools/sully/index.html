@@ -12,7 +12,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <link rel="stylesheet" href="layout-rhythm.css?v=sully-20261011">
 <link rel="stylesheet" href="slop-slip.css?v=sully-20261011">
 <link rel="stylesheet" href="slop-handbook.css?v=sully-20261011">
-<link rel="stylesheet" href="slop-ui.css?v=sully-20261011">
+<link rel="stylesheet" href="slop-ui.css?v=clear-queue-1">
 <link rel="stylesheet" href="genres.css?v=sully-20261011">
 <link rel="stylesheet" href="artwork-drawer.css?v=1">
 </head>
@@ -32,26 +32,26 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 
 
 <details class="personalPanel"><summary>Shape discovery</summary>
-<p>These controls use Archive metadata. No audio model is connected. Exclusions apply locally to each result page; they are never sent with your search. Archive credits may be incomplete.</p>
+<p>Artist exclusions apply on this device, using Archive credits.</p>
 <form id="personalFilters"><label for="excludeCreators">Exclude credited artists (one exact name per line)</label><textarea id="excludeCreators" rows="3" maxlength="20000"></textarea><label><input type="checkbox" id="diversify" checked> Spread results across different artists</label><button>Apply preferences</button></form>
 <form id="saveModeForm"><label for="modeTitle">Save this search and variety setting</label><div class="personalRow"><input id="modeTitle" maxlength="200" placeholder="Mode name" required><button>Save mode</button></div></form><div id="savedModes"></div>
 </details>
 <div id="discoverHome">
-    <div class="discoverIntro"><h1>Discover</h1><p>Explore recordings, follow an artist or a sound, and save music you want to return to.</p></div>
+    <div class="discoverIntro"><h1>Discover</h1></div>
     <section class="discoverSection" aria-labelledby="genre-title"><div class="sectionHeading"><div><h2 id="genre-title">A few places to begin</h2></div><button id="browseGenres" type="button">Browse Genres →</button></div><div class="trails" aria-label="Explore sounds"><button data-genre="ambient">Ambient</button><button data-genre="experimental">Experimental</button><button data-genre="electronic">Electronic</button><button data-genre="jazz">Jazz</button><button data-genre="noise">Noise</button><button data-genre="field recordings">Field recordings</button></div></section>
-    <section class="discoverSection" aria-labelledby="paths-title"><div class="sectionHeading"><div><h2 id="paths-title">Playlists &amp; listening paths</h2></div></div><div class="pathGrid"><article class="pathCard"><img class="collectionArt" src="https://archive.org/services/img/netlabels" alt="Netlabels collection artwork" loading="lazy"><p class="pathMeta">Archive collection</p><h3>Netlabels</h3><p>Independent releases and artist-run labels. Start anywhere and follow a thread.</p><button type="button" data-collection="netlabels">Explore path</button></article><article class="pathCard"><img class="collectionArt" src="https://archive.org/services/img/etree" alt="Live Music Archive collection artwork" loading="lazy"><p class="pathMeta">Archive collection</p><h3>Live Music Archive</h3><p>Concert recordings, live sets and the sound of a room.</p><button type="button" data-collection="etree">Explore path</button></article></div></section>
-    <section class="discoverSection clapSection" aria-labelledby="clap-title"><div class="sectionHeading"><div><p class="eyebrow">From the Archive</p><h2 id="clap-title">Recently added recordings</h2></div><p class="sectionHint">Explore recent additions to the Internet Archive’s audio collections.</p></div><div id="clapResults" class="clapGrid" aria-live="polite"><p class="dim">Looking through the Archive…</p></div></section>
-    <footer class="discoverFooter"><p>Sully reads public Internet Archive metadata. A release always keeps its own context, credits, and rights.</p><a href="https://github.com/akindoflikeness/akindoflikeness-site/issues" target="_blank" rel="noopener">Report a display issue</a></footer>
+    <section class="discoverSection" aria-labelledby="paths-title"><div class="sectionHeading"><div><h2 id="paths-title">Playlists &amp; listening paths</h2></div></div><div class="pathGrid"><article class="pathCard"><img class="collectionArt" src="https://archive.org/services/img/netlabels" alt="Netlabels collection artwork" loading="lazy"><p class="pathMeta">Archive collection</p><h3>Netlabels</h3><p>Independent releases and artist-run labels.</p><button type="button" data-collection="netlabels">Explore path</button></article><article class="pathCard"><img class="collectionArt" src="https://archive.org/services/img/etree" alt="Live Music Archive collection artwork" loading="lazy"><p class="pathMeta">Archive collection</p><h3>Live Music Archive</h3><p>Concert recordings and live sets.</p><button type="button" data-collection="etree">Explore path</button></article></div></section>
+    <section class="discoverSection clapSection" aria-labelledby="clap-title"><div class="sectionHeading"><div><p class="eyebrow">From the Archive</p><h2 id="clap-title">Recently added recordings</h2></div></div><div id="clapResults" class="clapGrid" aria-live="polite"><p class="dim">Looking through the Archive…</p></div></section>
+    <footer class="discoverFooter"><a href="https://github.com/akindoflikeness/akindoflikeness-site/issues" target="_blank" rel="noopener">Report a display issue</a></footer>
   </div>
   <section id="searchResults" hidden><div class="heading"><h2 id="shelfTitle">Music from the Archive</h2><span id="resultCount">LIVE ARCHIVE INDEX</span></div><div id="status" role="status" aria-live="polite"></div><p id="relatedNote" class="dim" hidden></p><button id="resetShelf" hidden>All music</button><div id="results" class="grid"></div><div class="pager" id="pager" aria-label="Result page" hidden><button id="pagePrevious" aria-label="Previous page">‹</button><output id="pageNumber" aria-live="polite">0</output><button id="pageNext" aria-label="Next page">›</button></div></section>
 </section>
-<section id="saved" hidden><h1>Liked tracks</h1><p id="saveState" class="dim">Opening your liked tracks…</p><div class="libraryTools"><button id="exportLibrary" disabled>Save</button><button id="importLibrary">Load</button><input type="file" id="importFile" accept=".json,application/json" hidden></div>
+<section id="saved" hidden><h1>Liked tracks</h1><p id="saveState" class="dim">Opening your liked tracks…</p><div class="libraryTools"><button id="exportLibrary" disabled>Back up</button><button id="importLibrary">Import</button><input type="file" id="importFile" accept=".json,application/json" hidden></div>
 <details class="personalPanel playlistEditor"><summary id="playlistsTitle">Playlists</summary>
 <form id="newPlaylistForm" class="personalRow"><label for="playlistTitle" class="srOnly">New playlist name</label><input id="playlistTitle" maxlength="200" placeholder="New playlist name" required><button>Create playlist</button></form>
 <label for="playlistSelect">Your playlists</label><select id="playlistSelect"></select>
 <div id="playlistActions" hidden><div class="personalRow"><label for="renamePlaylist" class="srOnly">Playlist name</label><input id="renamePlaylist" maxlength="200"><button id="renamePlaylistButton">Rename</button></div><div class="personalRow"><label for="playlistSource">Add tracks from</label><select id="playlistSource"><option value="current">Current track</option><option value="queue">Queue</option><option value="liked">Liked tracks</option></select><button id="addPlaylistTracks">Add tracks</button><button id="queuePlaylist">Queue playlist</button><button id="deletePlaylist">Delete playlist</button></div></div><button id="undoPlaylist" hidden>Undo playlist deletion</button><div id="playlistTracks"></div></details>
-<p class="libraryHint">Save a portable copy of your library, or Load one. Likes and playlists stay in this browser.</p><div id="savedList"></div></section>
-<section id="queue" hidden><h1>Up next</h1><label class="personalPanel"><input type="checkbox" id="recoverQueue"> Remember this queue and position on this device. Restore paused.</label><div id="queueList"></div></section>
+<p class="libraryHint">Saved in this browser. Back up your library to keep a copy.</p><div id="savedList"></div></section>
+<section id="queue" hidden><div class="queueHeader"><h1>Up next</h1><details class="queueOptions"><summary>Options</summary><label><input type="checkbox" id="recoverQueue"> Remember queue</label><p>Saved on this device. Restores paused.</p></details></div><div id="queueList"></div></section>
 <section id="log" class="handbook handbook--log" hidden aria-labelledby="log-title">
   <div class="handbookHero">
     <p class="handbookEyebrow">DEV DIARY / NOT A FEED</p>
@@ -71,6 +71,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   </div>
 
   <ol class="logList">
+<li class="logEntry" id="clear-queue-log"><div class="logDate"><time datetime="2026-10-11">11 Oct<br>2026</time><span class="logStatus logStatus--pot">In progress</span></div><article><p class="entryKicker">Interface</p><h2>A quieter queue.</h2><p>One heading, one empty state, and queue preferences under Options. Empty groups and unused search controls stay out of the way. Repeated introductory copy has been removed from Discover.</p></article></li>
 <li class="logEntry" id="archive-load-log"><div class="logDate"><time datetime="2026-10-11">11 Oct<br>2026</time><span class="logStatus logStatus--shipped">Shipped</span></div><article><p class="entryKicker">Reliability / Archive requests</p><h2>Less work for a cover.</h2><p>Browsing and library lists use Archive thumbnails without fetching extra metadata or probing original images. Opened releases and the player still resolve larger artwork, sharing the result across repeated cover elements. Failed requests show their error on Discover and no longer claim that the app is working normally. Retry stays manual.</p><p class="entryNote">Verified on 11 Oct 2026: 16 local unit tests, local library and drawer regressions, and public drawer and failure-display checks using controlled Archive responses. Live checks also reproduced a search timeout and direct Archive HTTP 502 responses. Reduced request volume is verified; the cause of the upstream interruption is not established.</p></article></li>
 <li class="logEntry" id="artwork-drawer-log"><div class="logDate"><time datetime="2026-10-11">11 Oct<br>2026</time><span class="logStatus logStatus--shipped">Shipped</span></div><article><p class="entryKicker">Player / artwork</p><h2>Artwork in its own drawer.</h2><p>The player thumbnail opens a separate artwork panel over the sidebar. It fits the whole cover above the player without moving the page or interrupting audio. Close it with the thumbnail, Close button or Escape. Covered navigation is kept out of keyboard focus.</p><p class="entryNote">Verified publicly on 11 Oct 2026: deployed assets and drawer checks at four desktop and mobile sizes, including short screens, unchanged page geometry, Close and Escape focus recovery, and unchanged prepared audio state using a controlled Archive fixture. Local library recovery and genre-layout browser checks also passed.</p></article></li>
 <li class="logEntry" id="sully-name-log"><div class="logDate"><time datetime="2026-10-11">11 Oct<br>2026</time><span class="logStatus logStatus--shipped">Shipped</span></div><article><p class="entryKicker">Name / language</p><h2>A new name: Sully.</h2><p>The player has a new name and revised wording that puts the music and its makers first. Existing listening links, likes, playlists and backups remain compatible.</p><p class="entryNote">Verified publicly on 11 Oct 2026: Sully app and information page, old-route redirects with query strings and listening fragments, and a shared Archive release opening without autoplay. Locally: 12 unit checks plus library recovery, genre browsing and responsive-layout browser suites passed.</p></article></li>
@@ -294,9 +295,9 @@ Caveat: the honest edge, if there is one.</pre>
 <script src="slop-slip-ui.js?v=sully-20261011"></script>
 <script src="slop-archive.js?v=sully-20261011"></script>
 <script src="slop-personal.js?v=sully-20261011"></script>
-<script src="app.js?v=archive-load-2"></script>
+<script src="app.js?v=clear-queue-1"></script>
 <script src="personal-ui.js?v=sully-20261011"></script>
-<script src="design-ui.js?v=archive-load-1"></script>
+<script src="design-ui.js?v=clear-queue-1"></script>
 <script src="genre-directory.js?v=sully-20261011"></script>
 <script src="genre-ui.js?v=sully-20261011"></script>
 <script src="artwork-drawer.js?v=1"></script>
