@@ -134,3 +134,7 @@ Keep new screens aligned to those shared components and retain one-column nav.
 - Next: manual queue move-up/move-down operations, preserving repeated entries,
   then verify their exact order survives opted-in paused recovery. Keep album
   queue semantics separate. Do not start shuffle/repeat in that same step.
+- Deployment evidence: implementation 5c45733 passed both remote check jobs,
+  Cloudflare Pages and the bounded metadata sampler. The browser suite also
+  passed against the deployed branch URL, including the new sorting checks.
+  Temporary local server and browser processes were stopped.
