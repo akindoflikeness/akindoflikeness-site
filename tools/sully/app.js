@@ -110,7 +110,7 @@ async function play(t,remember=true,autoplay=true){
  SlopArtwork.attach($('#nowCover'),t.id,undefined);
  $('#nowTitle').textContent=t.title;
  $('#nowArtist').textContent=nowArtist;
- $('#sidebarNow').hidden=false;
+ $('#artworkToggle').disabled=false;
  $('#sidebarNowCover').src=coverUrl;
  SlopArtwork.attach($('#sidebarNowCover'),t.id,undefined);
  $('#sidebarNowCover').alt='Artwork for '+(t.release||t.title);

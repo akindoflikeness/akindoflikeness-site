@@ -73,3 +73,7 @@ human contact route to the ledger in Docs.
 ## Name and compatibility
 
 Sully was previously called Slop. The old /slop and /tools/slop/ routes redirect to /sully and /tools/sully/. Redirects preserve query strings and listening fragments. Keep the slop-library database, localStorage keys, broadcast channel, export format identifiers and v1 listening-link protocol unchanged: these preserve existing libraries and backups on the same origin. Internal slop-prefixed filenames and JavaScript APIs are retained for compatibility. New backup filenames use sully. Historical development notes and copyright attributions retain their original names.
+
+## Artwork drawer
+
+artwork-drawer.js and artwork-drawer.css provide an independent overlay outside the sidebar. The player thumbnail toggles it; Close and Escape return focus to the thumbnail. Covered navigation is inert while open. The panel ends above the measured player height and keeps images uncropped. Track selection updates the artwork without forcing the drawer open. Run tests/artwork-drawer-browser.cjs for short-screen geometry, focus recovery and unchanged playback state.
