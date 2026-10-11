@@ -1,6 +1,5 @@
 /* Figma genre revision 79:1179–79:1182. Scoped to the genre view. */
 body.genreView {
-  --slop-sidebar: 220px;
   overflow: hidden;
 }
 .genreView .shell {

@@ -12,7 +12,7 @@
   --ink: #f1eadc;
   --muted: #c0b8aa;
   --lime: #e4d6ba;
-  --slop-sidebar: 411px;
+  --slop-sidebar: 220px;
   --slop-content: 1008px;
   --slop-player: 95px;
   --slop-gutter: 56px;
@@ -966,7 +966,6 @@ h2 {
 
 @media (max-width: 1180px) {
   :root {
-    --slop-sidebar: 250px;
     --slop-gutter: 36px;
   }
 
@@ -982,7 +981,6 @@ h2 {
 
 @media (max-width: 930px) {
   :root {
-    --slop-sidebar: 204px;
     --slop-gutter: 28px;
   }
 
