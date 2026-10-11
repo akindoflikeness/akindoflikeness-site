@@ -155,3 +155,18 @@ slice, not completion of all future milestones or the Neocities move.
   draft PR when needed. Do not attempt to continue work through a merged PR.
 - Future feature changes remain preview-only until separately approved for release.
 - Next implementation remains manual queue reordering and paused recovery checks.
+
+### Public verification
+
+- PR #41 merged as 605bb9f after both release check jobs and the metadata sampler
+  passed. Cloudflare production deployment 2d2ad1fa-5b4c-4fe0-a82a-93b2e363d493
+  succeeded on 11 October 2026.
+- The full browser regression passed at https://akindoflikeness.net/tools/slop/:
+  migration, repeated playlist entries, exclusions, saved modes, backup restore,
+  sorting, paused queue recovery and desktop/mobile overflow checks.
+- Confirmed the live wordmark hides the preview badge and the retained branch
+  URL shows it. Both expose the released library sorting control.
+- Retained and advanced slop/discovery-foundations to the release merge. Future
+  feature commits remain isolated from main. Updated the daily continuation to
+  treat #41 as release history and open a new draft PR for later development.
+- Browser checks used isolated temporary contexts and closed their processes.
