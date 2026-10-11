@@ -16,6 +16,14 @@ functional and recovery gates pass. Do not move the public site prematurely.
 - Each continuation reads this file and the open branch, performs one bounded unit
   of work, updates evidence and remaining work, and stops temporary processes.
 
+## Completion checklist
+
+- Every meaningful behaviour or deployment change must add or update the visible
+  Log in index.html in the same change, as well as these development notes.
+- Preview entries remain In the pot. Shipped requires production verification.
+- Open the deployed Log and verify its entry and status before reporting completion.
+- Figma-only proposals are design work, not implemented functionality.
+
 ## First implementation (approved for release 11 October 2026)
 
 - Existing likes migrate without deletion from IndexedDB version 1 to 2.
