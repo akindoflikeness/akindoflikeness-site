@@ -27,6 +27,7 @@
       && file.length > 0
       && file.length <= 1500
       && !file.startsWith("/")
+      && !/^[a-z][a-z0-9+.-]*:/i.test(file)
       && !file.includes("\\")
       && !/[\u0000-\u001f]/.test(file)
       && !file.split("/").some(function (part) { return part === "." || part === ".."; })

@@ -1,0 +1,18 @@
+(function(root,factory){const api=factory();if(typeof module!=='undefined')module.exports=api;if(root)root.SlopPersonal=api})(typeof globalThis==='undefined'?null:globalThis,function(){
+  'use strict';
+  const normalise=s=>String(s).normalize('NFKC').trim().toLowerCase();
+  const empty=()=>({playlists:[],modes:[],excludedCreators:[],diversify:true});
+  function label(s,max=200){if(typeof s!=='string'||s.length>max||/[\u0000-\u001f]/.test(s))throw Error('Invalid library text.');return s;}
+  function track(t){if(!t||typeof t.id!=='string'||!/^[A-Za-z0-9][A-Za-z0-9_.-]{0,199}$/.test(t.id))throw Error('Invalid Archive item.');label(t.file,1500);if(!t.file||/^[a-z][a-z0-9+.-]*:/i.test(t.file)||t.file.startsWith('/')||t.file.includes('\\')||t.file.split('/').some(x=>x==='.'||x==='..')||!/\.(mp3|ogg|m4a|flac|wav|opus)$/i.test(t.file))throw Error('Invalid audio reference.');return {id:t.id,file:t.file,title:label(t.title,1000),artist:label(t.artist,1000),release:label(t.release,1000),tags:list(t.tags,50).map(x=>label(x))};}
+  function list(v,max){if(!Array.isArray(v)||v.length>max)throw Error('Library list is missing or too large.');return v;}
+  function personal(value){if(!value||typeof value!=='object')throw Error('Invalid personal library.');const ids=new Set();const checkId=id=>{label(id,100);if(!id||ids.has(id))throw Error('Duplicate library record.');ids.add(id);return id;};return {
+    playlists:list(value.playlists,200).map(p=>({id:checkId(p.id),title:label(p.title),tracks:list(p.tracks,2000).map(track)})),
+    modes:list(value.modes,100).map(m=>{if(!['all','artist','release','tags'].includes(m.scope)||typeof m.diversify!=='boolean')throw Error('Unsupported discovery mode.');return {id:checkId(m.id),title:label(m.title),query:label(m.query),scope:m.scope,diversify:m.diversify};}),
+    excludedCreators:[...new Set(list(value.excludedCreators,100).map(x=>normalise(label(x))).filter(Boolean))],
+    diversify:typeof value.diversify==='boolean'?value.diversify:true
+  };}
+  function backup(value){if(value?.format==='slop-saved-tracks'&&value.version===1)return {tracks:list(value.tracks,10000).map(track),personal:empty(),legacy:true};if(value?.format!=='slop-library'||value.version!==2)throw Error('Choose a Slop library v2 or liked-tracks v1 backup.');return {tracks:list(value.tracks,10000).map(track),personal:personal(value.personal),legacy:false};}
+  function merge(existing,incoming,makeId){const out=personal(existing);for(const key of ['playlists','modes'])for(const record of incoming[key]){const same=out[key].find(x=>x.id===record.id);if(!same)out[key].push(record);else if(JSON.stringify(same)!==JSON.stringify(record))out[key].push({...record,id:makeId(),title:(record.title+' (imported copy)').slice(0,200)});}out.excludedCreators=[...new Set([...out.excludedCreators,...incoming.excludedCreators])];return personal(out);}
+  function rank(candidates,state){const blocked=new Set(state.excludedCreators.map(normalise));let result=candidates.filter(d=>!(Array.isArray(d.creator)?d.creator:[d.creator||'']).some(c=>blocked.has(normalise(c))));if(!state.diversify)return result;const picked=[],remaining=[...result],counts=new Map();while(remaining.length){let best=0,bestPenalty=Infinity;for(let i=0;i<remaining.length;i++){const c=normalise((Array.isArray(remaining[i].creator)?remaining[i].creator[0]:remaining[i].creator)||remaining[i].identifier);const penalty=(counts.get(c)||0);if(penalty<bestPenalty){best=i;bestPenalty=penalty;}}const d=remaining.splice(best,1)[0],c=normalise((Array.isArray(d.creator)?d.creator[0]:d.creator)||d.identifier);counts.set(c,(counts.get(c)||0)+1);picked.push(d);}return picked;}
+  return Object.freeze({empty,track,personal,backup,merge,rank});
+});

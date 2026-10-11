@@ -1,0 +1,49 @@
+name: Slop development checks
+on:
+  push:
+    branches: [slop/discovery-foundations]
+    paths: ['tools/slop/**', '.github/workflows/slop-development.yml']
+  pull_request:
+    paths: ['tools/slop/**', '.github/workflows/slop-development.yml']
+permissions:
+  contents: read
+concurrency:
+  group: slop-checks-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tools/slop/slop-archive.test.cjs tools/slop/slop-personal.test.cjs
+      - run: |
+          node --check tools/slop/app.js
+          node --check tools/slop/personal-ui.js
+          node --check tools/slop/design-ui.js
+          node --check tools/slop/slop-slip-ui.js
+          node --check tools/slop/embed.js
+      - name: Browser recovery check
+        run: |
+          npm install --prefix "$RUNNER_TEMP/slop-check" --no-save playwright@1.64.0
+          "$RUNNER_TEMP/slop-check/node_modules/.bin/playwright" install --with-deps chromium
+          python3 -m http.server 8766 --bind 127.0.0.1 >/tmp/slop-server.log 2>&1 &
+          SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/slop/tests/library-browser.cjs
+  catalogue-sample:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tools/slop/scripts/build-catalogue.cjs "$RUNNER_TEMP/slop-catalogue.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: slop-metadata-sample
+          path: ${{ runner.temp }}/slop-catalogue.json
+          retention-days: 1
