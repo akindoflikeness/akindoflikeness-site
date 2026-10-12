@@ -288,3 +288,21 @@ to Shipped. Keep the development branch and preview available afterward.
 - When renaming this app again, carry forward the HTML cache exception as well
   as redirects and asset versions. Next work remains the preview continuation
   queue, with UI changes designed in Figma before implementation.
+
+## 12 October: validate queue recovery before restoration (preview)
+
+- Synced released main through 34677e2 into the continuing preview; preserved
+  compact layout, artwork drawer and shared Base UI controls. Previous preview
+  6d9cf51 passed Pages, recovery checks and the bounded metadata sampler.
+- Before manual queue ordering, closed a recovery validation gap: unknown snapshot
+  versions and oversized lists were silently ignored, and invalid positions were
+  coerced. A shared validator now rejects the complete snapshot before assigning
+  either queue and uses the existing recovery message. Null means no snapshot.
+- Five personal-library Node tests pass, including duplicate ordering, the combined
+  10,000-track boundary, invalid references, current track and playback positions.
+  The local browser recovery suite passes, including damaged album data alongside
+  a valid manual queue: neither partially restores and likes remain intact.
+- No new UI controls; manual queue ordering still needs its Figma design before
+  implementation. Keep shuffle/repeat out of that step. Production is unchanged.
+- Updated visible Log as In the pot and refreshed both dependency URLs plus the
+  bootstrap URL. Temporary local server and browser stopped after checks.
