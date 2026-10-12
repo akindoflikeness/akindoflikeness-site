@@ -273,3 +273,9 @@ to Shipped. Keep the development branch and preview available afterward.
   https://slop-discovery-foundations.akindoflikeness-site.pages.dev/tools/sully/.
 - Resume bounded preview development from tools/sully. Future feature publication
   needs its own release approval; this approval covered the genre revision.
+
+## 12 October 2026 — full-width views
+
+Removed the shared 1008px content cap and the separate 800px handbook cap.
+All views now fill the available main column with the existing responsive gutters.
+Paragraph-specific reading limits remain. Stylesheet cache keys updated.
