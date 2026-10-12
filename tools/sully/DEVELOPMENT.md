@@ -306,3 +306,8 @@ to Shipped. Keep the development branch and preview available afterward.
   implementation. Keep shuffle/repeat out of that step. Production is unchanged.
 - Updated visible Log as In the pot and refreshed both dependency URLs plus the
   bootstrap URL. Temporary local server and browser stopped after checks.
+- Deployed evidence: 35c918e passed both hosted check runs, Pages and the bounded
+  push sampler (PR sampler intentionally skipped). The full recovery browser
+  suite also passed against the deployed preview. Opened its Log and verified
+  the recovery entry is visible with IN THE POT status. Draft PR #43 tracks this
+  preview-only work: https://github.com/akindoflikeness/akindoflikeness-site/pull/43.
