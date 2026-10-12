@@ -279,3 +279,7 @@ to Shipped. Keep the development branch and preview available afterward.
 Removed the shared 1008px content cap and the separate 800px handbook cap.
 All views now fill the available main column with the existing responsive gutters.
 Paragraph-specific reading limits remain. Stylesheet cache keys updated.
+
+Verified locally and on the public route: responsive density checks passed, including
+full-width geometry for all views at 1440px, 1920px and 2880px. Mobile overflow
+checks passed down to 320px. Refreshed stylesheet keys after CDN cache verification.
