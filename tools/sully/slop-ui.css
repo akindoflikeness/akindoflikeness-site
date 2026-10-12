@@ -12,7 +12,7 @@
   --ink: #f1eadc;
   --muted: #c0b8aa;
   --lime: #e4d6ba;
-  --slop-sidebar: 411px;
+  --slop-sidebar: 220px;
   --slop-content: 1008px;
   --slop-player: 95px;
   --slop-gutter: 56px;
@@ -862,7 +862,7 @@ h2 {
   border-radius: var(--slop-radius);
 }
 
-dialog {
+.sullyDialog {
   width: min(880px, calc(100vw - 32px));
   max-height: min(85vh, 850px);
   margin: auto;
@@ -874,11 +874,11 @@ dialog {
   box-shadow: 0 30px 90px #000a;
 }
 
-dialog::backdrop {
+.uiBackdrop {
   background: rgb(0 0 0 / .733);
 }
 
-dialog .close {
+.sullyDialog .close {
   min-height: 38px;
   padding: 5px 11px;
   font-size: 13px;
@@ -966,7 +966,6 @@ dialog .close {
 
 @media (max-width: 1180px) {
   :root {
-    --slop-sidebar: 250px;
     --slop-gutter: 36px;
   }
 
@@ -982,7 +981,6 @@ dialog .close {
 
 @media (max-width: 930px) {
   :root {
-    --slop-sidebar: 204px;
     --slop-gutter: 28px;
   }
 
@@ -1193,7 +1191,7 @@ dialog .close {
     bottom: calc(var(--slop-player) + 12px);
   }
 
-  dialog {
+  .sullyDialog {
     padding: 24px;
   }
 
@@ -1439,3 +1437,9 @@ nav button.active:hover:not(:disabled){background:var(--lime);color:#000;border-
 #genres .genreName{min-height:30px}#genres .atlasSelection{margin:12px 0;padding:10px 0}#genres .atlasToolbar{margin-top:12px}
 @media(max-width:720px){#genres h1{font-size:38px;margin-bottom:10px}#genres .viewDescription{font-size:15px;margin-bottom:12px}#genres .contextualSearch{margin-bottom:18px}#genres .atlasNote{margin:8px 0}}
 @media(pointer:coarse){#genres .genreName{min-height:44px}}
+
+/* Queue controls belong alongside the title; preferences stay collapsed. */
+.queueHeader {display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.queueHeader h1 {margin:0}
+#queue .contextualSearch[hidden], #queueFilterStatus[hidden] {display:none}
+#queue .queueEmpty {margin:0}

@@ -1,7 +1,7 @@
 name: Sully development checks
 on:
   push:
-    branches: [slop/discovery-foundations]
+    branches: [main, slop/discovery-foundations]
     paths: ['tools/sully/**', '.github/workflows/slop-development.yml']
   pull_request:
     paths: ['tools/sully/**', '.github/workflows/slop-development.yml']
@@ -19,7 +19,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test tools/sully/slop-archive.test.cjs tools/sully/slop-personal.test.cjs tools/sully/genre-directory.test.cjs
+      - name: Build shared UI
+        working-directory: tools/sully
+        run: |
+          npm ci
+          npm run build
+          git diff --exit-code -- ui.bundle.js ui.bundle.js.LEGAL.txt THIRD-PARTY-NOTICES.txt
+      - run: node --test tools/sully/artwork.test.cjs tools/sully/slop-archive.test.cjs tools/sully/slop-personal.test.cjs tools/sully/genre-directory.test.cjs
       - run: |
           node --check tools/sully/app.js
           node --check tools/sully/personal-ui.js
@@ -28,16 +34,21 @@ jobs:
           node --check tools/sully/genre-ui.js
           node --check tools/sully/slop-slip-ui.js
           node --check tools/sully/embed.js
+          node --check tools/sully/bootstrap.js
       - name: Browser recovery check
         run: |
           npm install --prefix "$RUNNER_TEMP/slop-check" --no-save playwright@1.64.0
           "$RUNNER_TEMP/slop-check/node_modules/.bin/playwright" install --with-deps chromium
           python3 -m http.server 8766 --bind 127.0.0.1 >/tmp/slop-server.log 2>&1 &
+          SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/sully/tests/density-browser.cjs
+          SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/sully/tests/base-ui-browser.cjs
           SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/sully/tests/library-browser.cjs
           SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/sully/tests/genres-browser.cjs
           SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/sully/tests/genre-layout-browser.cjs
+          SLOP_TEST_URL="http://127.0.0.1:8766/tools/sully/" SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/sully/tests/artwork-drawer-browser.cjs
+          SLOP_TEST_URL="http://127.0.0.1:8766/tools/sully/" SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/sully/tests/archive-failure-browser.cjs
   catalogue-sample:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/slop/discovery-foundations'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

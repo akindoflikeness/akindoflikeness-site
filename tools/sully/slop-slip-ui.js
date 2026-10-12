@@ -89,11 +89,11 @@
       const at = currentPosition();
       if (!track) return;
       heading.textContent = prettyTrack(track);
-      context.textContent = track.release ? "From " + track.release : "Exact track handoff";
+      context.textContent = track.release ? "From " + track.release : "";
       includeTime.disabled = at === null;
       if (resetStartTime) includeTime.checked = at !== null;
       timeLabel.textContent = at === null
-        ? "Start at this moment (not available yet)"
+        ? "Include Playback Position (not available yet)"
         : "Start at " + protocol.formatTime(at);
       copyEmbed.disabled = !track.file;
     }
@@ -132,7 +132,7 @@
       const track = currentTrack();
       if (!track || !track.file) return;
       await copyWithFallback(protocol.embedCode(track, embeddedUrl()));
-      toast("Quiet embed copied. It will never autoplay.");
+      toast("Embed copied.");
     }
 
     function installReleaseCopy() {
@@ -152,13 +152,13 @@
       copyRelease.id = "copyReleaseSlip";
       copyRelease.className = "shareRelease";
       copyRelease.type = "button";
-      copyRelease.textContent = "Copy release link";
+      copyRelease.textContent = "Copy Release Link";
       copyRelease.title = "Copy an exact link to this Archive release";
       copyRelease.addEventListener("click", function () {
         const title = releaseBody.querySelector(".detailtop h2")?.textContent?.trim() || release;
         const url = protocol.buildSlipUrl(settings.baseUrl || root.location.href, ref);
         copyWithFallback(title + " · Sully\n" + url)
-          .then(function () { toast("Release Listening link copied."); })
+          .then(function () { toast("Release link copied."); })
           .catch(function () { toast("Could not copy the release Slip."); });
       });
       source.insertAdjacentElement("afterend", copyRelease);
@@ -207,7 +207,6 @@
           const prepared = settings.prepareTrack(resolved.track);
           seekWhenReady(resolved.track);
           await prepared;
-          toast("Ready to listen: " + prettyTrack(resolved.track) + ". Press play to listen.");
         } else if (typeof settings.openRelease === "function") {
           await settings.openRelease({
             identifier: resolved.release.id,
@@ -215,7 +214,6 @@
             creator: resolved.release.artist,
             subject: []
           });
-          toast("A release is ready: " + resolved.release.title + ".");
         }
       } catch (error) {
         toast(error && error.message ? error.message : "This Sully Slip could not be opened.");

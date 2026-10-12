@@ -1,0 +1,17 @@
+.uiBackdrop {position:fixed;inset:0;z-index:80;background:#000b}
+.sullyDialog {position:fixed;inset:50% auto auto 50%;transform:translate(-50%,-50%);z-index:81;margin:0;max-height:calc(100dvh - 32px);box-sizing:border-box;color:var(--ink);border:1px solid var(--line)}
+.sullyDialog[hidden],.uiBackdrop[hidden],.artworkDrawer[hidden]{display:none!important}
+.uiPositioner {z-index:60}
+.uiPopover {padding:14px 18px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;box-shadow:0 8px 30px #0008;max-width:calc(100vw - 24px)}
+.uiPopover p {font-size:13px;color:var(--muted);margin:6px 0 0}
+.uiCheck {display:flex;align-items:center;gap:8px;min-height:44px;font-size:14px}
+.uiCheck input {width:auto;margin:0}
+.queueHeader>[data-sully-ui] {margin-left:auto}
+.queueOptionsTrigger {min-height:44px;font-size:14px}
+.artworkContent {display:flex;flex-direction:column;flex:1;min-height:0}
+.artworkDrawerHeader h2 {font-size:14px;font-family:inherit;margin:0}
+.artworkDrawer {transition:transform 180ms ease;transform:translateX(var(--drawer-swipe-movement-x,0px))}
+.artworkDrawer[data-starting-style],.artworkDrawer[data-ending-style]{transform:translateX(-100%)}
+@media(prefers-reduced-motion:reduce){.artworkDrawer{transition:none}}
+
+#message {z-index:100}

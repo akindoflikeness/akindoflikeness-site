@@ -105,7 +105,7 @@ and test keyboard focus, scroll restoration, empty/error states and playback.
 
 ### Implemented for approved release
 
-The 79:1179–79:1182 revision is now implemented in genre-ui.js and genres.css.
+The 79:1179â€“79:1182 revision is now implemented in genre-ui.js and genres.css.
 The genre view uses the current 220px Figma rail without changing other pages.
 Dynamic directory relationships, filters, source tags, disabled/error states and
 recording availability remain functional. Phone selection opens an accessible
