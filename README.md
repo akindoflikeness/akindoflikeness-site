@@ -29,6 +29,9 @@ There is no manual build step for prose edits. To add a piece, add
 URL, its first commit supplies its date, and its first paragraph supplies its
 excerpt. Existing publication dates and related links remain outside the documents.
 Keep the filename when changing a title so existing links continue to work.
+Standalone essays also support `**bold**` and `[link text](https://example.com)`.
+Single line breaks are preserved for lyrics and prompts; other square brackets
+remain literal. YouTube links open the original video without requiring an embed.
 
 | you want to change              | edit                                   | then run                    |
 |---------------------------------|----------------------------------------|-----------------------------|
