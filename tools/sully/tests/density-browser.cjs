@@ -25,13 +25,19 @@ const base=process.env.SLOP_TEST_URL||'http://127.0.0.1:8766/tools/sully/';
    console.log(`${width}px: results start at ${Math.round(geometry.coverTop)}px`);
    if(process.env.SLOP_SCREENSHOTS)await page.screenshot({path:process.env.SLOP_SCREENSHOTS+`/sully-compact-search-${width}.png`});
   }
-  for(const width of [1440,390]){
+  for(const width of [2880,1920,1440,390]){
    await page.setViewportSize({width,height:900});
    for(const view of ['discover','genres','saved','queue','log','docs','about']){
     if(width<=720)await page.locator('#navigationToggle').click();
     await page.locator(view==='genres'?'#navGenres':`nav [data-view="${view}"]`).click();
     await page.evaluate(()=>scrollTo(0,0));
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${view} overflow at ${width}`);
+    const bounds=await page.evaluate(()=>{
+     const main=document.querySelector('main'),style=getComputedStyle(main),rect=main.getBoundingClientRect();
+     const section=Array.from(main.children).find(el=>el.tagName==='SECTION'&&el.getBoundingClientRect().width>0);
+     return {available:rect.width-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight),actual:section.getBoundingClientRect().width};
+    });
+    assert.ok(Math.abs(bounds.actual-bounds.available)<1,view+' should fill the main column at '+width+': '+JSON.stringify(bounds));
     if(process.env.SLOP_SCREENSHOTS)await page.screenshot({path:process.env.SLOP_SCREENSHOTS+`/sully-compact-${view}-${width}.png`});
    }
   }

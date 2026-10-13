@@ -311,3 +311,12 @@ to Shipped. Keep the development branch and preview available afterward.
   suite also passed against the deployed preview. Opened its Log and verified
   the recovery entry is visible with IN THE POT status. Draft PR #43 tracks this
   preview-only work: https://github.com/akindoflikeness/akindoflikeness-site/pull/43.
+## 12 October 2026 — full-width views
+
+Removed the shared 1008px content cap and the separate 800px handbook cap.
+All views now fill the available main column with the existing responsive gutters.
+Paragraph-specific reading limits remain. Stylesheet cache keys updated.
+
+Verified locally and on the public route: responsive density checks passed, including
+full-width geometry for all views at 1440px, 1920px and 2880px. Mobile overflow
+checks passed down to 320px. Refreshed stylesheet keys after CDN cache verification.

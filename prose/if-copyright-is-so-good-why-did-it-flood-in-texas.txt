@@ -1,0 +1,137 @@
+If Copyright Is So Good Why Did It Flood In Texas?
+
+When I was fourteen I came across Stevie Ray Vaughan performing Texas Flood at the El Mocambo.
+
+[Stevie Ray Vaughan performing Texas Flood at the El Mocambo](https://www.youtube.com/watch?v=KC5H9P4F5Uk)
+
+I'd listen to it on repeat on the way to and from school. That performance was the reason I decided to pick up a guitar, and learning to play even a fraction as well as Stevie did that night has been a goal of mine ever since. As a guitarist, I suspect it always will be.
+
+I didn't know it was a cover.
+
+At eighteen I discovered another recording that I absolutely loved.
+
+[The Sky Is Crying by Elmore James & His Broom Dusters](https://www.youtube.com/watch?v=pd7b1Ye6Oc0)
+
+It was another song I knew through Stevie. I started to understand how much of the music I loved had existed long before I'd heard it.
+
+Texas Flood was first recorded by Larry Davis in 1958, with Fenton Robinson on guitar.
+
+[Larry Davis — Texas Flood](https://www.youtube.com/watch?v=lPs6Hv3nzLw)
+
+Davis had written the song a few years earlier, and it's now credited to Davis and Joseph Scott. Stevie recorded his version in 1983, twenty-five years later.
+
+It's a blues standard, part of a tradition in which musicians learn from one another, reinterpret what came before and contribute something of their own.
+
+**That tradition is why I started playing music.**
+
+A while ago I recorded a demo of Texas Flood. It was a collaboration with a friend I'd met online, who contributed some guitar parts. My vocals, our recording, our interpretation of a song that had already passed through generations of musicians.
+
+Recently I came back to that demo. I've been experimenting with Suno, including one of its custom models built using my own music. I wanted to use the old recording as material and see what I could make from it.
+
+Suno rejected the audio on copyright grounds.
+
+It's worth explaining that our recording wasn't an attempt to reproduce Stevie's or Larry Davis's arrangement. The genre, music and instrumentation are all different from any recorded version of the song.
+
+I uploaded the backing track without vocals. Accepted.
+
+I uploaded the recording with my vocals. Rejected.
+
+I submitted the lyrics without any audio. Rejected.
+
+That doesn't tell me precisely how Suno's copyright detection works, but it gives me a fairly good indication of what it's objecting to. The instrumental recording was accepted. The recording with my vocals wasn't. And the lyrics alone were enough to trigger a rejection.
+
+It seems the problem wasn't what we'd done musically with the song. It was the words themselves.
+
+I wasn't uploading Larry Davis's recording, or Stevie's. I was uploading something we'd performed and recorded ourselves. The lyrics were a separate attempt after the audio was refused.
+
+I understand the distinction between owning a recording and owning the underlying composition. Recording my own version doesn't transfer the copyright in the song to me.
+
+But I wasn't trying to claim ownership of Texas Flood. I wanted to experiment with it.
+
+Suno offers tools for uploading audio, reinterpreting recordings and creating custom models from your own material. It also requires users to have the necessary rights to material they submit, and screens for copyrighted works. Those restrictions may make sense as a way of managing the company's legal exposure, but they have consequences for the people using the tools.
+
+In my case the consequence was that a recording I'd made with another musician couldn't even enter the process. I couldn't find out what I might make with it.
+
+**Who owns Texas Flood?**
+
+A copyright licensing listing identifies Songs of Universal, Inc. and Floree Music Company as its publishers, with Universal as the principal licensing contact.
+
+[Texas Flood — Copyright and publishing information](https://www.easysong.com/search/songs/song-copyright-holder-information.aspx?s=47632)
+
+Larry Davis died in 1994. Stevie Ray Vaughan died in 1990.
+
+I don't know how the royalties are distributed today, or who ultimately benefits from them. I would certainly like the people responsible for making the music, and those they leave behind, to be compensated.
+
+But what does preventing my experiment accomplish?
+
+No recording was produced. Nothing was released. Nobody licensed a new interpretation. I didn't get to explore what I'd brought to the tool, and I don't see who gained anything musically from that refusal.
+
+This isn't exclusively a problem with AI, or even with copyright. It's about what we expect our systems of ownership to do, and how those systems interact with the tools we use.
+
+Music doesn't arrive independently of everything that came before it. Stevie's performance wasn't valuable to me because he'd invented every part of it. I didn't even know who'd written the song. It mattered because of what he did with it, and what hearing him play made me want to do.
+
+Years later I found Larry Davis, Elmore James and a history of musicians whose work had reached me through somebody else's interpretation. My own recording exists because of that history, and because a friend I met on the internet wanted to contribute to it.
+
+None of us made those contributions alone.
+
+I've written before about how tools contribute to what we make.
+
+[Mutation](https://akindoflikeness.net/writing/mutation)
+
+They're made by people, informed by other people's work, and become part of how we learn and express ourselves. New tools make new things possible, but they also inherit the restrictions of the systems in which they're developed.
+
+Artists can be harmed by the ways their work is used. I don't think those harms are addressed simply by making creative participation harder, though.
+
+The recording I wanted to use began with a performance that made a fourteen-year-old want to play guitar. It passed through a song recorded in 1958, another musician's interpretation twenty-five years later, and a collaboration between two people who met online.
+
+Now, almost seventy years after that first recording, the tool I've chosen to explore it with says no.
+
+I understand why the company might want to avoid the legal risk. I understand that a composition can remain copyrighted long after its original recording.
+
+What I don't understand is what we're preserving by preventing people from doing this.
+
+**If the purpose is to protect music and the people who make it, who benefits from stopping another musician from playing with it?**
+
+With all that being said. Here is a version that is only generated using words a custom model that AI made itself. Way more of an emulation than what my demo would have done. I even feel worse about sharing it, but why should I? No human was involved to own it.
+
+**Lyrics Prompt:-**
+
+[Extended instrumental guitar introduction]
+[Key: F# blues, slow 12/8]
+
+[Lead guitar motif: ascending blues phrase]
+[Bend A sharply upward from the minor third]
+[Strike C# as the fifth, then climb to the high F# octave]
+[Bend E upward a whole step into F#, hold with wide vibrato]
+[Repeat and vary this melodic contour]
+[Leave long spaces between phrases]
+[Rhythm section follows the guitar, not the reverse]
+
+[Verse 1]
+...
+See the river swallow Houston
+Every signal in the city's drowned
+See the river swallow Houston
+Every signal in the city's drowned
+I've been dialing for my darling
+Can't get through, not a whisper of sound
+
+Those black clouds are drawing nearer
+Now my boots are filling up with rain
+Those black clouds are drawing nearer
+Now my boots are filling up with rain
+All the roads are turning rivers
+And that current's driving me inside
+
+Now I'm heading out at daybreak
+Gonna find my way back home to stay
+Now I'm heading out at daybreak
+Gonna find my way back home to stay
+Where the wind won't lift the houses
+And the sun comes out each day
+
+**Style:-**
+
+Raw live Texas electric blues, driving medium-fast 12/8 swing, fiercely expressive overdriven electric guitar, rapid ascending blues runs, powerful bent notes, aggressive picking and rough vibrato. Thick murky amplifier saturation, loose understated bass, forceful swinging drums, gritty passionate blues vocals. Unpolished small-club sound, intense spontaneous guitar improvisation.
+
+[Listen to the AI-generated example on YouTube](https://youtu.be/zjNeJ5oobic)

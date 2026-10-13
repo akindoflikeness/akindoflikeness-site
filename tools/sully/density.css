@@ -108,7 +108,7 @@ h2,.sectionHeading h2,.heading h2,.handbook h2 {font-size:var(--ui-heading);line
 #genres .sourceTagPanel,#genres .atlasMethod {margin-top:16px;padding-top:10px}
 
 /* Information pages and overlays follow the same scale. */
-.handbook {padding:0 0 24px;margin:0;max-width:800px}
+.handbook {padding:0 0 24px;margin:0;max-width:none}
 .handbookHero {padding-bottom:14px}
 .handbookLead {font-size:15px;line-height:1.45;margin-top:8px}
 .handbookMeta {margin-top:14px;gap:10px}

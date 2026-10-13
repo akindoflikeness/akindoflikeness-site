@@ -89,6 +89,29 @@ def indent(block, n):
     return "\n".join(pad + line if line else line for line in block.split("\n"))
 
 
+def essay_prose(text):
+    """Escape prose, supporting bold, HTTPS links and intentional line breaks.
+
+    Other square brackets remain literal, including musical prompt directions.
+    Videos use ordinary links so playback does not depend on embedded players.
+    """
+    token = re.compile(r"\*\*(.+?)\*\*|\[([^\]\n]+)\]\((https://[^\s)]+)\)")
+
+    def inline(value):
+        parts, end = [], 0
+        for match in token.finditer(value):
+            parts.append(esc(value[end:match.start()]))
+            if match[1] is not None:
+                parts.append(f"<strong>{esc(match[1])}</strong>")
+            else:
+                parts.append(f'<a href="{esc(match[3])}">{esc(match[2])}</a>')
+            end = match.end()
+        parts.append(esc(value[end:]))
+        return "".join(parts).replace("\n", "<br>\n")
+
+    return "\n".join(f"<p>{inline(p.strip())}</p>" for p in re.split(r"\n\s*\n", text.strip()) if p.strip())
+
+
 # ---------- pieces ----------
 
 def cover_img(a, lazy=False):
@@ -350,7 +373,7 @@ def build_essay(root, home, entry):
         album = next(album for album in cat["albums"] if album["slug"] == entry["album"])
         prose = paragraphs(linked_album_prose(album, root))
     else:
-        prose = paragraphs(esc(prose_document(os.path.join(ROOT, "prose", entry["slug"] + ".txt"))[1]))
+        prose = essay_prose(prose_document(os.path.join(ROOT, "prose", entry["slug"] + ".txt"))[1])
     content = f'''<article class="detail essay">
       <header class="essay-header">
         <h1 class="intro-title">{esc(entry['title'])}</h1>
