@@ -340,3 +340,8 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
 - Visible Log entry is In the pot. Refreshed personal-ui and bootstrap URLs.
   Next: Figma queue ordering controls, then duplicate-reference and paused recovery
   ordering checks. Shuffle/repeat remain separate; production unchanged.
+- Deployed evidence: 615f9ab passed both hosted checks, Pages and the bounded
+  push sampler; duplicate PR sampler skipped as intended. The browser recovery
+  suite passed on the deployed preview, including the new cross-tab scenarios.
+  Its visible Log entry was opened and verified as IN THE POT. PR #43 updated;
+  all temporary browsers closed. No production changes or new services.
