@@ -42,9 +42,16 @@ $('#confirmImport').onclick=()=>runPersonal(async()=>{if(!personalImport)return;
 
 // Queue recovery is opt-in: a paused snapshot, never automatic listening.
 const sessionKey='slop-session-v1';let recoveryEnabled=false,lastSnapshot=0,recoveryErrorShown=false;
-function saveSession(){if(!recoveryEnabled)return;try{if(queue.length+albumQueue.length>10000)throw Error('Queue recovery is limited to 10,000 tracks.');localStorage.setItem(sessionKey,JSON.stringify({version:1,current:currentTrack?portableTrack(currentTrack):null,queue:queue.map(portableTrack),album:albumQueue.map(portableTrack),position:Number.isFinite(audio.currentTime)?audio.currentTime:0}));lastSnapshot=Date.now();recoveryErrorShown=false}catch{try{localStorage.removeItem(sessionKey)}catch{}if(!recoveryErrorShown)toast('Queue recovery could not be saved. The queue may exceed this device’s storage or the 10,000-track limit.');recoveryErrorShown=true}}
+function saveSession(){if(!recoveryEnabled)return;try{if(localStorage.getItem('slop-recover-queue')!=='true'){recoveryEnabled=false;$('#recoverQueue').checked=false;return;}if(queue.length+albumQueue.length>10000)throw Error('Queue recovery is limited to 10,000 tracks.');localStorage.setItem(sessionKey,JSON.stringify({version:1,current:currentTrack?portableTrack(currentTrack):null,queue:queue.map(portableTrack),album:albumQueue.map(portableTrack),position:Number.isFinite(audio.currentTime)?audio.currentTime:0}));lastSnapshot=Date.now();recoveryErrorShown=false}catch{try{localStorage.removeItem(sessionKey)}catch{}if(!recoveryErrorShown)toast('Queue recovery could not be saved. The queue may exceed this device’s storage or the 10,000-track limit.');recoveryErrorShown=true}}
 try{recoveryEnabled=localStorage.getItem('slop-recover-queue')==='true'}catch{}
 $('#recoverQueue').checked=recoveryEnabled;
+// Consent is shared across tabs; live queues themselves remain independent.
+window.addEventListener('storage',event=>{
+ if(event.key!==null&&event.key!=='slop-recover-queue')return;
+ try{if(event.storageArea!==localStorage)return;recoveryEnabled=localStorage.getItem('slop-recover-queue')==='true';}
+ catch{recoveryEnabled=false;}
+ $('#recoverQueue').checked=recoveryEnabled;
+});
 $('#recoverQueue').onchange=()=>{recoveryEnabled=$('#recoverQueue').checked;try{localStorage.setItem('slop-recover-queue',String(recoveryEnabled));if(!recoveryEnabled)localStorage.removeItem(sessionKey);else saveSession()}catch{toast('Queue recovery storage is unavailable.')}};
 if(recoveryEnabled&&!SlopSlipProtocol.looksLikeSlip(location.hash)){try{const snapshot=SlopPersonal.session(JSON.parse(localStorage.getItem(sessionKey)||'null'));if(snapshot){const restoredQueue=snapshot.queue,restoredAlbum=snapshot.album,current=snapshot.current;queue=restoredQueue;albumQueue=restoredAlbum;renderQueue();if(current){play(current,false,false);const source=audio.src,position=Number(snapshot.position)||0;audio.addEventListener('loadedmetadata',()=>{if(audio.src===source&&Number.isFinite(audio.duration))audio.currentTime=Math.min(Math.max(position,0),audio.duration)},{once:true})}}}catch{toast('The previous queue could not be restored. Your library is safe.')}}
 document.addEventListener('slop:queuechange',saveSession);document.addEventListener('slop:trackchange',saveSession);

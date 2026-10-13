@@ -22,6 +22,25 @@ async function context(browser){const c=await browser.newContext({viewport:{widt
  // Restore into a completely fresh browser context: no accounts, no source reads.
  const fresh=await context(browser),restored=await fresh.newPage();await restored.goto(base);await restored.locator('nav [data-view="saved"]').click();await restored.locator('#importFile').setInputFiles({name:'library.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(data))});await restored.locator('#confirmImport').click();await restored.locator('.playlistEditor summary').click();await restored.waitForSelector('#playlistTracks [data-personal-play]');assert.equal(await restored.locator('#playlistTracks [data-personal-play]').count(),2);assert.equal(await restored.locator('#savedList [data-splay]').count(),1);assert.equal(await restored.locator('#diversify').isChecked(),false);
  await restored.locator('#queuePlaylist').click();await restored.locator('nav [data-view="queue"]').click();await restored.locator('#queueQuery').fill('missing title');assert.equal(await restored.locator('#queueList .track:visible').count(),0);await restored.locator('#queueQuery').fill('preserved');assert.equal(await restored.locator('#queueList .track:visible').count(),2);await restored.locator('#queueQuery').fill('');await restored.locator('.queueOptionsTrigger').click();await restored.locator('#recoverQueue').check();await restored.keyboard.press('Escape');await restored.reload();await restored.locator('nav [data-view="queue"]').click();assert.equal(await restored.locator('#queueList [data-qplay]').count(),2);assert.equal(await restored.locator('#audio').evaluate(a=>a.paused),true);
+ // Disabling in another tab must prevent stale saves, even before its storage event arrives.
+ const peer=await fresh.newPage();await peer.goto(base);await peer.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+ assert.equal(await peer.locator('#recoverQueue').isChecked(),true);
+ const originalQueue=await restored.evaluate(()=>JSON.stringify(queue));
+ await peer.evaluate(()=>{document.querySelector('#recoverQueue').checked=false;document.querySelector('#recoverQueue').dispatchEvent(new Event('change'));});
+ await restored.waitForFunction(()=>!document.querySelector('#recoverQueue').checked);
+ await restored.evaluate(()=>{recoveryEnabled=true;document.dispatchEvent(new Event('slop:queuechange'));});
+ assert.equal(await restored.evaluate(()=>localStorage.getItem('slop-session-v1')),null);
+ assert.equal(await restored.evaluate(()=>JSON.stringify(queue)),originalQueue);
+ await peer.close();await restored.reload();await restored.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+ assert.equal(await restored.evaluate(()=>queue.length+albumQueue.length),0);
+ assert.equal(await restored.locator('#recoverQueue').isChecked(),false);
+ // Re-enable, then clearing site storage in another tab must also stop writes.
+ await restored.evaluate(()=>{document.querySelector('#recoverQueue').checked=true;document.querySelector('#recoverQueue').dispatchEvent(new Event('change'));});
+ const clearing=await fresh.newPage();await clearing.goto(new URL('LICENSE.txt',base).href);await clearing.evaluate(()=>localStorage.clear());
+ await restored.waitForFunction(()=>!document.querySelector('#recoverQueue').checked);
+ await restored.evaluate(()=>window.dispatchEvent(new Event('pagehide')));
+ assert.equal(await clearing.evaluate(()=>localStorage.getItem('slop-session-v1')),null);await clearing.close();
+ await restored.evaluate(()=>{document.querySelector('#recoverQueue').checked=true;document.querySelector('#recoverQueue').dispatchEvent(new Event('change'));});
  // Malformed recovery must report failure without restoring a partial queue or touching likes.
  await restored.goto(new URL('LICENSE.txt',base).href);
  await restored.evaluate(t=>localStorage.setItem('slop-session-v1',JSON.stringify({version:1,current:null,queue:[t],album:[{...t,file:'../bad.mp3'}],position:0})),track);

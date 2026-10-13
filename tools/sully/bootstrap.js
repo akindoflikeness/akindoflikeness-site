@@ -10,7 +10,7 @@
   "slop-archive.js?v=sully-20261011",
   "slop-personal.js?v=recovery-validation-1",
   "app.js?v=base-ui-1",
-  "personal-ui.js?v=recovery-validation-1",
+  "personal-ui.js?v=recovery-consent-1",
   "design-ui.js?v=base-ui-1",
   "genre-directory.js?v=sully-20261011",
   "genre-ui.js?v=base-ui-1"

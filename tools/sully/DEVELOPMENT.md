@@ -320,3 +320,23 @@ Paragraph-specific reading limits remain. Stylesheet cache keys updated.
 Verified locally and on the public route: responsive density checks passed, including
 full-width geometry for all views at 1440px, 1920px and 2880px. Mobile overflow
 checks passed down to 320px. Refreshed stylesheet keys after CDN cache verification.
+
+## 13 October: queue recovery opt-out across tabs (preview)
+
+- Synced main through 3bb2273, preserving the full-width release and unrelated
+  publication. Resolved adjacent Log and development-note additions by retaining
+  both histories. PR #43 remains a draft; previous 74bcc70 checks all passed.
+- Found that an already-open tab retained its recovery opt-in after another tab
+  disabled it, and could recreate the deleted snapshot during queue changes or
+  page close. Storage events now synchronise the checkbox and preference; every
+  snapshot write also checks stored consent to cover delayed storage events.
+- Live queues stay independent. Enabling elsewhere does not immediately overwrite
+  the snapshot. Legacy keys remain unchanged. Clearing localStorage also disables
+  recovery in other tabs. No new interface controls or Figma changes are needed.
+- Local browser suite passed with two-tab disable, deliberately stale in-memory
+  consent, preserved live order, reload without recovery, and storage-clear plus
+  pagehide checks. Existing damaged snapshot, backup and library checks pass.
+  Syntax and whitespace checks pass; temporary server and browser stopped.
+- Visible Log entry is In the pot. Refreshed personal-ui and bootstrap URLs.
+  Next: Figma queue ordering controls, then duplicate-reference and paused recovery
+  ordering checks. Shuffle/repeat remain separate; production unchanged.

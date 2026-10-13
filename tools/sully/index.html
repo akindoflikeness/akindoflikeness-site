@@ -72,6 +72,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   </div>
 
   <ol class="logList">
+<li class="logEntry" id="queue-consent-log"><div class="logDate"><time datetime="2026-10-13">13 Oct<br>2026</time><span class="logStatus logStatus--pot">In the pot</span></div><article><p class="entryKicker">Preview / recovery</p><h2>Turn recovery off across your tabs.</h2><p>Switching queue recovery off in one tab now updates the other open tabs. They stop saving the queue, including when closed, so an older tab cannot recreate the deleted snapshot. Each tab keeps its current listening queue.</p></article></li>
 <li class="logEntry" id="queue-validation-log"><div class="logDate"><time datetime="2026-10-12">12 Oct<br>2026</time><span class="logStatus logStatus--pot">In the pot</span></div><article><p class="entryKicker">Preview / recovery</p><h2>A damaged queue should explain itself.</h2><p>Queue recovery now checks the whole saved snapshot before restoring it. Unsupported versions, oversized queues and invalid playback positions show a recovery message instead of being silently ignored. Repeated tracks retain their order, and restoration remains paused. Saved likes and playlists are untouched.</p></article></li>
 <li class="logEntry" id="full-width-log"><div class="logDate"><time datetime="2026-10-12">12 Oct<br>2026</time><span class="logStatus logStatus--shipped">Shipped</span></div><article><p class="entryKicker">Interface</p><h2>Room Across the Page</h2><p>Every view uses the available content width, with consistent edge padding. Search, collections, release grids, library, queue, Docs and Log expand with the window.</p><p class="entryNote">Verified on 12 Oct 2026: local and public browser checks confirm full-width views at 1440px, 1920px and 2880px, with no horizontal overflow on mobile down to 320px.</p></article></li>
 <li class="logEntry" id="density-log"><div class="logDate"><time datetime="2026-10-11">11 Oct<br>2026</time><span class="logStatus logStatus--shipped">Shipped</span></div><article><p class="entryKicker">Interface</p><h2>More Room for Music</h2><p>Smaller headings, controls and cards, with tighter spacing across the app. Search filters sit together and empty status messages take no space.</p><p class="entryNote">Verified on 11 Oct 2026: desktop search results start at 183px. Responsive checks cover every view down to 320px wide. Local library and dialog checks, public layout and artwork checks, and the automated suite passed.</p></article></li>
@@ -297,6 +298,6 @@ Caveat: the honest edge, if there is one.</pre>
   <p class="sharePrinciple">Only this recording is shared. Playback starts paused.</p>
 </dialog>
 <script src="ui.bundle.js?v=base-ui-1"></script>
-<script src="bootstrap.js?v=recovery-validation-1"></script>
+<script src="bootstrap.js?v=recovery-consent-1"></script>
 
 </body></html>
