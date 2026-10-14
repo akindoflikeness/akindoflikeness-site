@@ -361,3 +361,8 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   No application script changes, so no asset version refresh is necessary.
 - Next remains Figma queue ordering controls, followed by exact duplicate ordering
   and paused-recovery checks. Keep shuffle/repeat separate.
+- Hosted evidence: a78291d passed both Firefox/WebKit jobs, both existing Chromium
+  checks, Pages and the bounded push sampler. The duplicate PR sampler was skipped.
+  Opened the deployed preview Log and verified its browser-check entry is visible
+  as IN THE POT. Temporary browser closed. Recovery now has three-engine evidence;
+  hardware-specific mobile validation remains a later release gate.
