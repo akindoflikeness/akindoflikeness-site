@@ -6,6 +6,8 @@ A buildless, MIT-licensed discovery interface and player for Internet Archive au
 
 Serve the entire tools/sully directory together, including the icons directory, stylesheets, Sully Slip scripts and slop-archive.js. No install, account or backend is required.
 
+Discovery excludes sample packs, sample libraries and loop packs labelled in titles or subjects, plus known superseded uploads. This filtering happens in the Archive query so pagination and counts agree. Existing direct listening links remain usable.
+
 Browsing and search query the Archive audio index directly, 30 releases at a time. The ‹ page › control moves through result pages, beginning at 0 in the interface. Genre and collection filters narrow that index. Browsing keeps its newest-indexed Archive order; text searches match phrases in artist names and release titles, with dedicated Artist, Release title and Tags choices and relevance ordering. Related shelves use Archive download count. There is no fixed starter catalogue. More like this searches for shared metadata tags, not audio similarity.
 
 Opening a release fetches its complete playable track list from Archive metadata. Audio streams directly from archive.org. Larger cover artwork loads as cards come into view; Archive thumbnails remain the fallback. Availability depends on the source uploads and Archive service.
