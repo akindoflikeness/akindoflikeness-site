@@ -345,3 +345,19 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   suite passed on the deployed preview, including the new cross-tab scenarios.
   Its visible Log entry was opened and verified as IN THE POT. PR #43 updated;
   all temporary browsers closed. No production changes or new services.
+
+## 14 October: remote Firefox and WebKit recovery gate (preview)
+
+- Previous d12dae6 checks and Pages passed. Synced main through 58bd05a without
+  changing production. Draft PR #43 remains the recovery work under review.
+- Added the milestone's missing Firefox/WebKit recovery gate. The existing real
+  browser suite now accepts an explicit engine; Chromium remains the default.
+  The new remote job runs Firefox then WebKit sequentially under a ten-minute
+  limit and stops its temporary server. No local browser downloads or services.
+- Coverage is the same backup, migration, repeated references, malformed snapshot,
+  cross-tab opt-out, paused recovery and responsive library flow used in Chromium.
+  This exercises engines on Linux, not actual Safari/iOS hardware certification.
+- Syntax check passes. Hosted results pending; the Log entry remains In the pot.
+  No application script changes, so no asset version refresh is necessary.
+- Next remains Figma queue ordering controls, followed by exact duplicate ordering
+  and paused-recovery checks. Keep shuffle/repeat separate.

@@ -1,9 +1,11 @@
-const {chromium}=require(process.env.SLOP_PLAYWRIGHT||'playwright');
+const playwright=require(process.env.SLOP_PLAYWRIGHT||'playwright');
+const engine=process.env.SLOP_BROWSER_ENGINE||'chromium';
+if(!['chromium','firefox','webkit'].includes(engine))throw Error('Unsupported browser engine: '+engine);
 const assert=require('node:assert/strict');
 const base=process.env.SLOP_TEST_URL||'http://127.0.0.1:8766/tools/sully/';
 const track={id:'unavailable-example',file:'song.flac',title:'A preserved reference',artist:'Example artist',release:'Example release',tags:['ambient']};
 async function context(browser){const c=await browser.newContext({viewport:{width:1366,height:768}});await c.route('https://archive.org/**',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({response:{numFound:3,docs:[{identifier:'one',title:'One',creator:'Excluded',subject:['ambient']},{identifier:'two',title:'Two',creator:'Other',subject:['ambient']},{identifier:'three',title:'Three',creator:'Other',subject:['ambient']}]}})}));return c;}
-(async()=>{const browser=await chromium.launch({headless:true,...(process.env.SLOP_BROWSER_CHANNEL?{channel:process.env.SLOP_BROWSER_CHANNEL}:{})});try{
+(async()=>{const browser=await playwright[engine].launch({headless:true,...(engine==='chromium'&&process.env.SLOP_BROWSER_CHANNEL?{channel:process.env.SLOP_BROWSER_CHANNEL}:{})});try{
  const c=await context(browser),page=await c.newPage(),errors=[];page.on('pageerror',e=>{errors.push(e.message);console.error('PAGE ERROR:',e.message)});
  // Seed the shipping v1 database, then load the new app to exercise migration.
  await page.goto(new URL('LICENSE.txt',base).href);
