@@ -379,3 +379,8 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
 - This run is bounded release integration, not new queue UI. Next remains Figma
   queue ordering controls and duplicate-order recovery checks. Hosted and deployed
   integration verification pending below.
+- Integration evidence: 4f08841 passed all hosted Chromium, Firefox/WebKit checks,
+  Pages and the bounded push sampler. Deployed preview library recovery suite
+  passed; opened Log confirmed both histories and the 15 Oct integration note,
+  with the new bootstrap URL loaded. Temporary browsers closed. No user decision
+  or new production milestone; routine integration only.
