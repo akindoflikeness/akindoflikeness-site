@@ -42,3 +42,20 @@ test('name searches keep phrases together and exclude incidental description mat
   assert.equal(searchClause('field recordings','tags'),'subject:"field recordings"');
   assert.ok(!searchClause('name" OR mediatype:movies','artist').includes('" OR'));
 });
+
+
+test('all discovery paths exclude labelled packs and the superseded Mutation at source', () => {
+  const {musicClause}=require('./slop-archive.js');
+  const clause=musicClause();
+  assert.ok(clause.startsWith('(mediatype:audio OR mediatype:etree) AND NOT ('));
+  assert.ok(clause.includes('identifier:"mutation-akol"'));
+  assert.ok(!clause.includes('identifier:"mutation-akol-v2"'));
+  for(const field of ['title','subject']) {
+    for(const label of ['sample pack','sample packs','sample-pack','samplepack','sample library','loop pack'])
+      assert.ok(clause.includes(field+':"'+label+'"'));
+    for(const label of ['samples','loops','experimental','ambient'])
+      assert.ok(!clause.includes(field+':"'+label+'"'));
+  }
+  const app=require('fs').readFileSync(require('path').join(__dirname,'app.js'),'utf8');
+  assert.ok(app.includes('let q=SlopArchive.musicClause();'));
+});

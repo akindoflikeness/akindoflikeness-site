@@ -69,7 +69,7 @@ let relatedSeed=null;
 const quote=value=>'"'+String(value).replace(/["\\]/g,' ').slice(0,200)+'"';
 function renderPager(){const pages=Math.ceil(totalResults/PAGE_SIZE),pager=$('#pager');pager.hidden=pages<=1;$('#pageNumber').textContent=String(page-1);$('#pagePrevious').disabled=page<=1;$('#pageNext').disabled=page>=pages}
 async function search(targetPage=1){window.slopRenderFilters?.();const nextPage=Math.max(1,Math.floor(Number(targetPage)||1)),seq=++request;docs=[];totalResults=0;$('#results').replaceChildren();$('#pager').hidden=true;$('#status').textContent='Searching the Archive…';$('#resultCount').textContent='';document.querySelectorAll('[data-collection]').forEach(b=>b.classList.toggle('active',collection===b.dataset.collection));document.querySelectorAll('[data-genre]').forEach(b=>b.classList.toggle('active',!relatedSeed&&!collection&&genre===b.dataset.genre));$('#resetShelf').hidden=!(relatedSeed||collection);$('#relatedNote').hidden=!relatedSeed;
- let q='(mediatype:audio OR mediatype:etree)';
+ let q=SlopArchive.musicClause();
  if(collection)q+=' AND collection:'+quote(collection);
  const query=$('#query').value.trim().slice(0,200),scope=$('#searchScope').value;if(query)q+=' AND '+SlopArchive.searchClause(query,scope);if(genre)q+=' AND ('+(Array.isArray(genre)?genre:[genre]).map(g=>'subject:'+quote(g)).join(' OR ')+')';
  if(relatedSeed){const tags=tagsOf(relatedSeed).slice(0,6);if(!tags.length){$('#status').textContent='This release has no tags to match.';$('#resultCount').textContent='0 RELEASES';return}q+=' AND ('+tags.map(t=>'subject:'+quote(t)).join(' OR ')+') AND NOT identifier:'+quote(relatedSeed.identifier);$('#relatedNote').textContent='Shared tags: '+tags.join(' · ')}

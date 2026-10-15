@@ -366,3 +366,16 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   Opened the deployed preview Log and verified its browser-check entry is visible
   as IN THE POT. Temporary browser closed. Recovery now has three-engine evidence;
   hardware-specific mobile validation remains a later release gate.
+
+## 15 October: reconcile released discovery filters with recovery preview
+
+- Previous a8db01d passed Pages, Chromium and both remote recovery-engine checks.
+- Main 22a3243 adds released discovery filtering. Merged it into preview and
+  resolved bootstrap conflicts explicitly: music-filter-1 for Archive/app,
+  recovery-validation-1 for the personal library, recovery-consent-1 for recovery.
+  A new recovery-music-1 bootstrap URL prevents a cached loader dropping either.
+- Retained both release and preview Log entries, adding the integration note.
+  Focused Archive/personal tests and bootstrap syntax pass. Production unchanged.
+- This run is bounded release integration, not new queue UI. Next remains Figma
+  queue ordering controls and duplicate-order recovery checks. Hosted and deployed
+  integration verification pending below.
