@@ -43,6 +43,25 @@ async function context(browser){const c=await browser.newContext({viewport:{widt
  await restored.evaluate(()=>window.dispatchEvent(new Event('pagehide')));
  assert.equal(await clearing.evaluate(()=>localStorage.getItem('slop-session-v1')),null);await clearing.close();
  await restored.evaluate(()=>{document.querySelector('#recoverQueue').checked=true;document.querySelector('#recoverQueue').dispatchEvent(new Event('change'));});
+ // A failed snapshot write must discard stale recovery, preserve the live queue,
+ // report once, and recover when storage becomes writable again.
+ await restored.evaluate(t=>{
+   queue=[t,{...t,title:'Repeated occurrence'},t];renderQueue();
+   window.recoveryWriteOriginal=Storage.prototype.setItem;
+   Storage.prototype.setItem=function(key,value){if(key==='slop-session-v1')throw new DOMException('Full','QuotaExceededError');return window.recoveryWriteOriginal.call(this,key,value);};
+   document.dispatchEvent(new Event('slop:queuechange'));
+ },track);
+ assert.equal(await restored.evaluate(()=>localStorage.getItem('slop-session-v1')),null);
+ assert.match(await restored.locator('#message').textContent(),/recovery could not be saved/);
+ assert.deepEqual(await restored.evaluate(()=>queue.map(t=>t.title)),[track.title,'Repeated occurrence',track.title]);
+ assert.equal(await restored.evaluate(()=>saved.size),1);
+ await restored.evaluate(()=>{document.querySelector('#message').textContent='';document.dispatchEvent(new Event('slop:queuechange'));});
+ assert.equal(await restored.locator('#message').textContent(),'');
+ await restored.evaluate(()=>{Storage.prototype.setItem=window.recoveryWriteOriginal;delete window.recoveryWriteOriginal;document.dispatchEvent(new Event('slop:queuechange'));});
+ assert.deepEqual(await restored.evaluate(()=>JSON.parse(localStorage.getItem('slop-session-v1')).queue.map(t=>t.title)),[track.title,'Repeated occurrence',track.title]);
+ await restored.reload();await restored.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+ assert.deepEqual(await restored.evaluate(()=>queue.map(t=>t.title)),[track.title,'Repeated occurrence',track.title]);
+ assert.equal(await restored.locator('#audio').evaluate(a=>a.paused),true);
  // Malformed recovery must report failure without restoring a partial queue or touching likes.
  await restored.goto(new URL('LICENSE.txt',base).href);
  await restored.evaluate(t=>localStorage.setItem('slop-session-v1',JSON.stringify({version:1,current:null,queue:[t],album:[{...t,file:'../bad.mp3'}],position:0})),track);

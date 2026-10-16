@@ -384,3 +384,18 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   passed; opened Log confirmed both histories and the 15 Oct integration note,
   with the new bootstrap URL loaded. Temporary browsers closed. No user decision
   or new production milestone; routine integration only.
+
+## 16 October: storage-quota recovery regression gate (preview)
+
+- Read continuation queue and confirmed 329743f hosted checks all passed; no new
+  main changes. Native Figma canvas editing (use_figma) is absent from the current
+  tool inventory, so queue-control design cannot be completed in this run. Do not
+  substitute a code-backed Figma app or claim the controls have been designed.
+- Added a focused storage-failure scenario to the existing three-engine recovery
+  suite: fail only snapshot writes with QuotaExceededError, check old snapshot
+  removal, live duplicate sequence and likes preservation, one warning per failure
+  episode, then restore writes and reload the exact sequence paused.
+- This tests existing recovery behaviour rather than adding controls. No runtime
+  asset changes or cache-version changes needed. Visible Log added as In the pot.
+- Syntax passes; remote and deployed evidence pending. Next remains native Figma
+  queue-control design when canvas editing is available; no owner action needed.
