@@ -399,3 +399,7 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   asset changes or cache-version changes needed. Visible Log added as In the pot.
 - Syntax passes; remote and deployed evidence pending. Next remains native Figma
   queue-control design when canvas editing is available; no owner action needed.
+- Verified 26b8bf8: both hosted Chromium and Firefox/WebKit jobs passed, along
+  with Pages and the bounded push sampler. Deployed preview recovery suite passed
+  the quota scenario; opened Log verified the new entry as In the pot. Temporary
+  browsers closed. This confirms existing behaviour; no new production milestone.
