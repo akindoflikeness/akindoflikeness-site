@@ -12,7 +12,16 @@
     diversify:typeof value.diversify==='boolean'?value.diversify:true
   };}
   function backup(value){if(value?.format==='slop-saved-tracks'&&value.version===1)return {tracks:list(value.tracks,10000).map(track),personal:empty(),legacy:true};if(value?.format!=='slop-library'||value.version!==2)throw Error('Choose a Sully library v2 or liked-tracks v1 backup.');return {tracks:list(value.tracks,10000).map(track),personal:personal(value.personal),legacy:false};}
+  // Validate the entire recovery snapshot before replacing either queue.
+  function session(value){
+    if(value===null)return null;
+    if(!value||value.version!==1)throw Error('Unsupported queue snapshot.');
+    const queue=list(value.queue,10000),album=list(value.album,10000);
+    if(queue.length+album.length>10000)throw Error('Queue snapshot is too large.');
+    if(typeof value.position!=='number'||!Number.isFinite(value.position)||value.position<0)throw Error('Invalid playback position.');
+    return {version:1,queue:queue.map(track),album:album.map(track),current:value.current===null?null:track(value.current),position:value.position};
+  }
   function merge(existing,incoming,makeId){const out=personal(existing);for(const key of ['playlists','modes'])for(const record of incoming[key]){const same=out[key].find(x=>x.id===record.id);if(!same)out[key].push(record);else if(JSON.stringify(same)!==JSON.stringify(record))out[key].push({...record,id:makeId(),title:(record.title+' (imported copy)').slice(0,200)});}out.excludedCreators=[...new Set([...out.excludedCreators,...incoming.excludedCreators])];return personal(out);}
   function rank(candidates,state){const blocked=new Set(state.excludedCreators.map(normalise));let result=candidates.filter(d=>!(Array.isArray(d.creator)?d.creator:[d.creator||'']).some(c=>blocked.has(normalise(c))));if(!state.diversify)return result;const picked=[],remaining=[...result],counts=new Map();while(remaining.length){let best=0,bestPenalty=Infinity;for(let i=0;i<remaining.length;i++){const c=normalise((Array.isArray(remaining[i].creator)?remaining[i].creator[0]:remaining[i].creator)||remaining[i].identifier);const penalty=(counts.get(c)||0);if(penalty<bestPenalty){best=i;bestPenalty=penalty;}}const d=remaining.splice(best,1)[0],c=normalise((Array.isArray(d.creator)?d.creator[0]:d.creator)||d.identifier);counts.set(c,(counts.get(c)||0)+1);picked.push(d);}return picked;}
-  return Object.freeze({empty,track,personal,backup,merge,rank});
+  return Object.freeze({empty,track,personal,backup,session,merge,rank});
 });
