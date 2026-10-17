@@ -422,3 +422,7 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
 - e41cc43 remote checks passed before work; production and application behaviour
   unchanged. Added visible design-only Log entry. Next: implement this proposal in
   preview, with exact duplicate-order, focus, filtered view and recovery checks.
+- Pages deployed 360f3e9; opened preview Log and verified the design-only wording
+  and proposal link. Chromium checks and sampler passed; Firefox/WebKit runs were
+  still in progress at this observation (no runtime changes in this slice).
+  Temporary verification browser closed. PR #43 remains preview-only.
