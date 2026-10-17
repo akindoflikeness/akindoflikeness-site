@@ -114,3 +114,13 @@ Short phone viewports compact player spacing to preserve usable browsing space.
 Local screenshot and keyboard/scroll checks passed; see DEVELOPMENT for deployed
 release evidence. Player and navigation asset files remain the existing local
 assets; music cover imagery remains dynamic, with no Figma fixture artwork.
+
+### Queue ordering proposal — 17 October 2026
+
+Board 106:1703; desktop 106:1704; phone 106:1741; behaviour notes 106:1778.
+Focused editable ordering panels reuse quiet-action component 80:1199, Lora and
+local colour variables. Original Queue 5:6210 remains unchanged. Design only:
+move single occurrences; disabled boundary controls; disable while filtering;
+retain focus and announce position; album remainder and current playback unchanged.
+Implement within existing shared queue UI and keep recovery opt-in. Screenshots
+inspected after compact desktop sizing. No working ordering controls shipped yet.

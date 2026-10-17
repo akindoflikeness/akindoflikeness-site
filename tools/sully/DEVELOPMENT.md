@@ -403,3 +403,22 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   with Pages and the bounded push sampler. Deployed preview recovery suite passed
   the quota scenario; opened Log verified the new entry as In the pot. Temporary
   browsers closed. This confirms existing behaviour; no new production milestone.
+
+## 17 October: editable queue ordering proposal
+
+- Native canvas editing returned. Used figma-use and figma-generate-design to
+  inspect existing Queue 5:6210, local action component 80:1199, Lora and colour
+  variables. No Code Connect files found. Existing screens/components retained.
+- New focused ordering proposal: board 106:1703, desktop panel 106:1704, phone
+  panel 106:1741, behaviour notes 106:1778. Uses editable text, auto-layout and
+  quiet-action component instances with existing colour variables. These are
+  focused content panels, not complete application screens or working controls.
+- First/last disabled states, duplicate occurrences, 44px buttons, compact desktop
+  rows, phone stacking and independent album order documented. Search disables
+  reordering until cleared; native keyboard actions retain occurrence focus and
+  announce new position. Existing play/next/remove actions remain in implementation.
+- Inspected final screenshot after auto-layout and density corrections. No blank
+  image placeholders or flattened UI. No new components or runtime asset changes.
+- e41cc43 remote checks passed before work; production and application behaviour
+  unchanged. Added visible design-only Log entry. Next: implement this proposal in
+  preview, with exact duplicate-order, focus, filtered view and recovery checks.
