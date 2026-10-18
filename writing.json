@@ -8,7 +8,7 @@
     "date": "2026-10-18",
     "subtitle": "It's Human All the Way Down",
     "theme": "essay-lora",
-    "stylesheet": "/assets/essay-lora-v2.css",
+    "stylesheet": "/assets/essay-lora-v3.css",
     "figures": [
       {
         "after": "I own it on vinyl and on CD now.",
@@ -26,6 +26,7 @@
         "height": 1294,
         "caption": "further fandom proof, whilst off my tits on questionably cooked roast beef"
       }
-    ]
+    ],
+    "audio": "/assets/audio/who-can-participate-backing.mp3"
   }
 ]

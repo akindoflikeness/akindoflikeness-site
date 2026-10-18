@@ -363,7 +363,7 @@ def writing_entries():
         album = albums.get(slug)
         date = album["date"] if album else metadata.get(slug, {}).get("date") or prose_date(slug)
         entry = dict(slug=slug, title=title, date=date, excerpt=excerpt)
-        entry.update({key: value for key, value in metadata.get(slug, {}).items() if key in ("subtitle", "theme", "stylesheet", "figures")})
+        entry.update({key: value for key, value in metadata.get(slug, {}).items() if key in ("subtitle", "theme", "stylesheet", "figures", "audio")})
         if album:
             entry["album"] = slug
         entries.append(entry)
@@ -400,11 +400,18 @@ def build_essay(root, home, entry):
                   f'loading="lazy" decoding="async"><figcaption>{esc(figure["caption"])}</figcaption></figure>')
         prose = prose.replace(anchor, anchor + '\n' + markup)
     subtitle = f'\n        <p class="essay-subtitle">{esc(entry["subtitle"])}</p>' if entry.get("subtitle") else ""
+    audio = ""
+    if entry.get("audio"):
+        audio = (f'\n      <section class="essay-audio" aria-label="Audio version">'
+                 f'<p id="essay-audio-label">Audio version</p>'
+                 f'<audio controls preload="metadata" aria-labelledby="essay-audio-label">'
+                 f'<source src="{esc(entry["audio"])}" type="audio/mpeg">'
+                 f'<a href="{esc(entry["audio"])}">Listen to the audio version</a></audio></section>')
     content = f'''<article class="detail essay">
       <header class="essay-header">
         <h1 class="intro-title">{esc(entry['title'])}</h1>{subtitle}
         <time class="fine" datetime="{esc(entry['date'])}">{('Released ' if entry.get('album') else '')}{nice_date(entry['date'])}</time>
-      </header>
+      </header>{audio}
       <div class="prose essay-prose">{prose}</div>
       {essay_navigation(root, entry)}
     </article>'''
