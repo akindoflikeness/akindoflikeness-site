@@ -124,3 +124,8 @@ move single occurrences; disabled boundary controls; disable while filtering;
 retain focus and announce position; album remainder and current playback unchanged.
 Implement within existing shared queue UI and keep recovery opt-in. Screenshots
 inspected after compact desktop sizing. No working ordering controls shipped yet.
+
+18 October: ordering actions implemented in preview via queue-order.js/css.
+Boundary controls use aria-disabled plus guarded activation to preserve keyboard
+focus. Existing player and row actions retained; phone ordering wraps below them.
+Duplicate occurrence, filtered view, focus and paused recovery tests added.

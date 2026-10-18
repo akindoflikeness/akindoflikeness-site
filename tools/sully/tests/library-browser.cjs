@@ -62,6 +62,29 @@ async function context(browser){const c=await browser.newContext({viewport:{widt
  await restored.reload();await restored.waitForFunction(()=>document.documentElement.dataset.ready==='true');
  assert.deepEqual(await restored.evaluate(()=>queue.map(t=>t.title)),[track.title,'Repeated occurrence',track.title]);
  assert.equal(await restored.locator('#audio').evaluate(a=>a.paused),true);
+ // Ordering moves one duplicate occurrence and leaves album/current playback alone.
+ await restored.locator('nav [data-view="queue"]').click();
+ const albumBefore=await restored.evaluate(()=>JSON.stringify(albumQueue));
+ const currentBefore=await restored.evaluate(()=>JSON.stringify(currentTrack));
+ const move=restored.locator('[data-queue-index="1"][data-queue-move="-1"]');
+ await move.focus();await restored.keyboard.press('Enter');
+ assert.deepEqual(await restored.evaluate(()=>queue.map(t=>t.title)),['Repeated occurrence',track.title,track.title]);
+ assert.equal(await restored.evaluate(()=>document.activeElement.dataset.queueIndex),'0');
+ assert.equal(await restored.locator('[data-queue-index="0"][data-queue-move="-1"]').getAttribute('aria-disabled'),'true');
+ await restored.keyboard.press('Enter');assert.equal(await restored.evaluate(()=>queue[0].title),'Repeated occurrence');
+ await restored.locator('#queueQuery').fill('Repeated');
+ assert.equal(await restored.locator('[data-queue-index="0"][data-queue-move="1"]').getAttribute('aria-disabled'),'true');
+ await restored.locator('[data-queue-index="0"][data-queue-move="1"]').dispatchEvent('click');
+ assert.equal(await restored.evaluate(()=>queue[0].title),'Repeated occurrence');
+ await restored.locator('#queueQuery').fill('');
+ assert.equal(await restored.evaluate(()=>JSON.stringify(albumQueue)),albumBefore);
+ assert.equal(await restored.evaluate(()=>JSON.stringify(currentTrack)),currentBefore);
+ for(const width of [1440,390,320]){await restored.setViewportSize({width,height:844});assert.equal(await restored.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);}
+ if(process.env.SLOP_SCREENSHOTS)await restored.screenshot({path:process.env.SLOP_SCREENSHOTS+'/queue-order-phone.png'});
+ await restored.reload();await restored.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+ assert.deepEqual(await restored.evaluate(()=>queue.map(t=>t.title)),['Repeated occurrence',track.title,track.title]);
+ assert.equal(await restored.locator('#audio').evaluate(a=>a.paused),true);
+ await restored.setViewportSize({width:1366,height:768});
  // Malformed recovery must report failure without restoring a partial queue or touching likes.
  await restored.goto(new URL('LICENSE.txt',base).href);
  await restored.evaluate(t=>localStorage.setItem('slop-session-v1',JSON.stringify({version:1,current:null,queue:[t],album:[{...t,file:'../bad.mp3'}],position:0})),track);

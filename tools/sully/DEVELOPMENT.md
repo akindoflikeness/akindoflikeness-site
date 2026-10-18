@@ -426,3 +426,22 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   and proposal link. Chromium checks and sampler passed; Firefox/WebKit runs were
   still in progress at this observation (no runtime changes in this slice).
   Temporary verification browser closed. PR #43 remains preview-only.
+
+## 18 October: manual queue ordering in preview
+
+- Implemented the focused Figma ordering actions from 106:1708 (design context
+  and screenshot retrieved with figma-design-to-code). Existing play/save/next/
+  remove controls and shared shell remain; on phones ordering wraps underneath.
+- Moves by occurrence index, preserving repeats, current playback and album queue.
+  Boundaries and filtered queues use aria-disabled with guarded handlers so the
+  focused action remains reachable after a move to the boundary. A polite status
+  announces the new position. Shared queue-change events trigger opt-in recovery.
+- Local library suite passed: duplicate occurrence moved once, keyboard/focus,
+  boundary guard, filtered click guard, album/current preservation, exact paused
+  reload order, and no overflow at 1440/390/320px. Phone screenshot inspected.
+  Temporary browser/server stopped. No model or catalogue processing locally.
+- Added queue-order.js/css and refreshed bootstrap URL. Visible Log marks the
+  implementation In the pot; historical design entry remains dated 17 October.
+- Next: review deployed three-engine results, then advance remaining library
+  milestone (saved releases / exchange) separately from shuffle/repeat. Production
+  release requires separate approval; PR #43 remains draft.
