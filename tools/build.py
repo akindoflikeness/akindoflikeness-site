@@ -390,7 +390,7 @@ def build_essay(root, home, entry):
         prose = paragraphs(linked_album_prose(album, root))
     else:
         prose = essay_prose(prose_document(os.path.join(ROOT, "prose", entry["slug"] + ".txt"))[1])
-    for figure in entry.get("figures", []):
+    for figure in reversed(entry.get("figures", [])):
         anchor = f'<p>{esc(figure["after"])}</p>'
         if prose.count(anchor) != 1:
             raise ValueError(f'Figure anchor must occur once in {entry["slug"]}')
