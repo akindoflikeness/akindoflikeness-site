@@ -396,6 +396,7 @@ def build_essay(root, home, entry):
             raise ValueError(f'Figure anchor must occur once in {entry["slug"]}')
         markup = (f'<figure class="essay-figure"><img src="{esc(figure["src"])}" '
                   f'alt="{esc(figure["alt"])}" width="{int(figure["width"])}" height="{int(figure["height"])}" '
+                  f'style="display:block;width:100%;max-width:100%;height:auto;aspect-ratio:auto;object-fit:contain" '
                   f'loading="lazy" decoding="async"><figcaption>{esc(figure["caption"])}</figcaption></figure>')
         prose = prose.replace(anchor, anchor + '\n' + markup)
     subtitle = f'\n        <p class="essay-subtitle">{esc(entry["subtitle"])}</p>' if entry.get("subtitle") else ""
