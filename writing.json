@@ -8,6 +8,16 @@
     "date": "2026-10-18",
     "subtitle": "It's Human All the Way Down",
     "theme": "essay-lora",
-    "stylesheet": "/assets/essay-lora-v1.css"
+    "stylesheet": "/assets/essay-lora-v2.css",
+    "figures": [
+      {
+        "after": "I own it on vinyl and on CD now.",
+        "src": "/assets/spirit-of-eden-proof-of-purchase.jpg",
+        "alt": "Talk Talk's Spirit of Eden record sleeve resting on patterned fabric.",
+        "width": 1962,
+        "height": 1478,
+        "caption": "proof of purchase :->"
+      }
+    ]
   }
 ]

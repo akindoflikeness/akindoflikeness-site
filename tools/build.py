@@ -363,7 +363,7 @@ def writing_entries():
         album = albums.get(slug)
         date = album["date"] if album else metadata.get(slug, {}).get("date") or prose_date(slug)
         entry = dict(slug=slug, title=title, date=date, excerpt=excerpt)
-        entry.update({key: value for key, value in metadata.get(slug, {}).items() if key in ("subtitle", "theme", "stylesheet")})
+        entry.update({key: value for key, value in metadata.get(slug, {}).items() if key in ("subtitle", "theme", "stylesheet", "figures")})
         if album:
             entry["album"] = slug
         entries.append(entry)
@@ -390,6 +390,14 @@ def build_essay(root, home, entry):
         prose = paragraphs(linked_album_prose(album, root))
     else:
         prose = essay_prose(prose_document(os.path.join(ROOT, "prose", entry["slug"] + ".txt"))[1])
+    for figure in entry.get("figures", []):
+        anchor = f'<p>{esc(figure["after"])}</p>'
+        if prose.count(anchor) != 1:
+            raise ValueError(f'Figure anchor must occur once in {entry["slug"]}')
+        markup = (f'<figure class="essay-figure"><img src="{esc(figure["src"])}" '
+                  f'alt="{esc(figure["alt"])}" width="{int(figure["width"])}" height="{int(figure["height"])}" '
+                  f'loading="lazy" decoding="async"><figcaption>{esc(figure["caption"])}</figcaption></figure>')
+        prose = prose.replace(anchor, anchor + '\n' + markup)
     subtitle = f'\n        <p class="essay-subtitle">{esc(entry["subtitle"])}</p>' if entry.get("subtitle") else ""
     content = f'''<article class="detail essay">
       <header class="essay-header">
