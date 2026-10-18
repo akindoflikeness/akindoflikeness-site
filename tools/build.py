@@ -90,12 +90,12 @@ def indent(block, n):
 
 
 def essay_prose(text):
-    """Escape prose, supporting bold, HTTPS links and intentional line breaks.
+    """Escape prose, supporting emphasis, headings, quotes and safe links.
 
     Other square brackets remain literal, including musical prompt directions.
     Videos use ordinary links so playback does not depend on embedded players.
     """
-    token = re.compile(r"\*\*(.+?)\*\*|\[([^\]\n]+)\]\((https://[^\s)]+)\)")
+    token = re.compile(r"\*\*(.+?)\*\*|\*([^*\n]+)\*|\[([^\]\n]+)\]\((https://[^\s)]+|/(?!/)[^\s)]+)\)")
 
     def inline(value):
         parts, end = [], 0
@@ -103,13 +103,26 @@ def essay_prose(text):
             parts.append(esc(value[end:match.start()]))
             if match[1] is not None:
                 parts.append(f"<strong>{esc(match[1])}</strong>")
+            elif match[2] is not None:
+                parts.append(f"<em>{esc(match[2])}</em>")
             else:
-                parts.append(f'<a href="{esc(match[3])}">{esc(match[2])}</a>')
+                parts.append(f'<a href="{esc(match[4])}">{inline(match[3])}</a>')
             end = match.end()
         parts.append(esc(value[end:]))
         return "".join(parts).replace("\n", "<br>\n")
 
-    return "\n".join(f"<p>{inline(p.strip())}</p>" for p in re.split(r"\n\s*\n", text.strip()) if p.strip())
+    blocks = []
+    for paragraph in re.split(r"\n\s*\n", text.strip()):
+        paragraph = paragraph.strip()
+        if not paragraph:
+            continue
+        if paragraph.startswith("## "):
+            blocks.append(f"<h2>{inline(paragraph[3:])}</h2>")
+        elif paragraph.startswith("> "):
+            blocks.append(f"<blockquote><p>{inline(paragraph[2:])}</p></blockquote>")
+        else:
+            blocks.append(f"<p>{inline(paragraph)}</p>")
+    return "\n".join(blocks)
 
 
 # ---------- pieces ----------
@@ -147,8 +160,10 @@ def slim_catalogue(albums, root):
     return json.dumps({"artist": ARTIST, "albums": out}, ensure_ascii=False, separators=(",", ":"))
 
 
-def head_extra(title, canonical=None, description=None, image=None, og_type="website", noindex=False):
+def head_extra(title, canonical=None, description=None, image=None, og_type="website", noindex=False, stylesheet=None):
     lines = [f'<meta property="og:title" content="{esc(title)}">', f'<meta property="og:type" content="{og_type}">']
+    if stylesheet:
+        lines.append(f'<link rel="stylesheet" href="{esc(stylesheet)}">')
     if canonical:
         lines.insert(0, f'<link rel="canonical" href="{canonical}">')
     if noindex:
@@ -348,6 +363,7 @@ def writing_entries():
         album = albums.get(slug)
         date = album["date"] if album else metadata.get(slug, {}).get("date") or prose_date(slug)
         entry = dict(slug=slug, title=title, date=date, excerpt=excerpt)
+        entry.update({key: value for key, value in metadata.get(slug, {}).items() if key in ("subtitle", "theme", "stylesheet")})
         if album:
             entry["album"] = slug
         entries.append(entry)
@@ -374,16 +390,17 @@ def build_essay(root, home, entry):
         prose = paragraphs(linked_album_prose(album, root))
     else:
         prose = essay_prose(prose_document(os.path.join(ROOT, "prose", entry["slug"] + ".txt"))[1])
+    subtitle = f'\n        <p class="essay-subtitle">{esc(entry["subtitle"])}</p>' if entry.get("subtitle") else ""
     content = f'''<article class="detail essay">
       <header class="essay-header">
-        <h1 class="intro-title">{esc(entry['title'])}</h1>
+        <h1 class="intro-title">{esc(entry['title'])}</h1>{subtitle}
         <time class="fine" datetime="{esc(entry['date'])}">{('Released ' if entry.get('album') else '')}{nice_date(entry['date'])}</time>
       </header>
       <div class="prose essay-prose">{prose}</div>
       {essay_navigation(root, entry)}
     </article>'''
     return page(root, home, title=entry["title"], content=content, current="writing",
-                canonical=SITE_URL + "/writing/" + entry["slug"], description=entry["excerpt"], og_type="article")
+                canonical=SITE_URL + "/writing/" + entry["slug"], description=entry["excerpt"], og_type="article", theme=entry.get("theme"), stylesheet=entry.get("stylesheet"))
 
 
 def build_collection(root, home, name):
