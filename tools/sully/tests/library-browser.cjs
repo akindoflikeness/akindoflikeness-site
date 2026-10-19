@@ -62,6 +62,13 @@ async function context(browser){const c=await browser.newContext({viewport:{widt
  await restored.reload();await restored.waitForFunction(()=>document.documentElement.dataset.ready==='true');
  assert.deepEqual(await restored.evaluate(()=>queue.map(t=>t.title)),[track.title,'Repeated occurrence',track.title]);
  assert.equal(await restored.locator('#audio').evaluate(a=>a.paused),true);
+ // Queue search matches recording text, never action labels added by ordering.
+ await restored.locator('nav [data-view="queue"]').click();
+ await restored.locator('#queueQuery').fill('Move');
+ assert.equal(await restored.locator('#queueList .track:visible').count(),0);
+ await restored.locator('#queueQuery').fill('Example artist');
+ assert.equal(await restored.locator('#queueList .track:visible').count(),3);
+ await restored.locator('#queueQuery').fill('');
  // Ordering moves one duplicate occurrence and leaves album/current playback alone.
  await restored.locator('nav [data-view="queue"]').click();
  const albumBefore=await restored.evaluate(()=>JSON.stringify(albumQueue));

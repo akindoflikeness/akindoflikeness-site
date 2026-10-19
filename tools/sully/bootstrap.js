@@ -11,7 +11,7 @@
   "slop-personal.js?v=recovery-validation-1",
   "app.js?v=music-filter-1",
   "personal-ui.js?v=recovery-consent-1",
-  "design-ui.js?v=base-ui-1",
+  "design-ui.js?v=queue-search-1",
   "queue-order.js?v=ordering-1",
   "genre-directory.js?v=sully-20261011",
   "genre-ui.js?v=base-ui-1"

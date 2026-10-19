@@ -449,3 +449,15 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   passed. Deployed preview recovery suite passed and its ordering Log entry was
   opened and verified In the pot. PR #43 title/body updated to the complete scope.
   All temporary processes stopped. Production unchanged.
+
+## 19 October: queue search ignores action labels (preview)
+
+- Confirmed 76cdd6e checks passed, synced main through 45568cc, preserving unrelated
+  essay publication. Found the new Move controls were included in queue search:
+  a search for Move returned all three unrelated tracks in the deployed preview.
+- Added a failing browser regression (3 matches instead of 0), then scoped queue
+  search to the existing trackCopy title/artist text. Artist matching remains
+  covered. No new controls or layout changes; ordering guards remain intact.
+- Refreshed design-ui and bootstrap versions, added visible preview Log entry.
+  Syntax passes; hosted/deployed fixed-result verification follows. Production
+  unchanged. Next: saved releases/exchange slice from the library milestone.
