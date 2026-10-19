@@ -1,0 +1,217 @@
+Who Can Participate in the Present?
+
+I think we have a tendency to confuse the mechanisms through which people access culture with the value of what happens when they do.
+
+We talk about ownership, copyright, licensing and compensation as though these things can adequately account for the relationship between people and the things they encounter. They're important, but they don't tell us very much about what those encounters actually mean, what they make possible, or what people go on to do because of them.
+
+And I think that distinction matters enormously when we're discussing new technologies and their relationship with human creativity.
+
+I've spent much of my life [making music](/music.html). Learning instruments, experimenting with technology, making things that didn't work, discovering things I didn't know I was looking for.
+
+Some of those experiences changed my life.
+
+When I was young, I discovered Talk Talk's [*Spirit of Eden*](https://en.wikipedia.org/wiki/Spirit_of_Eden) through a Rolling Stone list of the greatest albums. I pirated it. I couldn't have known what that record would come to mean to me, or how much it would influence the way I understood music and what could be done with it.
+
+I own it on vinyl and on CD now.
+
+The transaction that introduced me to that record was worth nothing to its rights holders. But the experience was worth more to me than I could possibly quantify.
+
+It changed how I listened, what I appreciated, and what I imagined music could be. And that experience didn't end when the record stopped playing. It became part of everything I would go on to make.
+
+**The absence of a legitimate transaction didn't mean the absence of cultural value.** Nor did it mean the absence of a human relationship with the work.
+
+Quite the opposite.
+
+And that's the problem with reducing these questions to the mechanisms by which something is produced, distributed or accessed. Those mechanisms matter, but they aren't the whole of the experience, and they cannot tell us everything about its value.
+
+The person encountering the work matters. Their circumstances matter. What they take from it, what they learn, what they feel, and what they go on to contribute all matter.
+
+I wonder how we account for that.
+
+And more importantly, what happens when we fail to?
+
+## What are we preserving?
+
+There are now machines capable of realising certain musical ideas better than I ever could. I can describe something I want to hear, and a system can produce a result that might previously have required years of training, expensive equipment, professional collaborators, or skills I simply don't possess.
+
+I don't think that makes my life of making music any less meaningful.
+
+It doesn't invalidate the things I've learned, the decisions I've made, the enjoyment I've had, or the things I've contributed.
+
+And I didn't arrive at that perspective without difficulty.
+
+These capabilities are strange. They challenge relationships we've developed with our skills, our work, and sometimes our understanding of ourselves. I've had to contend with that feeling, and I recognise it when I encounter it in others.
+
+I understand why somebody who has spent decades developing an expertise might feel uncomfortable watching a machine accomplish something that once required so much of their time and attention.
+
+But I don't think the value of that experience was ever contingent on somebody else being unable to achieve the same result.
+
+If a machine can play guitar better than I can, I haven't lost the years I spent learning to play guitar.
+
+If somebody can now make a synthesizer without learning to program in the conventional way, the knowledge and experience of the people who developed synthesizers before them hasn't disappeared.
+
+Those people still did those things. They lived those experiences. They made decisions, solved problems, made discoveries, and contributed something to the world.
+
+Why should another person's new capabilities diminish any of that?
+
+> I don't think we preserve the value of human experience by denying other people the opportunity to have their own.
+
+## The knowledge doesn't disappear
+
+I've been spending a lot of time discussing AI-assisted software development with musicians, developers, and people who have only recently discovered that they can create software at all.
+
+One of the recurring objections is that people using AI lack the domain knowledge required to do what they're attempting.
+
+Sometimes they do. That matters.
+
+But I find the suggestion that AI makes domain knowledge worthless rather peculiar.
+
+Where did the knowledge come from?
+
+Somebody learned something. Somebody experimented, developed a theory, wrote a paper, documented a technique, or shared what they'd discovered. Other people built upon that work.
+
+These systems are possible because of an extraordinary accumulation of human knowledge and ingenuity.
+
+And now some of that knowledge can be accessed and applied by people who previously had no practical means of doing so.
+
+That doesn't mean the knowledge has become worthless. It means the relationship between possessing knowledge and applying it is changing.
+
+There are limitations. Generated code can be wrong. A working program isn't necessarily a reliable program. Testing requires judgement, and there are things an inexperienced developer may not know to look for.
+
+But these are problems to investigate, not reasons to declare somebody's participation illegitimate before examining what they've made.
+
+I've encountered people who enjoy writing DSP algorithms themselves and want to continue doing so.
+
+Brilliant.
+
+I can appreciate that process. I can appreciate the knowledge, the craftsmanship, the enjoyment of understanding something deeply enough to construct it yourself.
+
+There may be people who particularly value software developed that way and want to support the people making it.
+
+But that preference doesn't establish an obligation for everybody else to work in the same way.
+
+And I don't see why these approaches need to be enemies.
+
+## The person behind the category
+
+Something else has become increasingly apparent to me through these discussions.
+
+We seem remarkably willing to defend humanity in the abstract while dismissing actual human beings in front of us.
+
+Someone uses AI to create software, and suddenly they're a vibe coder, a slopper, a grifter, an idiot, or somebody trying to destroy an industry.
+
+*The category arrives before the examination.*
+
+We don't need to know what they've made, how they've made it, what they understand, what they've tested, what they've learned, or why they wanted to make it.
+
+We've assigned the label. We know what sort of person they are now.
+
+And once that happens, contempt becomes remarkably easy to justify.
+
+I've watched people make unfounded accusations, ridicule others, and dismiss their contributions without addressing a single substantive argument. I've watched those responses receive approval from people who presumably consider themselves on the right side of the discussion.
+
+I think there's a word for this.
+
+Prejudice.
+
+What particularly concerns me is the social environment that allows it to sustain itself.
+
+When somebody is assigned to a sufficiently disliked category, treating them badly can become a way of demonstrating your own legitimacy to the people around you.
+
+You don't need to substantiate what you've said. You don't even need to engage with the person.
+
+You just need to demonstrate that you know who deserves contempt.
+
+And people applaud.
+
+I find this deeply uncomfortable, particularly when the justification is supposedly the preservation of human creativity, human labour, or human expression.
+
+I don't think criticism of AI is inherently prejudicial. There are serious questions about ownership, compensation, security, reliability, labour, and the concentration of power. I've wrestled with many of them myself, and I don't pretend to have resolved them.
+
+But those questions deserve to be discussed.
+
+Reducing somebody to a stereotype doesn't answer them.
+
+And the same applies in the other direction. A developer concerned about their livelihood isn't automatically a gatekeeper, a Luddite, or somebody incapable of adapting.
+
+They're a person with experiences, interests, knowledge and concerns that deserve to be understood.
+
+We can disagree with people without deciding what sort of person they must be.
+
+## What could we actually do?
+
+What frustrates me most is how much time and energy we're wasting.
+
+AI is already being incorporated into software development. Developers I've spoken with are using it in different capacities, and I expect those capabilities to continue developing.
+
+We can debate where it's useful, where it isn't, and what consequences its adoption might have.
+
+But I'd much rather see us spending more time asking what we can do together.
+
+We have people with decades of experience in DSP, electrical engineering, computer science, interface design and music production.
+
+We have musicians who understand exactly what they want a tool to accomplish but have never had the technical means to build it.
+
+We have people discovering software development for the first time.
+
+And we have new technologies that might allow these people to exchange knowledge, collaborate and realise ideas in ways that weren't previously practical.
+
+What might they make together?
+
+How do we build tools that make development more accessible without abandoning quality, reliability or security?
+
+How do we make expertise available to more people while continuing to recognise and support the people who develop it?
+
+How do we create an ecosystem in which developers can earn a living, musicians can realise their ideas, and people who previously couldn't participate can contribute something meaningful?
+
+What opportunities are we missing because we're too occupied arguing about which people are entitled to make things?
+
+These aren't questions with easy answers.
+
+People need to eat. Developers need to sustain their work. Businesses have responsibilities. New technologies can create opportunities while also disrupting the conditions that allowed other people to contribute.
+
+I don't think we should dismiss any of that.
+
+But surely these are reasons to collaborate, experiment and learn from one another, rather than retreat into competing ideas about who deserves to participate.
+
+I've never understood why the emergence of a new capability should require us to abandon our appreciation for what came before it.
+
+I still love playing guitar.
+
+I still love synthesizers.
+
+I still love listening to people who have spent their lives developing an extraordinary command of an instrument or a discipline.
+
+And I love seeing somebody discover that they can make something they previously couldn't.
+
+Those experiences aren't mutually exclusive.
+
+## The end times
+
+I recently encountered a developer reflecting on twenty years of professional programming experience.
+
+They'd been watching somebody create software through a process completely unlike the one they'd spent their career learning.
+
+Rather than dismissing it, they found it interesting.
+
+They recognised that the skills they'd spent years acquiring had once been necessary to accomplish those things, but wondered whether they would always be necessary in the same way.
+
+I found that perspective refreshing.
+
+They hadn't lost their experience. They hadn't abandoned their expertise. They were simply curious about what had become possible.
+
+And I think we could use considerably more of that curiosity.
+
+I don't want a future without developers, musicians, artists, or the accumulated knowledge and experience that brought us here.
+
+I want a future in which more people can participate, where expertise continues to matter, where people can sustain themselves through their contributions, and where we can discover what becomes possible when we stop treating one another as obstacles.
+
+I don't know exactly what that future looks like.
+
+That's rather the point.
+
+To borrow a sentiment I encountered recently, every generation thinks it's the end of the world.
+
+**The end times are as nigh as they've always been.**
+
+Perhaps we ought to see what we can make of them.
