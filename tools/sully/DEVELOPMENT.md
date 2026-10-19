@@ -461,3 +461,7 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
 - Refreshed design-ui and bootstrap versions, added visible preview Log entry.
   Syntax passes; hosted/deployed fixed-result verification follows. Production
   unchanged. Next: saved releases/exchange slice from the library milestone.
+- Fixed-result evidence: 0692bed passed all hosted Chromium/Firefox/WebKit checks,
+  Pages and bounded sampler. The previously failing deployed regression now passes,
+  including artist matching, and the visible Log was verified In the pot. All
+  temporary browsers closed. Routine preview correction; no release decision.
