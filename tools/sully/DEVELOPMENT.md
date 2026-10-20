@@ -470,3 +470,7 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   navigation scripts for cache correctness. No conflicts or Sully source changes;
   no new behaviour tests were added in this sync. Production main remains source.
   Preview deployment/check status pending.
+- Verification: latest preview commit 71b1f36 passed both Chromium and Firefox/WebKit
+  check runs, Pages and the bounded push sampler (duplicate PR sampler skipped).
+  Opened the deployed preview Log to confirm Sully and the queue-search entry.
+  No application assets changed in this sync; no production changes.
