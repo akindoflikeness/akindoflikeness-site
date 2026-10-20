@@ -465,3 +465,8 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   Pages and bounded sampler. The previously failing deployed regression now passes,
   including artist matching, and the visible Log was verified In the pot. All
   temporary browsers closed. Routine preview correction; no release decision.
+- 20 Oct: synchronized preview with production navigation fixes 6ecf654 and
+  010db5d. These update stylesheet loading before internal page swaps and refresh
+  navigation scripts for cache correctness. No conflicts or Sully source changes;
+  no new behaviour tests were added in this sync. Production main remains source.
+  Preview deployment/check status pending.
