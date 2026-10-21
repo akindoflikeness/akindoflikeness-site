@@ -15,13 +15,13 @@ localSearch($('#saved'),'savedQuery','Liked','Search liked artists, releases or 
 const libraryOrder=document.createElement('div');libraryOrder.className='libraryOrder';
 libraryOrder.innerHTML='<label for="savedSort">Sort Releases</label><select id="savedSort"><option value="recent">Recently Liked</option><option value="artist">Artist A–Z</option><option value="release">Release A–Z</option></select>';
 $('#savedList').before(libraryOrder);$('#savedSort').onchange=renderSaved;
-function filterQueue(){$('#queueQuery').closest('form').hidden=!$('#queueList .track');const term=$('#queueQuery').value.toLocaleLowerCase().trim();$('#queueList').querySelectorAll('.track').forEach(row=>row.hidden=!!term&&!row.textContent.toLocaleLowerCase().includes(term));const count=[...$('#queueList').querySelectorAll('.track')].filter(r=>!r.hidden).length;$('#queueFilterStatus').hidden=!term;$('#queueFilterStatus').textContent=term?count+' matching tracks':'';}
+function filterQueue(){$('#queueQuery').closest('form').hidden=!$('#queueList .track');const term=$('#queueQuery').value.toLocaleLowerCase().trim();$('#queueList').querySelectorAll('.track').forEach(row=>row.hidden=!!term&&!(row.querySelector('.trackCopy')?.textContent||'').toLocaleLowerCase().includes(term));const count=[...$('#queueList').querySelectorAll('.track')].filter(r=>!r.hidden).length;$('#queueFilterStatus').hidden=!term;$('#queueFilterStatus').textContent=term?count+' matching tracks':'';}
 localSearch($('#queue'),'queueQuery','Queue','Search this queue…',filterQueue);
 const queueStatus=document.createElement('p');queueStatus.id='queueFilterStatus';queueStatus.className='dim';queueStatus.setAttribute('role','status');$('#queueList').before(queueStatus);
 document.addEventListener('slop:queuechange',filterQueue);filterQueue();
 for(const [name,selector,label] of [['docs','.docsSection','Docs'],['log','.logEntry','Log'],['about','section','About']]){
  if(name==='about')continue;
- const root=$('#'+name);localSearch(root,name+'Query',label,'Search '+label.toLowerCase()+'…',()=>{const term=$('#'+name+'Query').value.trim().toLocaleLowerCase();root.querySelectorAll(selector).forEach(row=>row.hidden=!!term&&!row.textContent.toLocaleLowerCase().includes(term))});
+ const root=$('#'+name);localSearch(root,name+'Query',label,'Search '+label.toLowerCase()+'…',()=>{const term=$('#'+name+'Query').value.trim().toLocaleLowerCase();root.querySelectorAll(selector).forEach(row=>row.hidden=!!term&&!(row.querySelector('.trackCopy')?.textContent||'').toLocaleLowerCase().includes(term))});
 }
 localSearch($('#about'),'aboutQuery','Archive','Artist or release name…',()=>{});
 $('#about .search').onsubmit=e=>{e.preventDefault();$('#query').value=$('#aboutQuery').value;view('discover');$('#search').requestSubmit()};

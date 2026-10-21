@@ -1,9 +1,11 @@
-const {chromium}=require(process.env.SLOP_PLAYWRIGHT||'playwright');
+const playwright=require(process.env.SLOP_PLAYWRIGHT||'playwright');
+const engine=process.env.SLOP_BROWSER_ENGINE||'chromium';
+if(!['chromium','firefox','webkit'].includes(engine))throw Error('Unsupported browser engine: '+engine);
 const assert=require('node:assert/strict');
 const base=process.env.SLOP_TEST_URL||'http://127.0.0.1:8766/tools/sully/';
 const track={id:'unavailable-example',file:'song.flac',title:'A preserved reference',artist:'Example artist',release:'Example release',tags:['ambient']};
 async function context(browser){const c=await browser.newContext({viewport:{width:1366,height:768}});await c.route('https://archive.org/**',route=>route.fulfill({contentType:'application/json',body:JSON.stringify({response:{numFound:3,docs:[{identifier:'one',title:'One',creator:'Excluded',subject:['ambient']},{identifier:'two',title:'Two',creator:'Other',subject:['ambient']},{identifier:'three',title:'Three',creator:'Other',subject:['ambient']}]}})}));return c;}
-(async()=>{const browser=await chromium.launch({headless:true,...(process.env.SLOP_BROWSER_CHANNEL?{channel:process.env.SLOP_BROWSER_CHANNEL}:{})});try{
+(async()=>{const browser=await playwright[engine].launch({headless:true,...(engine==='chromium'&&process.env.SLOP_BROWSER_CHANNEL?{channel:process.env.SLOP_BROWSER_CHANNEL}:{})});try{
  const c=await context(browser),page=await c.newPage(),errors=[];page.on('pageerror',e=>{errors.push(e.message);console.error('PAGE ERROR:',e.message)});
  // Seed the shipping v1 database, then load the new app to exercise migration.
  await page.goto(new URL('LICENSE.txt',base).href);
@@ -22,6 +24,81 @@ async function context(browser){const c=await browser.newContext({viewport:{widt
  // Restore into a completely fresh browser context: no accounts, no source reads.
  const fresh=await context(browser),restored=await fresh.newPage();await restored.goto(base);await restored.locator('nav [data-view="saved"]').click();await restored.locator('#importFile').setInputFiles({name:'library.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(data))});await restored.locator('#confirmImport').click();await restored.locator('.playlistEditor summary').click();await restored.waitForSelector('#playlistTracks [data-personal-play]');assert.equal(await restored.locator('#playlistTracks [data-personal-play]').count(),2);assert.equal(await restored.locator('#savedList [data-splay]').count(),1);assert.equal(await restored.locator('#diversify').isChecked(),false);
  await restored.locator('#queuePlaylist').click();await restored.locator('nav [data-view="queue"]').click();await restored.locator('#queueQuery').fill('missing title');assert.equal(await restored.locator('#queueList .track:visible').count(),0);await restored.locator('#queueQuery').fill('preserved');assert.equal(await restored.locator('#queueList .track:visible').count(),2);await restored.locator('#queueQuery').fill('');await restored.locator('.queueOptionsTrigger').click();await restored.locator('#recoverQueue').check();await restored.keyboard.press('Escape');await restored.reload();await restored.locator('nav [data-view="queue"]').click();assert.equal(await restored.locator('#queueList [data-qplay]').count(),2);assert.equal(await restored.locator('#audio').evaluate(a=>a.paused),true);
+ // Disabling in another tab must prevent stale saves, even before its storage event arrives.
+ const peer=await fresh.newPage();await peer.goto(base);await peer.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+ assert.equal(await peer.locator('#recoverQueue').isChecked(),true);
+ const originalQueue=await restored.evaluate(()=>JSON.stringify(queue));
+ await peer.evaluate(()=>{document.querySelector('#recoverQueue').checked=false;document.querySelector('#recoverQueue').dispatchEvent(new Event('change'));});
+ await restored.waitForFunction(()=>!document.querySelector('#recoverQueue').checked);
+ await restored.evaluate(()=>{recoveryEnabled=true;document.dispatchEvent(new Event('slop:queuechange'));});
+ assert.equal(await restored.evaluate(()=>localStorage.getItem('slop-session-v1')),null);
+ assert.equal(await restored.evaluate(()=>JSON.stringify(queue)),originalQueue);
+ await peer.close();await restored.reload();await restored.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+ assert.equal(await restored.evaluate(()=>queue.length+albumQueue.length),0);
+ assert.equal(await restored.locator('#recoverQueue').isChecked(),false);
+ // Re-enable, then clearing site storage in another tab must also stop writes.
+ await restored.evaluate(()=>{document.querySelector('#recoverQueue').checked=true;document.querySelector('#recoverQueue').dispatchEvent(new Event('change'));});
+ const clearing=await fresh.newPage();await clearing.goto(new URL('LICENSE.txt',base).href);await clearing.evaluate(()=>localStorage.clear());
+ await restored.waitForFunction(()=>!document.querySelector('#recoverQueue').checked);
+ await restored.evaluate(()=>window.dispatchEvent(new Event('pagehide')));
+ assert.equal(await clearing.evaluate(()=>localStorage.getItem('slop-session-v1')),null);await clearing.close();
+ await restored.evaluate(()=>{document.querySelector('#recoverQueue').checked=true;document.querySelector('#recoverQueue').dispatchEvent(new Event('change'));});
+ // A failed snapshot write must discard stale recovery, preserve the live queue,
+ // report once, and recover when storage becomes writable again.
+ await restored.evaluate(t=>{
+   queue=[t,{...t,title:'Repeated occurrence'},t];renderQueue();
+   window.recoveryWriteOriginal=Storage.prototype.setItem;
+   Storage.prototype.setItem=function(key,value){if(key==='slop-session-v1')throw new DOMException('Full','QuotaExceededError');return window.recoveryWriteOriginal.call(this,key,value);};
+   document.dispatchEvent(new Event('slop:queuechange'));
+ },track);
+ assert.equal(await restored.evaluate(()=>localStorage.getItem('slop-session-v1')),null);
+ assert.match(await restored.locator('#message').textContent(),/recovery could not be saved/);
+ assert.deepEqual(await restored.evaluate(()=>queue.map(t=>t.title)),[track.title,'Repeated occurrence',track.title]);
+ assert.equal(await restored.evaluate(()=>saved.size),1);
+ await restored.evaluate(()=>{document.querySelector('#message').textContent='';document.dispatchEvent(new Event('slop:queuechange'));});
+ assert.equal(await restored.locator('#message').textContent(),'');
+ await restored.evaluate(()=>{Storage.prototype.setItem=window.recoveryWriteOriginal;delete window.recoveryWriteOriginal;document.dispatchEvent(new Event('slop:queuechange'));});
+ assert.deepEqual(await restored.evaluate(()=>JSON.parse(localStorage.getItem('slop-session-v1')).queue.map(t=>t.title)),[track.title,'Repeated occurrence',track.title]);
+ await restored.reload();await restored.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+ assert.deepEqual(await restored.evaluate(()=>queue.map(t=>t.title)),[track.title,'Repeated occurrence',track.title]);
+ assert.equal(await restored.locator('#audio').evaluate(a=>a.paused),true);
+ // Queue search matches recording text, never action labels added by ordering.
+ await restored.locator('nav [data-view="queue"]').click();
+ await restored.locator('#queueQuery').fill('Move');
+ assert.equal(await restored.locator('#queueList .track:visible').count(),0);
+ await restored.locator('#queueQuery').fill('Example artist');
+ assert.equal(await restored.locator('#queueList .track:visible').count(),3);
+ await restored.locator('#queueQuery').fill('');
+ // Ordering moves one duplicate occurrence and leaves album/current playback alone.
+ await restored.locator('nav [data-view="queue"]').click();
+ const albumBefore=await restored.evaluate(()=>JSON.stringify(albumQueue));
+ const currentBefore=await restored.evaluate(()=>JSON.stringify(currentTrack));
+ const move=restored.locator('[data-queue-index="1"][data-queue-move="-1"]');
+ await move.focus();await restored.keyboard.press('Enter');
+ assert.deepEqual(await restored.evaluate(()=>queue.map(t=>t.title)),['Repeated occurrence',track.title,track.title]);
+ assert.equal(await restored.evaluate(()=>document.activeElement.dataset.queueIndex),'0');
+ assert.equal(await restored.locator('[data-queue-index="0"][data-queue-move="-1"]').getAttribute('aria-disabled'),'true');
+ await restored.keyboard.press('Enter');assert.equal(await restored.evaluate(()=>queue[0].title),'Repeated occurrence');
+ await restored.locator('#queueQuery').fill('Repeated');
+ assert.equal(await restored.locator('[data-queue-index="0"][data-queue-move="1"]').getAttribute('aria-disabled'),'true');
+ await restored.locator('[data-queue-index="0"][data-queue-move="1"]').dispatchEvent('click');
+ assert.equal(await restored.evaluate(()=>queue[0].title),'Repeated occurrence');
+ await restored.locator('#queueQuery').fill('');
+ assert.equal(await restored.evaluate(()=>JSON.stringify(albumQueue)),albumBefore);
+ assert.equal(await restored.evaluate(()=>JSON.stringify(currentTrack)),currentBefore);
+ for(const width of [1440,390,320]){await restored.setViewportSize({width,height:844});assert.equal(await restored.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);}
+ if(process.env.SLOP_SCREENSHOTS)await restored.screenshot({path:process.env.SLOP_SCREENSHOTS+'/queue-order-phone.png'});
+ await restored.reload();await restored.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+ assert.deepEqual(await restored.evaluate(()=>queue.map(t=>t.title)),['Repeated occurrence',track.title,track.title]);
+ assert.equal(await restored.locator('#audio').evaluate(a=>a.paused),true);
+ await restored.setViewportSize({width:1366,height:768});
+ // Malformed recovery must report failure without restoring a partial queue or touching likes.
+ await restored.goto(new URL('LICENSE.txt',base).href);
+ await restored.evaluate(t=>localStorage.setItem('slop-session-v1',JSON.stringify({version:1,current:null,queue:[t],album:[{...t,file:'../bad.mp3'}],position:0})),track);
+ await restored.goto(base);await restored.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+ assert.match(await restored.locator('#message').textContent(),/previous queue could not be restored/);
+ assert.equal(await restored.evaluate(()=>queue.length+albumQueue.length),0);
+ assert.equal(await restored.evaluate(()=>saved.size),1);
  await restored.locator('nav [data-view="saved"]').click();
  // Sorting is a view operation: preserve references, grouping and action indices.
  await restored.evaluate(async t=>{const db=await dbReady;await new Promise((resolve,reject)=>{const tx=db.transaction('saved','readwrite');for(const row of [{...t,savedAt:'2026-10-09T00:00:00Z'},{...t,id:'another-release',artist:'Zulu artist',release:'Alpha release',title:'Second reference',savedAt:'2026-10-11T00:00:00Z'},{...t,file:'second.flac',title:'Same album, second track',savedAt:'2026-10-10T00:00:00Z'}])tx.objectStore('saved').put({...row,key:keyOf(row)});tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)});await refreshSaved()},track);

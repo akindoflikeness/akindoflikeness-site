@@ -1,0 +1,10 @@
+/* Figma ordering actions; playback controls remain the shared queue controls. */
+#queueList .orderableTrack {grid-template-columns:44px minmax(0,1fr) auto auto}
+.queueOrder {display:flex;gap:12px}
+.queueOrder button {width:108px;min-height:44px;padding:8px;border:1px solid var(--line);border-radius:4px;background:var(--panel);color:var(--ink);font:400 15px/1.4 var(--font-body, 'Lora', serif)}
+.queueOrder button[aria-disabled="true"] {opacity:.35;cursor:default}
+@media(max-width:900px){
+ #queueList .orderableTrack {grid-template-columns:44px minmax(0,1fr) auto}
+ #queueList .queueOrder {grid-column:2/-1}
+}
+@media(max-width:400px){#queueList .queueOrder {grid-column:1/-1}}

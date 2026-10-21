@@ -21,3 +21,10 @@ test('hard exclusions apply to any creator credit and diversity does not invent 
  assert.deepEqual(P.rank(docs,{...P.empty(),excludedCreators:['excluded']}).map(d=>d.identifier),['1','4','2']);
  assert.deepEqual(P.rank(docs,{...P.empty(),diversify:false}).map(d=>d.identifier),['1','2','3','4']);
 });
+test('queue recovery validates both sequences and position before returning a snapshot',()=>{
+ const value={version:1,current:track,queue:[track,{...track,title:'Second occurrence'},track],album:[track],position:32.5};
+ assert.deepEqual(P.session(value),value);assert.equal(P.session(null),null);
+ for(const invalid of [{...value,version:2},{...value,queue:null},{...value,album:[{...track,file:'../bad.mp3'}]},{...value,current:false},...[-1,Infinity,NaN,'32',null].map(position=>({...value,position})),{...value,queue:Array(10000).fill(track)}])assert.throws(()=>P.session(invalid));
+ assert.equal(P.session({...value,queue:Array(9999).fill(track)}).queue.length,9999);
+ assert.deepEqual(value.queue.map(t=>t.title),[track.title,'Second occurrence',track.title]);
+});

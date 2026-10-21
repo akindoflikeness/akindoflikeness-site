@@ -47,6 +47,24 @@ jobs:
           SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/sully/tests/genre-layout-browser.cjs
           SLOP_TEST_URL="http://127.0.0.1:8766/tools/sully/" SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/sully/tests/artwork-drawer-browser.cjs
           SLOP_TEST_URL="http://127.0.0.1:8766/tools/sully/" SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/sully/tests/archive-failure-browser.cjs
+  recovery-engines:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Recovery in Firefox and WebKit
+        run: |
+          npm install --prefix "$RUNNER_TEMP/slop-check" --no-save playwright@1.64.0
+          "$RUNNER_TEMP/slop-check/node_modules/.bin/playwright" install --with-deps firefox webkit
+          python3 -m http.server 8766 --bind 127.0.0.1 >/tmp/slop-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for engine in firefox webkit; do
+            SLOP_BROWSER_ENGINE="$engine" SLOP_PLAYWRIGHT="$RUNNER_TEMP/slop-check/node_modules/playwright" node tools/sully/tests/library-browser.cjs
+          done
   catalogue-sample:
     if: github.event_name == 'push' && github.ref == 'refs/heads/slop/discovery-foundations'
     runs-on: ubuntu-latest

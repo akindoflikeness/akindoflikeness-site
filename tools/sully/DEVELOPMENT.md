@@ -274,6 +274,43 @@ to Shipped. Keep the development branch and preview available afterward.
 - Resume bounded preview development from tools/sully. Future feature publication
   needs its own release approval; this approval covered the genre revision.
 
+### Public cache verification after the Sully rename
+
+- Release 5851308 deployed successfully. The custom domain still served the old
+  Log because the zone's 600-second HTML cache exception named only /tools/slop.
+- Extended that existing exception to /tools/sully, /tools/sully/ and
+  /tools/sully/index.html (ruleset 81aed3017e0d452ca538233281d91c4d version 4).
+  Existing cache behaviour for the rest of the site is preserved. A targeted
+  three-URL purge alone had not resolved the stale response.
+- A fresh browser verified the plain old URL redirects to Sully, the public Log
+  shows Shipped, production hides the preview badge, and the retained preview
+  displays its badge and working genre families. Browser closed afterward.
+- When renaming this app again, carry forward the HTML cache exception as well
+  as redirects and asset versions. Next work remains the preview continuation
+  queue, with UI changes designed in Figma before implementation.
+
+## 12 October: validate queue recovery before restoration (preview)
+
+- Synced released main through 34677e2 into the continuing preview; preserved
+  compact layout, artwork drawer and shared Base UI controls. Previous preview
+  6d9cf51 passed Pages, recovery checks and the bounded metadata sampler.
+- Before manual queue ordering, closed a recovery validation gap: unknown snapshot
+  versions and oversized lists were silently ignored, and invalid positions were
+  coerced. A shared validator now rejects the complete snapshot before assigning
+  either queue and uses the existing recovery message. Null means no snapshot.
+- Five personal-library Node tests pass, including duplicate ordering, the combined
+  10,000-track boundary, invalid references, current track and playback positions.
+  The local browser recovery suite passes, including damaged album data alongside
+  a valid manual queue: neither partially restores and likes remain intact.
+- No new UI controls; manual queue ordering still needs its Figma design before
+  implementation. Keep shuffle/repeat out of that step. Production is unchanged.
+- Updated visible Log as In the pot and refreshed both dependency URLs plus the
+  bootstrap URL. Temporary local server and browser stopped after checks.
+- Deployed evidence: 35c918e passed both hosted check runs, Pages and the bounded
+  push sampler (PR sampler intentionally skipped). The full recovery browser
+  suite also passed against the deployed preview. Opened its Log and verified
+  the recovery entry is visible with IN THE POT status. Draft PR #43 tracks this
+  preview-only work: https://github.com/akindoflikeness/akindoflikeness-site/pull/43.
 ## 12 October 2026 — full-width views
 
 Removed the shared 1008px content cap and the separate 800px handbook cap.
@@ -283,3 +320,178 @@ Paragraph-specific reading limits remain. Stylesheet cache keys updated.
 Verified locally and on the public route: responsive density checks passed, including
 full-width geometry for all views at 1440px, 1920px and 2880px. Mobile overflow
 checks passed down to 320px. Refreshed stylesheet keys after CDN cache verification.
+
+## 13 October: queue recovery opt-out across tabs (preview)
+
+- Synced main through 3bb2273, preserving the full-width release and unrelated
+  publication. Resolved adjacent Log and development-note additions by retaining
+  both histories. PR #43 remains a draft; previous 74bcc70 checks all passed.
+- Found that an already-open tab retained its recovery opt-in after another tab
+  disabled it, and could recreate the deleted snapshot during queue changes or
+  page close. Storage events now synchronise the checkbox and preference; every
+  snapshot write also checks stored consent to cover delayed storage events.
+- Live queues stay independent. Enabling elsewhere does not immediately overwrite
+  the snapshot. Legacy keys remain unchanged. Clearing localStorage also disables
+  recovery in other tabs. No new interface controls or Figma changes are needed.
+- Local browser suite passed with two-tab disable, deliberately stale in-memory
+  consent, preserved live order, reload without recovery, and storage-clear plus
+  pagehide checks. Existing damaged snapshot, backup and library checks pass.
+  Syntax and whitespace checks pass; temporary server and browser stopped.
+- Visible Log entry is In the pot. Refreshed personal-ui and bootstrap URLs.
+  Next: Figma queue ordering controls, then duplicate-reference and paused recovery
+  ordering checks. Shuffle/repeat remain separate; production unchanged.
+- Deployed evidence: 615f9ab passed both hosted checks, Pages and the bounded
+  push sampler; duplicate PR sampler skipped as intended. The browser recovery
+  suite passed on the deployed preview, including the new cross-tab scenarios.
+  Its visible Log entry was opened and verified as IN THE POT. PR #43 updated;
+  all temporary browsers closed. No production changes or new services.
+
+## 14 October: remote Firefox and WebKit recovery gate (preview)
+
+- Previous d12dae6 checks and Pages passed. Synced main through 58bd05a without
+  changing production. Draft PR #43 remains the recovery work under review.
+- Added the milestone's missing Firefox/WebKit recovery gate. The existing real
+  browser suite now accepts an explicit engine; Chromium remains the default.
+  The new remote job runs Firefox then WebKit sequentially under a ten-minute
+  limit and stops its temporary server. No local browser downloads or services.
+- Coverage is the same backup, migration, repeated references, malformed snapshot,
+  cross-tab opt-out, paused recovery and responsive library flow used in Chromium.
+  This exercises engines on Linux, not actual Safari/iOS hardware certification.
+- Syntax check passes. Hosted results pending; the Log entry remains In the pot.
+  No application script changes, so no asset version refresh is necessary.
+- Next remains Figma queue ordering controls, followed by exact duplicate ordering
+  and paused-recovery checks. Keep shuffle/repeat separate.
+- Hosted evidence: a78291d passed both Firefox/WebKit jobs, both existing Chromium
+  checks, Pages and the bounded push sampler. The duplicate PR sampler was skipped.
+  Opened the deployed preview Log and verified its browser-check entry is visible
+  as IN THE POT. Temporary browser closed. Recovery now has three-engine evidence;
+  hardware-specific mobile validation remains a later release gate.
+
+## 15 October: reconcile released discovery filters with recovery preview
+
+- Previous a8db01d passed Pages, Chromium and both remote recovery-engine checks.
+- Main 22a3243 adds released discovery filtering. Merged it into preview and
+  resolved bootstrap conflicts explicitly: music-filter-1 for Archive/app,
+  recovery-validation-1 for the personal library, recovery-consent-1 for recovery.
+  A new recovery-music-1 bootstrap URL prevents a cached loader dropping either.
+- Retained both release and preview Log entries, adding the integration note.
+  Focused Archive/personal tests and bootstrap syntax pass. Production unchanged.
+- This run is bounded release integration, not new queue UI. Next remains Figma
+  queue ordering controls and duplicate-order recovery checks. Hosted and deployed
+  integration verification pending below.
+- Integration evidence: 4f08841 passed all hosted Chromium, Firefox/WebKit checks,
+  Pages and the bounded push sampler. Deployed preview library recovery suite
+  passed; opened Log confirmed both histories and the 15 Oct integration note,
+  with the new bootstrap URL loaded. Temporary browsers closed. No user decision
+  or new production milestone; routine integration only.
+
+## 16 October: storage-quota recovery regression gate (preview)
+
+- Read continuation queue and confirmed 329743f hosted checks all passed; no new
+  main changes. Native Figma canvas editing (use_figma) is absent from the current
+  tool inventory, so queue-control design cannot be completed in this run. Do not
+  substitute a code-backed Figma app or claim the controls have been designed.
+- Added a focused storage-failure scenario to the existing three-engine recovery
+  suite: fail only snapshot writes with QuotaExceededError, check old snapshot
+  removal, live duplicate sequence and likes preservation, one warning per failure
+  episode, then restore writes and reload the exact sequence paused.
+- This tests existing recovery behaviour rather than adding controls. No runtime
+  asset changes or cache-version changes needed. Visible Log added as In the pot.
+- Syntax passes; remote and deployed evidence pending. Next remains native Figma
+  queue-control design when canvas editing is available; no owner action needed.
+- Verified 26b8bf8: both hosted Chromium and Firefox/WebKit jobs passed, along
+  with Pages and the bounded push sampler. Deployed preview recovery suite passed
+  the quota scenario; opened Log verified the new entry as In the pot. Temporary
+  browsers closed. This confirms existing behaviour; no new production milestone.
+
+## 17 October: editable queue ordering proposal
+
+- Native canvas editing returned. Used figma-use and figma-generate-design to
+  inspect existing Queue 5:6210, local action component 80:1199, Lora and colour
+  variables. No Code Connect files found. Existing screens/components retained.
+- New focused ordering proposal: board 106:1703, desktop panel 106:1704, phone
+  panel 106:1741, behaviour notes 106:1778. Uses editable text, auto-layout and
+  quiet-action component instances with existing colour variables. These are
+  focused content panels, not complete application screens or working controls.
+- First/last disabled states, duplicate occurrences, 44px buttons, compact desktop
+  rows, phone stacking and independent album order documented. Search disables
+  reordering until cleared; native keyboard actions retain occurrence focus and
+  announce new position. Existing play/next/remove actions remain in implementation.
+- Inspected final screenshot after auto-layout and density corrections. No blank
+  image placeholders or flattened UI. No new components or runtime asset changes.
+- e41cc43 remote checks passed before work; production and application behaviour
+  unchanged. Added visible design-only Log entry. Next: implement this proposal in
+  preview, with exact duplicate-order, focus, filtered view and recovery checks.
+- Pages deployed 360f3e9; opened preview Log and verified the design-only wording
+  and proposal link. Chromium checks and sampler passed; Firefox/WebKit runs were
+  still in progress at this observation (no runtime changes in this slice).
+  Temporary verification browser closed. PR #43 remains preview-only.
+
+## 18 October: manual queue ordering in preview
+
+- Implemented the focused Figma ordering actions from 106:1708 (design context
+  and screenshot retrieved with figma-design-to-code). Existing play/save/next/
+  remove controls and shared shell remain; on phones ordering wraps underneath.
+- Moves by occurrence index, preserving repeats, current playback and album queue.
+  Boundaries and filtered queues use aria-disabled with guarded handlers so the
+  focused action remains reachable after a move to the boundary. A polite status
+  announces the new position. Shared queue-change events trigger opt-in recovery.
+- Local library suite passed: duplicate occurrence moved once, keyboard/focus,
+  boundary guard, filtered click guard, album/current preservation, exact paused
+  reload order, and no overflow at 1440/390/320px. Phone screenshot inspected.
+  Temporary browser/server stopped. No model or catalogue processing locally.
+- Added queue-order.js/css and refreshed bootstrap URL. Visible Log marks the
+  implementation In the pot; historical design entry remains dated 17 October.
+- Next: review deployed three-engine results, then advance remaining library
+  milestone (saved releases / exchange) separately from shuffle/repeat. Production
+  release requires separate approval; PR #43 remains draft.
+- Verified aa4eecf: all hosted Chromium/Firefox/WebKit checks, Pages and sampler
+  passed. Deployed preview recovery suite passed and its ordering Log entry was
+  opened and verified In the pot. PR #43 title/body updated to the complete scope.
+  All temporary processes stopped. Production unchanged.
+
+## 19 October: queue search ignores action labels (preview)
+
+- Confirmed 76cdd6e checks passed, synced main through 45568cc, preserving unrelated
+  essay publication. Found the new Move controls were included in queue search:
+  a search for Move returned all three unrelated tracks in the deployed preview.
+- Added a failing browser regression (3 matches instead of 0), then scoped queue
+  search to the existing trackCopy title/artist text. Artist matching remains
+  covered. No new controls or layout changes; ordering guards remain intact.
+- Refreshed design-ui and bootstrap versions, added visible preview Log entry.
+  Syntax passes; hosted/deployed fixed-result verification follows. Production
+  unchanged. Next: saved releases/exchange slice from the library milestone.
+- Fixed-result evidence: 0692bed passed all hosted Chromium/Firefox/WebKit checks,
+  Pages and bounded sampler. The previously failing deployed regression now passes,
+  including artist matching, and the visible Log was verified In the pot. All
+  temporary browsers closed. Routine preview correction; no release decision.
+- 20 Oct: synchronized preview with production navigation fixes 6ecf654 and
+  010db5d. These update stylesheet loading before internal page swaps and refresh
+  navigation scripts for cache correctness. No conflicts or Sully source changes;
+  no new behaviour tests were added in this sync. Production main remains source.
+  Preview deployment/check status pending.
+- Verification: latest preview commit 71b1f36 passed both Chromium and Firefox/WebKit
+  check runs, Pages and the bounded push sampler (duplicate PR sampler skipped).
+  Opened the deployed preview Log to confirm Sully and the queue-search entry.
+  No application assets changed in this sync; no production changes.
+
+## 21 October: playlist exchange design handoff
+
+- Added editable desktop export/import dialogs in the existing Figma file (board
+  108:1715; dialogs 108:1718 and 108:1734). The rendered 1160×680 screenshot was
+  visually reviewed. Export distinguishes Sully JSON from XSPF and describes
+  what can be preserved; import previews repeated and unavailable references.
+- Added the proposal link to the visible Log as In the pot and documented the
+  design coverage. This is a handoff only; no interchange code or deployed
+  behaviour changed. The design does not send audio or library data to a service.
+- Next bounded step: implement XSPF export/import in the local library flow while
+  retaining the existing JSON full-library backup, preserving repeated entries,
+  validating before writes, and keeping unavailable Archive references visible.
+  Add phone/error states to Figma alongside that implementation. Production stays
+  unchanged.
+- Remote evidence at 15:31 UTC: PR-triggered `check` and `recovery-engines` jobs
+  passed for 3aba348. The push-triggered catalogue sampler failed twice with the
+  same external `fetch failed` error; one targeted retry did not change it. The
+  no-cache preview request returned HTTP 200 but still served HTML without this
+  Log entry, so preview publication is unverified and must be checked again before
+  calling the design handoff deployed. Production is unchanged.
