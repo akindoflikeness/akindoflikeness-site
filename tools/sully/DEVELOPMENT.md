@@ -489,3 +489,9 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   validating before writes, and keeping unavailable Archive references visible.
   Add phone/error states to Figma alongside that implementation. Production stays
   unchanged.
+- Remote evidence at 15:31 UTC: PR-triggered `check` and `recovery-engines` jobs
+  passed for 3aba348. The push-triggered catalogue sampler failed twice with the
+  same external `fetch failed` error; one targeted retry did not change it. The
+  no-cache preview request returned HTTP 200 but still served HTML without this
+  Log entry, so preview publication is unverified and must be checked again before
+  calling the design handoff deployed. Production is unchanged.
