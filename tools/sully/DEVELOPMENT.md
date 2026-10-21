@@ -474,3 +474,18 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   check runs, Pages and the bounded push sampler (duplicate PR sampler skipped).
   Opened the deployed preview Log to confirm Sully and the queue-search entry.
   No application assets changed in this sync; no production changes.
+
+## 21 October: playlist exchange design handoff
+
+- Added editable desktop export/import dialogs in the existing Figma file (board
+  108:1715; dialogs 108:1718 and 108:1734). The rendered 1160×680 screenshot was
+  visually reviewed. Export distinguishes Sully JSON from XSPF and describes
+  what can be preserved; import previews repeated and unavailable references.
+- Added the proposal link to the visible Log as In the pot and documented the
+  design coverage. This is a handoff only; no interchange code or deployed
+  behaviour changed. The design does not send audio or library data to a service.
+- Next bounded step: implement XSPF export/import in the local library flow while
+  retaining the existing JSON full-library backup, preserving repeated entries,
+  validating before writes, and keeping unavailable Archive references visible.
+  Add phone/error states to Figma alongside that implementation. Production stays
+  unchanged.

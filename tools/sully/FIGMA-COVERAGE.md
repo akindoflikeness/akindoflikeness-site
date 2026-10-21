@@ -46,8 +46,9 @@ Checked 10 October 2026. Development preview only; production remains unchanged.
    provenance and an honest metadata-only fallback. The illustrated CLAP section
    is not evidence of a working sound model. No fake sound-search control shipped.
 6. **Later roadmap features:** follows, optional history, notes, saved releases,
-   shuffle/repeat/reordering and exchange formats need designed interactions when
-   their corresponding implementation milestone begins.
+   shuffle and repeat still need designed interactions. Playlist exchange now has
+   a desktop export/import proposal (108:1715); phone layouts, invalid-file and
+   partial-import states remain to be designed before its implementation is complete.
 
 ## Intentional adaptations
 
@@ -129,3 +130,14 @@ inspected after compact desktop sizing. No working ordering controls shipped yet
 Boundary controls use aria-disabled plus guarded activation to preserve keyboard
 focus. Existing player and row actions retained; phone ordering wraps below them.
 Duplicate occurrence, filtered view, focus and paused recovery tests added.
+
+
+### Playlist exchange proposal — 21 October 2026
+
+Board 108:1715, with editable export and import dialogs (108:1718 and 108:1734).
+It distinguishes Sully JSON (order, repeats and Archive references) from XSPF
+(compatible-player interchange with possible loss of Sully-only details). Import
+previews entry/repeat/unavailable counts, names a new playlist and keeps repeated
+positions. Audio is never copied; unavailable references remain listed. Screenshot
+reviewed at 1160×680. This is a desktop design proposal, not implemented behaviour;
+phone, malformed-file and partial-import states still need design attention.
