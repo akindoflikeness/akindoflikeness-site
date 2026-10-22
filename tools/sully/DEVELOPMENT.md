@@ -514,5 +514,10 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   implementation is on the continuation branch only.
 - Local deterministic tests pass 21/21, including serializer escaping, round-trip
   metadata/repeats and invalid references; script syntax and `git diff --check`
-  pass. Hosted build, Chromium, Firefox and WebKit checks are pending. Preview-only;
+  pass. Hosted run 39745986639 passed build, unit and Chromium browser checks,
+  Firefox/WebKit recovery checks, and the bounded catalogue sampler; PR run
+  39745994276 passed build, unit, Chromium, Firefox and WebKit checks. The
+  deployed preview returned HTTP 200 and its no-cache Log shows the playlist
+  exchange entry as In the pot; versioned UI/bootstrap/module references are
+  served. Preview-only;
   do not release this feature to production without separate owner approval.
