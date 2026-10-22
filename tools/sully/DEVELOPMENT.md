@@ -495,3 +495,24 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   no-cache preview request returned HTTP 200 but still served HTML without this
   Log entry, so preview publication is unverified and must be checked again before
   calling the design handoff deployed. Production is unchanged.
+
+## 22 October: individual playlist exchange in preview
+
+- Added Sully playlist JSON v1 (metadata and repeated occurrences) and XSPF export.
+  Both formats can be imported as a new local playlist; XSPF import accepts only
+  HTTPS Internet Archive download links and preserves repeated rows. Tags survive
+  in Sully JSON and in the Sully XSPF extension. Import validates fully before a
+  write, makes no source-availability requests, and never includes audio. Existing
+  full-library backup/load remains separate and unchanged.
+- Added a bounded file-size and 2,000-entry limit, XML entity rejection, path/ID
+  validation and a preview summary. Updated the visible Log, bootstrap and bundle
+  version URLs. The playlist exchange proposal is now partly implemented; phone
+  and malformed/partial import visual states remain for a later design pass.
+- Follow-up: PR #43 was merged by the repository owner at 18:00 UTC on 21 October;
+  GitHub Pages deployed merge commit 4f8bb38. The Cloudflare preview now returns
+  this branch's 21 October design Log entry over a no-cache request. This playlist
+  implementation is on the continuation branch only.
+- Local deterministic tests pass 21/21, including serializer escaping, round-trip
+  metadata/repeats and invalid references; script syntax and `git diff --check`
+  pass. Hosted build, Chromium, Firefox and WebKit checks are pending. Preview-only;
+  do not release this feature to production without separate owner approval.

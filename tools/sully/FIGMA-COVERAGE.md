@@ -141,3 +141,11 @@ previews entry/repeat/unavailable counts, names a new playlist and keeps repeate
 positions. Audio is never copied; unavailable references remain listed. Screenshot
 reviewed at 1160×680. This is a desktop design proposal, not implemented behaviour;
 phone, malformed-file and partial-import states still need design attention.
+
+### Playlist exchange preview implementation — 22 October 2026
+
+The preview now exposes per-playlist Sully JSON and XSPF export plus import as a
+new playlist. Its compact format selector replaces the proposal's larger format
+cards; the separate confirmation keeps the repeat count and no-audio/unchecked-
+availability warning visible. The full-library JSON backup remains a separate
+operation. Phone, malformed XML and partial import screenshots remain to review.
