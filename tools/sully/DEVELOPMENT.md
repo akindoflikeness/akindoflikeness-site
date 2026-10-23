@@ -521,3 +521,17 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   exchange entry as In the pot; versioned UI/bootstrap/module references are
   served. Preview-only;
   do not release this feature to production without separate owner approval.
+
+## 23 October: playlist exchange phone and error states (Figma)
+
+- Added a 390×844 import-ready state and invalid-XSPF recovery state to the
+  existing proposal at node 110:1715. The first keeps the import action anchored
+  at the bottom while summary, repeats, unavailable references and playlist name
+  remain readable. The error identifies the file problem, assures the listener
+  that the library is unchanged, and offers a direct retry. Screenshot reviewed.
+- Added the design-only handoff to the visible Log as In the pot. No app code or
+  production assets changed; there are no coupled asset URLs to refresh.
+- Next: begin the saved-releases slice from milestone 1, inspecting the local
+  personal-library model and the existing release-detail flow before choosing a
+  small metadata-only save action. Keep it local and portable, then verify a
+  duplicate-safe save/unsave and paused recovery behavior.
