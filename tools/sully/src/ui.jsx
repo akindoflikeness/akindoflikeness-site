@@ -5,7 +5,7 @@ import {Dialog} from '@base-ui/react/dialog';
 import {Drawer} from '@base-ui/react/drawer';
 import {Popover} from '@base-ui/react/popover';
 
-const pending=new Set(['release','exportDialog','importDialog','shareDialog','sidebarNowCover','recoverQueue']);
+const pending=new Set(['release','exportDialog','importDialog','playlistImportDialog','shareDialog','sidebarNowCover','recoverQueue']);
 let resolveReady;
 window.sullyUIReady=new Promise(resolve=>{resolveReady=resolve;});
 function ready(element){if(element){pending.delete(element.id);if(!pending.size)queueMicrotask(resolveReady);}}
@@ -89,7 +89,7 @@ function QueueOptions() {
 }
 
 for(const element of [...document.querySelectorAll('dialog')]){
-  const titles={release:'Release',exportDialog:'Back Up Library',importDialog:'Import Library',shareDialog:'Share Track'};
+  const titles={release:'Release',exportDialog:'Back Up Library',importDialog:'Import Library',playlistImportDialog:'Import Playlist',shareDialog:'Share Track'};
   mount(AppDialog,{id:element.id,html:element.innerHTML,title:titles[element.id]},element);
 }
 document.querySelector('#sidebarNow').remove();

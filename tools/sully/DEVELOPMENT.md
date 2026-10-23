@@ -495,3 +495,43 @@ checks passed down to 320px. Refreshed stylesheet keys after CDN cache verificat
   no-cache preview request returned HTTP 200 but still served HTML without this
   Log entry, so preview publication is unverified and must be checked again before
   calling the design handoff deployed. Production is unchanged.
+
+## 22 October: individual playlist exchange in preview
+
+- Added Sully playlist JSON v1 (metadata and repeated occurrences) and XSPF export.
+  Both formats can be imported as a new local playlist; XSPF import accepts only
+  HTTPS Internet Archive download links and preserves repeated rows. Tags survive
+  in Sully JSON and in the Sully XSPF extension. Import validates fully before a
+  write, makes no source-availability requests, and never includes audio. Existing
+  full-library backup/load remains separate and unchanged.
+- Added a bounded file-size and 2,000-entry limit, XML entity rejection, path/ID
+  validation and a preview summary. Updated the visible Log, bootstrap and bundle
+  version URLs. The playlist exchange proposal is now partly implemented; phone
+  and malformed/partial import visual states remain for a later design pass.
+- Follow-up: PR #43 was merged by the repository owner at 18:00 UTC on 21 October;
+  GitHub Pages deployed merge commit 4f8bb38. The Cloudflare preview now returns
+  this branch's 21 October design Log entry over a no-cache request. This playlist
+  implementation is on the continuation branch only.
+- Local deterministic tests pass 21/21, including serializer escaping, round-trip
+  metadata/repeats and invalid references; script syntax and `git diff --check`
+  pass. Hosted run 39745986639 passed build, unit and Chromium browser checks,
+  Firefox/WebKit recovery checks, and the bounded catalogue sampler; PR run
+  39745994276 passed build, unit, Chromium, Firefox and WebKit checks. The
+  deployed preview returned HTTP 200 and its no-cache Log shows the playlist
+  exchange entry as In the pot; versioned UI/bootstrap/module references are
+  served. Preview-only;
+  do not release this feature to production without separate owner approval.
+
+## 23 October: playlist exchange phone and error states (Figma)
+
+- Added a 390×844 import-ready state and invalid-XSPF recovery state to the
+  existing proposal at node 110:1715. The first keeps the import action anchored
+  at the bottom while summary, repeats, unavailable references and playlist name
+  remain readable. The error identifies the file problem, assures the listener
+  that the library is unchanged, and offers a direct retry. Screenshot reviewed.
+- Added the design-only handoff to the visible Log as In the pot. No app code or
+  production assets changed; there are no coupled asset URLs to refresh.
+- Next: begin the saved-releases slice from milestone 1, inspecting the local
+  personal-library model and the existing release-detail flow before choosing a
+  small metadata-only save action. Keep it local and portable, then verify a
+  duplicate-safe save/unsave and paused recovery behavior.

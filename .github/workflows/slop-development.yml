@@ -25,7 +25,7 @@ jobs:
           npm ci
           npm run build
           git diff --exit-code -- ui.bundle.js ui.bundle.js.LEGAL.txt THIRD-PARTY-NOTICES.txt
-      - run: node --test tools/sully/artwork.test.cjs tools/sully/slop-archive.test.cjs tools/sully/slop-personal.test.cjs tools/sully/genre-directory.test.cjs
+      - run: node --test tools/sully/artwork.test.cjs tools/sully/slop-archive.test.cjs tools/sully/slop-personal.test.cjs tools/sully/playlist-exchange.test.cjs tools/sully/genre-directory.test.cjs
       - run: |
           node --check tools/sully/app.js
           node --check tools/sully/personal-ui.js
@@ -33,6 +33,7 @@ jobs:
           node --check tools/sully/genre-directory.js
           node --check tools/sully/genre-ui.js
           node --check tools/sully/slop-slip-ui.js
+          node --check tools/sully/playlist-exchange.js
           node --check tools/sully/embed.js
           node --check tools/sully/bootstrap.js
       - name: Browser recovery check
